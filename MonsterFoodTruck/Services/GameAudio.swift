@@ -8,6 +8,9 @@ final class GameAudio {
     private var settings = GameSettings()
     private var lastPlayed: [String: Double] = [:]
     private(set) var loadWarnings: [String] = []
+    #if DEBUG
+    var diagnosticPlayerCount:Int{sounds.values.reduce(0){$0+$1.count}+(music == nil ? 0:1)}
+    #endif
     init() {
         do { try AVAudioSession.sharedInstance().setCategory(.ambient,mode:.default,options:[.mixWithOthers]) }
         catch { loadWarnings.append("系統音訊初始化失敗：\(error.localizedDescription)") }

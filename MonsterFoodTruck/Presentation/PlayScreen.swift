@@ -7,6 +7,12 @@ struct PlayScreen:View {
         ZStack {
             VStack(spacing:6){
                 if let label=model.debugScenarioLabel{Text(label).font(.caption2.bold()).foregroundStyle(TruckTheme.teal)}
+                #if DEBUG
+                if PerformanceDiagnostics.enabled{
+                    Text("模擬器效能診斷").font(.caption2).accessibilityIdentifier("performance-diagnostic")
+                        .accessibilityValue("entries=\(PerformanceDiagnostics.shared.entryCount);nodes=\(model.kitchen.children.count);audio=\(model.audio.diagnosticPlayerCount);error=\(PerformanceDiagnostics.shared.reportError ?? "none")")
+                }
+                #endif
                 if let session=model.session,let content=model.content{
                     HStack{VStack(alignment:.leading,spacing:2){Text(session.level(content).name).font(.headline);Text("已服務 \(session.served)／\(session.level(content).orders.count) ・\(session.mode.rawValue)").font(.caption)
                         if session.waitingForSlot{Label("下一位客人在等候入場",systemImage:"figure.stand.line.dotted.figure.stand").font(.caption2.bold())}

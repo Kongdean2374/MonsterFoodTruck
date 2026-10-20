@@ -41,6 +41,9 @@ final class KitchenScene: SKScene {
     override init(size:CGSize) {super.init(size:size);scaleMode = .resizeFill;backgroundColor = .clear;isUserInteractionEnabled=false}
     override convenience init(){self.init(size:CGSize(width:390,height:330))}
     required init?(coder:NSCoder){super.init(coder:coder)}
+    #if DEBUG
+    override func update(_ currentTime:TimeInterval){PerformanceDiagnostics.shared.frame()}
+    #endif
     override func didChangeSize(_ oldSize:CGSize){
         if let state,let content{display(session:state,content:content,selected:nil,reduceMotion:reduced)}
         else{layoutCharacters()}
@@ -76,6 +79,9 @@ final class KitchenScene: SKScene {
             }
         }
         layoutCharacters()
+        #if DEBUG
+        if session.isPaused || reduceMotion{PerformanceDiagnostics.shared.endActiveInterval()}
+        #endif
         isPaused=session.isPaused || reduceMotion
     }
     private func layoutCharacters(){

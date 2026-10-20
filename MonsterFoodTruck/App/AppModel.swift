@@ -2,7 +2,7 @@ import SwiftUI
 import Combine
 import UIKit
 
-enum Screen: Equatable { case home, levels, introduction(String), game, result, complete, help, about, ended }
+enum Screen: Equatable { case home, levels, introduction(String), practiceIntroduction, game, result, complete, help, about, ended }
 
 @MainActor
 final class AppModel: ObservableObject {
@@ -21,6 +21,7 @@ final class AppModel: ObservableObject {
     @Published var startupError: String?
     @Published var confirmation: Confirmation?
     private var confirmationAfterSettings:Confirmation?
+    private var screenAfterSettings:Screen?
     @Published var isSaving = false
     @Published private(set) var debugScenarioLabel:String?
     private var debugFrozen=false
@@ -44,9 +45,8 @@ final class AppModel: ObservableObject {
     }
     @Published private(set) var isSettling=false
     private var recoveryBlocked = false
-    private var nextIsPractice = false
     enum Confirmation: Identifiable {
-        case replace(String), restart, abandon, resetSettings, resetProgress
+        case replace(String,Bool), restart, abandon, resetSettings, resetProgress
         var id: String { String(describing:self) }
     }
     init(saveDirectory:URL?=nil) {saveDirectoryOverride=saveDirectory;load()}
@@ -60,7 +60,7 @@ final class AppModel: ObservableObject {
             #if DEBUG
             let environment=ProcessInfo.processInfo.environment
             if environment["MFT_NORMAL_REPLAY"]=="1"{directory.appendPathComponent("UIReplayEvidence",isDirectory:true)}
-            if let suite=environment["MFT_UI_SUITE"],["navigation","layout","controls"].contains(suite){directory.appendPathComponent("UIEvidence-"+suite,isDirectory:true)}
+            if let suite=environment["MFT_UI_SUITE"],["navigation","layout","controls","performance"].contains(suite){directory.appendPathComponent("UIEvidence-"+suite,isDirectory:true)}
             #endif
             let store = SaveStore(directory:directory,content:content)
             let loaded = store.load()
@@ -96,7 +96,7 @@ final class AppModel: ObservableObject {
     var allComplete: Bool { guard let content else { return false }; return content.levels.allSatisfy { (document.records[$0.id]?.best ?? 0) > 0 } }
     func startButton() {
         guard let content else { return }
-        if document.session != nil { confirmation = .replace(nextLevelID()); return }
+        if document.session != nil { confirmation = .replace(nextLevelID(),false); return }
         if allComplete { screen = .levels }
         else { screen = .introduction(nextLevelID()) }
     }
@@ -104,21 +104,21 @@ final class AppModel: ObservableObject {
         guard let content else { return "level_01" }
         return content.levels.first { (document.records[$0.id]?.best ?? 0) == 0 }?.id ?? content.levels[0].id
     }
-    func requestBegin(_ levelID: String) {
-        if document.session != nil { confirmation = .replace(levelID) }
-        else { begin(levelID) }
+    func requestBegin(_ levelID: String,practice:Bool=false) {
+        if document.session != nil { confirmation = .replace(levelID,practice) }
+        else { begin(levelID,practice:practice) }
     }
-    func begin(_ levelID: String) {
+    func begin(_ levelID: String,practice:Bool=false) {
         guard let content, let index = content.levels.firstIndex(where: { $0.id == levelID }), document.unlocked(index,content:content) else { message = "請先通過前一關。"; return }
         recoveryBlocked = false
         lesson=nil
         document.session = GameSession(level:content.levels[index],mode:document.settings.nextMode,content:content)
-        document.session?.isPractice = nextIsPractice
-        nextIsPractice = false
+        document.session?.isPractice = practice
         selectedOrder = document.session?.activeOrders.first?.id
         resultSession = nil; lastEvent = -1; lastSnapshotTime = 0; lastUptime = nil; tutorialPhase = 0
         screen = .game;syncKitchen();persist()
         #if DEBUG
+        PerformanceDiagnostics.shared.enter(scene:kitchen,audioPlayers:audio.diagnosticPlayerCount)
         if normalReplay {
             do{replayInputs=try CommandReplayPlanner.run(level:content.levels[index],mode:document.settings.nextMode,content:content).inputs;replayCursor=0;lastReplayCommand = -1}
             catch{normalReplay=false;message="參考操作序列無法建立：\(error.localizedDescription)"}
@@ -139,6 +139,9 @@ final class AppModel: ObservableObject {
     func pause() {
         document.session?.isPaused = true; lastUptime = nil
         kitchen.isPaused = true; audio.pause(); persist()
+        #if DEBUG
+        PerformanceDiagnostics.shared.pauseAndExport()
+        #endif
     }
     func resume() {
         guard screen == .game, lesson == nil else { return }
@@ -180,6 +183,9 @@ final class AppModel: ObservableObject {
         #endif
     }
     func command(_ command: GameCommand) {
+        #if DEBUG
+        PerformanceDiagnostics.shared.handledInput()
+        #endif
         _=submit(command,catchUp:true)
     }
     @discardableResult private func submit(_ command:GameCommand,catchUp:Bool)->Bool{
@@ -294,20 +300,21 @@ final class AppModel: ObservableObject {
         persist{[weak self] success in
             guard let self else{return};self.isClosingSettings=false
             if success{self.message=nil;self.audio.pause();self.settingsPresented=false}
-            else{self.confirmationAfterSettings=nil}
+            else{self.confirmationAfterSettings=nil;self.screenAfterSettings=nil}
         }
     }
     func closeSettingsFor(_ confirmation:Confirmation){confirmationAfterSettings=confirmation;closeSettings()}
+    func closeSettingsToHelp(){screenAfterSettings = .help;closeSettings()}
     func settingsDidDismiss(){
         if let pending=confirmationAfterSettings{confirmationAfterSettings=nil;confirmation=pending}
+        else if let pending=screenAfterSettings{screenAfterSettings=nil;screen=pending}
         else if screen == .home{audio.startMusic()}
     }
-    func updateTutorialForReplay() {nextIsPractice=true}
     func updateSettings(_ edit: (inout GameSettings)->Void) {edit(&document.settings);audio.configure(document.settings);syncKitchen();persist()}
     func confirmed(_ confirmation: Confirmation) {
         switch confirmation {
-        case let .replace(id):begin(id)
-        case .restart:if let id=document.session?.levelID{begin(id)}
+        case let .replace(id,practice):begin(id,practice:practice)
+        case .restart:if let id=document.session?.levelID{begin(id,practice:document.session?.isPractice == true)}
         case .abandon:document.session=nil;screen = .home;persist()
         case .resetSettings:document.settings=GameSettings();audio.configure(document.settings);persist()
         case .resetProgress:document.records=[:];document.session=nil;document.tutorialDone=false;document.seenLessons=[];screen = .home;settingsPresented=false;recoveryBlocked=false;persist()

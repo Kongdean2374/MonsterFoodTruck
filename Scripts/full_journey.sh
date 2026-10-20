@@ -25,7 +25,7 @@ trap stop_recording EXIT
 xcrun simctl io "$DEVICE" recordVideo --codec=h264 --force build/QA_EVIDENCE/journey/normal-six-level-journey.mov > build/journey-recording.log 2>&1 &
 VIDEO_PID=$!
 STATUS=0
-if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$DEVICE" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckUITests/FullJourneyTests -only-testing:MonsterFoodTruckUITests/ControlFlowTests -resultBundlePath build/Journey.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO CURRENT_PROJECT_VERSION="${GITHUB_RUN_NUMBER:-1}" | tee build/journey.log; then
+if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$DEVICE" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckUITests/FullJourneyTests -only-testing:MonsterFoodTruckUITests/ControlFlowTests -only-testing:MonsterFoodTruckUITests/PerformanceTests -resultBundlePath build/Journey.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO CURRENT_PROJECT_VERSION="${GITHUB_RUN_NUMBER:-1}" | tee build/journey.log; then
   STATUS=0
 else
   STATUS=$?
@@ -37,6 +37,11 @@ xcrun swift Scripts/probe_video.swift build/QA_EVIDENCE/journey/normal-six-level
 APP_DATA=$(xcrun simctl get_app_container "$DEVICE" cc.chaihome.monsterfoodtruck data)
 REPLAY_DIR="$APP_DATA/Library/Application Support/MonsterFoodTruck/UIReplayEvidence/Journey"
 if [ -d "$REPLAY_DIR" ]; then ditto "$REPLAY_DIR" build/QA_EVIDENCE/journey/actual-model-snapshots; fi
+PERFORMANCE_REPORT="$APP_DATA/Library/Application Support/MonsterFoodTruck/Diagnostics/PERFORMANCE.json"
+if [ -f "$PERFORMANCE_REPORT" ]; then
+  cp "$PERFORMANCE_REPORT" build/QA_EVIDENCE/journey/PERFORMANCE.json
+  python3 Scripts/summarize_performance.py build/QA_EVIDENCE/journey/PERFORMANCE.json build/QA_EVIDENCE/journey/PERFORMANCE_SUMMARY.json
+fi
 python3 - "$DEVICE" "$STATUS" <<'PY'
 import json,os,subprocess,sys
 from pathlib import Path
@@ -45,6 +50,7 @@ report=dict(source_sha=subprocess.check_output(['git','rev-parse','HEAD'],text=T
 Path('build/QA_EVIDENCE/journey/RECORDING_METHOD.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 if int(sys.argv[2])==0 and report['recorded_bytes']<1024:raise SystemExit('Normal-speed journey recording is missing or empty')
 if int(sys.argv[2])==0 and len(list(Path('build/QA_EVIDENCE/journey/actual-model-snapshots').glob('actual-level_*.json')))!=6:raise SystemExit('Six actual runtime session histories were not exported')
+if int(sys.argv[2])==0 and not Path('build/QA_EVIDENCE/journey/PERFORMANCE_SUMMARY.json').is_file():raise SystemExit('Actual twenty-entry performance measurements were not exported')
 if int(sys.argv[2])==0:
  actual=sum(json.loads(p.read_text())['time'] for p in Path('build/QA_EVIDENCE/journey/actual-model-snapshots').glob('actual-level_*.json'))
  metadata=json.loads(Path('build/QA_EVIDENCE/journey/VIDEO_METADATA.json').read_text())

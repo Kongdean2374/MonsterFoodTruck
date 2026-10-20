@@ -57,4 +57,5 @@ jobs:
             build/LAYOUT_ENVIRONMENT.txt
             build/Layout-*.xcresult
             build/*.log
+            build/QA_EVIDENCE
           if-no-files-found: error

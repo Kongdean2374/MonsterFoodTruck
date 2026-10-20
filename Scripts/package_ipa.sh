@@ -41,5 +41,13 @@ out=Path('build/delivery')
 digest=hashlib.sha256((out/ipa).read_bytes()).hexdigest()
 manifest=dict(source_sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),version=p['CFBundleShortVersionString'],build=p['CFBundleVersion'],bundle_id=p['CFBundleIdentifier'],platform='iOS device',signature='unsigned',runner_image=os.getenv('ImageVersion'),xcode=subprocess.check_output(['xcodebuild','-version'],text=True).strip(),sdk=subprocess.check_output(['xcrun','--sdk','iphoneos','--show-sdk-version'],text=True).strip(),workflow_run_id=os.getenv('GITHUB_RUN_ID'),ipa=ipa,ipa_sha256=digest,created_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),validation='See TEST_SUMMARY.md; not a final acceptance')
 (out/'BUILD_MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
+evidence=[]
+for file in sorted(Path('build/QA_EVIDENCE').rglob('*')):
+ if file.is_file():
+  checksum=hashlib.sha256()
+  with file.open('rb') as stream:
+   for chunk in iter(lambda:stream.read(1024*1024),b''):checksum.update(chunk)
+  evidence.append(dict(path=str(file.relative_to('build')),bytes=file.stat().st_size,sha256=checksum.hexdigest()))
+(out/'QA_EVIDENCE_INDEX.json').write_text(json.dumps(dict(source_sha=manifest['source_sha'],files=evidence),ensure_ascii=False,indent=2)+'\n')
 (out/'SHA256SUMS.txt').write_text(''.join(hashlib.sha256(f.read_bytes()).hexdigest()+'  '+f.name+'\n' for f in sorted(out.iterdir()) if f.is_file() and f.name!='SHA256SUMS.txt'))
 PY

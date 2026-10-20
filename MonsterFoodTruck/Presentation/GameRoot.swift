@@ -34,6 +34,7 @@ struct GameRoot:View {
                 case .home:HomeScreen()
                 case .levels:LevelScreen()
                 case let .introduction(id):IntroductionScreen(levelID:id)
+                case .practiceIntroduction:IntroductionScreen(levelID:"level_01",isPractice:true)
                 case .game:PlayScreen()
                 case .result:ResultScreen()
                 case .complete:CompletionScreen()
@@ -104,10 +105,12 @@ struct LevelScreen:View {
                         let unlocked=model.document.unlocked(index,content:content)
                         Button{model.screen = .introduction(level.id)}label:{
                             HStack(spacing:16){Text(String(format:"%02d",index+1)).font(.title.bold()).foregroundStyle(TruckTheme.moss).frame(width:42)
-                                VStack(alignment:.leading,spacing:5){Text(level.name).font(.headline);Text(level.focus).font(.caption).multilineTextAlignment(.leading);Text(starsText(model.document.records[level.id]?.best ?? 0)).foregroundStyle(TruckTheme.teal)}
+                                VStack(alignment:.leading,spacing:5){Text(level.name).font(.headline);Text(level.focus).font(.caption).multilineTextAlignment(.leading);Text(starsText(model.document.records[level.id]?.best ?? 0)).foregroundStyle(TruckTheme.teal)
+                                    Text("一般 \(model.document.records[level.id]?.normal ?? 0)星・舒緩 \(model.document.records[level.id]?.gentle ?? 0)星").font(.caption2)
+                                }
                                 Spacer(minLength:0);Image(systemName:unlocked ? "chevron.right":"lock.fill")
                             }.padding(16).frame(maxWidth:.infinity,minHeight:104).background(.white.opacity(0.7),in:RoundedRectangle(cornerRadius:20))
-                        }.disabled(!unlocked).opacity(unlocked ? 1:0.65).accessibilityIdentifier("level-\(level.id)").accessibilityLabel("第\(index+1)關，\(level.name)，\(unlocked ? "可玩":"鎖定")，最高\(model.document.records[level.id]?.best ?? 0)星")
+                        }.disabled(!unlocked).opacity(unlocked ? 1:0.65).accessibilityIdentifier("level-\(level.id)").accessibilityLabel("第\(index+1)關，\(level.name)，\(unlocked ? "可玩":"鎖定")，最高\(model.document.records[level.id]?.best ?? 0)星，一般\(model.document.records[level.id]?.normal ?? 0)星，舒緩\(model.document.records[level.id]?.gentle ?? 0)星")
                     }}.padding(.bottom,20)
                 }
             }
@@ -119,18 +122,20 @@ func starsText(_ stars:Int)->String{String(repeating:"★",count:max(0,min(3,sta
 struct IntroductionScreen:View {
     @EnvironmentObject var model:AppModel
     var levelID:String
+    var isPractice=false
     var body:some View{
         VStack(spacing:20){ScreenHeading(title:"準備開張")
             if let content=model.content,let level=content.levels.first(where:{$0.id==levelID}){
                 Spacer(minLength:0)
                 Text(level.name).font(.largeTitle.bold()).multilineTextAlignment(.center)
+                if isPractice{Text("教學練習・不更新正式星數或解鎖").font(.headline).multilineTextAlignment(.center)}
                 HStack{ForEach(Array(Set(level.orders.map(\.recipe))).sorted(by:{$0.rawValue<$1.rawValue}),id:\.self){id in
                     VStack{DishImage(column:content.recipe(id).atlasColumn).frame(height:80);Text(content.recipe(id).name).font(.caption)}
                 }}
                 Text(level.focus).font(.headline).multilineTextAlignment(.center)
                 VStack(alignment:.leading,spacing:12){Text("共 \(level.orders.count) 筆訂單・成功 \(level.passCount) 筆通關");Text("全部服務，並達成 \(level.preferenceCount) 筆偏好可得三星");Text("下一局模式：\(model.document.settings.nextMode.rawValue)");Text("\(Set(level.orders.map{content.monster($0.monster).name}).sorted().joined(separator:"、"))")}.font(.subheadline).padding(20).background(.white.opacity(0.7),in:RoundedRectangle(cornerRadius:20))
                 Spacer(minLength:0)
-                Button("開始營業"){model.requestBegin(levelID)}.buttonStyle(TruckButtonStyle(primary:true)).accessibilityIdentifier("beginLevel")
+                Button("開始營業"){model.requestBegin(levelID,practice:isPractice)}.buttonStyle(TruckButtonStyle(primary:true)).accessibilityIdentifier("beginLevel")
                 Button("返回選關"){model.screen = .levels}.frame(minHeight:44)
             }
         }.padding(.horizontal,24).padding(.bottom,12)

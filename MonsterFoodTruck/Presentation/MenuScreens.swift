@@ -2,7 +2,6 @@ import SwiftUI
 
 struct SettingsScreen:View {
     @EnvironmentObject var model:AppModel
-    @Environment(\.dismiss) private var dismiss
     func setting<T>(_ keyPath:WritableKeyPath<GameSettings,T>)->Binding<T>{Binding(get:{model.document.settings[keyPath:keyPath]},set:{value in model.updateSettings{$0[keyPath:keyPath]=value}})}
     func switchRow(_ title:String,_ key:WritableKeyPath<GameSettings,Bool>)->some View{
         let value=setting(key)
@@ -35,7 +34,7 @@ struct SettingsScreen:View {
                     Text("左手配置將主要命令放到左側；兩爐、兩備料槽與兩成品位置的規則相同。").font(.caption)
                 }
                 Section("教學與資料"){
-                    Button("重新查看操作教學"){dismiss();model.screen = .help}.frame(minHeight:44)
+                    Button("重新查看操作教學"){model.closeSettingsToHelp()}.frame(minHeight:44)
                     Button("恢復預設設定"){model.closeSettingsFor(.resetSettings)}.frame(minHeight:44)
                     Button("清除遊戲進度",role:.destructive){model.closeSettingsFor(.resetProgress)}.frame(minHeight:44)
                 }
@@ -83,7 +82,7 @@ struct ResultScreen:View {
                 }
                 if session.isPractice{
                     Button("正式開始第一關"){model.begin("level_01")}.buttonStyle(TruckButtonStyle(primary:true))
-                    Button("再看一次教學"){model.updateTutorialForReplay();model.begin("level_01")}.buttonStyle(TruckButtonStyle())
+                    Button("再看一次教學"){model.begin("level_01",practice:true)}.buttonStyle(TruckButtonStyle())
                 }else{Button("再玩一次"){model.begin(session.levelID)}.buttonStyle(TruckButtonStyle())}
                 Button("關卡選擇"){model.screen = .levels}.buttonStyle(TruckButtonStyle())
                 Button("回首頁"){model.screen = .home}.frame(minHeight:44)
@@ -129,7 +128,7 @@ struct InformationScreen:View {
                     Text("看到爪子目標與倒數時，可蓋住那盤、先出餐，或服務伸手的小鬼。唯一餐蓋只暫停偷嚐，不延長熱度，也不重置暴露或預告進度。")
                     Text("暫停、設定、離開 App 時，所有遊戲時間停止；回來後需自行按繼續營業。舒緩模式可延長反應時間，不影響可得星數。")
                     if model.session != nil{Button("返回暫停的這一局"){model.screen = .game}.buttonStyle(TruckButtonStyle(primary:true))}
-                    else{Button("重看第一關教學"){model.updateTutorialForReplay();model.screen = .introduction("level_01")}.buttonStyle(TruckButtonStyle(primary:true))}
+                    else{Button("重看第一關教學"){model.screen = .practiceIntroduction}.buttonStyle(TruckButtonStyle(primary:true))}
                 }
             }.padding(.vertical,20)}
         }.padding(.horizontal,24)
