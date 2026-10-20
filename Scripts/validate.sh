@@ -12,7 +12,9 @@ print(candidates[0]['udid'])
 PY
 )
 echo "$SIM_ID" > build/simulator-id.txt
-xcodebuild test -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -parallel-testing-enabled NO -resultBundlePath build/Validation.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/validate.log
+xcodebuild build-for-testing -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/compile.log
+plutil -p build/DerivedData/Build/Products/Debug-iphonesimulator/MonsterFoodTruck.app/Info.plist
+xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -parallel-testing-enabled NO -resultBundlePath build/Validation.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/validate.log
 xcrun simctl io "$SIM_ID" screenshot build/QA_EVIDENCE/after-tests.png
 python3 - <<'PY'
 from pathlib import Path
