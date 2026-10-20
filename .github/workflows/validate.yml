@@ -32,6 +32,8 @@ jobs:
           retention-days: 14
           path: |
             build/ENVIRONMENT.txt
+            build/SIMULATOR_APP_INFO.plist
+            build/SIMULATOR_APP_IDENTITY.json
             build/Validation.xcresult
             build/QA_EVIDENCE
             build/TEST_SUMMARY.md

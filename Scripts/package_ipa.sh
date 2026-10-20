@@ -5,6 +5,8 @@ test -z "$(git status --porcelain --untracked-files=no)"
 xcodebuild archive -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Release -destination 'generic/platform=iOS' -archivePath build/MonsterFoodTruck.xcarchive -derivedDataPath build/DeviceData CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= DEVELOPMENT_TEAM= CURRENT_PROJECT_VERSION="${GITHUB_RUN_NUMBER:-1}" | tee build/archive.log
 APP=build/MonsterFoodTruck.xcarchive/Products/Applications/MonsterFoodTruck.app
 test -f "$APP/MonsterFoodTruck"
+cp "$APP/Info.plist" build/delivery/DEVICE_APP_INFO.plist
+python3 Scripts/verify_app.py "$APP" --platform iPhoneOS --output build/delivery/DEVICE_APP_IDENTITY.json
 xcrun vtool -show-build "$APP/MonsterFoodTruck" | tee build/delivery/MACHO_PLATFORM.txt
 grep -Eq 'platform[[:space:]]+IOS$' build/delivery/MACHO_PLATFORM.txt
 if find "$APP" \( -name '*.mobileprovision' -o -name '*.p12' -o -name '*.key' \) | grep -q .; then
