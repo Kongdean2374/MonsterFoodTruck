@@ -14,7 +14,7 @@ final class PerformanceTests:XCTestCase {
         XCTAssertTrue(app.buttons["start"].waitForExistence(timeout:10))
         let launchNote=XCTAttachment(string:"Fresh isolated save directory; first process launch to home accessibility availability: \(Date().timeIntervalSince(launchedAt))s including XCTest overhead. OS filesystem cache not controlled. Simulator measurement, not physical-device cold launch.")
         launchNote.name="performance-launch-method";launchNote.lifetime = .keepAlways;add(launchNote)
-        var allocatedAudio:String?
+        var allocatedAudio:String?,descendantsAtFirstEntry:Int?
         for entry in 1...20{
             app.buttons["start"].tap();XCTAssertTrue(app.buttons["beginLevel"].waitForExistence(timeout:5));app.buttons["beginLevel"].tap()
             if entry==1{XCTAssertTrue(app.buttons["略過教學"].waitForExistence(timeout:5));app.buttons["略過教學"].tap()}
@@ -25,6 +25,10 @@ final class PerformanceTests:XCTestCase {
             let value=app.staticTexts["performance-diagnostic"].value as? String ?? ""
             XCTAssertTrue(value.contains("entries=\(entry);nodes=1;"),"Unexpected actual node state: \(value)")
             XCTAssertTrue(value.hasSuffix("error=none"),"Diagnostic export failed: \(value)")
+            let descendants=Int(value.components(separatedBy:";descendants=").last?.components(separatedBy:";").first ?? "") ?? 0
+            XCTAssertGreaterThan(descendants,1,"Whole SpriteKit subtree must include the character's child parts: \(value)")
+            if let descendantsAtFirstEntry{XCTAssertEqual(descendants,descendantsAtFirstEntry,"Character child parts grew across real scene reentry")}
+            else{descendantsAtFirstEntry=descendants}
             let audio=value.components(separatedBy:";audio=").last?.components(separatedBy:";").first ?? "missing"
             if let allocatedAudio{XCTAssertEqual(audio,allocatedAudio,"Audio players grew during scene reentry")}else{allocatedAudio=audio;XCTAssertGreaterThan(Int(audio) ?? 0,0)}
             app.buttons["pause"].tap();XCTAssertTrue(app.buttons["保存並回首頁"].waitForExistence(timeout:5))

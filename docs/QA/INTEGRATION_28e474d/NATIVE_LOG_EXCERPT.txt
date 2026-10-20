@@ -1,0 +1,35 @@
+2026-10-20T19:22:58.6650200Z 	 Executed 4 tests, with 0 failures (0 unexpected) in 2.353 (2.354) seconds
+2026-10-20T19:22:58.6868040Z Test Suite 'SceneLifecycleTests' started at 2026-10-20 19:22:58.566.
+2026-10-20T19:23:01.5495690Z Test Suite 'SceneLifecycleTests' passed at 2026-10-20 19:23:01.524.
+2026-10-20T19:23:04.1258850Z 	 Executed 26 tests, with 0 failures (0 unexpected) in 9.994 (10.005) seconds
+2026-10-20T19:23:04.1260590Z 	 Executed 26 tests, with 0 failures (0 unexpected) in 9.994 (10.006) seconds
+2026-10-20T19:23:53.5893820Z Test Suite 'FlowTests' started at 2026-10-20 19:23:53.467.
+2026-10-20T19:29:59.8831930Z Test Suite 'FlowTests' passed at 2026-10-20 19:29:59.846.
+2026-10-20T19:29:59.8847330Z 	 Executed 4 tests, with 0 failures (0 unexpected) in 366.373 (366.378) seconds
+2026-10-20T19:30:04.0509970Z ** TEST EXECUTE SUCCEEDED **
+2026-10-20T19:46:44.1458270Z     t =   443.22s     Synthesize event
+2026-10-20T19:47:28.0127090Z     t =   487.09s Find the "primaryCommand" Button
+2026-10-20T19:47:28.0591760Z     t =   487.13s Tap "primaryCommand" Button
+2026-10-20T19:47:28.0694070Z     t =   487.13s     Wait for cc.chaihome.monsterfoodtruck to idle
+2026-10-20T19:47:28.0859260Z     t =   487.13s     Find the "primaryCommand" Button
+2026-10-20T19:47:28.1653870Z     t =   487.19s     Check for interrupting elements affecting "primaryCommand" Button
+2026-10-20T19:47:28.2481950Z     t =   487.30s     Synthesize event
+2026-10-20T19:47:28.5978030Z     t =   487.62s     Wait for cc.chaihome.monsterfoodtruck to idle
+2026-10-20T19:47:28.8117070Z     t =   487.83s Checking existence of `"知道了，繼續" Button`
+2026-10-20T19:47:28.9266760Z     t =   487.98s Checking existence of `"primaryCommand" Button`
+2026-10-20T19:47:32.2082910Z     t =   491.25s     Checking `Expect predicate `existsNoRetry == 1` for object Button (First Match)`
+2026-10-20T19:47:32.2192580Z     t =   491.25s         Checking existence of `Button (First Match)`
+2026-10-20T19:47:32.2567560Z     t =   491.32s Waiting 5.0s for "香草芽" Button to exist
+2026-10-20T19:47:33.3135130Z     t =   492.38s     Checking `Expect predicate `existsNoRetry == 1` for object "香草芽" Button`
+2026-10-20T19:47:33.3249550Z     t =   492.38s         Checking existence of `"香草芽" Button`
+2026-10-20T19:47:33.4099630Z     t =   492.48s Find the "香草芽" Button
+2026-10-20T19:47:33.4986900Z     t =   492.57s Tap "香草芽" Button
+2026-10-20T19:47:33.5001290Z     t =   492.57s     Wait for cc.chaihome.monsterfoodtruck to idle
+2026-10-20T19:47:33.5003570Z     t =   492.57s     Find the "香草芽" Button
+2026-10-20T19:47:33.6523400Z     t =   492.72s     Check for interrupting elements affecting "香草芽" Button
+2026-10-20T19:47:33.7182050Z     t =   492.79s     Synthesize event
+2026-10-20T19:48:14.0391370Z /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/UITests/FullJourneyTests.swift:97: error: -[MonsterFoodTruckUITests.FullJourneyTests testSixLevelsAtNormalSpeed] : failed - Real late-level tap action failed: 出餐
+2026-10-20T19:49:24.9835830Z /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/UITests/PerformanceTests.swift:13: error: -[MonsterFoodTruckUITests.PerformanceTests testTwentyRealSceneEntriesKeepNodesAndAudioBounded] : Failed to terminate cc.chaihome.monsterfoodtruck:58814: Failed to terminate cc.chaihome.monsterfoodtruck:0
+2026-10-20T19:49:24.9932730Z 	 Executed 4 tests, with 2 failures (0 unexpected) in 815.144 (815.154) seconds
+2026-10-20T19:49:24.9935760Z 	 Executed 4 tests, with 2 failures (0 unexpected) in 815.144 (815.157) seconds
+2026-10-20T19:50:24.7176180Z ** TEST EXECUTE FAILED **

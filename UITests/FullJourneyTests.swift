@@ -7,6 +7,11 @@ final class FullJourneyTests:XCTestCase {
     override func tearDown(){
         if (testRun?.failureCount ?? 0)>0{
             let shot=XCTAttachment(screenshot:XCUIScreen.main.screenshot());shot.name="FAILED-journey-actual-screen";shot.lifetime = .keepAlways;add(shot)
+            let app=XCUIApplication()
+            let tree=XCTAttachment(string:app.debugDescription);tree.name="FAILED-journey-accessibility";tree.lifetime = .keepAlways;add(tree)
+            // Preserve the failed screen first, then pause through the actual UI
+            // so its clock/save remains inspectable before the next independent case.
+            if app.buttons["pause"].exists && app.buttons["pause"].isHittable{app.buttons["pause"].tap()}
         }
     }
     func testSixLevelsAtNormalSpeed(){
@@ -72,9 +77,31 @@ final class FullJourneyTests:XCTestCase {
         }
         let herb=app.buttons["香草芽"]
         XCTAssertTrue(herb.waitForExistence(timeout:5),"Uncovered, tidied stew must offer the original herb action")
-        XCTAssertTrue(herb.isHittable);herb.tap();perform("出餐",app)
+        XCTAssertTrue(herb.isHittable);herb.tap();serveHerbedMeal("L5-1",app)
         XCTAssertTrue(app.staticTexts["已服務 2／7 ・一般"].waitForExistence(timeout:5));captureRealTaps("actual-late-two-served-with-cloche",app)
         app.buttons["pause"].tap();app.buttons["保存並回首頁"].tap();XCTAssertTrue(app.buttons["繼續遊玩"].waitForExistence(timeout:5))
+    }
+    private func serveHerbedMeal(_ orderID:String,_ app:XCUIApplication){
+        // Scorch repair does not erase a pending theft. A later bite can cancel
+        // the first herb operation; respond to that displayed state, once.
+        for recovery in 0...1{
+            XCTAssertTrue(app.buttons["quick-\(orderID)"].exists,"The original customer must still be present")
+            let ready=app.buttons.matching(NSPredicate(format:"identifier == %@ AND label IN %@ AND enabled == true",argumentArray:["primaryCommand",["出餐","整理 3 秒"]])).firstMatch
+            XCTAssertTrue(ready.waitForExistence(timeout:10),"Herb work must finish or expose its actual interrupted recovery action")
+            let action=ready.label
+            let note=XCTAttachment(string:"Actual normal-clock UI after herb: \(action); recovery=\(recovery); expected order=\(orderID)")
+            note.name="actual-late-post-herb-action-\(recovery)";note.lifetime = .keepAlways;add(note)
+            if action == "出餐"{perform("出餐",app);return}
+            XCTAssertEqual(action,"整理 3 秒");XCTAssertEqual(recovery,0,"One plate can be stolen from only once; do not conceal repeated damage")
+            captureRealTaps("actual-late-herb-interrupted-needs-tidy",app)
+            perform("整理 3 秒",app)
+            let herb=app.buttons["香草芽"]
+            XCTAssertTrue(herb.waitForExistence(timeout:5));XCTAssertTrue(herb.isHittable)
+            let repaired=app.buttons.matching(NSPredicate(format:"value == %@","已整理・偏好失效")).firstMatch
+            XCTAssertTrue(repaired.exists,"A second repair must still retain the lost preference qualification")
+            herb.tap()
+        }
+        XCTFail("The original herbed meal was not served after its legal recovery")
     }
     private func revealLevel(_ id:String,_ app:XCUIApplication)->XCUIElement{
         let level=app.buttons["level-\(id)"]
@@ -86,12 +113,17 @@ final class FullJourneyTests:XCTestCase {
         return level
     }
     private func perform(_ label:String,_ app:XCUIApplication){
-        let deadline=Date().addingTimeInterval(35);var tapped=false
+        let deadline=Date().addingTimeInterval(35);var tapped=false,observations:[String]=[],previous=""
+        defer{
+            let note=XCTAttachment(string:observations.joined(separator:"\n"));note.name="actual-command-\(label)-transitions";note.lifetime = .keepAlways;add(note)
+        }
         while Date()<deadline{
             if app.buttons["知道了，繼續"].exists{app.buttons["知道了，繼續"].tap();continue}
             let button=app.buttons["primaryCommand"]
-            if tapped && (!button.exists || button.label != label){return}
-            if button.exists && button.isEnabled && button.isHittable && button.label==label{button.tap();tapped=true}
+            let exists=button.exists,actual=exists ? button.label:"absent"
+            if actual != previous{observations.append("\(Date().timeIntervalSince1970): wanted=\(label), actual=\(actual), tapped=\(tapped)");previous=actual}
+            if tapped && (!exists || actual != label){return}
+            if !tapped && exists && actual==label && button.isEnabled && button.isHittable{button.tap();tapped=true}
             RunLoop.current.run(until:Date().addingTimeInterval(0.2))
         }
         XCTFail("Real late-level tap action failed: \(label)")

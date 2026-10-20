@@ -163,6 +163,13 @@ final class FlowTests: XCTestCase {
         app.buttons["設定"].tap();XCTAssertTrue(app.navigationBars["餐車設定"].waitForExistence(timeout:5))
         for label in ["高對比資訊","大字介面","左手單手配置"]{reveal(app.switches[label],app,up:true);app.switches[label].tap();XCTAssertEqual(app.switches[label].value as? String,"1")}
         app.buttons["完成"].tap()
+        // Saving is asynchronous and keeps this sheet disabled until its real
+        // ordered write completes. Wait for that phase before the unchanged
+        // dismissal and home-hittability assertions, rather than timing I/O as
+        // if it were only a navigation animation.
+        let saving=app.buttons.matching(NSPredicate(format:"label == %@","儲存中…")).firstMatch
+        let saved=XCTNSPredicateExpectation(predicate:NSPredicate(format:"exists == false"),object:saving)
+        XCTAssertEqual(XCTWaiter.wait(for:[saved],timeout:15),.completed,"The real settings write must finish before checking sheet dismissal")
         let closed=XCTNSPredicateExpectation(predicate:NSPredicate(format:"exists == false"),object:app.navigationBars["餐車設定"])
         XCTAssertEqual(XCTWaiter.wait(for:[closed],timeout:5),.completed,"Settings must finish saving and dismiss before the home screenshot")
         let homeReady=XCTNSPredicateExpectation(predicate:NSPredicate(format:"hittable == true"),object:app.buttons["關卡選擇"])

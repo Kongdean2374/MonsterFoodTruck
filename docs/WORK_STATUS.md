@@ -1,12 +1,12 @@
 # 工作狀態
 
-2026-10-20。完整遊戲仍在製作與回歸，沒有最終驗收或完整遊戲 IPA。最近已完成主驗證的 source `2bb77a9af1064272f1d4ca50a0dc950fecf7f04a`，[Validate 39472144828](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39472144828) 主 job 已完成並上傳實物：基礎 31／0／0，延伸 3／1／0；原大小尺寸仍保留。沒有取消或重開舊 run。
+2026-10-20。完整遊戲仍在製作與回歸，沒有最終驗收或完整遊戲 IPA。最近已完成原生的 source `28e474db37fdc8c9be40a490cd9c51a1070bd888`，[Validate 39481483503](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39481483503) 基礎 31／0／0、延伸 2／2／0、small 與 large 各 3／0／0；整體 failure，裝置封裝依門檻未執行。沒有取消或重開舊 run。
 
 ## 恢復入口與單一寫入者
 
 - 倉庫 `Kongdean2374/MonsterFoodTruck`，公開，預設分支 main。單一工作樹 `/workspace/MonsterFoodTruck`、整合分支 `integration/full-game`，目前 Codex 對話為唯一產品寫入者。不 reset／force push／覆蓋未知工作。
 - 先讀 `git status`、本檔及 [問題紀錄](QA/ISSUE_LOG.md)；完整規格 [PROJECT_SPEC](PROJECT_SPEC.md)。歷史失敗及 Dot 的獨立判定保存在問題紀錄與各 QA 目錄，不以新成功改寫。
-- 最新原生候選 `2bb77a9af1064272f1d4ca50a0dc950fecf7f04a`／Validate 39472144828 主 job 118798719852 failure；原生基礎 31 通過／0 失敗／0 略過，延伸 3 通過／1 失敗／0 略過。唯一失敗是正常第五關點按未先整理受損料理（MFT-015），不是 timeout。18:56 UTC Dot 提醒測試已失敗／仍上傳附件，已遵守並下載原附件核對。small 原 job 已成功，large 原 job 仍執行，尚未代稱三尺寸全過。9882a0c 前一 run 主／small／large 均因新增測試 fixture 的 setter 編譯失敗，已自行結束；沒有取消／重開舊 job。
+- 最新完成原生候選 `28e474db37fdc8c9be40a490cd9c51a1070bd888`／Validate 39481483503：基礎 31／0／0，延伸 2／2／0，small／large 各 3／0／0，全部原 job 已自行結束；主失敗，無 IPA。失敗是配料遭接續偷嚐後未再整理，以及後續 Performance 啟動終止前 App 失敗，未略過任何失敗測試。
 - main 仍為 `b12837c80dfc9f44ae6035c8bf7334f0fff66fdb` 的核心候選。完整候選可在指定整合分支手動產出同 SHA 的完整驗證與未簽名裝置包；仍須全部原生 scopes 通過，不為產包先改 main。
 
 ## 已有獨立判定（範圍不可擴張）
@@ -55,3 +55,11 @@
 - 最終只交付同一完整 source SHA、成功原生 scopes、可追溯實際 PNG／影片、無簽名 iPhoneOS IPA、必要識別欄位／Mach-O／逐檔校驗／SHA256SUMS。不得以 bootstrap IPA、固定情境或純 Domain 結果代替。
 
 - Dot 已獨立核對 2bb review artifact SHA-256／基礎 31／0／0／延伸 3／1／0、六份工程 session 與模擬器診斷；未稱全遊戲或聽感通過。Codex 依提醒查到 nodes=1 實際是 `scene.children.count`，僅根下一層，不能宣稱全部角色部件穩定，列 MFT-016。先完成 MFT-015 原主流程同 SHA 回歸，不新增產品功能；後續補足原規格必要證據。
+
+- 目前整合 HEAD `28e474db37fdc8c9be40a490cd9c51a1070bd888`／Validate 39481483503／主 job 118832059204 已開始原生，含 MFT-015 既有修正、四 scopes 成功後同 SHA 自動裝置 archive；不新增產品功能。2bb large 原失敗已下載核對，本地保留 MFT-013 儲存階段同步修正待目前回歸完成，不取消或另開重複 job。
+
+- 依最新查詢節奏約 5–10 分鐘看一次 CI，沒有新結果不固定刷屏。獨立必要驗收僅本地準備：MFT-016 改為根層／完整 SpriteKit 後代分列入場、暫停及 update 取樣最大值，延伸原二十次實際進場斷言；原根層 JSON 被新全樹匯出門檻明確拒絕，不補造數值。僅語法與真實舊資料拒絕檢查，未有原生新數字，未套用正在跑的 28e474d，見 NODE_INVENTORY_PENDING。
+
+- 28e474d 所有原 job 已自行結束：基礎 31／0／0，延伸 2／2／0，小大各 3／0／0，package-device 因主失敗 skipped；沒有 IPA。原 review／layout archive 已下載核對 digest，原失敗與實圖見 INTEGRATION_28e474d。第一輪整理與香草點按走過；依實際時序的 Domain 診斷是偷嚐接續並取消配料，下一修正候選有界處理第二次受損、保留原斷言並匯出真實後段 session。Performance 在啟動終止前 App 失敗，沒有新 20 次數據，MFT-017 開放。
+
+- 下一修正候選僅修既有驗證：真實 UI 對第二次受損有界整理／重加原香草／出餐，原斷言及正常時鐘保留；失敗先留原圖／hierarchy 再透過正常暫停 UI 保存現場。真正後段保存檔另匯出並檢查原兩位客人、餐蓋取下／重用與香草輸入。MFT-013 先等實際儲存階段再執行原關閉斷言；MFT-016 加全 SpriteKit 子樹量測，不改玩法。新數值與新修正尚待同 SHA 原生，不借用舊成功。

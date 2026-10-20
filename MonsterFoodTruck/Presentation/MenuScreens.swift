@@ -39,7 +39,7 @@ struct SettingsScreen:View {
                     Button("恢復預設設定"){model.closeSettingsFor(.resetSettings)}.frame(minHeight:44)
                     Button("清除遊戲進度",role:.destructive){model.closeSettingsFor(.resetProgress)}.frame(minHeight:44)
                 }
-            }.disabled(model.isClosingSettings).navigationTitle("餐車設定").toolbar{ToolbarItem(placement:.confirmationAction){Button("完成"){model.closeSettings()}.frame(minHeight:44).disabled(model.isClosingSettings)}}
+            }.disabled(model.isClosingSettings).navigationTitle("餐車設定").toolbar{ToolbarItem(placement:.confirmationAction){Button(model.isClosingSettings ? "儲存中…":"完成"){model.closeSettings()}.frame(minHeight:44).disabled(model.isClosingSettings).accessibilityIdentifier("settingsDone")}}
         }.preferredColorScheme(.light)
             .interactiveDismissDisabled(model.isClosingSettings)
     }

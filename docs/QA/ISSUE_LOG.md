@@ -1,5 +1,11 @@
 # 品質問題紀錄
 
+## MFT-017（延伸效能案例啟動時終止前一 App 失敗）
+
+- Source 28e474d／Validate 39481483503／job 118832059204，PerformanceTests.swift:13 在 `app.launch()` 自動終止前一程序時回報 `Failed to terminate ...:58814 ...:0`。該方法 failed，沒有開始二十次進場；本 SHA 沒有二十次新效能取樣，不能套用 2bb 舊資料。
+- 原失敗截圖及摘要見 INTEGRATION_28e474d，保留 failure，不擅自歸因 App deadlock 或 runner 容量。下一候選原完整方法照跑；FullJourney 如失敗先保存原截圖／hierarchy，再經真實暫停 UI 留住現場，減少下一獨立案例與前一活躍遊戲互相干擾，不強殺 App 或把失敗轉綠。
+- 狀態 OPEN，待同 SHA 原生回歸與實物。
+
 ## MFT-016（場景節點診斷只計直接子節點）
 
 - 使用者轉交 Dot 獨立核對 2bb 的二十次進場診斷，要求確認 nodes=1 範圍。Codex 檢查 `PerformanceDiagnostics.enter` 使用 `scene.children.count`，UI diagnostic 同樣只取 `model.kitchen.children.count`；確實未遞迴計算 ForestRig／DragonRig 後代，也不是節點連續峰值。
@@ -7,6 +13,9 @@
 - 狀態 OPEN：文件已更正範圍；依使用者要求先完成既有 MFT-015 流程及同 SHA 回歸，再補原規格需要的完整後代／生命週期證據，不為此新增產品功能。
 
 ## MFT-015（後關實際餐蓋點按未先整理受損料理）
+
+- 後續 28e474d 基礎 31／0／0；延伸 2／2／0，原第一輪整理／偏好失效／香草點按已走過，但之後出餐等待失敗。依原生操作時刻的 Domain 診斷，原偷嚐預告在整理時暫停、完成後接續，約在配料開始後 0.35 秒偷嚐並取消配料；不是再次缺原香草按鈕。重建是診斷，不代稱 UI 成功，見 INTEGRATION_28e474d/ENGINEERING_RECONSTRUCTION。
+- 下一候選保留所有原斷言，在顯示第二次受損時只做一次真實三秒整理、重新香草與出餐；不重置偷嚐／延長耐心／注入狀態。原 helper 減少重複 accessibility 查詢，命令只點一次，附實際轉移紀錄；另匯出真正 App 保存的後段 session，和六關 DEBUG 工程歷史分列，仍待原生。
 
 - P1，規格 4.6／12.2／12.3，source `2bb77a9af1064272f1d4ca50a0dc950fecf7f04a`／Validate 39472144828／主 job 118798719852。基礎 31 passed／0 failed／0 skipped；延伸 3 passed／1 failed／0 skipped，整體 failure。
 - `FullJourneyTests.swift:60` 在真實第五關關閉 driver、餐蓋重用後直接點香草芽，原生 hierarchy 明列燉菜「焦邊・待整理」、主要命令「整理 3 秒」。原 PNG 蓋住龍餐時就已顯示旁邊燉菜焦邊，失敗圖稍後再遭偷嚐；配料被合法禁用，不是單純不存在等待或 timeout。前面六次工程 session／結算／重開解鎖已走過，但不能把後續失敗的整個方法標成功。
@@ -160,3 +169,18 @@
 - 證據：[DOT-001 目錄](DOT-001/) 保存原始 BUILD_MANIFEST、測試統計、裝置識別、Foundation probe、vtool／codesign 輸出與真實截圖。截圖只證明 bootstrap 啟動，不是正式美術或完整遊戲驗收。
 - 下載補充：本地 gh 的 blob redirect 下載曾遭 403，改用既有 GitHub 連接器的 artifact download 成功取得同一 artifact，沒有改連線政策或繞過限制。
 - 歷史續：IN_PROGRESS → READY_FOR_RETEST → VERIFIED_CLOSED（Dot 對上述相同 SHA／artifact 獨立重測，經使用者轉交）。不代表後續提交、完整遊戲、正式美術或真機通過。
+
+### MFT-013 後續：2bb 大尺寸儲存與關閉同步
+
+- 原大尺寸 job 118823068619 已自行 failure，2／1／0；artifact 12290254187 已下載核對 SHA-256。FlowTests.swift:167 在「完成」後等導覽列消失失敗，失敗截圖已是完整首頁；保持原失敗，不稱三尺寸通過。
+- 原 XCTest 32.64 秒錄影末段仍見停用的完成按鈕，之後才關閉。原條件把非同步 ordered save 與 sheet 轉場合併計五秒，沒有先等寫入階段；來源與未改圖片見 INTEGRATION_2bb77a9。尚未斷言單一 UIKit 根因或已修好。
+- 本地待測修正只讓既有 isClosingSettings 顯示「儲存中…」，UI 先等該真實狀態結束，再保留原導覽列不存在／首頁 hittable 五秒斷言及原三個設定重開值。28e474d 原生 job 已在執行，保留，不為本地修正取消它或重跑不變 SHA。
+
+### MFT-012 後續：三尺寸局部標籤實圖
+
+- Codex 已實看 2bb 主／SE3／15 Pro Max 原 busy 圖，成品／爐台／備料固定奶油淺底可讀、保留木紋；原字壓深木紋的局部改動已有實物，未代稱 Dot 通過。原生三尺寸整體仍有 large 儲存關閉等待失敗，兩者範圍分開，見 INTEGRATION_2bb77a9。
+
+### MFT-016 本地必要驗收準備
+
+- 原主流程 28e474d 正在回歸期間，本地準備完整 SpriteKit 後代入場／暫停計數與 update 取樣最大值、原二十次 UI 方法的部件不增加斷言，原根層／音訊斷言仍保留。根與後代、取樣與 profiler、SpriteKit 與 SwiftUI 範圍明列，不新增玩法。
+- Swift／Python 語法檢查完成；真正 2bb 根層 JSON 被新匯出器拒絕升格成全樹結果。新 Apple SDK 編譯與原生數值仍待，狀態 IN_PROGRESS，不修改原 job 或宣稱已通過。見 NODE_INVENTORY_PENDING.md。

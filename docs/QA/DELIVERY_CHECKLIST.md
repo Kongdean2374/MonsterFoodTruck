@@ -5,12 +5,12 @@
 | 查驗內容 | 必須可追溯的證據 | 目前狀態 |
 |---|---|---|
 | 生成工程／安裝／識別 | Source SHA、ENVIRONMENT、實際 plist、Foundation probe | P1 已獨立關閉；完整候選仍須重測 |
-| 三菜／三角色／六關與所有核心規則 | 原生 GameModel／SaveStore／SceneLifecycle／Strategy xcresult、JSON | 2bb 26 單元已過；後續擴充清除設定保留仍待新候選 |
-| 真實首次教學至第一關、存檔恢復與設定 | 原 Flow 全部斷言，原生摘要、PNG | 2bb 原完整基礎 Flow 通過，未代稱 Dot 驗收 |
+| 三菜／三角色／六關與所有核心規則 | 原生 GameModel／SaveStore／SceneLifecycle／Strategy xcresult、JSON | 28e474d 26 單元過，含確認清除後保留設定的擴充 |
+| 真實首次教學至第一關、存檔恢復與設定 | 原 Flow 全部斷言，原生摘要、PNG | 28e474d 原完整基礎 Flow 通過，未代稱 Dot 驗收 |
 | 六關與結算／最終畫面／解鎖重開保存 | 正常時鐘六次實際 session、UI 摘要、錄影 | 2bb 工程正常時鐘六次 session／結算走過，同一方法後續點按仍失敗 |
 | 餐蓋正常開合／服務／回收重用 | 無 driver 的真實後關點按與原生截圖 | 2bb 龍餐蓋與歸還走過，燉菜未整理即配料失敗，原案例未通過 |
 | 練習不獎勵、背景、失敗／同關重試、各確認取消 | FullJourney／ControlFlow 原生結果及圖 | 2bb 練習／ControlFlow 原生方法通過；全延伸仍有一失敗 |
-| 三尺寸、大字／高對比／左右手及關鍵狀態 | 同 SHA 三 scopes、各 PNG／摘要 | 2bb 主基礎過、small job 成功；large 原 job 與實圖覆核尚待 |
+| 三尺寸、大字／高對比／左右手及關鍵狀態 | 同 SHA 三 scopes、各 PNG／摘要 | 28e474d 主基礎及小大各 3 項過；整體仍有延伸失敗 |
 | 三角色五表情／部件動作、三菜狀態、餐車 | 深淺底實際大小 PNG、遊玩及動態影片、來源清單 | 母版方向通過；正式擴作待實圖，MFT-007 開放 |
 | 配樂／提示可辨、音量與觸覺 | 25 WAV、實際監聽／真機紀錄 | 靜態及程式整合；監聽／觸覺未驗收 |
 | 二十次場景重進與效能 | 原始 PERFORMANCE、取樣方式、summary | 2bb 二十次原生方法通過；有實際取樣，不宣稱物理 60fps／100ms |

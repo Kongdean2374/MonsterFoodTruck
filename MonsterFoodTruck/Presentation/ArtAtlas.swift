@@ -37,7 +37,7 @@ final class KitchenScene: SKScene {
     override convenience init(){self.init(size:CGSize(width:390,height:330))}
     required init?(coder:NSCoder){super.init(coder:coder)}
     #if DEBUG
-    override func update(_ currentTime:TimeInterval){PerformanceDiagnostics.shared.frame()}
+    override func update(_ currentTime:TimeInterval){PerformanceDiagnostics.shared.frame(scene:self)}
     #endif
     override func didChangeSize(_ oldSize:CGSize){
         if let state,let content{display(session:state,content:content,selected:nil,reduceMotion:reduced)}

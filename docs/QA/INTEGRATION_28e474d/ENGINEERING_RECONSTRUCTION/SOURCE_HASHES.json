@@ -1,0 +1,21 @@
+{
+  "method": "Engineering diagnostic only; official Linux Swift 6.1.2, same unmodified Domain/content as native source 28e474d.",
+  "files": [
+    {
+      "path": "MonsterFoodTruck/Data/GameContent.swift",
+      "sha256": "22ee06afb133b87ca0f1dd75c258fd4eb5047e2b879e3cfebbaba78662300fd0"
+    },
+    {
+      "path": "MonsterFoodTruck/Domain/GameSession.swift",
+      "sha256": "64c308f6e2ede79557c0621aaca63d616e1cb352087fbd3263c4fbf977a4ce15"
+    },
+    {
+      "path": "MonsterFoodTruck/Resources/Content.json",
+      "sha256": "f899ad0bdebe5e7790bf713713cafa003180972569f6bb338e48358debda48e2"
+    },
+    {
+      "path": "docs/QA/INTEGRATION_28e474d/ENGINEERING_RECONSTRUCTION/main.swift",
+      "sha256": "2dc66c08c1afa55822aa4755e0836c38114c31787b15faf06059be4ef4c7b385"
+    }
+  ]
+}

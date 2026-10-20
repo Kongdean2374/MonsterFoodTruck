@@ -1,0 +1,97 @@
+{
+  "afterRecovery" : {
+    "admittedAt" : 0,
+    "cookedAt" : 25.094,
+    "deadline" : 65,
+    "everNibbled" : true,
+    "everScorched" : true,
+    "exposure" : 3,
+    "heatExpiredRecorded" : false,
+    "id" : "L5-1",
+    "isCovered" : false,
+    "monster" : "moss_deer",
+    "needsTidy" : false,
+    "platedAt" : 38.989,
+    "preferred" : false,
+    "recipe" : "cloud_stew",
+    "stage" : "plated",
+    "status" : "served",
+    "topping" : "香草芽",
+    "warningRemaining" : 0
+  },
+  "beforeRecovery" : {
+    "admittedAt" : 0,
+    "cookedAt" : 25.094,
+    "deadline" : 65,
+    "everNibbled" : true,
+    "everScorched" : true,
+    "exposure" : 3,
+    "heatExpiredRecorded" : false,
+    "id" : "L5-1",
+    "isCovered" : false,
+    "monster" : "moss_deer",
+    "needsTidy" : true,
+    "platedAt" : 38.989,
+    "preferred" : false,
+    "recipe" : "cloud_stew",
+    "slot" : 0,
+    "stage" : "plated",
+    "station" : "plate",
+    "status" : "waiting",
+    "warningRemaining" : 0
+  },
+  "method" : "Engineering model reconstruction from approximate native event timestamps; not real UI success or source-SHA native retest.",
+  "nativeSourceSHA" : "28e474db37fdc8c9be40a490cd9c51a1070bd888",
+  "relevantEvents" : [
+    {
+      "detail" : "",
+      "id" : 15,
+      "kind" : "scorched",
+      "orderID" : "L5-1",
+      "time" : 32.094010000000004
+    },
+    {
+      "detail" : "",
+      "id" : 17,
+      "kind" : "nibbleWarning",
+      "orderID" : "L5-2",
+      "time" : 34.57299999999999
+    },
+    {
+      "detail" : "",
+      "id" : 26,
+      "kind" : "nibbleWarning",
+      "orderID" : "L5-1",
+      "time" : 43.919
+    },
+    {
+      "detail" : "",
+      "id" : 27,
+      "kind" : "tidyStart",
+      "orderID" : "L5-1",
+      "time" : 44.102
+    },
+    {
+      "detail" : "",
+      "id" : 29,
+      "kind" : "tidyDone",
+      "orderID" : "L5-1",
+      "time" : 47.102
+    },
+    {
+      "detail" : "香草芽",
+      "id" : 30,
+      "kind" : "toppingStart",
+      "orderID" : "L5-1",
+      "time" : 49.572
+    },
+    {
+      "detail" : "",
+      "id" : 31,
+      "kind" : "nibbled",
+      "orderID" : "L5-1",
+      "time" : 49.919
+    }
+  ],
+  "served" : 2
+}

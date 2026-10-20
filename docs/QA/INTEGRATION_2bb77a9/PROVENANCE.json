@@ -156,6 +156,26 @@
       "path": "QA_EVIDENCE/layout-small/0C59948E-2226-47F6-844C-935446DB8277.png",
       "bytes": 757323,
       "sha256": "ab9db4e33d48c68e0bb9337720945988f4d94b22af917095bc893951a1f2f0e1"
+    },
+    {
+      "path": "LAYOUT_TEST_SUMMARY_large.json",
+      "bytes": 1509,
+      "sha256": "3acfe3963bdc7d3871dbc30f570cc5ee7ce9088f40d953f54c9b1a2ad3348abd"
+    },
+    {
+      "path": "QA_EVIDENCE/layout-large/F6550D85-AEFC-443D-9F5D-2133729C42CB.png",
+      "bytes": 4062745,
+      "sha256": "563648a0309bc0859131b6c85b227c77b94f1db6a5c0012be0aafa1507f1784e"
+    },
+    {
+      "path": "QA_EVIDENCE/layout-large/C6EF0214-AD3E-43C6-AAA7-3C31641803F7.txt",
+      "bytes": 203,
+      "sha256": "6d1b7fb7ae3afa1b32339f87af7871ef86e7125aaa046bac8bf68862fe4ddd4f"
+    },
+    {
+      "path": "QA_EVIDENCE/layout-large/F3EFAE4A-988A-49DD-9D22-16CB673EC221.png",
+      "bytes": 1931744,
+      "sha256": "19d1612509a8abd301235e0729f4522bdbb4a472bb82fb39c65c75ef670a0dbe"
     }
   ],
   "layout_small": {
@@ -167,6 +187,26 @@
       "passed": 3,
       "failed": 0,
       "skipped": 0
+    }
+  },
+  "layout_large": {
+    "job_id": 118823068619,
+    "artifact_id": 12290254187,
+    "archive_sha256": "693bbb2b8075753d8210c0d88e601dd498ea984acad23ffc660cb068c0240589",
+    "bytes": 219379145,
+    "counts": {
+      "passed": 2,
+      "failed": 1,
+      "skipped": 0
+    },
+    "original_xctest_screen_recording": {
+      "path": "QA_EVIDENCE/layout-large/B0D66EB6-6E78-42FC-AF76-5DA003EEA4BF.mp4",
+      "bytes": 24425862,
+      "sha256": "3fe77570410e7c7dd2d649d3c318b714a8cffb4e11642bc017faea9a12ddb9e9",
+      "duration_seconds": 32.641667,
+      "width": 1290,
+      "height": 2796,
+      "method": "Original XCTest screen recording downloaded unchanged. Read-only ffmpeg decoding at original dimensions; no rescaling, overlays, pixel cleanup or generated replacement."
     }
   }
 }

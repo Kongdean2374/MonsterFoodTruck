@@ -10,7 +10,7 @@ struct PlayScreen:View {
                 #if DEBUG
                 if PerformanceDiagnostics.enabled{
                     Text("模擬器效能診斷").font(.caption2).accessibilityIdentifier("performance-diagnostic")
-                        .accessibilityValue("entries=\(PerformanceDiagnostics.shared.entryCount);nodes=\(model.kitchen.children.count);audio=\(model.audio.diagnosticPlayerCount);error=\(PerformanceDiagnostics.shared.reportError ?? "none")")
+                        .accessibilityValue("entries=\(PerformanceDiagnostics.shared.entryCount);nodes=\(model.kitchen.children.count);descendants=\(PerformanceDiagnostics.descendantCount(in:model.kitchen));audio=\(model.audio.diagnosticPlayerCount);error=\(PerformanceDiagnostics.shared.reportError ?? "none")")
                 }
                 #endif
                 if let session=model.session,let content=model.content{

@@ -1,0 +1,4 @@
+Query chain:
+ →Find: Target Application 'cc.chaihome.monsterfoodtruck'
+  ↪︎Find: Descendants matching type NavigationBar
+    ↪︎Find: Elements matching predicate '"餐車設定" IN identifiers'

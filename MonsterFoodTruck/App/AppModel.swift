@@ -147,7 +147,7 @@ final class AppModel: ObservableObject {
         document.session?.isPaused = true; lastUptime = nil
         kitchen.isPaused = true; audio.pause(); persist()
         #if DEBUG
-        PerformanceDiagnostics.shared.pauseAndExport()
+        PerformanceDiagnostics.shared.pauseAndExport(scene:kitchen)
         #endif
     }
     func resume() {

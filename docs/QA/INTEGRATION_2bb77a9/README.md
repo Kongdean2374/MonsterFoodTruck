@@ -30,6 +30,8 @@ Source `2bb77a9af1064272f1d4ca50a0dc950fecf7f04a`，[Validate 39472144828](https
 
 SE3 small job `118823068652` 已完成：3 passed／0 failed／0 skipped；原 artifact `12291387951` 已下載並核對 digest。[375×667pt 首頁大字](QA_EVIDENCE/layout-small/A1DB82D6-FCF8-4AD1-8812-D6803B46444F.png) 確認已退出設定且沒有底部接縫；[小尺寸大字左手 busy](QA_EVIDENCE/layout-small/0C59948E-2226-47F6-844C-935446DB8277.png) 的固定奶油側標可辨、木紋保留，爪子與耐心數字未相壓。這兩張由 Codex 實看，未代稱 Dot 通過。
 
-完整同 SHA IPA 尚未產生。large 原 job 保留執行，結果另補；不以本頁替代原生全 scopes 成功、7.7 或 Dot 驗收。
+完整同 SHA IPA 尚未產生。large 原 job `118823068619` 已自行結束：2 passed／1 failed／0 skipped。`FlowTests.swift:167` 等待設定導覽列消失的五秒條件失敗；[原失敗截圖](QA_EVIDENCE/layout-large/F6550D85-AEFC-443D-9F5D-2133729C42CB.png) 已為完整首頁，但不能據此把失敗改列成功。原 XCTest 錄影 32.64 秒顯示末段完成按鈕仍停在停用的儲存階段，之後才回首頁；原可及性附件在完成點按前也曾只有空的 UIApplication 根。後續局部修正明示儲存中狀態並先等實際寫入結束，再保留原導覽列消失／首頁可點五秒斷言與重開後設定值；目前 28e474d 照原 job 回歸，不取消／另開重複 job。不以本頁替代原生全 scopes 成功、7.7 或 Dot 驗收。
 
 使用者另轉交 Dot 獨立下載同一 review artifact、核對 archive SHA-256、31／0／0 與 3／1／0、焦邊待整理／無香草芽、六份 session 服務完成、二十次模擬器診斷及無音軌；判定範圍完全保留。Dot 指出 nodes 計數風險後，Codex 已查源碼確認僅直接子節點，列 MFT-016，沒有把它當全部節點或真機效能通過。
+
+Codex 亦已實看 [大尺寸大字左手 busy](QA_EVIDENCE/layout-large/F3EFAE4A-988A-49DD-9D22-16CB673EC221.png)：成品／爐台／備料均在固定淺底，餐車木紋保留，爪子虛線不壓耐心。這只補三尺寸局部靜態覆核；large 操作方法仍失敗，不混稱三尺寸回歸成功。

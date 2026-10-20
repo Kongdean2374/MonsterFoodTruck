@@ -1,0 +1,266 @@
+{
+  "audio_tracks" : 0,
+  "capture_nominal_fps" : 29.589944839477539,
+  "duration_seconds" : 960.3366666666667,
+  "frame_sample_errors" : [
+
+  ],
+  "frame_sample_method" : "Read-only decoding of the original recording at its original dimensions; no rescaling, overlays, alpha edits or replacement images. The complete original MOV is retained. These are timestamped samples, not a claim that every animation was reviewed.",
+  "frame_samples" : [
+    {
+      "actual_seconds" : 0,
+      "file" : "actual-recording-frame-00.png",
+      "height" : 2622,
+      "requested_seconds" : 0.050000000000000003,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 15.353333333333333,
+      "file" : "actual-recording-frame-01.png",
+      "height" : 2622,
+      "requested_seconds" : 27.485333333333333,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 54.295000000000002,
+      "file" : "actual-recording-frame-02.png",
+      "height" : 2622,
+      "requested_seconds" : 54.920666666666662,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 82.346666666666664,
+      "file" : "actual-recording-frame-03.png",
+      "height" : 2622,
+      "requested_seconds" : 82.355999999999995,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 109.76833333333333,
+      "file" : "actual-recording-frame-04.png",
+      "height" : 2622,
+      "requested_seconds" : 109.79133333333333,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 137.19333333333333,
+      "file" : "actual-recording-frame-05.png",
+      "height" : 2622,
+      "requested_seconds" : 137.22666666666669,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 164.66166666666666,
+      "file" : "actual-recording-frame-06.png",
+      "height" : 2622,
+      "requested_seconds" : 164.66200000000001,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 192.08166666666668,
+      "file" : "actual-recording-frame-07.png",
+      "height" : 2622,
+      "requested_seconds" : 192.09733333333335,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 219.53166666666667,
+      "file" : "actual-recording-frame-08.png",
+      "height" : 2622,
+      "requested_seconds" : 219.53266666666667,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 246.965,
+      "file" : "actual-recording-frame-09.png",
+      "height" : 2622,
+      "requested_seconds" : 246.96800000000005,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 274.39499999999998,
+      "file" : "actual-recording-frame-10.png",
+      "height" : 2622,
+      "requested_seconds" : 274.40333333333336,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 301.79000000000002,
+      "file" : "actual-recording-frame-11.png",
+      "height" : 2622,
+      "requested_seconds" : 301.83866666666665,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 329.26499999999999,
+      "file" : "actual-recording-frame-12.png",
+      "height" : 2622,
+      "requested_seconds" : 329.274,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 356.59500000000003,
+      "file" : "actual-recording-frame-13.png",
+      "height" : 2622,
+      "requested_seconds" : 356.70933333333335,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 384.04166666666669,
+      "file" : "actual-recording-frame-14.png",
+      "height" : 2622,
+      "requested_seconds" : 384.14466666666669,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 411.52833333333331,
+      "file" : "actual-recording-frame-15.png",
+      "height" : 2622,
+      "requested_seconds" : 411.57999999999998,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 438.91333333333336,
+      "file" : "actual-recording-frame-16.png",
+      "height" : 2622,
+      "requested_seconds" : 439.01533333333333,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 466.40833333333336,
+      "file" : "actual-recording-frame-17.png",
+      "height" : 2622,
+      "requested_seconds" : 466.45066666666673,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 493.87833333333333,
+      "file" : "actual-recording-frame-18.png",
+      "height" : 2622,
+      "requested_seconds" : 493.88600000000008,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 521.31833333333338,
+      "file" : "actual-recording-frame-19.png",
+      "height" : 2622,
+      "requested_seconds" : 521.32133333333331,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 548.68166666666662,
+      "file" : "actual-recording-frame-20.png",
+      "height" : 2622,
+      "requested_seconds" : 548.75666666666666,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 575.99666666666667,
+      "file" : "actual-recording-frame-21.png",
+      "height" : 2622,
+      "requested_seconds" : 576.19200000000001,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 603.60666666666668,
+      "file" : "actual-recording-frame-22.png",
+      "height" : 2622,
+      "requested_seconds" : 603.62733333333324,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 631.04333333333329,
+      "file" : "actual-recording-frame-23.png",
+      "height" : 2622,
+      "requested_seconds" : 631.06266666666659,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 658.47333333333336,
+      "file" : "actual-recording-frame-24.png",
+      "height" : 2622,
+      "requested_seconds" : 658.49799999999993,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 685.14666666666665,
+      "file" : "actual-recording-frame-25.png",
+      "height" : 2622,
+      "requested_seconds" : 685.93333333333328,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 713.35333333333335,
+      "file" : "actual-recording-frame-26.png",
+      "height" : 2622,
+      "requested_seconds" : 713.36866666666663,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 740.75833333333333,
+      "file" : "actual-recording-frame-27.png",
+      "height" : 2622,
+      "requested_seconds" : 740.80399999999997,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 768.21000000000004,
+      "file" : "actual-recording-frame-28.png",
+      "height" : 2622,
+      "requested_seconds" : 768.23933333333332,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 795.40999999999997,
+      "file" : "actual-recording-frame-29.png",
+      "height" : 2622,
+      "requested_seconds" : 795.67466666666667,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 823.10666666666668,
+      "file" : "actual-recording-frame-30.png",
+      "height" : 2622,
+      "requested_seconds" : 823.1099999999999,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 839.41499999999996,
+      "file" : "actual-recording-frame-31.png",
+      "height" : 2622,
+      "requested_seconds" : 850.54533333333325,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 865.09666666666669,
+      "file" : "actual-recording-frame-32.png",
+      "height" : 2622,
+      "requested_seconds" : 877.98066666666659,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 897.77166666666665,
+      "file" : "actual-recording-frame-33.png",
+      "height" : 2622,
+      "requested_seconds" : 905.41599999999994,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 897.77166666666665,
+      "file" : "actual-recording-frame-34.png",
+      "height" : 2622,
+      "requested_seconds" : 932.8513333333334,
+      "width" : 1206
+    },
+    {
+      "actual_seconds" : 958.14666666666665,
+      "file" : "actual-recording-frame-35.png",
+      "height" : 2622,
+      "requested_seconds" : 960.28666666666663,
+      "width" : 1206
+    }
+  ],
+  "height" : 2622,
+  "scope" : "Capture metadata and optional original-dimension frame samples; nominal capture rate does not prove game FPS, image correctness, or audible playback.",
+  "width" : 1206
+}

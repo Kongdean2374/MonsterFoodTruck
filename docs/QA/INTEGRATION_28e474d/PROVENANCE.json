@@ -1,0 +1,131 @@
+{
+  "source_sha": "28e474db37fdc8c9be40a490cd9c51a1070bd888",
+  "run_id": 39481483503,
+  "job_id": 118832059204,
+  "job_conclusion": "failure",
+  "review_artifact": {
+    "id": 12293059125,
+    "bytes": 144141014,
+    "sha256": "ef1c15760f49de5c8edef6a4759c9604202542983233e198092fd1c84fdfb77b"
+  },
+  "method": "Downloaded original review archive and verified GitHub archive digest; selected original files copied unchanged. Native failures retained.",
+  "files": [
+    {
+      "path": "TEST_RESULT_SUMMARY.json",
+      "bytes": 1177,
+      "sha256": "144cca5ccd4a676f1e0f07e3cb58a532e3fe48fd3143ddbd45e47e81710784aa"
+    },
+    {
+      "path": "JOURNEY_TEST_SUMMARY.json",
+      "bytes": 1977,
+      "sha256": "5f2e33e2ca68ee3b5bc05e5504073e1486bc588a584060f07e1fc451527a8baa"
+    },
+    {
+      "path": "VALIDATION_STATUS.json",
+      "bytes": 525,
+      "sha256": "2b39b07ba11db5c2c7e05c550c1ef440b67ec18df547ce39ff9533ea1eeef10e"
+    },
+    {
+      "path": "ENVIRONMENT.txt",
+      "bytes": 2157,
+      "sha256": "56f1c74b2bbd729b61aeb2bf2bf6781ea8deda31f1c852626573ef74944037a4"
+    },
+    {
+      "path": "TEST_SUMMARY.md",
+      "bytes": 1053,
+      "sha256": "8c7a05f0576811b04fc373079cc9b1d2df18e35887d4220a3c15cce9890755cd"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/RECORDING_METHOD.json",
+      "bytes": 872,
+      "sha256": "0963f9a0ba028530c7fcc53336861a67d9aa18bee84c83cf9033bdeda4ae0cca"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/VIDEO_METADATA.json",
+      "bytes": 7742,
+      "sha256": "7d3d4abb3fef1d0c8e527587e0377d5c818fb9e003849e3bb0ddcd88761a700f"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_01.json",
+      "bytes": 5122,
+      "sha256": "b821d85b12c53cdec899ad1d0f6018720cda0c423e94830f4c0a4aabaf9ffef2"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_02.json",
+      "bytes": 6084,
+      "sha256": "934fde141a4cb43698b440aa1d9df80e4c33c7097f5722c71cf26775fcfc4d5c"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_03.json",
+      "bytes": 7912,
+      "sha256": "81c7860c7c24e356a5ab9e3c834eecfd5d03f8891171a939dfa58e206a4f6ddc"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_04.json",
+      "bytes": 9378,
+      "sha256": "05a7ce640c8d9ce114ba34ee407437bee221eee0c758f4a9364f74bbe6aaca15"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_05.json",
+      "bytes": 12403,
+      "sha256": "f6490677414c77461e4044e178246e6f44a309bf8dd558658587feaa1be79a75"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_06.json",
+      "bytes": 15275,
+      "sha256": "f009d289a97808afd712b6ce5679c3c66b273c9954213d7d0e25e8b148d6d753"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/A223F638-4077-4570-8D35-9ED6C0614EF0.png",
+      "bytes": 2092246,
+      "sha256": "68a1218a81a1659f00c9926e42a27b8ddd85d15934bee3a01380cd8d1eca140f"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/D96DB399-43DF-44DF-8E58-EB7FBF3DE08E.png",
+      "bytes": 1964747,
+      "sha256": "d1348bbc3a161b4b165fa877012b65aacf143b849eecb4484e197888d7fda4cf"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/439E906D-3A59-42BF-934A-8056767A8DC6.png",
+      "bytes": 2005880,
+      "sha256": "12515d87260b29fc830a508fe1e80d79b4389402f867f6609cbab109322bf7bb"
+    },
+    {
+      "path": "LAYOUT_TEST_SUMMARY_small.json",
+      "bytes": 1006,
+      "sha256": "629e6de841c42bbcd091929812497e8430b07af4453808b27428ca8d542c55e7"
+    },
+    {
+      "path": "LAYOUT_TEST_SUMMARY_large.json",
+      "bytes": 997,
+      "sha256": "10d841070a9b319bc2b529b974edc9293c98cd1ac096544e50460c2a6cdcd46b"
+    }
+  ],
+  "full_artifact": {
+    "id": 12294476623,
+    "bytes": 3321492488,
+    "sha256": "d9acaebfd0b97f65446564a21e661c6f86acca613d86d40ce2054aa3fb0b28b8",
+    "downloaded": false,
+    "reason": "Exceeds connector 512 MiB limit; original preserved in Actions."
+  },
+  "layout_small": {
+    "artifact_id": 12294697304,
+    "job_id": 118851764735,
+    "archive_sha256": "393a0d4458f163df8439489c1e36d6926dfcb90a97a36432f9347da06d15c262",
+    "counts": {
+      "passedTests": 3,
+      "failedTests": 0,
+      "skippedTests": 0
+    }
+  },
+  "layout_large": {
+    "artifact_id": 12294298090,
+    "job_id": 118851764708,
+    "archive_sha256": "29fce91d211ec44ab6f720357aa84f698228312bc4ca064ce523eb78d0e063f2",
+    "counts": {
+      "passedTests": 3,
+      "failedTests": 0,
+      "skippedTests": 0
+    }
+  }
+}

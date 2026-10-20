@@ -52,6 +52,11 @@ xcrun swift Scripts/probe_video.swift build/QA_EVIDENCE/journey/normal-six-level
 APP_DATA=$(xcrun simctl get_app_container "$DEVICE" cc.chaihome.monsterfoodtruck data)
 REPLAY_DIR="$APP_DATA/Library/Application Support/MonsterFoodTruck/UIReplayEvidence/Journey"
 if [ -d "$REPLAY_DIR" ]; then ditto "$REPLAY_DIR" build/QA_EVIDENCE/journey/actual-model-snapshots; fi
+LATE_SAVE_DIR="$APP_DATA/Library/Application Support/MonsterFoodTruck/UIReplayEvidence"
+mkdir -p build/QA_EVIDENCE/journey/actual-late-session
+for SAVE_NAME in save-v1.json save-v1.backup.json; do
+  if [ -f "$LATE_SAVE_DIR/$SAVE_NAME" ]; then cp "$LATE_SAVE_DIR/$SAVE_NAME" "build/QA_EVIDENCE/journey/actual-late-session/$SAVE_NAME"; fi
+done
 PERFORMANCE_REPORT="$APP_DATA/Library/Application Support/MonsterFoodTruck/Diagnostics/PERFORMANCE.json"
 if [ -f "$PERFORMANCE_REPORT" ]; then
   cp "$PERFORMANCE_REPORT" build/QA_EVIDENCE/journey/PERFORMANCE.json
@@ -69,6 +74,18 @@ if video.is_file():
   for chunk in iter(lambda:stream.read(1024*1024),b''):digest.update(chunk)
  report['recording_sha256']=digest.hexdigest()
 Path('build/QA_EVIDENCE/journey/RECORDING_METHOD.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+saved=Path('build/QA_EVIDENCE/journey/actual-late-session/save-v1.json')
+if saved.is_file():
+ late=dict(source_sha=report['source_sha'],workflow_run_id=report['workflow_run_id'],method='Read-only export of the actual app save written by the driver-disabled late-level UI taps. Normal six-level engineering histories remain separately labelled.',path=saved.name,bytes=saved.stat().st_size,sha256=hashlib.sha256(saved.read_bytes()).hexdigest())
+ (saved.parent/'PROVENANCE.json').write_text(json.dumps(late,ensure_ascii=False,indent=2)+'\n')
+if int(sys.argv[2])==0:
+ assert saved.is_file(),'Actual late-level UI save was not exported'
+ session=json.loads(saved.read_text()).get('session')
+ assert session and session['levelID']=='level_05' and not session['isPractice'],'Expected actual formal fifth-level UI session'
+ assert all(next(o for o in session['orders'] if o['id']==order)['status']=='served' for order in ['L5-1','L5-2']),'Original two late-level customers were not both served'
+ commands=[row['command'] for row in session['inputs']]
+ assert sum('cover' in c for c in commands)>=3 and sum('uncover' in c for c in commands)>=2,'Actual cover/uncover/reuse commands missing from late UI save'
+ assert any(c.get('garnish',{}).get('_0')=='L5-1' and c['garnish'].get('_1')=='香草芽' for c in commands),'Original actual herb command missing'
 if report['recording_required_forced_termination']:raise SystemExit('Recording required forced termination; original XCTest summary and PNGs were preserved, but this is not a successful video validation')
 if int(sys.argv[2])==0 and report['recorded_bytes']<1024:raise SystemExit('Normal-speed journey recording is missing or empty')
 if int(sys.argv[2])==0 and len(list(Path('build/QA_EVIDENCE/journey/actual-model-snapshots').glob('actual-level_*.json')))!=6:raise SystemExit('Six actual runtime session histories were not exported')

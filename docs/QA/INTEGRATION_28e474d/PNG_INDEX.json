@@ -1,0 +1,32 @@
+[
+  {
+    "test": "FullJourneyTests/testSixLevelsAtNormalSpeed()",
+    "configurationName": "Test Scheme Action",
+    "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+    "deviceName": "iPhone 16 Pro",
+    "exportedFileName": "A223F638-4077-4570-8D35-9ED6C0614EF0.png",
+    "isAssociatedWithFailure": false,
+    "suggestedHumanReadableName": "FAILED-journey-actual-screen_0_F6768A9D-8BAE-4B73-AB20-A961E97E8DB9.png",
+    "timestamp": 1792525694.374
+  },
+  {
+    "test": "FullJourneyTests/testSixLevelsAtNormalSpeed()",
+    "configurationName": "Test Scheme Action",
+    "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+    "deviceName": "iPhone 16 Pro",
+    "exportedFileName": "D96DB399-43DF-44DF-8E58-EB7FBF3DE08E.png",
+    "isAssociatedWithFailure": false,
+    "suggestedHumanReadableName": "actual-late-damaged-stew-before-tidy_0_A639BD8B-2DD9-4215-9D8D-4252B47E1D47.png",
+    "timestamp": 1792525647.697
+  },
+  {
+    "test": "PerformanceTests/testTwentyRealSceneEntriesKeepNodesAndAudioBounded()",
+    "configurationName": "Test Scheme Action",
+    "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+    "deviceName": "iPhone 16 Pro",
+    "exportedFileName": "439E906D-3A59-42BF-934A-8056767A8DC6.png",
+    "isAssociatedWithFailure": false,
+    "suggestedHumanReadableName": "FAILED-performance-actual-screen_0_2E3AC7EE-A111-410D-B7D0-5BDA548CAA0C.png",
+    "timestamp": 1792525756.525
+  }
+]
