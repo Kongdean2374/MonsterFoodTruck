@@ -1,0 +1,1 @@
+1792536965.7679381: L5-1-covered. Wall time aids navigation only; video frame index uses actual presentation timestamps.

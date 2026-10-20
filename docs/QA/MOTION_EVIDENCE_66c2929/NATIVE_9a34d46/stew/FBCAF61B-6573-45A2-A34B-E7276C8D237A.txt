@@ -1,0 +1,1 @@
+1792536919.075535: L5-1-actual-game-start. Wall time aids navigation only; video frame index uses actual presentation timestamps.

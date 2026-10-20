@@ -1,0 +1,1 @@
+1792536704.4981909: rig-dark-cycle-3-before-real-tap. Wall time aids navigation only; video frame index uses actual presentation timestamps.

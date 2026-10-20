@@ -1,0 +1,90 @@
+{
+  "phase": "light",
+  "test_exit": 0,
+  "export_exit": 0,
+  "video_probe_exit": 1,
+  "recording_forced_termination": false,
+  "files": [
+    {
+      "path": "TEST_SUMMARY.json",
+      "bytes": 1010,
+      "sha256": "5fc63c2524404032c1dede3283c9ddf8c4ef733e1f3d7bcee5218caed5441609"
+    },
+    {
+      "path": "VIDEO_PROBE.log",
+      "bytes": 15912,
+      "sha256": "f4ab959ce2bb5346daf2f0d9587812237a5efbc4bcdccdd9dffba05ee817504c"
+    },
+    {
+      "path": "light.mov",
+      "bytes": 15435251,
+      "sha256": "e7d9c108e332e11b80b0cccf493e24de4521f31a130e2f714d19d41ee48dedb2"
+    },
+    {
+      "path": "pre-record-launch.txt",
+      "bytes": 36,
+      "sha256": "6271889e405816e6c943fddf753c07243beb1a437d6d61cb1293bd0bece7019a"
+    },
+    {
+      "path": "recording-ready.png",
+      "bytes": 135722,
+      "sha256": "a3ae9bc241b619832a2f40952aad0ec216584f9b242a46eb4cf23d6743051bbe"
+    },
+    {
+      "path": "recording.log",
+      "bytes": 231,
+      "sha256": "9891d3b4912b384dca8613ba968b521c11de9f796987a795d9ce2eac1a9b523b"
+    },
+    {
+      "path": "screenshots/3AA6E67E-1F5F-48A9-BB35-3081B1E00031.txt",
+      "bytes": 130,
+      "sha256": "4f50f284c1fbafb81876ede7d125df9b55b683ad60c7e47e260e112b9464120f"
+    },
+    {
+      "path": "screenshots/730CD19C-4C52-441A-AFFA-8F7A2596E928.txt",
+      "bytes": 130,
+      "sha256": "db8b0b9199b5aab0f3ff7a195374720694f5d4690d388fbcc336f436efe6e6d0"
+    },
+    {
+      "path": "screenshots/7EA76E04-04FC-4A86-A037-C6B3BEC8B0E8.txt",
+      "bytes": 130,
+      "sha256": "e4d46fdb41110410a9fa8d17d0a3e34086dfaae860aa97673651ac0ea430ffed"
+    },
+    {
+      "path": "screenshots/9D520967-798B-4A3D-9CDD-07CF68D38E6C.png",
+      "bytes": 508508,
+      "sha256": "b17e09f53e4ee00ed1394b831b498d344c952d5300646ed3b714f53d2a84ac93"
+    },
+    {
+      "path": "screenshots/C17AF110-C039-44A5-8C7D-4AAA06C6F7EC.txt",
+      "bytes": 140,
+      "sha256": "88d5f191f48db42db9cf65c0bb689c45074a8a0316a18fce3d88046eaa438a05"
+    },
+    {
+      "path": "screenshots/CD78932B-ED3B-4A6D-847E-A13D0E2DAF14.png",
+      "bytes": 508368,
+      "sha256": "2af9162c2e1a901e4d39132fc74805f9db0e9460c9c29f7c7d7b270d5626fc0f"
+    },
+    {
+      "path": "screenshots/D64F8B93-7092-4B38-90CF-BFA8B5658B52.txt",
+      "bytes": 140,
+      "sha256": "6b7874df5e164ee9f275113cf44431d2354233ea713147adf53dd2b44e7ba78b"
+    },
+    {
+      "path": "screenshots/ED3D31F2-F789-4773-AA4F-90422CA70FA8.txt",
+      "bytes": 140,
+      "sha256": "75b62744099634e92c0a0be105fb8ff6d6c793acbf58ab25917d705f1d539641"
+    },
+    {
+      "path": "screenshots/manifest.json",
+      "bytes": 3828,
+      "sha256": "aacde3120f0f94bec3907142ee7bdea5875cc86d5272c46be4e4d14a262a9b94"
+    },
+    {
+      "path": "test.log",
+      "bytes": 4576,
+      "sha256": "4f1f89558e4a02cce3de405ef99171e27a43c065ad336cb1f44862827758e5f7"
+    }
+  ],
+  "scope": "Original native short capture. Passed assertions check capture operations only, not final art scores or all-level human play."
+}

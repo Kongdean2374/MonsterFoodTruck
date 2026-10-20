@@ -1,0 +1,1 @@
+1792536919.471303: real-command-備料. Wall time aids navigation only; video frame index uses actual presentation timestamps.

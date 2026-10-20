@@ -1,0 +1,1 @@
+1792536704.496626: rig-dark-cycle-2-after. Wall time aids navigation only; video frame index uses actual presentation timestamps.

@@ -1,0 +1,1 @@
+1792536773.798181: rig-light-cycle-1-after. Wall time aids navigation only; video frame index uses actual presentation timestamps.

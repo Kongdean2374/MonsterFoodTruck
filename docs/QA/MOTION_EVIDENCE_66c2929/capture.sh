@@ -29,7 +29,7 @@ seed=qa/'docs/QA/INTEGRATION_66c2929/QA_EVIDENCE/journey/actual-late-session'
 receipt=json.loads((seed/'PROVENANCE.json').read_text())
 assert receipt['source_sha']==candidate
 assert hashlib.sha256((seed/'save-v1.json').read_bytes()).hexdigest()==receipt['sha256']
-report=dict(candidate_source_sha=candidate,candidate_build=25,harness_sha=os.environ['MFT_HARNESS_SHA'],workflow_run_id=os.environ['GITHUB_RUN_ID'],method='Only a separate UI-test harness is overlaid on the fixed candidate checkout. App source, project, resources and game clocks unchanged. Three-cycle existing ArtReview demo and three bounded first-customer real UI recipe captures; no six-level replay, new IPA or full-game acceptance.',harness_file='UITests/ArtReviewTests.swift',harness_sha256=hashlib.sha256(Path('UITests/ArtReviewTests.swift').read_bytes()).hexdigest(),original_harness_git_blob=subprocess.check_output(['git','rev-parse',candidate+':UITests/ArtReviewTests.swift'],text=True).strip(),seed_save=receipt,seed_method='Unmodified actual save earned in source 66c2929, copied to the isolated simulator before each recipe. Unlocks are restored progress, not a fresh-user unlock walkthrough or injected order/score state.',audio='Native simctl picture only; hearing and haptics unverified.')
+report=dict(candidate_source_sha=candidate,candidate_build=25,harness_sha=os.environ['MFT_HARNESS_SHA'],capture_cases=os.environ.get('MFT_CAPTURE_CASES','all'),workflow_run_id=os.environ['GITHUB_RUN_ID'],method='Only a separate UI-test harness is overlaid on the fixed candidate checkout. App source, project, resources and game clocks unchanged. Explicit capture_cases records all five bounded cases or only the missing crisp case; no six-level replay, new IPA or full-game acceptance.',harness_file='UITests/ArtReviewTests.swift',harness_sha256=hashlib.sha256(Path('UITests/ArtReviewTests.swift').read_bytes()).hexdigest(),original_harness_git_blob=subprocess.check_output(['git','rev-parse',candidate+':UITests/ArtReviewTests.swift'],text=True).strip(),seed_save=receipt,seed_method='Unmodified actual save earned in source 66c2929, copied to the isolated simulator before each recipe. Unlocks are restored progress, not a fresh-user unlock walkthrough or injected order/score state.',audio='Native simctl picture only; hearing and haptics unverified.')
 (out/'SOURCE_PROVENANCE.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 PY
 xcrun simctl list devices available --json > "$MFT_REVIEW/DEVICES.json"
@@ -66,7 +66,12 @@ stop_recording(){
 }
 trap stop_recording EXIT
 MFT_ANY_FAILED=0
-for MFT_SPEC in dark:testDarkContinuousMotion light:testLightContinuousMotion soup:testSoupTransitions stew:testStewRecoveryTransitions crisp:testCrispTransitions; do
+case "${MFT_CAPTURE_CASES:-all}" in
+  all) MFT_SPECS="dark:testDarkContinuousMotion light:testLightContinuousMotion soup:testSoupTransitions stew:testStewRecoveryTransitions crisp:testCrispTransitions";;
+  crisp) MFT_SPECS="crisp:testCrispTransitions";;
+  *) echo "Unrecognized explicit capture scope" >&2;exit 1;;
+esac
+for MFT_SPEC in $MFT_SPECS; do
   MFT_PHASE=${MFT_SPEC%%:*};MFT_METHOD=${MFT_SPEC#*:};MFT_PHASE_OUT="$MFT_REVIEW/$MFT_PHASE"
   mkdir -p "$MFT_PHASE_OUT"
   xcrun simctl terminate "$MFT_DEVICE" cc.chaihome.monsterfoodtruck 2>/dev/null || true
@@ -112,11 +117,13 @@ PY
 done
 git diff --exit-code -- MonsterFoodTruck MonsterFoodTruck.xcodeproj ArtSource Tests Scripts
 python3 - "$MFT_REVIEW" <<'PY'
-import hashlib,json
+import hashlib,json,os
 from pathlib import Path
 import sys
 r=Path(sys.argv[1]);rows=[]
-for phase,order,recipe in [('soup','L1-1','star_soup'),('stew','L5-1','cloud_stew'),('crisp','L4-1','moon_crisp')]:
+expected=[('soup','L1-1','star_soup'),('stew','L5-1','cloud_stew'),('crisp','L4-1','moon_crisp')]
+if os.environ.get('MFT_CAPTURE_CASES')=='crisp':expected=[expected[-1]]
+for phase,order,recipe in expected:
  f=r/phase/'actual-save-v1.json'
  if not f.is_file():continue
  s=json.loads(f.read_text())['session'];o=next(x for x in s['orders'] if x['id']==order)
@@ -128,7 +135,7 @@ for phase,order,recipe in [('soup','L1-1','star_soup'),('stew','L5-1','cloud_ste
   for kind in ['scorched','nibbled','tidyStart','tidyDone','toppingDone','served']:assert any(e['kind']==kind for e in events),kind
  rows.append(dict(phase=phase,order=order,recipe=recipe,sha256=hashlib.sha256(f.read_bytes()).hexdigest(),method='Restored actual candidate-earned progress, then one customer served by real UI taps at normal clock; not a completed-level walkthrough.'))
 (r/'ACTUAL_RECIPE_SESSIONS.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2)+'\n')
-assert len(rows)==3,'Missing actual recipe session evidence'
+assert len(rows)==len(expected),'Missing actual recipe session evidence in explicit capture scope'
 total=sum(p.stat().st_size for p in r.rglob('*') if p.is_file());assert total<400*1024*1024,'Short review evidence exceeds explicit download budget'
 PY
 exit "$MFT_ANY_FAILED"

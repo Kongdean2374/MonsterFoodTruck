@@ -1,0 +1,615 @@
+{
+  "source_sha": "66c2929dd05c28af1b0c3ec8a79805446c6dc023",
+  "run_id": 39497238513,
+  "method": "Index only; original bytes and native wall timestamps unchanged. Intent labels are not verified animation phases. All three rigs are 72x76 pt in the review page.",
+  "files": [
+    {
+      "viewport": "large",
+      "pixels": [
+        1290,
+        2796
+      ],
+      "points": [
+        430.0,
+        932.0
+      ],
+      "filename": "52A08DDA-1EE2-4881-ADD8-932FDDE051FA.png",
+      "original_human_name": "ART-dark-five-poses-game-size_0_7AD6CF49-62C2-4FCD-AD6D-2BFBE07BED56.png",
+      "intended_phase_label": "ART-dark-five-poses-game-size",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792533114.711,
+      "native_attachment_utc": "2026-10-20T21:51:54.711000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:51:54.711000+08:00",
+      "bytes": 1011524,
+      "sha256": "eda5285bc628c972fbe00d9f50e308e912e82ec1d6a5b1016c4c1215559a66fc",
+      "artifact_id": 12301693883,
+      "job_id": 118900546280,
+      "archive_path": "QA_EVIDENCE/layout-large/52A08DDA-1EE2-4881-ADD8-932FDDE051FA.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "large",
+      "pixels": [
+        1290,
+        2796
+      ],
+      "points": [
+        430.0,
+        932.0
+      ],
+      "filename": "A20D6C5B-F370-4977-9154-DD84E97F8508.png",
+      "original_human_name": "ART-dark-motion-reach_0_13164143-864B-447C-A1E4-282F65E04E33.png",
+      "intended_phase_label": "ART-dark-motion-reach",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792533118.276,
+      "native_attachment_utc": "2026-10-20T21:51:58.276000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:51:58.276000+08:00",
+      "bytes": 1015533,
+      "sha256": "040a5bcd5a9d89102d052d55e20f3272eac276f90eb09642f4b60a0b68b5863d",
+      "artifact_id": 12301693883,
+      "job_id": 118900546280,
+      "archive_path": "QA_EVIDENCE/layout-large/A20D6C5B-F370-4977-9154-DD84E97F8508.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "large",
+      "pixels": [
+        1290,
+        2796
+      ],
+      "points": [
+        430.0,
+        932.0
+      ],
+      "filename": "2AEFC311-ED99-42C2-9695-3F0A8F1CB609.png",
+      "original_human_name": "ART-dark-motion-receive_0_4DDB27A0-48C1-417A-A9F5-2AD360BB78AE.png",
+      "intended_phase_label": "ART-dark-motion-receive",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792533119.636,
+      "native_attachment_utc": "2026-10-20T21:51:59.636000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:51:59.636000+08:00",
+      "bytes": 1011715,
+      "sha256": "3872059f74721d04fb00db756b5cdcb06251afbc83ee7404a68f727e56ada84a",
+      "artifact_id": 12301693883,
+      "job_id": 118900546280,
+      "archive_path": "QA_EVIDENCE/layout-large/2AEFC311-ED99-42C2-9695-3F0A8F1CB609.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "large",
+      "pixels": [
+        1290,
+        2796
+      ],
+      "points": [
+        430.0,
+        932.0
+      ],
+      "filename": "388331AC-7913-4F46-BADD-0CF38CA89979.png",
+      "original_human_name": "ART-dark-motion-return-to-anchor_0_499FFC1B-C394-4B6F-A8BC-7BEED8381426.png",
+      "intended_phase_label": "ART-dark-motion-return-to-anchor",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792533121.852,
+      "native_attachment_utc": "2026-10-20T21:52:01.852000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:52:01.852000+08:00",
+      "bytes": 1012174,
+      "sha256": "6a639121a37caeaf0c3affd14e40f46547422830332f8a250e81604227e6cc25",
+      "artifact_id": 12301693883,
+      "job_id": 118900546280,
+      "archive_path": "QA_EVIDENCE/layout-large/388331AC-7913-4F46-BADD-0CF38CA89979.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "large",
+      "pixels": [
+        1290,
+        2796
+      ],
+      "points": [
+        430.0,
+        932.0
+      ],
+      "filename": "AA261DA2-B071-4F6F-A080-1605DDD9FD7D.png",
+      "original_human_name": "ART-light-five-poses-game-size_0_D9B44411-7995-4A25-8E59-AD71ED8AF2EE.png",
+      "intended_phase_label": "ART-light-five-poses-game-size",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792533134.721,
+      "native_attachment_utc": "2026-10-20T21:52:14.721000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:52:14.721000+08:00",
+      "bytes": 1047893,
+      "sha256": "22a34acd416dabb84c4df42a8d31531cb93565de8bf880712a277101d432312c",
+      "artifact_id": 12301693883,
+      "job_id": 118900546280,
+      "archive_path": "QA_EVIDENCE/layout-large/AA261DA2-B071-4F6F-A080-1605DDD9FD7D.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "large",
+      "pixels": [
+        1290,
+        2796
+      ],
+      "points": [
+        430.0,
+        932.0
+      ],
+      "filename": "1D2E106E-5B34-47E5-B59F-65848CED0FC1.png",
+      "original_human_name": "ART-light-motion-reach_0_6F7E2CDD-EB2B-4005-AE34-EE1FFB363119.png",
+      "intended_phase_label": "ART-light-motion-reach",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792533137.243,
+      "native_attachment_utc": "2026-10-20T21:52:17.243000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:52:17.243000+08:00",
+      "bytes": 1047248,
+      "sha256": "40b5b828d6c5d563df1631bc1b15cbcebd1a4873924ca13e092c2b8abb6ae703",
+      "artifact_id": 12301693883,
+      "job_id": 118900546280,
+      "archive_path": "QA_EVIDENCE/layout-large/1D2E106E-5B34-47E5-B59F-65848CED0FC1.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "large",
+      "pixels": [
+        1290,
+        2796
+      ],
+      "points": [
+        430.0,
+        932.0
+      ],
+      "filename": "4FBC4CDB-4F29-4CE1-A431-8C029D0107CB.png",
+      "original_human_name": "ART-light-motion-receive_0_569C963F-AB1B-47EC-8419-C77F7243D407.png",
+      "intended_phase_label": "ART-light-motion-receive",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792533138.774,
+      "native_attachment_utc": "2026-10-20T21:52:18.774000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:52:18.774000+08:00",
+      "bytes": 1046763,
+      "sha256": "87fa0a2002ca796b0b688609deb061b6554f70ff95f7efb7f811024acbf2ccc8",
+      "artifact_id": 12301693883,
+      "job_id": 118900546280,
+      "archive_path": "QA_EVIDENCE/layout-large/4FBC4CDB-4F29-4CE1-A431-8C029D0107CB.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "large",
+      "pixels": [
+        1290,
+        2796
+      ],
+      "points": [
+        430.0,
+        932.0
+      ],
+      "filename": "9E078640-3520-4DA6-B9C7-FC664CF4F743.png",
+      "original_human_name": "ART-light-motion-return-to-anchor_0_230B4254-5BE4-44F6-BA3A-B3D170012E8A.png",
+      "intended_phase_label": "ART-light-motion-return-to-anchor",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792533141.062,
+      "native_attachment_utc": "2026-10-20T21:52:21.062000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:52:21.062000+08:00",
+      "bytes": 1046571,
+      "sha256": "c6a9a218b8070160fa7d31745a39feab992c219f36d94327f37ef704dcb59d02",
+      "artifact_id": 12301693883,
+      "job_id": 118900546280,
+      "archive_path": "QA_EVIDENCE/layout-large/9E078640-3520-4DA6-B9C7-FC664CF4F743.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "small",
+      "pixels": [
+        750,
+        1334
+      ],
+      "points": [
+        375.0,
+        667.0
+      ],
+      "filename": "8CFADC06-7E3B-49B1-9770-D36DD15F3D8D.png",
+      "original_human_name": "ART-dark-five-poses-game-size_0_276D28A4-CA9E-4A23-B598-D50030DAC428.png",
+      "intended_phase_label": "ART-dark-five-poses-game-size",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792532440.808,
+      "native_attachment_utc": "2026-10-20T21:40:40.808000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:40:40.808000+08:00",
+      "bytes": 495159,
+      "sha256": "150f2c47dea2e828b5addac829d3ae9c4cf46d64a5e4e3916d0124d0b7c718b5",
+      "artifact_id": 12302380889,
+      "job_id": 118900546087,
+      "archive_path": "QA_EVIDENCE/layout-small/8CFADC06-7E3B-49B1-9770-D36DD15F3D8D.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict",
+      "direct_original_copy": "original-se3-static/8CFADC06-7E3B-49B1-9770-D36DD15F3D8D.png"
+    },
+    {
+      "viewport": "small",
+      "pixels": [
+        750,
+        1334
+      ],
+      "points": [
+        375.0,
+        667.0
+      ],
+      "filename": "1C0175BC-785D-4F0B-A1D3-EDA18D4F40FA.png",
+      "original_human_name": "ART-dark-motion-reach_0_D4B74C61-3C23-4264-B79C-B98BCFCA6FBE.png",
+      "intended_phase_label": "ART-dark-motion-reach",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792532446.052,
+      "native_attachment_utc": "2026-10-20T21:40:46.052000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:40:46.052000+08:00",
+      "bytes": 495248,
+      "sha256": "1cd95717a45e9e49914214ec8c22e8265d5c1402f10c718232a57fd8aa458699",
+      "artifact_id": 12302380889,
+      "job_id": 118900546087,
+      "archive_path": "QA_EVIDENCE/layout-small/1C0175BC-785D-4F0B-A1D3-EDA18D4F40FA.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict",
+      "direct_original_copy": "original-se3-static/1C0175BC-785D-4F0B-A1D3-EDA18D4F40FA.png"
+    },
+    {
+      "viewport": "small",
+      "pixels": [
+        750,
+        1334
+      ],
+      "points": [
+        375.0,
+        667.0
+      ],
+      "filename": "082E01F1-4B49-47BC-83FF-4CCD5C50F505.png",
+      "original_human_name": "ART-dark-motion-receive_0_48E4605C-6D66-4E24-98B7-1B7BF13AC1D8.png",
+      "intended_phase_label": "ART-dark-motion-receive",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792532447.74,
+      "native_attachment_utc": "2026-10-20T21:40:47.740000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:40:47.740000+08:00",
+      "bytes": 495242,
+      "sha256": "9de3c4e739c1035aca5a267367b4c96c632b4ce674613b442ca656e239754e06",
+      "artifact_id": 12302380889,
+      "job_id": 118900546087,
+      "archive_path": "QA_EVIDENCE/layout-small/082E01F1-4B49-47BC-83FF-4CCD5C50F505.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict",
+      "direct_original_copy": "original-se3-static/082E01F1-4B49-47BC-83FF-4CCD5C50F505.png"
+    },
+    {
+      "viewport": "small",
+      "pixels": [
+        750,
+        1334
+      ],
+      "points": [
+        375.0,
+        667.0
+      ],
+      "filename": "67CBC4DD-0BA9-4DCD-B4DB-CD9D82FE8B96.png",
+      "original_human_name": "ART-dark-motion-return-to-anchor_0_110547FB-1965-4A47-83B2-64B06500C1D0.png",
+      "intended_phase_label": "ART-dark-motion-return-to-anchor",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792532450.887,
+      "native_attachment_utc": "2026-10-20T21:40:50.887000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:40:50.887000+08:00",
+      "bytes": 495213,
+      "sha256": "7b8cc2f420bc55655394d33b21a7d4ba5409b4a573e966fd337038007a557b4f",
+      "artifact_id": 12302380889,
+      "job_id": 118900546087,
+      "archive_path": "QA_EVIDENCE/layout-small/67CBC4DD-0BA9-4DCD-B4DB-CD9D82FE8B96.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict",
+      "direct_original_copy": "original-se3-static/67CBC4DD-0BA9-4DCD-B4DB-CD9D82FE8B96.png"
+    },
+    {
+      "viewport": "small",
+      "pixels": [
+        750,
+        1334
+      ],
+      "points": [
+        375.0,
+        667.0
+      ],
+      "filename": "33F2ED12-C5DF-47D8-A0E6-4DCAD24E8708.png",
+      "original_human_name": "ART-light-five-poses-game-size_0_8DF99BF2-799C-443A-A06E-6C334B3708CC.png",
+      "intended_phase_label": "ART-light-five-poses-game-size",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792532471.427,
+      "native_attachment_utc": "2026-10-20T21:41:11.427000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:41:11.427000+08:00",
+      "bytes": 508020,
+      "sha256": "019ed11d826bebff8728e136b733a8c55eb918d45a7ae88266676b20143504bb",
+      "artifact_id": 12302380889,
+      "job_id": 118900546087,
+      "archive_path": "QA_EVIDENCE/layout-small/33F2ED12-C5DF-47D8-A0E6-4DCAD24E8708.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict",
+      "direct_original_copy": "original-se3-static/33F2ED12-C5DF-47D8-A0E6-4DCAD24E8708.png"
+    },
+    {
+      "viewport": "small",
+      "pixels": [
+        750,
+        1334
+      ],
+      "points": [
+        375.0,
+        667.0
+      ],
+      "filename": "60CBDD57-10F6-44FA-AF95-6ABD128DCBB7.png",
+      "original_human_name": "ART-light-motion-reach_0_1A72B029-5E72-40AC-AD85-3349EE89CEAE.png",
+      "intended_phase_label": "ART-light-motion-reach",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792532472.484,
+      "native_attachment_utc": "2026-10-20T21:41:12.484000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:41:12.484000+08:00",
+      "bytes": 508177,
+      "sha256": "edc9dd1b32ff921f77a0b6082ae03063dca44308532435ff86f546de9ac8d407",
+      "artifact_id": 12302380889,
+      "job_id": 118900546087,
+      "archive_path": "QA_EVIDENCE/layout-small/60CBDD57-10F6-44FA-AF95-6ABD128DCBB7.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict",
+      "direct_original_copy": "original-se3-static/60CBDD57-10F6-44FA-AF95-6ABD128DCBB7.png"
+    },
+    {
+      "viewport": "small",
+      "pixels": [
+        750,
+        1334
+      ],
+      "points": [
+        375.0,
+        667.0
+      ],
+      "filename": "469B77DD-486E-48AE-9DCF-EFD6023184A4.png",
+      "original_human_name": "ART-light-motion-receive_0_77CF0682-0BD0-44F1-AB98-9B022F6D8749.png",
+      "intended_phase_label": "ART-light-motion-receive",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792532473.604,
+      "native_attachment_utc": "2026-10-20T21:41:13.604000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:41:13.604000+08:00",
+      "bytes": 508245,
+      "sha256": "88a56fc95b166fa9d50bc41a68d39b0d338e24f8ca1d0089daa7d10737516d32",
+      "artifact_id": 12302380889,
+      "job_id": 118900546087,
+      "archive_path": "QA_EVIDENCE/layout-small/469B77DD-486E-48AE-9DCF-EFD6023184A4.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict",
+      "direct_original_copy": "original-se3-static/469B77DD-486E-48AE-9DCF-EFD6023184A4.png"
+    },
+    {
+      "viewport": "small",
+      "pixels": [
+        750,
+        1334
+      ],
+      "points": [
+        375.0,
+        667.0
+      ],
+      "filename": "3A965CA3-E2CD-4F46-B12D-50C033481059.png",
+      "original_human_name": "ART-light-motion-return-to-anchor_0_7EAAD7FE-1D52-4275-A27A-B17CD056F3A3.png",
+      "intended_phase_label": "ART-light-motion-return-to-anchor",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792532475.542,
+      "native_attachment_utc": "2026-10-20T21:41:15.542000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:41:15.542000+08:00",
+      "bytes": 508213,
+      "sha256": "76c074dc0cc672c0e2c99ca5fa72b17a37c447f005b907f38d13037031ae95f0",
+      "artifact_id": 12302380889,
+      "job_id": 118900546087,
+      "archive_path": "QA_EVIDENCE/layout-small/3A965CA3-E2CD-4F46-B12D-50C033481059.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict",
+      "direct_original_copy": "original-se3-static/3A965CA3-E2CD-4F46-B12D-50C033481059.png"
+    },
+    {
+      "viewport": "standard",
+      "pixels": [
+        1206,
+        2622
+      ],
+      "points": [
+        402.0,
+        874.0
+      ],
+      "filename": "C72D0EEE-9B20-451F-A2AE-BC028BC07650.png",
+      "original_human_name": "ART-dark-five-poses-game-size_0_4D87828F-363F-4FD7-ADEC-7DF28B4F18FF.png",
+      "intended_phase_label": "ART-dark-five-poses-game-size",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792530501.698,
+      "native_attachment_utc": "2026-10-20T21:08:21.698000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:08:21.698000+08:00",
+      "bytes": 1004959,
+      "sha256": "fe2bce7f6eb2384776ca91ced8de2fb8bcc9048ed8689c07ab11c63125581535",
+      "artifact_id": 12300107138,
+      "job_id": 118885341280,
+      "archive_path": "QA_EVIDENCE/C72D0EEE-9B20-451F-A2AE-BC028BC07650.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "standard",
+      "pixels": [
+        1206,
+        2622
+      ],
+      "points": [
+        402.0,
+        874.0
+      ],
+      "filename": "23139B6B-D4DF-41A9-994D-F960EFEAC22D.png",
+      "original_human_name": "ART-dark-motion-reach_0_36A7F70D-B0F8-40A0-AF57-63ABF683BD1D.png",
+      "intended_phase_label": "ART-dark-motion-reach",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792530503.227,
+      "native_attachment_utc": "2026-10-20T21:08:23.227000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:08:23.227000+08:00",
+      "bytes": 1003997,
+      "sha256": "d421860f2d7fbc60b6954bac5d1b5c45b87b4bd140c451edec26965371be982c",
+      "artifact_id": 12300107138,
+      "job_id": 118885341280,
+      "archive_path": "QA_EVIDENCE/23139B6B-D4DF-41A9-994D-F960EFEAC22D.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "standard",
+      "pixels": [
+        1206,
+        2622
+      ],
+      "points": [
+        402.0,
+        874.0
+      ],
+      "filename": "78F8792A-C294-414E-93D6-03C069DB00E6.png",
+      "original_human_name": "ART-dark-motion-receive_0_0701F50E-CD01-49AB-B084-152677362239.png",
+      "intended_phase_label": "ART-dark-motion-receive",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792530504.428,
+      "native_attachment_utc": "2026-10-20T21:08:24.428000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:08:24.428000+08:00",
+      "bytes": 1004814,
+      "sha256": "a75dbce69d5c25c528150164da9c033b40d77ac990fdc4202ec33ea02509530d",
+      "artifact_id": 12300107138,
+      "job_id": 118885341280,
+      "archive_path": "QA_EVIDENCE/78F8792A-C294-414E-93D6-03C069DB00E6.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "standard",
+      "pixels": [
+        1206,
+        2622
+      ],
+      "points": [
+        402.0,
+        874.0
+      ],
+      "filename": "50C1B3BD-DD95-4628-A632-F22BA0483F56.png",
+      "original_human_name": "ART-dark-motion-return-to-anchor_0_2E7FB67B-F7F2-4E98-8241-F532AF2B1155.png",
+      "intended_phase_label": "ART-dark-motion-return-to-anchor",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792530506.949,
+      "native_attachment_utc": "2026-10-20T21:08:26.949000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:08:26.949000+08:00",
+      "bytes": 1003874,
+      "sha256": "ed0ae08c195e2d3937450fca1f776ec7a00f3eb08b47c482cad02026995a8fde",
+      "artifact_id": 12300107138,
+      "job_id": 118885341280,
+      "archive_path": "QA_EVIDENCE/50C1B3BD-DD95-4628-A632-F22BA0483F56.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "standard",
+      "pixels": [
+        1206,
+        2622
+      ],
+      "points": [
+        402.0,
+        874.0
+      ],
+      "filename": "0D99F3CC-3182-4994-8640-ECDC77E17640.png",
+      "original_human_name": "ART-light-five-poses-game-size_0_D3F28285-2C8C-48A5-A0E1-AC1439510441.png",
+      "intended_phase_label": "ART-light-five-poses-game-size",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792530515.358,
+      "native_attachment_utc": "2026-10-20T21:08:35.358000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:08:35.358000+08:00",
+      "bytes": 1037881,
+      "sha256": "d233967d56296553a59171497be0eb308de0191a3755ffb12fd29db0b5a59262",
+      "artifact_id": 12300107138,
+      "job_id": 118885341280,
+      "archive_path": "QA_EVIDENCE/0D99F3CC-3182-4994-8640-ECDC77E17640.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "standard",
+      "pixels": [
+        1206,
+        2622
+      ],
+      "points": [
+        402.0,
+        874.0
+      ],
+      "filename": "27C063FA-D399-48B5-9EE5-AABD93046FF0.png",
+      "original_human_name": "ART-light-motion-reach_0_60468A60-A5ED-4AEF-BCB5-8DCF4ADA3B64.png",
+      "intended_phase_label": "ART-light-motion-reach",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792530516.172,
+      "native_attachment_utc": "2026-10-20T21:08:36.172000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:08:36.172000+08:00",
+      "bytes": 1038264,
+      "sha256": "3181ae427ff82e68116c35ca84efceceaf3285eb59d9c43866869d4489e190b5",
+      "artifact_id": 12300107138,
+      "job_id": 118885341280,
+      "archive_path": "QA_EVIDENCE/27C063FA-D399-48B5-9EE5-AABD93046FF0.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "standard",
+      "pixels": [
+        1206,
+        2622
+      ],
+      "points": [
+        402.0,
+        874.0
+      ],
+      "filename": "56297442-42A1-423F-A0B2-66F9DB89230E.png",
+      "original_human_name": "ART-light-motion-receive_0_457F23F7-879F-424B-B187-1DD3D56DAFEE.png",
+      "intended_phase_label": "ART-light-motion-receive",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792530517.303,
+      "native_attachment_utc": "2026-10-20T21:08:37.303000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:08:37.303000+08:00",
+      "bytes": 1037637,
+      "sha256": "8a7aa4c5001d1b3a8632879267688cb861a562452492ae71f8fa8dd7eac8cf28",
+      "artifact_id": 12300107138,
+      "job_id": 118885341280,
+      "archive_path": "QA_EVIDENCE/56297442-42A1-423F-A0B2-66F9DB89230E.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    },
+    {
+      "viewport": "standard",
+      "pixels": [
+        1206,
+        2622
+      ],
+      "points": [
+        402.0,
+        874.0
+      ],
+      "filename": "FBBF2919-F697-4CCF-89F4-5134CA4B6B4A.png",
+      "original_human_name": "ART-light-motion-return-to-anchor_0_D10E4991-8714-4096-837A-EF45BB08C813.png",
+      "intended_phase_label": "ART-light-motion-return-to-anchor",
+      "test_identifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+      "native_attachment_timestamp": 1792530519.238,
+      "native_attachment_utc": "2026-10-20T21:08:39.238000+00:00",
+      "native_attachment_taipei": "2026-10-21T05:08:39.238000+08:00",
+      "bytes": 1038701,
+      "sha256": "8179940bca68b7d83d94e5eb3954b906c864380ceb211c428ef25a2ba904d358",
+      "artifact_id": 12300107138,
+      "job_id": 118885341280,
+      "archive_path": "QA_EVIDENCE/FBBF2919-F697-4CCF-89F4-5134CA4B6B4A.png",
+      "actual_animation_phase": "UNVERIFIED: attachment name and test sleeps do not establish the phase in pixels",
+      "evidence_scope": "Discrete original XCTest screenshot, not a continuous movement or joint verdict"
+    }
+  ]
+}

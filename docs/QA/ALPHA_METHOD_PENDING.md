@@ -4,12 +4,18 @@
 
 ## 已知來源與實際處理
 
-- 原始龍分層 `ArtSource/Prototypes/dragon-layer-rig.png`（887×1774 RGBA），git blob `44b09ed0086542e18ff5f3860f533fdd5599cd47`，SHA-256 `fb4b576ff92a8c8e11b30c017409ed790d90477c09ebe1781f5e75d7f8871107`。Resources 與實際 7c79fe0 App 中的 PNG 逐位元組相同，SIMULATOR_APP_IDENTITY 有原生產包校驗。
+- 原始龍分層 `ArtSource/Prototypes/dragon-layer-rig.png`（887×1774 RGBA），git blob `44b09ed0086542e18ff5f3860f533fdd5599cd47`，SHA-256 `fb4b576ff92a8c8e11b30c017409ed790d90477c09ebe1781f5e75d7f8871107`。Resources 與實際 66c2929 候選 IPA 中的 PNG 逐位元組相同，SIMULATOR_APP_IDENTITY 有原生產包校驗。
 - Dot 親自看過原 blob，在黑底下頭部下沿／頸部與尾焰旁看見紅黃零散殘點及毛邊；7.3 母版風格判定維持。此缺陷不能以小尺寸看不明顯為理由關閉。
 - Codex 唯讀 Alpha 分析顯示遠離實心輪廓的紅點大多為 Alpha 1–3／255；沒有藉由分析修改像素。
 - 圖片工具局部邊緣編修輸出 `exec-bbf1c57a-9e5f-41b0-8b3c-1a796fb961fa.png`，SHA-256 `6f4069a7d0a72a392d2a9acd7777e087723002c334d361fac93e905e374ee527`，同類低 Alpha 點仍在，未推選。
 - 圖片工具參考同一母版重做邊緣輸出 `exec-8c443528-4ab6-4b41-82b6-7dde54586ce9.png`，SHA-256 `b8cbdb5a0890f1466669f40a19761eb03f715a6ce671aefc8f838e7caacc8487`，仍有同類殘留，未推選。原輸出在工作區保留，沒有把大批失敗稿加入 App。
 - 真實深淺底、遊戲尺寸及動作取樣見 [INTEGRATION_7c79fe0](INTEGRATION_7c79fe0/)。該頁原查驗畫廊底字裁切另有程式修正，不能將其測試 passed 當成透明邊緣或動態接合通過。
+
+## 2026-10-21 局部圖片工具補試（未採用）
+
+獨立 7.7 第 5 項為 2／4，已直接從候選 IPA 再確認紅黃殘點。此輪僅做一次可行性補試，限定右上等待頭部與頸下空隙（x445～886、y50～480），要求其餘部件、原點、887×1774 畫布及透明度保持。輸出 `exec-ef77e153-fec5-4f95-968a-9b00152f86ef.png`，SHA-256 `6afa351ed6e879faba8575f03bb1366e055921b7fe47b3623d5850d6163b3316`。
+
+唯讀像素比較顯示指定範圍外 606,739 個實心像素變動；頸下所取空隙仍有 66 個非零 Alpha 樣本（原 105）。樣本數不是獨立缺陷個數。判定不採用：工具改動其他美術且未解決殘留。[比較紀錄](MOTION_EVIDENCE_66c2929/ALPHA_TRIAL_20261021.json)；原圖與三份工具輸出均保留，未複製進 App。唯讀比較沒有寫回像素，原候選 PNG 未變，也未重跑候選回歸；不再反覆生成整套素材。
 
 ## 保持未執行的特定方法
 

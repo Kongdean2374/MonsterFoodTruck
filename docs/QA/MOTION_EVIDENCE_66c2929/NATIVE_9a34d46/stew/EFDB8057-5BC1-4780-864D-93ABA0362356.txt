@@ -1,0 +1,1 @@
+1792536958.8661609: real-command-整理 3 秒. Wall time aids navigation only; video frame index uses actual presentation timestamps.

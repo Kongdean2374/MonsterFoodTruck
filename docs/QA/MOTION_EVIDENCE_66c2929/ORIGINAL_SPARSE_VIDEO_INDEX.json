@@ -1,0 +1,382 @@
+{
+  "source_sha": "66c2929dd05c28af1b0c3ec8a79805446c6dc023",
+  "run_id": 39497238513,
+  "review_artifact_id": 12300107138,
+  "full_movie_artifact_id": 12300750859,
+  "original_video_sha256": "7612a829294299563b6e83df5ccecad90e0ed03e84ef7defa79d5e0ed91ad94f",
+  "original_video_bytes": 1345897930,
+  "duration_seconds": 989.9933333333333,
+  "audio_tracks": 0,
+  "lookup_field": "actual_seconds ONLY; requested_seconds is the old seek request, not the decoded presentation time",
+  "source_metadata_sha256": "2a1ad232d79388b9e941669925d164b8effd7874c297d5b0e84d76e407344c42",
+  "frame_count": 36,
+  "duplicate_actual_timestamps": 0,
+  "actual_gap_seconds": {
+    "min": 3.9183333333333334,
+    "median": 28.28166666666675,
+    "max": 52.68
+  },
+  "scope": "Sparse samples cannot prove brief reach/receive/return or all food transitions. Native metadata and original PNGs were not rewritten.",
+  "frames": [
+    {
+      "actual_seconds": 0,
+      "file": "actual-recording-frame-00.png",
+      "height": 2622,
+      "requested_seconds": 0.05,
+      "width": 1206,
+      "bytes": 2749201,
+      "sha256": "95d43385936f838cdfcafbf803bfaced4ad6e3af5e01af792eff471b9e38059f",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-00.png"
+    },
+    {
+      "actual_seconds": 3.9183333333333334,
+      "file": "actual-recording-frame-01.png",
+      "height": 2622,
+      "requested_seconds": 28.332666666666668,
+      "width": 1206,
+      "bytes": 3077542,
+      "sha256": "759989f416b0d26535a6cfd3502d18ada6dbb6f7d66b9a775f640b2d71a79f29",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-01.png"
+    },
+    {
+      "actual_seconds": 56.598333333333336,
+      "file": "actual-recording-frame-02.png",
+      "height": 2622,
+      "requested_seconds": 56.61533333333333,
+      "width": 1206,
+      "bytes": 2178893,
+      "sha256": "a568e41137a1d53372833f913e46ee4aedee7fb9fdc8b52712bdee2dc5acc1c8",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-02.png"
+    },
+    {
+      "actual_seconds": 84.88333333333334,
+      "file": "actual-recording-frame-03.png",
+      "height": 2622,
+      "requested_seconds": 84.898,
+      "width": 1206,
+      "bytes": 2242377,
+      "sha256": "8b4421f6b228c7bc824dc751e132adc5c88b4ad101983e7eb78bcf1ac7d3d327",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-03.png"
+    },
+    {
+      "actual_seconds": 113.14666666666666,
+      "file": "actual-recording-frame-04.png",
+      "height": 2622,
+      "requested_seconds": 113.18066666666667,
+      "width": 1206,
+      "bytes": 2279665,
+      "sha256": "0f63ef4bbaefb0a02a7b4785e5f72c861f13f66b556b1125821735c4ff01bdd2",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-04.png"
+    },
+    {
+      "actual_seconds": 141.46166666666667,
+      "file": "actual-recording-frame-05.png",
+      "height": 2622,
+      "requested_seconds": 141.46333333333334,
+      "width": 1206,
+      "bytes": 2192477,
+      "sha256": "ae3ca97dc82d0e645448a670ad0ccd31c3e4f53145bac37c41065e3edc0262d2",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-05.png"
+    },
+    {
+      "actual_seconds": 169.73166666666665,
+      "file": "actual-recording-frame-06.png",
+      "height": 2622,
+      "requested_seconds": 169.746,
+      "width": 1206,
+      "bytes": 241209,
+      "sha256": "0584ee025458e0c3f5c603885c1c1655e8d8eee40874767a2a4809eead03a2eb",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-06.png"
+    },
+    {
+      "actual_seconds": 198.02,
+      "file": "actual-recording-frame-07.png",
+      "height": 2622,
+      "requested_seconds": 198.02866666666668,
+      "width": 1206,
+      "bytes": 2042203,
+      "sha256": "1dc0db142c279d82ada43bd47fd55af825e7cf2663d3e4b71c70495e7d06d883",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-07.png"
+    },
+    {
+      "actual_seconds": 226.29666666666665,
+      "file": "actual-recording-frame-08.png",
+      "height": 2622,
+      "requested_seconds": 226.31133333333335,
+      "width": 1206,
+      "bytes": 2128031,
+      "sha256": "a7163c292855a2bb99ed74fdf5ce1f18b634bf7be4d3d8f947b65540e2265891",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-08.png"
+    },
+    {
+      "actual_seconds": 254.58166666666668,
+      "file": "actual-recording-frame-09.png",
+      "height": 2622,
+      "requested_seconds": 254.594,
+      "width": 1206,
+      "bytes": 2051397,
+      "sha256": "ef100ef396d02b9e4b261ffcee4b190f6da40a81f43057c6c9f5bd95b1568b39",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-09.png"
+    },
+    {
+      "actual_seconds": 282.83666666666664,
+      "file": "actual-recording-frame-10.png",
+      "height": 2622,
+      "requested_seconds": 282.87666666666667,
+      "width": 1206,
+      "bytes": 2039760,
+      "sha256": "176d2d11cdedc5a970b768512f03ef73162fe5a2dcfdc3ff0f781819d6bc5d05",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-10.png"
+    },
+    {
+      "actual_seconds": 311.14666666666665,
+      "file": "actual-recording-frame-11.png",
+      "height": 2622,
+      "requested_seconds": 311.15933333333334,
+      "width": 1206,
+      "bytes": 2049504,
+      "sha256": "f6a8c734df709e9ae9e9dfaa0cc34ba6c16ad2f326d5e7a96236ae6b54ff3734",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-11.png"
+    },
+    {
+      "actual_seconds": 339.43333333333334,
+      "file": "actual-recording-frame-12.png",
+      "height": 2622,
+      "requested_seconds": 339.442,
+      "width": 1206,
+      "bytes": 2040020,
+      "sha256": "92972da4dfcc3c8da5e5e5e31b0d175d959f459ea74fae05bf78c788b4252b59",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-12.png"
+    },
+    {
+      "actual_seconds": 367.53333333333336,
+      "file": "actual-recording-frame-13.png",
+      "height": 2622,
+      "requested_seconds": 367.7246666666667,
+      "width": 1206,
+      "bytes": 2008732,
+      "sha256": "c43fa421b1fd72932ea3d9cb18ebb4a8ead23c8610156d359b9efa8ecafc9594",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-13.png"
+    },
+    {
+      "actual_seconds": 395.9683333333333,
+      "file": "actual-recording-frame-14.png",
+      "height": 2622,
+      "requested_seconds": 396.00733333333335,
+      "width": 1206,
+      "bytes": 1997387,
+      "sha256": "ab8d32ff5401c6718c45b1291d45f5b8936337868561ef9d809ec1b17e27760c",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-14.png"
+    },
+    {
+      "actual_seconds": 424.0783333333333,
+      "file": "actual-recording-frame-15.png",
+      "height": 2622,
+      "requested_seconds": 424.29,
+      "width": 1206,
+      "bytes": 2061660,
+      "sha256": "f0ea717d86e56ef934c0177d196ebdfe8e4837b5e1e14d800ad08bed16e15900",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-15.png"
+    },
+    {
+      "actual_seconds": 452.56666666666666,
+      "file": "actual-recording-frame-16.png",
+      "height": 2622,
+      "requested_seconds": 452.5726666666667,
+      "width": 1206,
+      "bytes": 2032245,
+      "sha256": "b8caea9a9f1af9a73fecbe96d606577d19c1e8bbd0dca18d7c91d05f98f671c3",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-16.png"
+    },
+    {
+      "actual_seconds": 480.81333333333333,
+      "file": "actual-recording-frame-17.png",
+      "height": 2622,
+      "requested_seconds": 480.8553333333333,
+      "width": 1206,
+      "bytes": 2046679,
+      "sha256": "709447dfd176b3bc09fafb3664d047d6e7d248967e78444f8d9435fe4e436fa1",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-17.png"
+    },
+    {
+      "actual_seconds": 506.955,
+      "file": "actual-recording-frame-18.png",
+      "height": 2622,
+      "requested_seconds": 509.138,
+      "width": 1206,
+      "bytes": 1972265,
+      "sha256": "424f38071ad3480e42dc7ccc6bf346bf1a34dda685dc6b32ba7a40b3103e0797",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-18.png"
+    },
+    {
+      "actual_seconds": 537.4133333333333,
+      "file": "actual-recording-frame-19.png",
+      "height": 2622,
+      "requested_seconds": 537.4206666666665,
+      "width": 1206,
+      "bytes": 2045190,
+      "sha256": "06b7e162a640801a689bcae576682d5213f6f5e4c3e0cd4aed8376320b5457eb",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-19.png"
+    },
+    {
+      "actual_seconds": 565.6033333333334,
+      "file": "actual-recording-frame-20.png",
+      "height": 2622,
+      "requested_seconds": 565.7033333333333,
+      "width": 1206,
+      "bytes": 2050567,
+      "sha256": "e4b3327bcde3abd9b0919cc2b09e8c4ae5e95b9fd30edfbbfb408fabbdeacd66",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-20.png"
+    },
+    {
+      "actual_seconds": 593.9533333333334,
+      "file": "actual-recording-frame-21.png",
+      "height": 2622,
+      "requested_seconds": 593.9859999999999,
+      "width": 1206,
+      "bytes": 2044160,
+      "sha256": "f5f8b790960d0180fd8f2c8a68037502097411f7ecfaa254557bdd870594a2ab",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-21.png"
+    },
+    {
+      "actual_seconds": 622.2683333333333,
+      "file": "actual-recording-frame-22.png",
+      "height": 2622,
+      "requested_seconds": 622.2686666666666,
+      "width": 1206,
+      "bytes": 1969293,
+      "sha256": "1e36b8cb01866810abade2ae89a0c403d504254ddc3df2e1908eeeffacdc1e59",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-22.png"
+    },
+    {
+      "actual_seconds": 650.445,
+      "file": "actual-recording-frame-23.png",
+      "height": 2622,
+      "requested_seconds": 650.5513333333332,
+      "width": 1206,
+      "bytes": 2053950,
+      "sha256": "fbff8df18749bf8df3385a2e0a67fdad411f88bbdeba37416ca2023d2aee0622",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-23.png"
+    },
+    {
+      "actual_seconds": 678.26,
+      "file": "actual-recording-frame-24.png",
+      "height": 2622,
+      "requested_seconds": 678.834,
+      "width": 1206,
+      "bytes": 290827,
+      "sha256": "8cad78293017ea627abc0803f92ae5d3167650592fcb91d6a6c6bcde45fb04cf",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-24.png"
+    },
+    {
+      "actual_seconds": 707.085,
+      "file": "actual-recording-frame-25.png",
+      "height": 2622,
+      "requested_seconds": 707.1166666666666,
+      "width": 1206,
+      "bytes": 1987455,
+      "sha256": "0c96b9c0941fc905442745d7cbb20a0e3bab742fae1ed89e93a4355b18da2995",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-25.png"
+    },
+    {
+      "actual_seconds": 735.3916666666667,
+      "file": "actual-recording-frame-26.png",
+      "height": 2622,
+      "requested_seconds": 735.3993333333333,
+      "width": 1206,
+      "bytes": 2152440,
+      "sha256": "f226d6de802dc98b0b08f841ef33afc91bd680f2f5bdbb53ac99e78ec5ef2ddb",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-26.png"
+    },
+    {
+      "actual_seconds": 763.68,
+      "file": "actual-recording-frame-27.png",
+      "height": 2622,
+      "requested_seconds": 763.6819999999999,
+      "width": 1206,
+      "bytes": 2058619,
+      "sha256": "792d0d0d0b90cff375a88fcafa0c7d82805ba34b3696d9d5edd0c67666cdbd10",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-27.png"
+    },
+    {
+      "actual_seconds": 791.9616666666667,
+      "file": "actual-recording-frame-28.png",
+      "height": 2622,
+      "requested_seconds": 791.9646666666666,
+      "width": 1206,
+      "bytes": 1946381,
+      "sha256": "613bfe419db7df86bb5a821331b7302ef5bf237a955a51e523e36069de54f94c",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-28.png"
+    },
+    {
+      "actual_seconds": 819.5216666666666,
+      "file": "actual-recording-frame-29.png",
+      "height": 2622,
+      "requested_seconds": 820.2473333333332,
+      "width": 1206,
+      "bytes": 3526478,
+      "sha256": "064008063309f2a2d49036494240223a3ae2093361984a9348edd26428f87fb7",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-29.png"
+    },
+    {
+      "actual_seconds": 848.5216666666666,
+      "file": "actual-recording-frame-30.png",
+      "height": 2622,
+      "requested_seconds": 848.53,
+      "width": 1206,
+      "bytes": 2058779,
+      "sha256": "1e228b9d12ae2c830e3b190853a19abb26e546d0d523478b37a4d72e88850643",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-30.png"
+    },
+    {
+      "actual_seconds": 876.5866666666667,
+      "file": "actual-recording-frame-31.png",
+      "height": 2622,
+      "requested_seconds": 876.8126666666666,
+      "width": 1206,
+      "bytes": 880840,
+      "sha256": "a32d706c5886f08bb0667b2fbf670c4698df370fb31000e1f320ff71a568205c",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-31.png"
+    },
+    {
+      "actual_seconds": 903.785,
+      "file": "actual-recording-frame-32.png",
+      "height": 2622,
+      "requested_seconds": 905.0953333333333,
+      "width": 1206,
+      "bytes": 426927,
+      "sha256": "643c0c1c0223d9667f7bda31943fce227d8699037ab55a10b28c20736ed30731",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-32.png"
+    },
+    {
+      "actual_seconds": 933.375,
+      "file": "actual-recording-frame-33.png",
+      "height": 2622,
+      "requested_seconds": 933.3779999999999,
+      "width": 1206,
+      "bytes": 1946321,
+      "sha256": "048d680e38f6f6e6995593ee43d889a0578385983aec392ba806a08088b95492",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-33.png"
+    },
+    {
+      "actual_seconds": 961.435,
+      "file": "actual-recording-frame-34.png",
+      "height": 2622,
+      "requested_seconds": 961.6606666666665,
+      "width": 1206,
+      "bytes": 3494461,
+      "sha256": "c36a4601aa55abaf7533b234502de1b878369130ffed9b8b7b34e57eeca472b6",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-34.png"
+    },
+    {
+      "actual_seconds": 986.74,
+      "file": "actual-recording-frame-35.png",
+      "height": 2622,
+      "requested_seconds": 989.9433333333332,
+      "width": 1206,
+      "bytes": 2589602,
+      "sha256": "249e1bb736679ab6d0b368e57ac55e5bdec2e27be8390ff387ef8292d5956ebb",
+      "archive_path": "QA_EVIDENCE/journey/video-frames/actual-recording-frame-35.png"
+    }
+  ]
+}

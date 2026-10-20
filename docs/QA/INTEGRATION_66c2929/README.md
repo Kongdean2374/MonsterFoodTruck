@@ -73,6 +73,8 @@ Codex 實看以上尺寸／狀態：工位奶油標籤、耐心數字、空位�
 
 二十次真實第一位鹿進場／備料／暫停／放棄重進，根層入場／暫停／update 取樣最大值均 1，完整 SpriteKit 後代均 5，audio players 49 固定。排除 scene 本身、SwiftUI／UIKit 及未掛樹物件；不是全關卡配置存活分析。update cadence 約 53.19–58.69 Hz、handler→next-update 樣本 p95 約 9.11–33.57ms、取樣 footprint 約 135.93–140.12MiB；不是實體 FPS／touch-to-photon／連續 profiler 峰值。原始與 summary 重新計算逐位元組一致。
 
-MFT-013／015／016／017 有此 SHA 原生回歸，標 READY_FOR_RETEST；原失敗永久保留在 d09011f／28e474d／2bb77a9 目錄，未代稱 Dot 關閉。[7.7 獨立查驗入口](ART_REVIEW.md) 六項尚未評分。MFT-007 圖片工具兩次仍未解決，原稿／試稿保留，未獲 Python 圖片修改特例授權；後續方法待另行確認，不要求本輪逐階段批准。
+MFT-013／015／016／017 有此 SHA 原生回歸，標 READY_FOR_RETEST；原失敗永久保留在 d09011f／28e474d／2bb77a9 目錄，未代稱 Dot 關閉。[7.7 獨立查驗](ART_REVIEW.md) 為 3／3／UNVERIFIED／3／2／3，不計總分，尚未達標。MFT-007 圖片工具三次仍未解決，原稿／試稿保留，未獲 Python 圖片修改特例授權；後續方法待另行確認，不要求本輪逐階段批准。
 
 真機簽名安裝、飛航全程、音訊監聽／系統靜音／觸覺、iOS 17 runtime、iPhone 17 Pro 效能及完全非視覺通關均未驗證。此候選提供具體實物供獨立查驗，沒有宣告完整遊戲最終通過。
+
+新補件：[獨立覆核與剩餘驗收](../MOTION_EVIDENCE_66c2929/REMAINING_ACCEPTANCE.md)、[舊靜態／稀疏影片 actual 索引](../MOTION_EVIDENCE_66c2929/EXISTING_EVIDENCE_INDEX.md)、[固定同候選短片](../MOTION_EVIDENCE_66c2929/)。後續文件／harness SHA 和實際 App source 分列，原 41 次回歸與 IPA 不變。

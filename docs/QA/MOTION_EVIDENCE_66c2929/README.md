@@ -20,4 +20,6 @@ App 固定使用 `66c2929dd05c28af1b0c3ec8a79805446c6dc023`／build 25。原 41 
 
 只有 commit message 以 `[motion-evidence-66c2929]` 開始、且六個 product／test／build-script tree 都仍與候選相同時，才走此獨立短片路由，不重跑六關或重打 IPA；若任何 product tree 改動，正常完整 Validate 仍執行。路由成功不是新的 41 項回歸成功。失敗的拍攝 XCTest／日誌／原 MOV／摘要也上傳，不改寫原候選或原失敗。
 
-目前本目錄是可審核的捕捉程式；原生結果與實際影格覆核在 job 完成後補入，不先宣稱影片已取得或接合通過。
+已取得 [9a34d46 原生補拍](FAILED_9a34d46.md)：四項操作通過、脆餅啟動失敗，時間戳 JSON 匯出也失敗，整體 failure。四段有效原 MOV 保留後只補缺少的脆餅，並唯讀重新解析已有影片；不重拍成功案例、不重跑完整六關。操作通過不是接合／7.7 通過。
+
+最新 [獨立分數](INDEPENDENT_REVIEW_20261021.md) 為 3／3／UNVERIFIED／3／2／3，不填總分；[原靜態與 actual 索引](EXISTING_EVIDENCE_INDEX.md)、[完整剩餘驗收清單](REMAINING_ACCEPTANCE.md)。

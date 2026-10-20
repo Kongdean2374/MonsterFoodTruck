@@ -1,5 +1,12 @@
 # 品質問題紀錄
 
+## 2026-10-21 獨立驗證與 7.7 補件（台北時間）
+
+- 使用者轉交 Dot 獨立核驗 66c2929 的 41 次方法執行、第五關真實保存、實際未簽名裝置 IPA、47 資源與 20 檔 checksum，一致，可列工程候選；完整遊戲尚未驗收。原 41 項 gate 不充作全部遊玩通過。
+- 7.7 正式紀錄：風格 3／4、小尺寸 3／4、表情動作 UNVERIFIED（靜態可 3，連續未驗）、UI 3／4、透明圖層 2／4、忙碌可讀性 3／4。**不填總分**，尚未達門檻。SE3 底列裁字與工位奶油底已獨立實看修復；此局部確認不關閉全部美術／動畫。
+- MFT-007 仍 OPEN：Dot 直接從候選 IPA 再看到頸下、外輪廓、尾焰紅黃點。第三次限定局部 imagegen 試稿仍改動範圍外 606,739 個實心像素且殘留未清，拒絕採用；原圖／候選不變，沒有 Python／shader 改圖。見 [方法與試稿 SHA](ALPHA_METHOD_PENDING.md)。
+- 舊影片 frame01 actual=3.918333、requested=28.332667 秒；36 樣本不可證短動作。新 [實際時間索引](MOTION_EVIDENCE_66c2929/EXISTING_EVIDENCE_INDEX.md) 按 actual 記錄。三角色連續循環與三菜真實單客人短片外部 harness 固定同 App，不重跑完整六關。首次 harness fd05dc6 因漏接原資產準備而被圖示 metadata gate 攔下，沒有拍攝 XCTest；[原失敗及附件](MOTION_EVIDENCE_66c2929/FAILED_fd05dc6.md) 保留，9a34d46 只修外部拍攝步驟。
+
 ## 最新同 SHA 候選：66c2929（原生／封裝成功，待獨立驗收）
 
 - Source `66c2929dd05c28af1b0c3ec8a79805446c6dc023`／Validate 39497238513，原 attempt 1 整體 success；基礎 31／0／0、延伸 4／0／0、small／large 各 3／0／0，package-device 118909103267 success。沒有取消或重開舊 job；41 是含尺寸重複方法的執行次數，未略過 XCTest。

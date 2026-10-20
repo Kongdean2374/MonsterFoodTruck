@@ -1,0 +1,20 @@
+{
+  "candidate_source_sha": "66c2929dd05c28af1b0c3ec8a79805446c6dc023",
+  "candidate_build": 25,
+  "harness_sha": "9a34d468b074799329dee99f80bb4ae44fe21231",
+  "workflow_run_id": "39510391658",
+  "method": "Only a separate UI-test harness is overlaid on the fixed candidate checkout. App source, project, resources and game clocks unchanged. Three-cycle existing ArtReview demo and three bounded first-customer real UI recipe captures; no six-level replay, new IPA or full-game acceptance.",
+  "harness_file": "UITests/ArtReviewTests.swift",
+  "harness_sha256": "a3d0b0a3541dcc70a7f69c4ae89c961ef5ee2cfade101661ddadf6065fe5b0ee",
+  "original_harness_git_blob": "6801a270c450b9a7502020d84c3d54246e202013",
+  "seed_save": {
+    "source_sha": "66c2929dd05c28af1b0c3ec8a79805446c6dc023",
+    "workflow_run_id": "39497238513",
+    "method": "Read-only export of the actual app save written by the driver-disabled late-level UI taps. Normal six-level engineering histories remain separately labelled.",
+    "path": "save-v1.json",
+    "bytes": 6202,
+    "sha256": "de8f91c77cca617b6a1479c11edf7edbee34285adea0020a3d1b3a6c67d3eb65"
+  },
+  "seed_method": "Unmodified actual save earned in source 66c2929, copied to the isolated simulator before each recipe. Unlocks are restored progress, not a fresh-user unlock walkthrough or injected order/score state.",
+  "audio": "Native simctl picture only; hearing and haptics unverified."
+}

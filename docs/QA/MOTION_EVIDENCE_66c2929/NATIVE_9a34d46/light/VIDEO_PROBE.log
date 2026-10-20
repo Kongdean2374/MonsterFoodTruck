@@ -1,0 +1,96 @@
+/Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/qa/docs/QA/MOTION_EVIDENCE_66c2929/probe_continuous_video.swift:11:23: warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead
+ 9 | let output=URL(fileURLWithPath:CommandLine.arguments[2])
+10 | let asset=AVURLAsset(url:video)
+11 | guard let track=asset.tracks(withMediaType:.video).first else{fatalError("Missing actual video track")}
+   |                       `- warning: 'tracks(withMediaType:)' was deprecated in macOS 13.0: Use loadTracks(withMediaType:) instead
+12 | let reader=try AVAssetReader(asset:asset)
+13 | let samples=AVAssetReaderTrackOutput(track:track,outputSettings:[kCVPixelBufferPixelFormatTypeKey as String:kCVPixelFormatType_32BGRA])
+
+/Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/qa/docs/QA/MOTION_EVIDENCE_66c2929/probe_continuous_video.swift:26:37: warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead
+24 | times.sort()
+25 | let gaps=zip(times,times.dropFirst()).map{$0.1-$0.0}.sorted()
+26 | let duration=CMTimeGetSeconds(asset.duration)
+   |                                     `- warning: 'duration' was deprecated in macOS 13.0: Use load(.duration) instead
+27 | guard duration.isFinite,duration>0 else{fatalError("Invalid actual duration")}
+28 | let report:[String:Any]=["file":video.lastPathComponent,"duration_seconds":duration,"width":track.naturalSize.width,"height":track.naturalSize.height,"audio_tracks":asset.tracks(withMediaType:.audio).count,"decoded_frame_count":times.count,"first_actual_seconds":times.first!,"last_actual_seconds":times.last!,"max_actual_frame_gap_seconds":gaps.last ?? 0,"p95_actual_frame_gap_seconds":gaps.isEmpty ? 0:gaps[max(0,Int(ceil(Double(gaps.count)*0.95))-1)],"scope":"Continuous native simulator recording; all decoded presentation timestamps retained. This measures recorded frame coverage, not physical display FPS, artistic acceptance or audio playback. No requested times or generated replacement frames."]
+
+/Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/qa/docs/QA/MOTION_EVIDENCE_66c2929/probe_continuous_video.swift:28:352: warning: left side of nil coalescing operator '??' has non-optional type 'Any', so the right side is never used
+26 | let duration=CMTimeGetSeconds(asset.duration)
+27 | guard duration.isFinite,duration>0 else{fatalError("Invalid actual duration")}
+28 | let report:[String:Any]=["file":video.lastPathComponent,"duration_seconds":duration,"width":track.naturalSize.width,"height":track.naturalSize.height,"audio_tracks":asset.tracks(withMediaType:.audio).count,"decoded_frame_count":times.count,"first_actual_seconds":times.first!,"last_actual_seconds":times.last!,"max_actual_frame_gap_seconds":gaps.last ?? 0,"p95_actual_frame_gap_seconds":gaps.isEmpty ? 0:gaps[max(0,Int(ceil(Double(gaps.count)*0.95))-1)],"scope":"Continuous native simulator recording; all decoded presentation timestamps retained. This measures recorded frame coverage, not physical display FPS, artistic acceptance or audio playback. No requested times or generated replacement frames."]
+   |                                                                                                                                                                                                                                                                                                                                                                `- warning: left side of nil coalescing operator '??' has non-optional type 'Any', so the right side is never used
+29 | try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys]).write(to:output.appendingPathExtension("json"))
+30 | try ("decoded_frame,actual_seconds\n"+times.enumerated().map{"\($0.offset),\($0.element)"}.joined(separator:"\n")+"\n").write(to:output.appendingPathExtension("csv"),atomically:true,encoding:.utf8)
+
+/Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/qa/docs/QA/MOTION_EVIDENCE_66c2929/probe_continuous_video.swift:28:99: warning: 'naturalSize' was deprecated in macOS 13.0: Use load(.naturalSize) instead
+26 | let duration=CMTimeGetSeconds(asset.duration)
+27 | guard duration.isFinite,duration>0 else{fatalError("Invalid actual duration")}
+28 | let report:[String:Any]=["file":video.lastPathComponent,"duration_seconds":duration,"width":track.naturalSize.width,"height":track.naturalSize.height,"audio_tracks":asset.tracks(withMediaType:.audio).count,"decoded_frame_count":times.count,"first_actual_seconds":times.first!,"last_actual_seconds":times.last!,"max_actual_frame_gap_seconds":gaps.last ?? 0,"p95_actual_frame_gap_seconds":gaps.isEmpty ? 0:gaps[max(0,Int(ceil(Double(gaps.count)*0.95))-1)],"scope":"Continuous native simulator recording; all decoded presentation timestamps retained. This measures recorded frame coverage, not physical display FPS, artistic acceptance or audio playback. No requested times or generated replacement frames."]
+   |                                                                                                   `- warning: 'naturalSize' was deprecated in macOS 13.0: Use load(.naturalSize) instead
+29 | try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys]).write(to:output.appendingPathExtension("json"))
+30 | try ("decoded_frame,actual_seconds\n"+times.enumerated().map{"\($0.offset),\($0.element)"}.joined(separator:"\n")+"\n").write(to:output.appendingPathExtension("csv"),atomically:true,encoding:.utf8)
+
+/Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/qa/docs/QA/MOTION_EVIDENCE_66c2929/probe_continuous_video.swift:28:132: warning: 'naturalSize' was deprecated in macOS 13.0: Use load(.naturalSize) instead
+26 | let duration=CMTimeGetSeconds(asset.duration)
+27 | guard duration.isFinite,duration>0 else{fatalError("Invalid actual duration")}
+28 | let report:[String:Any]=["file":video.lastPathComponent,"duration_seconds":duration,"width":track.naturalSize.width,"height":track.naturalSize.height,"audio_tracks":asset.tracks(withMediaType:.audio).count,"decoded_frame_count":times.count,"first_actual_seconds":times.first!,"last_actual_seconds":times.last!,"max_actual_frame_gap_seconds":gaps.last ?? 0,"p95_actual_frame_gap_seconds":gaps.isEmpty ? 0:gaps[max(0,Int(ceil(Double(gaps.count)*0.95))-1)],"scope":"Continuous native simulator recording; all decoded presentation timestamps retained. This measures recorded frame coverage, not physical display FPS, artistic acceptance or audio playback. No requested times or generated replacement frames."]
+   |                                                                                                                                    `- warning: 'naturalSize' was deprecated in macOS 13.0: Use load(.naturalSize) instead
+29 | try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys]).write(to:output.appendingPathExtension("json"))
+30 | try ("decoded_frame,actual_seconds\n"+times.enumerated().map{"\($0.offset),\($0.element)"}.joined(separator:"\n")+"\n").write(to:output.appendingPathExtension("csv"),atomically:true,encoding:.utf8)
+
+IOServiceMatchingfailed for: AppleM2ScalerParavirtDriver
+*** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: 'Invalid type in JSON write (__SwiftValue)'
+*** First throw call stack:
+(
+	0   CoreFoundation                      0x0000000196a5b8a0 __exceptionPreprocess + 176
+	1   libobjc.A.dylib                     0x000000019651eb90 objc_exception_throw + 88
+	2   Foundation                          0x0000000197ffdb94 _writeJSONValue + 788
+	3   Foundation                          0x0000000197ffe544 ___writeJSONObject_block_invoke + 412
+	4   Foundation                          0x0000000197ffdfb8 _writeJSONObject + 996
+	5   Foundation                          0x00000001988d2740 -[_NSJSONWriter dataWithRootObject:options:] + 104
+	6   Foundation                          0x0000000197ffd76c +[NSJSONSerialization dataWithJSONObject:options:error:] + 112
+	7   ???                                 0x000000011597ce08 0x0 + 4657237512
+	8   swift-frontend                      0x00000001049f14c4 _ZN4llvm3orc9runAsMainEPFiiPPcENS_8ArrayRefINSt3__112basic_stringIcNS6_11char_traitsIcEENS6_9allocatorIcEEEEEENS6_8optionalINS_9StringRefEEE + 908
+	9   swift-frontend                      0x0000000104907870 _ZN5swift8SwiftJIT7runMainEN4llvm8ArrayRefINSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEEEE + 628
+	10  swift-frontend                      0x0000000104914c5c _ZN5swift14RunImmediatelyERNS_16CompilerInstanceERKNSt3__16vectorINS2_12basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEENS7_IS9_EEEERKNS_12IRGenOptionsERKNS_10SILOptionsEONS2_10unique_ptrI	11  swift-frontend                      0x00000001048a1840 _ZL35processCommandLineAndRunImmediatelyRN5swift16CompilerInstanceEONSt3__110unique_ptrINS_9SILModuleENS2_14default_deleteIS4_EEEEN4llvm12PointerUnionIJPNS_10ModuleDeclEPNS_10SourceFileEEEEPNS_16	12  swift-frontend                      0x000000010489cffc _ZL29performCompileStepsPostSILGenRN5swift16CompilerInstanceENSt3__110unique_ptrINS_9SILModuleENS2_14default_deleteIS4_EEEEN4llvm12PointerUnionIJPNS_10ModuleDeclEPNS_10SourceFileEEEERKNS_20Primar	13  swift-frontend                      0x000000010489c71c _ZN5swift27performCompileStepsPostSemaERNS_16CompilerInstanceERiPNS_16FrontendObserverE + 2688
+	14  swift-frontend                      0x000000010489fe44 _ZL14performCompileRN5swift16CompilerInstanceERiPNS_16FrontendObserverE + 3796
+	15  swift-frontend                      0x000000010489dfd8 _ZN5swift15performFrontendEN4llvm8ArrayRefIPKcEES3_PvPNS_16FrontendObserverE + 3716
+	16  swift-frontend                      0x00000001048220bc _ZN5swift9mainEntryEiPPKc + 5428
+	17  dyld                                0x000000019655eb98 start + 6076
+)
+libc++abi: terminating due to uncaught exception of type NSException
+Stack dump:
+0.	Program arguments: /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-frontend -frontend -interpret /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/qa/docs/QA/MOTION_EVIDENCE_66c2929/probe_continuous_video.swift -Xllvm -aarch64-use-tbi -enable-objc-interop -stack-check -sdk /Applications/Xcode_16.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -new-driver-path /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-driver -empty-abi-descriptor -resource-dir /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift -module-name probe_continuous_video -disable-clang-spi -target-sdk-version 15.5 -target-sdk-name macosx15.5 -external-plugin-path /Applications/Xcode_16.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib/swift/host/plugins#/Applications/Xcode_16.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server -external-plugin-path /Applications/Xcode_16.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/local/lib/swift/host/plugins#/Applications/Xcode_16.4.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server -in-process-plugin-server-path /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -plugin-path /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins -plugin-path /Applications/Xcode_16.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/local/lib/swift/host/plugins -- /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/qa/build/motion-evidence/review/light/light.mov /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/qa/build/motion-evidence/review/light/FRAME_PTS
+1.	Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+2.	Compiling with effective version 5.10
+3.	While running user code "/Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/qa/docs/QA/MOTION_EVIDENCE_66c2929/probe_continuous_video.swift"
+Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):
+0  swift-frontend           0x000000010aa4ae24 llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) + 56
+1  swift-frontend           0x000000010aa48c5c llvm::sys::RunSignalHandlers() + 112
+2  swift-frontend           0x000000010aa4b460 SignalHandler(int) + 360
+3  libsystem_platform.dylib 0x00000001969396a4 _sigtramp + 56
+4  libsystem_pthread.dylib  0x00000001968ff848 pthread_kill + 296
+5  libsystem_c.dylib        0x0000000196808af0 abort + 124
+6  libc++abi.dylib          0x00000001968b5384 __cxxabiv1::__aligned_malloc_with_fallback(unsigned long) + 0
+7  libc++abi.dylib          0x00000001968a3cf4 demangling_terminate_handler() + 344
+8  libobjc.A.dylib          0x0000000196528dd4 _objc_terminate() + 156
+9  libc++abi.dylib          0x00000001968b4698 std::__terminate(void (*)()) + 16
+10 libc++abi.dylib          0x00000001968b7c30 __cxa_get_exception_ptr + 0
+11 libc++abi.dylib          0x00000001968b7bd8 __cxxabiv1::failed_throw(__cxxabiv1::__cxa_exception*) + 0
+12 libobjc.A.dylib          0x000000019651ecf8 objc_exception_throw + 448
+13 Foundation               0x0000000197ffdb94 _writeJSONValue + 788
+14 Foundation               0x0000000197ffe544 ___writeJSONObject_block_invoke + 412
+15 Foundation               0x0000000197ffdfb8 _writeJSONObject + 996
+16 Foundation               0x00000001988d2740 -[_NSJSONWriter dataWithRootObject:options:] + 104
+17 Foundation               0x0000000197ffd76c +[NSJSONSerialization dataWithJSONObject:options:error:] + 112
+18 Foundation               0x000000011597ce08 +[NSJSONSerialization dataWithJSONObject:options:error:] + 18446744071521695500
+19 swift-frontend           0x00000001049f14c4 llvm::orc::runAsMain(int (*)(int, char**), llvm::ArrayRef<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>, std::__1::optional<llvm::StringRef>) + 908
+20 swift-frontend           0x0000000104907870 swift::SwiftJIT::runMain(llvm::ArrayRef<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>) + 628
+21 swift-frontend           0x0000000104914c5c swift::RunImmediately(swift::CompilerInstance&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>> const&, swift::IRGenOptions const&, swift::SILOptions const&, std::__1::unique_ptr<swift::SILModule, std::__1::default_delete<swift::SILModule>>&&) + 1052
+22 swift-frontend           0x00000001048a1840 processCommandLineAndRunImmediately(swift::CompilerInstance&, std::__1::unique_ptr<swift::SILModule, std::__1::default_delete<swift::SILModule>>&&, llvm::PointerUnion<swift::ModuleDecl*, swift::SourceFile*>, swift::FrontendObserver*, int&) + 504
+23 swift-frontend           0x000000010489cffc performCompileStepsPostSILGen(swift::CompilerInstance&, std::__1::unique_ptr<swift::SILModule, std::__1::default_delete<swift::SILModule>>, llvm::PointerUnion<swift::ModuleDecl*, swift::SourceFile*>, swift::PrimarySpecificPaths const&, int&, swift::FrontendObserver*) + 1980
+24 swift-frontend           0x000000010489c71c swift::performCompileStepsPostSema(swift::CompilerInstance&, int&, swift::FrontendObserver*) + 2688
+25 swift-frontend           0x000000010489fe44 performCompile(swift::CompilerInstance&, int&, swift::FrontendObserver*) + 3796
+26 swift-frontend           0x000000010489dfd8 swift::performFrontend(llvm::ArrayRef<char const*>, char const*, void*, swift::FrontendObserver*) + 3716
+27 swift-frontend           0x00000001048220bc swift::mainEntry(int, char const**) + 5428
+28 dyld                     0x000000019655eb98 start + 6076

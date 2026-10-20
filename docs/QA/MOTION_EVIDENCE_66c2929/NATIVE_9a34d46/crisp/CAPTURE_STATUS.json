@@ -1,0 +1,75 @@
+{
+  "phase": "crisp",
+  "test_exit": 65,
+  "export_exit": 0,
+  "video_probe_exit": 1,
+  "recording_forced_termination": false,
+  "files": [
+    {
+      "path": "TEST_SUMMARY.json",
+      "bytes": 2293,
+      "sha256": "85b18f8b52372a892b5bef2de142ba61103edcb948f448561f50efed16075d31"
+    },
+    {
+      "path": "VIDEO_PROBE.log",
+      "bytes": 15912,
+      "sha256": "6545043ac1707af6b6ce36ec5ce0a1fda436ca9a6ff47dda5d80d9a9555d1540"
+    },
+    {
+      "path": "actual-save-v1.json",
+      "bytes": 6202,
+      "sha256": "de8f91c77cca617b6a1479c11edf7edbee34285adea0020a3d1b3a6c67d3eb65"
+    },
+    {
+      "path": "crisp.mov",
+      "bytes": 3506115,
+      "sha256": "7f16cb4cc9cb340c44536aa30b690b3948a10989640d2e577021320f3ec042d0"
+    },
+    {
+      "path": "pre-record-launch.txt",
+      "bytes": 36,
+      "sha256": "efe182cf102476197a03d8dcc8c7a901866f077ba79a6ed6c50330c76e0f4d72"
+    },
+    {
+      "path": "recording-ready.png",
+      "bytes": 1598661,
+      "sha256": "6a10febd42633f69e777f8968ed4eebae3a2e5aae008ede2821b5d442fc15c81"
+    },
+    {
+      "path": "recording.log",
+      "bytes": 231,
+      "sha256": "e5afe122fd63e932743ae9301efdab864571a4cf8cdda8af0948f4fde5ac8e58"
+    },
+    {
+      "path": "screenshots/57E3651C-4D4B-4DFC-AA47-E5E9C58AE7BC.txt",
+      "bytes": 73,
+      "sha256": "000b4cf27d2b92cbba5f72c807d5aaf00eb2fd48957e6d2ca662983575420c63"
+    },
+    {
+      "path": "screenshots/A7A17D4A-0258-4F4B-A74F-7571B2E6F541.txt",
+      "bytes": 912,
+      "sha256": "1332742340b611685d8ae89647ac7f8df561e8c0acefc0a2cdb45d29e1d2e4b4"
+    },
+    {
+      "path": "screenshots/A7C2C919-FB6D-4986-8DED-72250B13670A.png",
+      "bytes": 942327,
+      "sha256": "ca29aabd1cb53469e2bae704a8f4ffb59cb3be5020735e4e08cad86c92a29e93"
+    },
+    {
+      "path": "screenshots/C7A70B51-7992-42F9-A123-8CFB60335199.mp4",
+      "bytes": 1930405,
+      "sha256": "8dd3050727569336d7ad89a5a194ff64f3072b7e37bd491f26e24a223d3b1aa8"
+    },
+    {
+      "path": "screenshots/manifest.json",
+      "bytes": 1910,
+      "sha256": "2842a3bf98e0cb2eefba6d28b2cfad4805dd4349181acd20d92d5fd97b85e2ee"
+    },
+    {
+      "path": "test.log",
+      "bytes": 3528,
+      "sha256": "45151460cc844c9e1e4b849750e3bebb2b20062a175656cf2545ec217a887b13"
+    }
+  ],
+  "scope": "Original native short capture. Passed assertions check capture operations only, not final art scores or all-level human play."
+}

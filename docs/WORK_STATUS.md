@@ -1,12 +1,12 @@
 # 工作狀態
 
-2026-10-20。完整遊戲候選已取得同 SHA 的成功原生回歸與未簽名裝置 IPA，**尚未最終驗收**。實際 App source `66c2929dd05c28af1b0c3ec8a79805446c6dc023`／build 25；後續證據文件提交不改變此受測 SHA。MFT-007 龍局部 Alpha 仍開放，7.7／連續動態接合、音訊聽感與真機項仍待，不能代稱 Dot 通過。
+2026-10-21（台北時間）。完整遊戲候選已取得同 SHA 的成功原生回歸與未簽名裝置 IPA，**尚未最終驗收**。實際 App source `66c2929dd05c28af1b0c3ec8a79805446c6dc023`／build 25；後續證據文件提交不改變此受測 SHA。MFT-007 龍局部 Alpha 仍開放，7.7／連續動態接合、音訊聽感與真機項仍待，不能代稱 Dot 通過。
 
 ## 恢復入口與唯一寫入者
 
 - 公開倉庫 `Kongdean2374/MonsterFoodTruck`，單一工作樹 `/workspace/MonsterFoodTruck`、整合分支 `integration/full-game`，目前 Codex 對話為唯一產品寫入者。main 仍為 `b12837c80dfc9f44ae6035c8bf7334f0fff66fdb`，沒有為產包先合併 main。
 - 恢復先讀 git status、本檔、[問題紀錄](QA/ISSUE_LOG.md) 及 [完整規格](PROJECT_SPEC.md)；不 reset／force push／覆蓋未知工作。自己的 pre-fast-forward 備份 stash 保留，不應 pop 回已整合內容。
-- CI 正常等待約每 5–10 分鐘查詢，沒有新結果不固定刷屏。Validate 39497238513 的全部原 job 已自行結束，attempt 1，無取消／重開／活動建置。最新只有文件與原始證據整理，不新增產品功能。
+- CI 正常等待約每 5–10 分鐘查詢，沒有新結果不固定刷屏。Validate 39497238513 的全部原 job 已自行結束，attempt 1，無取消／重開。另有固定同 App source 的五段短片外部 harness，原候選不變、不新增功能，不重跑完整六關；目前原生結果以 [短片索引](QA/MOTION_EVIDENCE_66c2929/) 為準。
 
 ## 同 SHA 實物與原生結果
 
@@ -28,11 +28,17 @@
 - 二十次真實第一位鹿進場／備料／暫停／放棄重進的根層入場／暫停／update 取樣最大值都是 1，完整 SpriteKit 後代都是 5，audio players 49 固定。排除 scene 本身／SwiftUI／UIKit／未掛樹物件；不宣稱全關卡節點、真機 FPS 或物件釋放 profiler 通過。
 - 三尺寸 HomeLayouts／ArtReview／DEBUG 狀態都有原 PNG。Codex 實看所列首頁、教學、結果、後關實際圖、小大字／左手 busy 與深底五表情；側欄奶油標籤、數字及最後一列未見裁切。DEBUG 固定情境與實際操作、靜態與連續動態分列，不代稱 Dot 最終藝術通過。
 
+## 本次獨立查驗與動態補件
+
+Dot 已獨立核驗 66c2929 的 41 次原生執行、第五關實際保存事件、IPA 實際架構／平台／未簽名、47 資源及 20 檔 checksum，可列工程候選，仍未完整驗收。最新獨立 7.7 評分及限定範圍已記錄，沒有宣稱所有問題 ID 自動關閉。
+
+原 36 個電影樣本改按 actual_seconds 索引（frame01=3.918333 秒，不是 requested 28.332667 秒），原始檔未改；三尺寸 24 張 ArtReview 的意圖名不當實際相位。深淺底各三次連續循環與三菜單客人真實點按，只補必要短片；還原候選已賺取的原保存進度，不注入訂單或分數，不當自然解鎖／完整六關人工通關。[剩餘驗收清單](QA/MOTION_EVIDENCE_66c2929/REMAINING_ACCEPTANCE.md)。
+
 ## 問題與獨立判定
 
 - MFT-013／015／016／017 有本 SHA 原生回歸，READY_FOR_RETEST。原 d090 基礎 31／0／0＋延伸 3／1／0，28e 為 31／0／0＋2／2／0，2bb 為 31／0／0＋3／1／0；失敗與附件完整保留在各 QA 目錄。沒有把它們改寫成功，或僅重跑同一 SHA 消除紅燈。
-- MFT-007 OPEN：龍頭頸及尾焰旁低 Alpha 紅黃殘點／毛邊。兩次圖片工具修稿未解決，原稿／可退稿保留；沒有 Python／shader 清理特例授權，沒有繞過限制。方法問題整理在 [ALPHA_METHOD_PENDING](QA/ALPHA_METHOD_PENDING.md)，依既有指示待後續特定方法確認，不打斷其他不受影響工作。
-- 7.7 六項每項至少 3、總分至少 20／24 的獨立評分、連續動態接合尚未取得。資料入口 [ART_REVIEW](QA/INTEGRATION_66c2929/ART_REVIEW.md)，不要求新的逐階段批准，不代評分。
+- MFT-007 OPEN：龍頭頸及尾焰旁低 Alpha 紅黃殘點／毛邊。三次圖片工具修稿未解決，原稿／可退稿保留；沒有 Python／shader 清理特例授權，沒有繞過限制。方法問題整理在 [ALPHA_METHOD_PENDING](QA/ALPHA_METHOD_PENDING.md)，依既有指示待後續特定方法確認，不打斷其他不受影響工作。
+- 7.7 最新獨立評分 3／3／UNVERIFIED／3／2／3，不計總分，未達每項至少 3 及總分至少 20 的門檻。靜態表情可 3 不充作動作分數；SE3 底字與奶油底已獨立實看修復，龍 Alpha 仍 2／4。資料入口 [ART_REVIEW](QA/INTEGRATION_66c2929/ART_REVIEW.md)。
 - Dot 已獨立 VERIFIED_CLOSED 的 DOT-001 僅 f8707b553758ba86605d0b70b6f97be35b516b8e 的啟動工程：Validate 39424665706／IPA 39424665179、artifact 12265820706、2／0／0、原啟動圖及實際 IPA 識別／Mach-O／校驗；不是完整遊戲。
 - Dot 對 b12837c80dfc9f44ae6035c8bf7334f0fff66fdb／Validate 39430419215／job 118653712104 的 14 單元＋1 啟動通過，僅核心／存檔等待問題 MFT-001 VERIFIED_CLOSED。
 - Dot 的 7.3 是原 blob／母版及 0171012 SE3 風格與小尺寸辨識條件通過，可沿用擴作；不是 7.7 或完整遊戲通過。Dot 已獨立核對 2bb review archive digest／基礎 31／0／0＋延伸 3／1／0、工程六關及根層量測限制；原回報保留問題紀錄。

@@ -1,0 +1,20 @@
+{
+  "original_sha256": "fb4b576ff92a8c8e11b30c017409ed790d90477c09ebe1781f5e75d7f8871107",
+  "trial_sha256": "6afa351ed6e879faba8575f03bb1366e055921b7fe47b3623d5850d6163b3316",
+  "trial_file": "exec-ef77e153-fec5-4f95-968a-9b00152f86ef.png",
+  "original_size": [
+    887,
+    1774
+  ],
+  "trial_size": [
+    887,
+    1774
+  ],
+  "method": "Read-only pixel and alpha comparison; neither PNG was modified.",
+  "selected": false,
+  "changed_visible_pixels_outside_requested_region": 645925,
+  "changed_solid_pixels_outside_requested_region": 606739,
+  "detached_gap_nonzero_alpha_before": 105,
+  "detached_gap_nonzero_alpha_after": 66,
+  "decision": "Reject as candidate edit: non-target solid artwork changed and detached/edge remnants remain. Preserve candidate and original; no more whole-sheet attempts in this task."
+}

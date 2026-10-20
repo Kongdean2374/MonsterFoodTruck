@@ -1,0 +1,1 @@
+1792536958.425293: L5-1-actual-bite-before-repair. Wall time aids navigation only; video frame index uses actual presentation timestamps.

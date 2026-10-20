@@ -349,13 +349,29 @@
     },
     {
       "path": "README.md",
-      "sha256": "ac58fa156989b99d3539839599e8bec9fde562e0c0c7bea898fe77fb8be74a04",
-      "method": "Editorial evidence index; original native files remain unchanged and separately hashed."
+      "sha256": "3de401fe387a2ca9819a5035e001c82ca893b56545bcfbc0a0c05f6d369ed4a6",
+      "method": "Editorial index updated with independently reported 7.7 scores and evidence limits on 2026-10-21 Taipei. Native evidence files and their hashes remain unchanged."
     },
     {
       "path": "ART_REVIEW.md",
-      "sha256": "c749811b19cd77bf45aaa2cb88a10b6c653509ce376269b18eee33de611f1beb",
-      "method": "Editorial evidence index; original native files remain unchanged and separately hashed."
+      "sha256": "724d03257bae8978ed9ab5ef8398a9b30b12476f0f29250d5b4579e8acb95818",
+      "method": "Editorial index updated with independently reported 7.7 scores and evidence limits on 2026-10-21 Taipei. Native evidence files and their hashes remain unchanged."
     }
-  ]
+  ],
+  "independent_review_20261021": {
+    "report": "../MOTION_EVIDENCE_66c2929/INDEPENDENT_REVIEW_20261021.md",
+    "engineering_candidate_verified": true,
+    "full_game_accepted": false,
+    "art_scores": [
+      3,
+      3,
+      null,
+      3,
+      2,
+      3
+    ],
+    "art_item_3": "UNVERIFIED; static expression suggestion is not a motion score",
+    "art_total": null,
+    "art_gate_passed": false
+  }
 }

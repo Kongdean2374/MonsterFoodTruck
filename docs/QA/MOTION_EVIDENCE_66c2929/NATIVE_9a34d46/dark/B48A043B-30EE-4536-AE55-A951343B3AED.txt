@@ -1,0 +1,1 @@
+1792536708.894514: rig-dark-cycle-3-after. Wall time aids navigation only; video frame index uses actual presentation timestamps.
