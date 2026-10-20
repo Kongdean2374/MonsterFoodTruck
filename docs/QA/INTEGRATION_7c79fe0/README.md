@@ -1,6 +1,6 @@
 # 7c79fe0 分層整合與回歸證據
 
-Source `7c79fe0e0111f9d44212fc8e36866ab9a80a9a29`，[Validate 39462050918](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39462050918)，主 job 118763757859，artifact 12283827810。主 scope **failure**：26 項、24 passed／2 failed／0 skipped。21 單元中 20 個方法通過／1 個評分邊界方法失敗（4 個斷言）；5 UI 中 4 通過／1 原流程點暫停失敗。小／大尺寸既有 job 仍待結果，沒有取消或重開。
+Source `7c79fe0e0111f9d44212fc8e36866ab9a80a9a29`，[Validate 39462050918](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39462050918)，主 job 118763757859，artifact 12283827810。主 scope **failure**：26 項、24 passed／2 failed／0 skipped。21 單元中 20 個方法通過／1 個評分邊界方法失敗（4 個斷言）；5 UI 中 4 通過／1 原流程點暫停失敗。兩尺寸均已結束：small job 118769779105 SUCCESS，3 passed／0 failed／0 skipped、artifact 12285016705；large job 118769779074 FAILURE，2 passed／1 failed／0 skipped、artifact 12284587312。使用者轉交 Dot 已獨立核對相同結果，沒有取消或重開。
 
 MFT-009：第六關全偏好參考軌跡前提失效，與先前 Linux 的 6 對 7／2 星對 3 星失敗一致。正式評分沒有改判；下一候選保留全部門檻斷言，另先驗證使用的基準每單偏好皆達成。
 
@@ -20,3 +20,6 @@ Codex 已實看深淺底及忙碌圖，三角色完整部件、五表情、三�
 STRATEGY_DIAGNOSTICS 為實際原生 Domain 72 筆及配對禁保護對照。三排程／雙模式／間隔與選取延遲的共有數字和 Linux 候選 72 筆逐項吻合（誤差<0.0001），該原生方法實際通過，包括保護有收益的配對斷言。這不是人體手速、正常點按全遊戲或好玩判定。六關錄影、後關無 driver 點按、效能與完整 IPA 尚未執行。
 
 全部 PNG 直接複製 XCTest 原生附件，未重畫；SCREENSHOT_PROVENANCE 記錄來源、裝置、案例及 SHA-256；SIMULATOR_APP_IDENTITY 保存包內所有離線資源逐位元組雜湊。沒有代稱 Dot 通過。
+
+
+大尺寸新增實際診斷：[失敗圖片](650680D4-CA4D-4A37-BCA0-A24A569BFA9A.png)／[逐步位置](31065BFD-EA2E-4576-AF6A-20EA0BD4D037.txt)。十二次拖曳後左手列一直在 `(20, 914.33, 390, 66)`，完全沒有捲動；起點 x0.5／y0.65 落在「一般／舒緩」分段選擇器上，該控制項消耗垂直拖曳。下一候選改在 Form 的左側留白 x0.03 作相同短距離拖曳，每次重新量導覽列邊界；仍要求元素存在、hittable 且中心在可視區，原功能值及重開後斷言不變。[SE 大字高對比左手首頁](0ACAF0A3-1807-4F91-8021-AF56AF58BC46.png) 是本輪已通過小尺寸的原始圖，不能代替 large 通過。

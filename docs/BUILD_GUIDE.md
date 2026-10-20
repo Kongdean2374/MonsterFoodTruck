@@ -15,7 +15,7 @@ bash Scripts/validate.sh
 bash Scripts/package_ipa.sh
 ```
 
-`validate.yml` 用低權限 push／PR／手動觸發。`unsigned-ipa.yml` 僅手動觸發可信 `main`，先測同 SHA，再以 iPhone 裝置 SDK Release archive，關閉簽名，檢查 Mach-O iOS device 平台後封裝 `Payload/MonsterFoodTruck.app`。
+`validate.yml` 用低權限 push／PR／手動觸發。`unsigned-ipa.yml` 僅允許手動觸發本專案的 `main` 或指定整合分支 `integration/full-game`，其他 ref 不執行；沒有 fork／PR 觸發、secrets 或寫入權限。整合分支可提供同 SHA 完整試玩候選，避免為產包先將未獨立驗收內容推到 main。四個原生 scopes 仍須全部通過、沒有略過，再以 iPhone 裝置 SDK Release archive，關閉簽名，檢查實際 Mach-O 為 iOS device／arm64／minos 17.0 且無 LC_CODE_SIGNATURE，才封裝 `Payload/MonsterFoodTruck.app`。
 
 產物位於 Actions 執行頁的 artifacts，保留 14 天，下載可能需 GitHub 登入。裝置 archive／封裝成功後才有 IPA、SHA-256、完整 source SHA 與工具版本 manifest；測試失敗也保留 xcresult、原生摘要及實際 PNG。若失敗發生在啟動前，狀態會明寫未執行／沒有 App 圖，不虛構通過數。
 

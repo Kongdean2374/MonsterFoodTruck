@@ -30,11 +30,13 @@ final class FullJourneyTests:XCTestCase {
         XCTAssertTrue(app.staticTexts["六關已完成，可返回挑戰三星。"].waitForExistence(timeout:10))
         capture("normal-six-level-completion",app)
         app.buttons["返回挑戰三星"].tap()
+        _=revealLevel("level_06",app)
         XCTAssertTrue(app.buttons["level-level_06"].waitForExistence(timeout:5))
         XCTAssertTrue(app.buttons["level-level_06"].isEnabled)
         capture("normal-all-levels-unlocked",app)
         app.terminate();app.launchEnvironment.removeValue(forKey:"MFT_REPLAY_RESET");app.launch()
         app.buttons["關卡選擇"].tap()
+        _=revealLevel("level_06",app)
         XCTAssertTrue(app.buttons["level-level_06"].waitForExistence(timeout:5))
         XCTAssertTrue(app.buttons["level-level_06"].isEnabled,"Real saved unlock must survive process restart")
         capture("normal-restarted-unlocks",app)
@@ -43,8 +45,7 @@ final class FullJourneyTests:XCTestCase {
     private func verifyRealLateLevelClocheTaps(_ app:XCUIApplication){
         app.terminate();app.launchEnvironment.removeValue(forKey:"MFT_NORMAL_REPLAY");app.launchEnvironment["MFT_USE_REPLAY_SAVE"]="1";app.launch()
         XCTAssertTrue(app.buttons["關卡選擇"].waitForExistence(timeout:10));app.buttons["關卡選擇"].tap()
-        let level=app.buttons["level-level_05"]
-        for _ in 0..<4{if level.isHittable{break};app.swipeUp()}
+        let level=revealLevel("level_05",app)
         XCTAssertTrue(level.isHittable);level.tap();app.buttons["beginLevel"].tap()
         XCTAssertTrue(app.buttons["quick-L5-1"].waitForExistence(timeout:10))
         app.buttons["quick-L5-1"].tap();perform("備料",app);perform("下鍋",app)
@@ -59,6 +60,15 @@ final class FullJourneyTests:XCTestCase {
         app.buttons["取下"].tap();app.buttons["香草芽"].tap();perform("出餐",app)
         XCTAssertTrue(app.staticTexts["已服務 2／7 ・一般"].waitForExistence(timeout:5));captureRealTaps("actual-late-two-served-with-cloche",app)
         app.buttons["pause"].tap();app.buttons["保存並回首頁"].tap();XCTAssertTrue(app.buttons["繼續遊玩"].waitForExistence(timeout:5))
+    }
+    private func revealLevel(_ id:String,_ app:XCUIApplication)->XCUIElement{
+        let level=app.buttons["level-\(id)"]
+        for _ in 0..<6{
+            if level.exists && level.isHittable && level.frame.maxY<app.frame.maxY-44{return level}
+            app.swipeUp()
+        }
+        XCTAssertTrue(level.exists && level.isHittable,"Level card must be visible before inspecting its saved unlock: \(id)")
+        return level
     }
     private func perform(_ label:String,_ app:XCUIApplication){
         let deadline=Date().addingTimeInterval(35);var tapped=false

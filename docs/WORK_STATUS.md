@@ -6,8 +6,8 @@
 
 - 倉庫 `Kongdean2374/MonsterFoodTruck`，公開，預設分支 main。單一工作樹 `/workspace/MonsterFoodTruck`、整合分支 `integration/full-game`，目前 Codex 對話為唯一產品寫入者。不 reset／force push／覆蓋未知工作。
 - 先讀 `git status`、本檔及 [問題紀錄](QA/ISSUE_LOG.md)；完整規格 [PROJECT_SPEC](PROJECT_SPEC.md)。歷史失敗及 Dot 的獨立判定保存在問題紀錄與各 QA 目錄，不以新成功改寫。
-- 目前正在驗證候選 `7c79fe0e0111f9d44212fc8e36866ab9a80a9a29`；[Validate 39462050918](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39462050918) 正在執行，主 job 118763757859。full_qa／layout_qa 均開啟；主流程失敗仍會跑兩尺寸。沒有取消／重開重複 job。
-- main 仍為 `b12837c80dfc9f44ae6035c8bf7334f0fff66fdb` 的核心候選。最終需將完整候選整合到 main，再產出同 SHA 的真實測試與未簽名裝置包。
+- 目前正在驗證候選 `7c79fe0e0111f9d44212fc8e36866ab9a80a9a29`；[Validate 39462050918](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39462050918) 已結束，主 job 118763757859 failure，small success、large failure。full_qa／layout_qa 均開啟；原生基準失敗使六關延伸未執行，兩尺寸均已跑完。沒有取消／重開重複 job。
+- main 仍為 `b12837c80dfc9f44ae6035c8bf7334f0fff66fdb` 的核心候選。完整候選可在指定整合分支手動產出同 SHA 的完整驗證與未簽名裝置包；仍須全部原生 scopes 通過，不為產包先改 main。
 
 ## 已有獨立判定（範圍不可擴張）
 
@@ -40,3 +40,8 @@
 - Linux 無 Xcode／iOS Simulator。真實原生使用 GitHub macos-15 Apple Silicon、Xcode 16.4／Swift 6.1.2／iOS 18.5 runtime。iOS 17 是部署下限，沒有宣稱實際 iOS 17 runtime 或 iPhone 17 Pro 真機通過。
 - 25 個原創離線 WAV 及播放器已整合、靜態無削波；聽覺、真實觸覺、真機效能與飛航模式實測仍待。原始母版／舊稿保留；7.7 與完整遊戲 Dot 驗收未取得。
 - 最終只交付同一完整 source SHA、成功原生 scopes、可追溯實際 PNG／影片、無簽名 iPhoneOS IPA、必要識別欄位／Mach-O／逐檔校驗／SHA256SUMS。不得以 bootstrap IPA、固定情境或純 Domain 結果代替。
+
+- 7c79fe0 主驗證已結束：26 項、24 passed／2 failed／0 skipped，21 單元中 1 個評分邊界方法失敗（4 斷言），5 UI 中 1 個暫停點按失敗。原生策略診斷方法通過，72 筆與 Linux 候選逐項相符。新增 MFT-011：森林 clip 只裁視覺、bounds 跨過暫停鈕，修裝飾命中與 header 層次，保留原 .tap。查驗頁底字裁切亦局部修正，原始圖／摘要／來源在 QA/INTEGRATION_7c79fe0。設定確認窗本輪未到達，仍待重測。
+- 下一候選另改善空位入場提示在奶油資訊區的對比、確認窗大字可捲動、完成頁小尺寸可捲動；三尺寸 HomeLayouts 增加實際還原確認窗與取消後設定保留的回歸。兩尺寸既有 job 已自行結束：small 3 passed／0 failed／0 skipped，large 2 passed／1 failed／0 skipped。large 的十二次手勢都被模式分段選擇器消耗，左手列位置完全不變；下一候選手勢改走 Form 左側留白，保留同一可視中心條件與全部功能斷言。
+
+- 使用者最新轉交 Dot 同一 7c79fe0 兩尺寸結果，要求保留原斷言、以失敗附件診斷；新角色實圖正在獨立覆核，其他工作不等回覆。使用者已睡，必要個人授權問題留待早上；龍 alpha 的 Python 特例沒有授權，繼續保留，不再追問。

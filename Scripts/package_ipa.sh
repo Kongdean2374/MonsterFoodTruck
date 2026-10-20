@@ -20,6 +20,16 @@ python3 Scripts/verify_app.py "$APP" --platform iPhoneOS --resources MonsterFood
 xcrun swift Scripts/probe_bundle.swift "$PWD/$APP" | tee build/delivery/DEVICE_BUNDLE_PROBE.txt
 xcrun vtool -show-build "$APP/MonsterFoodTruck" | tee build/delivery/MACHO_PLATFORM.txt
 grep -Eq 'platform[[:space:]]+IOS$' build/delivery/MACHO_PLATFORM.txt
+xcrun lipo -archs "$APP/MonsterFoodTruck" > build/delivery/MACHO_ARCHITECTURES.txt
+xcrun otool -l "$APP/MonsterFoodTruck" > build/delivery/MACHO_LOAD_COMMANDS.txt
+python3 - <<'PY'
+import re
+from pathlib import Path
+out=Path('build/delivery')
+assert (out/'MACHO_ARCHITECTURES.txt').read_text().split()==['arm64'],'Device executable must be arm64'
+assert 'LC_CODE_SIGNATURE' not in (out/'MACHO_LOAD_COMMANDS.txt').read_text(),'Unsigned executable must have no signature load command'
+assert re.search(r'minos\s+17\.0(?:\s|$)',(out/'MACHO_PLATFORM.txt').read_text()),'Device binary minimum OS must be iOS 17.0'
+PY
 if find "$APP" \( -name '*.mobileprovision' -o -name '*.p12' -o -name '*.key' \) | grep -q .; then
   echo 'Unexpected signing material' >&2; exit 1
 fi
@@ -50,6 +60,8 @@ assert p['MinimumOSVersion']=='17.0'
 out=Path('build/delivery')
 digest=hashlib.sha256((out/ipa).read_bytes()).hexdigest()
 manifest=dict(source_sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),version=p['CFBundleShortVersionString'],build=p['CFBundleVersion'],bundle_id=p['CFBundleIdentifier'],platform='iOS device',signature='unsigned',runner_image=os.getenv('ImageVersion'),xcode=subprocess.check_output(['xcodebuild','-version'],text=True).strip(),sdk=subprocess.check_output(['xcrun','--sdk','iphoneos','--show-sdk-version'],text=True).strip(),workflow_run_id=os.getenv('GITHUB_RUN_ID'),ipa=ipa,ipa_sha256=digest,created_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),validation='See TEST_SUMMARY.md; not a final acceptance')
+manifest['architectures']=(out/'MACHO_ARCHITECTURES.txt').read_text().split()
+manifest['signature_load_command']='absent; inspected actual Mach-O load commands'
 (out/'BUILD_MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
 evidence=[]
 for file in sorted(Path('build/QA_EVIDENCE').rglob('*')):

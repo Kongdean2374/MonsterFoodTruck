@@ -50,7 +50,7 @@ struct ConfirmationScreen:View {
     var confirmation:AppModel.Confirmation
     @State private var secondConfirmation=false
     var body:some View{
-        VStack(spacing:20){
+        ScrollView{VStack(spacing:20){
             Image(systemName:"questionmark.circle").font(.system(size:40)).foregroundStyle(TruckTheme.moss)
             Text(title).font(.title2.bold()).multilineTextAlignment(.center)
             Text(detail).multilineTextAlignment(.center)
@@ -60,7 +60,7 @@ struct ConfirmationScreen:View {
                 else{dismiss();model.confirmed(confirmation)}
             }.buttonStyle(TruckButtonStyle(primary:true))
             Button("取消"){dismiss();model.confirmation=nil}.frame(minHeight:44)
-        }.padding(28).foregroundStyle(TruckTheme.cocoa).presentationDetents([.medium,.large]).presentationDragIndicator(.visible).preferredColorScheme(.light)
+        }.padding(28)}.foregroundStyle(TruckTheme.cocoa).presentationDetents([.large]).presentationDragIndicator(.visible).preferredColorScheme(.light)
     }
     var title:String{switch confirmation{case .replace:return "要開始新的一局嗎？";case .restart:return "重新開始本關？";case .abandon:return "放棄目前這局？";case .resetSettings:return "恢復預設設定？";case .resetProgress:return secondConfirmation ? "再次確認：清除所有進度？":"清除遊戲進度？"}}
     var detail:String{switch confirmation{case .replace,.restart,.abandon:return "目前這局的工序與訂單會清除，已獲得的星數及解鎖會保留。";case .resetSettings:return "只還原音量、模式與介面設定，不清除星數及解鎖。";case .resetProgress:return "將清除六關星數、解鎖、教學紀錄與進行中的局。音量與介面設定會保留；取消不會刪除任何資料。"}}
@@ -97,10 +97,10 @@ struct CompletionScreen:View {
     @EnvironmentObject var model:AppModel
     @State private var scene=CompletionScene(size:CGSize(width:351,height:180))
     var body:some View{
-        VStack(spacing:24){
+        GeometryReader{viewport in ScrollView{VStack(spacing:20){
             Spacer()
             GeometryReader{geo in
-                SpriteView(scene:scene,options:[.allowsTransparency]).accessibilityHidden(true)
+                SpriteView(scene:scene,options:[.allowsTransparency]).allowsHitTesting(false).accessibilityHidden(true)
                     .onAppear{scene.greet(width:geo.size.width,reduced:model.reducesMotion)}
                     .onChange(of:geo.size.width){_,width in scene.greet(width:width,reduced:model.reducesMotion)}
             }.frame(height:180)
@@ -110,7 +110,7 @@ struct CompletionScreen:View {
             Spacer()
             Button("返回挑戰三星"){model.screen = .levels}.buttonStyle(TruckButtonStyle(primary:true))
             Button("略過動畫，回首頁"){model.screen = .home}.frame(minHeight:44)
-        }.padding(24)
+        }.padding(24).frame(minHeight:viewport.size.height)}}
     }
 }
 struct InformationScreen:View {

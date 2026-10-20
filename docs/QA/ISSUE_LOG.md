@@ -66,6 +66,7 @@
 - `3bc6d37` 主驗證 23 項中 22 通過／1 失敗／0 略過：三個切換立即斷言通過，但 helper 直接取 frame 時，上方音樂滑桿已不在 Form 的可及性樹，捲動前即被 XCTest 判無匹配而失敗。新增先檢查 exists 再捲動／取 frame 的條件，保留全部原斷言；觸覺重開保存本輪未執行，仍待回歸。
 - 146a7ca 的主案例實際通過觸覺即時／程序重開後 0、音量保存及減少動態保存；整例仍因之後確認窗 MFT-008 失敗。SE 小尺寸仍被捲動跨越目標阻擋（1 通過／1 失敗），大尺寸 2 通過。下一候選短距離捲動並在失敗時保留逐步位置；新增高對比／大字／左手程序重開後值仍為 1 的明確斷言，保留全部舊斷言。
 - 使用者轉交 Dot 對 3bc6d37 的獨立結果：large 成功，small debugScenario 成功、HomeLayouts 於 FlowTests.swift:127 缺高對比 snapshot（job 118730361469）。沒有重開重複 job；等 146 完成後如實記錄 SE 仍失敗。
+- 7c79fe0 的 small 實際 3 passed／0 failed／0 skipped；large 2 passed／1 failed／0 skipped。使用者轉交 Dot 獨立核對同一 run／兩個 job。已實看 large 附件：十二次 x0.5 短拖後左手列位置完全不變，起點落在模式分段選擇器，改在 Form 留白 x0.03 拖曳，保留原斷言及位置匯出。這仍不是三尺寸通過。
 - 證據：[INTEGRATION_146a7ca](INTEGRATION_146a7ca/)、[INTEGRATION_69c3933](INTEGRATION_69c3933/)。狀態 READY_FOR_RETEST 僅觸覺保存子項；SE 可視捲動仍 IN_PROGRESS，未有 Dot 通過判定。
 
 ## MFT-002（整合教學操作與失敗證據）

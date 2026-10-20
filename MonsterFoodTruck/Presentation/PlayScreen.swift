@@ -17,7 +17,7 @@ struct PlayScreen:View {
                     HStack{VStack(alignment:.leading,spacing:2){Text(session.level(content).name).font(.headline);Text("已服務 \(session.served)／\(session.level(content).orders.count) ・\(session.mode.rawValue)").font(.caption)
                         if session.waitingForSlot{Label("下一位客人在等候入場",systemImage:"figure.stand.line.dotted.figure.stand").font(.caption2.bold())}
                         else if let next=session.nextAdmissionAt,next-session.time<=GameRules.arrivalNotice{Text("下一位 \(Int(ceil(max(0,next-session.time)))) 秒後入場").font(.caption2.bold())}
-                    };Spacer();Button{model.pause()}label:{Label("暫停",systemImage:"pause.fill").frame(minWidth:72,minHeight:44)}.accessibilityIdentifier("pause")}
+                    };Spacer();Button{model.pause()}label:{Label("暫停",systemImage:"pause.fill").frame(minWidth:72,minHeight:44).contentShape(Rectangle())}.accessibilityIdentifier("pause")}.zIndex(1)
                     KitchenCanvas().frame(minHeight:324,maxHeight:.infinity)
                     CommandPanel()
                 }
@@ -69,7 +69,10 @@ struct KitchenCanvas:View {
                                         }.frame(maxWidth:.infinity).padding(.horizontal,8).padding(.bottom,5)
                                             .background(RoundedRectangle(cornerRadius:16).stroke(model.selectedOrder==order.id ? TruckTheme.moss:.clear,lineWidth:3))
                                     }.buttonStyle(.plain).accessibilityIdentifier("customer-\(order.id)").accessibilityLabel("\(content.monster(order.monster).name)，\(content.recipe(order.recipe).name)，偏好\(content.monster(order.monster).preference)，耐心剩\(Int(max(0,order.deadline-session.time)))秒")
-                                }else{VStack(spacing:4){Image(systemName:"leaf");Text(session.waitingForSlot ? "等候入場":arrivalText(session))}.font(.caption).foregroundStyle(TruckTheme.cocoa.opacity(0.65)).frame(maxWidth:.infinity,maxHeight:.infinity).accessibilityElement(children:.combine)}
+                                }else{
+                                    VStack(spacing:0){Spacer(minLength:80);VStack(spacing:2){Image(systemName:"leaf");Text(session.waitingForSlot ? "等候入場":arrivalText(session))}.font(.caption).foregroundStyle(TruckTheme.cocoa).frame(maxWidth:.infinity,minHeight:47)}
+                                        .frame(maxWidth:.infinity,maxHeight:.infinity).accessibilityElement(children:.combine)
+                                }
                             }
                         }.frame(height:132).background(alignment:.bottom){if KitchenArt.enabled{TruckTheme.cream.frame(height:52)}}
                         ForEach([Station.plate,.stove,.prep],id:\.self){station in

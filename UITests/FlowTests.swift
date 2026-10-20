@@ -133,23 +133,24 @@ final class FlowTests: XCTestCase {
         // its tap centre to clear the sheet toolbar and bottom safe area too.
         var observations:[String]=[]
         func scroll(_ upward:Bool){
-            // Short drags avoid repeatedly jumping past the same SE row.
-            let start=app.coordinate(withNormalizedOffset:CGVector(dx:0.5,dy:upward ? 0.65:0.4))
-            let end=app.coordinate(withNormalizedOffset:CGVector(dx:0.5,dy:upward ? 0.43:0.62))
+            // Short drags avoid jumping past SE rows. Start in the Form gutter:
+            // at x=0.5 on Pro Max this gesture lands on the segmented picker,
+            // which consumes all twelve drags without scrolling the Form.
+            let start=app.coordinate(withNormalizedOffset:CGVector(dx:0.03,dy:upward ? 0.65:0.4))
+            let end=app.coordinate(withNormalizedOffset:CGVector(dx:0.03,dy:upward ? 0.43:0.62))
             start.press(forDuration:0.1,thenDragTo:end)
         }
-        let top=app.navigationBars["餐車設定"].frame.maxY+24
         for step in 0..<12{
             if !element.exists{observations.append("\(step): absent; initial direction up=\(up)");scroll(up);continue}
-            let frame=element.frame,viewport=app.frame
-            observations.append("\(step): \(frame); hittable=\(element.isHittable)")
+            let frame=element.frame,viewport=app.frame,top=app.navigationBars["餐車設定"].frame.maxY+24
+            observations.append("\(step): \(frame); hittable=\(element.isHittable); visible=\(top)...\(viewport.maxY-50); drag gutter x=0.03")
             let above=frame.midY<top,below=frame.midY>viewport.maxY-50
             if element.isHittable && !above && !below{return}
             scroll(above ? false:below ? true:up)
         }
         let note=XCTAttachment(string:observations.joined(separator:"\n"));note.name="FAILED-form-scroll-positions";note.lifetime = .keepAlways;add(note)
         guard element.exists else{XCTFail("Control did not appear after bounded form scrolling: \(element)");return}
-        let frame=element.frame
+        let frame=element.frame,top=app.navigationBars["餐車設定"].frame.maxY+24
         XCTAssertTrue(element.isHittable && frame.midY>=top && frame.midY<=app.frame.maxY-50,"Control centre remains outside visible form: \(frame)")
     }
     func testHomeLayouts(){
@@ -164,6 +165,17 @@ final class FlowTests: XCTestCase {
         app.buttons["完成"].tap();capture("layout-home-large-contrast-left",app)
         app.buttons["關卡選擇"].tap();XCTAssertTrue(app.buttons["level-level_01"].waitForExistence(timeout:5));capture("layout-levels-large-contrast",app)
         app.buttons["level-level_01"].tap();XCTAssertTrue(app.buttons["beginLevel"].waitForExistence(timeout:5));capture("layout-intro-large-contrast",app)
+        app.buttons["返回選關"].tap();app.buttons["首頁"].tap();app.buttons["設定"].tap()
+        reveal(app.buttons["恢復預設設定"],app,up:true);app.buttons["恢復預設設定"].tap()
+        XCTAssertTrue(app.buttons["還原設定"].waitForExistence(timeout:5));capture("layout-reset-confirmation-large-text",app)
+        app.buttons["取消"].tap()
+        let usable=XCTNSPredicateExpectation(predicate:NSPredicate(format:"hittable == true"),object:app.buttons["設定"])
+        XCTAssertEqual(XCTWaiter.wait(for:[usable],timeout:5),.completed)
+        app.buttons["設定"].tap()
+        for label in ["高對比資訊","大字介面","左手單手配置"]{
+            reveal(app.switches[label],app,up:true);XCTAssertEqual(app.switches[label].value as? String,"1","Cancelling reset must preserve settings")
+        }
+        app.buttons["完成"].tap()
     }
     func testDebugScenarioScreenshots(){
         for (name,large) in [("busy",false),("warning",false),("covered",false),("tidy",false),("scorched",false),("busy",true),("rig-prototype",false),("kitchen-prototype",false),("kitchen-prototype",true)]{
