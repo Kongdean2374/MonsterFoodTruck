@@ -11,6 +11,7 @@ mkdir -p build
 } > build/ENVIRONMENT.txt
 cat build/ENVIRONMENT.txt
 test -z "$(git status --porcelain --untracked-files=no)"
+bash Scripts/prepare_assets.sh
 python3 Scripts/generate_project.py
 git diff --exit-code -- MonsterFoodTruck.xcodeproj
 python3 Scripts/test_verify_app.py

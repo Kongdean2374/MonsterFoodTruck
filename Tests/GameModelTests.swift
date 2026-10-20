@@ -142,8 +142,10 @@ final class GameModelTests: XCTestCase {
             for input in result.inputs { replay.advance(to:input.time,content:c);XCTAssertNil(replay.send(input.command,content:c)) }
             replay.advance(to:result.time,content:c)
             XCTAssertEqual(replay.stars(content:c),3);try replay.validate(content:c)
-            let dir=ProcessInfo.processInfo.environment["MFT_EVIDENCE_DIR"]
-            if let dir { let url=URL(fileURLWithPath:dir).appendingPathComponent("\(level.id)-\(mode == .normal ? "normal" : "gentle").json");try JSONEncoder().encode(result).write(to:url) }
+            let attachment=XCTAttachment(data:try JSONEncoder().encode(result),uniformTypeIdentifier:"public.json")
+            attachment.name="reference-\(level.id)-\(mode == .normal ? "normal":"gentle")"
+            attachment.lifetime = .keepAlways
+            add(attachment)
         }}
     }
 }

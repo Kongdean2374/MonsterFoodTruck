@@ -1,0 +1,202 @@
+[
+  {
+    "file": "forest_evening.wav",
+    "duration": 20.87,
+    "peak": 0.1253,
+    "rms": 0.0284,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "select.wav",
+    "duration": 0.33,
+    "peak": 0.1018,
+    "rms": 0.0394,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "prepStart.wav",
+    "duration": 0.42,
+    "peak": 0.1766,
+    "rms": 0.0494,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "prepDone.wav",
+    "duration": 0.42,
+    "peak": 0.1765,
+    "rms": 0.0493,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "cookStart.wav",
+    "duration": 0.42,
+    "peak": 0.1763,
+    "rms": 0.0494,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "cookDone.wav",
+    "duration": 0.51,
+    "peak": 0.1995,
+    "rms": 0.0548,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "scorched.wav",
+    "duration": 0.42,
+    "peak": 0.1705,
+    "rms": 0.0494,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "plated.wav",
+    "duration": 0.42,
+    "peak": 0.1767,
+    "rms": 0.0493,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "toppingStart.wav",
+    "duration": 0.42,
+    "peak": 0.1775,
+    "rms": 0.0494,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "toppingDone.wav",
+    "duration": 0.42,
+    "peak": 0.1767,
+    "rms": 0.0493,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "covered.wav",
+    "duration": 0.42,
+    "peak": 0.1742,
+    "rms": 0.0493,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "uncovered.wav",
+    "duration": 0.42,
+    "peak": 0.1653,
+    "rms": 0.0492,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "nibbleWarning.wav",
+    "duration": 0.51,
+    "peak": 0.256,
+    "rms": 0.0803,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "nibbled.wav",
+    "duration": 0.42,
+    "peak": 0.1731,
+    "rms": 0.0493,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "tidyStart.wav",
+    "duration": 0.42,
+    "peak": 0.1745,
+    "rms": 0.0493,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "tidyDone.wav",
+    "duration": 0.42,
+    "peak": 0.1775,
+    "rms": 0.0493,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "served.wav",
+    "duration": 0.42,
+    "peak": 0.1739,
+    "rms": 0.0494,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "preferred.wav",
+    "duration": 0.51,
+    "peak": 0.1936,
+    "rms": 0.0548,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "left.wav",
+    "duration": 0.42,
+    "peak": 0.1771,
+    "rms": 0.0494,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "arrival.wav",
+    "duration": 0.42,
+    "peak": 0.1775,
+    "rms": 0.0493,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "win.wav",
+    "duration": 0.6,
+    "peak": 0.1955,
+    "rms": 0.0584,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "lose.wav",
+    "duration": 0.51,
+    "peak": 0.1762,
+    "rms": 0.0548,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "dragonReaction.wav",
+    "duration": 0.51,
+    "peak": 0.1756,
+    "rms": 0.0549,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "impReaction.wav",
+    "duration": 0.51,
+    "peak": 0.1877,
+    "rms": 0.0549,
+    "clipped": false,
+    "rate": 22050
+  },
+  {
+    "file": "deerReaction.wav",
+    "duration": 0.51,
+    "peak": 0.1784,
+    "rms": 0.0548,
+    "clipped": false,
+    "rate": 22050
+  }
+]

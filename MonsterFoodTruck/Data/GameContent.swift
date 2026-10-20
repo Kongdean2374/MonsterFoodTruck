@@ -1,5 +1,14 @@
 import Foundation
 
+enum GameRules {
+    static let toppingTime: Double = 2
+    static let tidyTime: Double = 3
+    static let heatWindow: Double = 9
+    static let exposureBeforeWarning: Double = 7
+    static let theftCooldown: Double = 8
+    static let arrivalNotice: Double = 4
+}
+
 enum RecipeID: String, Codable, CaseIterable, Hashable { case starSoup = "star_soup", moonCrisp = "moon_crisp", cloudStew = "cloud_stew" }
 enum MonsterID: String, Codable, CaseIterable, Hashable { case emberDragon = "ember_dragon", nibbleImp = "nibble_imp", mossDeer = "moss_deer" }
 enum Topping: String, Codable, CaseIterable, Hashable { case herb = "香草芽", star = "星脆片" }
