@@ -54,6 +54,7 @@ struct SaveDocument: Codable {
 struct SaveLoadResult {
     var document: SaveDocument
     var notice: String?
+    var preserveUnreadableFiles = false
 }
 
 /// One ordered writer; whole-document atomic replacement keeps settlement and
@@ -103,7 +104,7 @@ final class SaveStore {
                     return SaveLoadResult(document:document,notice:sessionNotice ?? (index == 1 ? "主要存檔無法讀取，已從最後有效備份恢復。" : nil))
                 } catch { failures.append(error.localizedDescription) }
             }
-            return SaveLoadResult(document:SaveDocument(),notice:failures.isEmpty ? nil : "存檔與備份無法恢復。原檔已保留；可重新開始，或先離開以保留資料。")
+            return SaveLoadResult(document:SaveDocument(),notice:failures.isEmpty ? nil : "存檔與備份無法恢復。原檔已保留；可重新開始，或先離開以保留資料。",preserveUnreadableFiles:!failures.isEmpty)
         }
     }
     func write(_ document: SaveDocument, completion: @escaping (Result<Void,Error>) -> Void) {

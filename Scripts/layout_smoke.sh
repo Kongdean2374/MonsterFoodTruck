@@ -14,7 +14,7 @@ for SIZE in small large; do
   DEVICE=$(xcrun simctl create "MonsterFoodTruck-$SIZE" "$TYPE" "$RUNTIME")
   echo "$SIZE $TYPE $DEVICE $RUNTIME" >> build/LAYOUT_ENVIRONMENT.txt
   STATUS=0
-  if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$DEVICE" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckUITests/FlowTests/testDebugScenarioScreenshots -resultBundlePath "build/Layout-$SIZE.xcresult" -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee "build/layout-$SIZE.log"; then STATUS=0; else STATUS=$?; fi
+  if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$DEVICE" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckUITests/FlowTests/testDebugScenarioScreenshots -only-testing:MonsterFoodTruckUITests/FlowTests/testHomeLayouts -resultBundlePath "build/Layout-$SIZE.xcresult" -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee "build/layout-$SIZE.log"; then STATUS=0; else STATUS=$?; fi
   xcrun xcresulttool export attachments --path "build/Layout-$SIZE.xcresult" --output-path "build/QA_EVIDENCE/layout-$SIZE"
   xcrun xcresulttool get test-results summary --path "build/Layout-$SIZE.xcresult" > "build/LAYOUT_TEST_SUMMARY_$SIZE.json"
   if [ "$STATUS" != 0 ]; then exit "$STATUS"; fi

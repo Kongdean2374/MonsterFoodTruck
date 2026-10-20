@@ -26,6 +26,10 @@ final class SaveStoreTests: XCTestCase {
         let permanentOnly=store.load()
         XCTAssertEqual(permanentOnly.document.totalStars,3);XCTAssertNil(permanentOnly.document.session)
         XCTAssertTrue(permanentOnly.notice?.contains("永久進度已保留") == true)
+        XCTAssertFalse(permanentOnly.preserveUnreadableFiles,"Readable permanent progress must still allow settings writes")
+        try Data("unreadable".utf8).write(to:dir.appendingPathComponent("save-v1.json"))
+        try Data("unreadable".utf8).write(to:dir.appendingPathComponent("save-v1.backup.json"))
+        XCTAssertTrue(store.load().preserveUnreadableFiles,"Two unreadable files require an explicit fresh start before replacement")
     }
     func testOrderedWritesBackupAndSettlementTransaction() async throws {
         let c=try GameContent.load()

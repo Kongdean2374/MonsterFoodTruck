@@ -15,6 +15,7 @@ final class AppModel: ObservableObject {
     @Published var settingsPresented = false
     @Published var startupError: String?
     @Published var confirmation: Confirmation?
+    private var confirmationAfterSettings:Confirmation?
     @Published var isSaving = false
     @Published private(set) var debugScenarioLabel:String?
     private var debugFrozen=false
@@ -46,16 +47,18 @@ final class AppModel: ObservableObject {
     func load() {
         do {
             let content = try GameContent.load()
+            try ArtAtlas.preload()
             var directory=try SaveStore.applicationDirectory()
             #if DEBUG
             let environment=ProcessInfo.processInfo.environment
             if environment["MFT_NORMAL_REPLAY"]=="1"{directory.appendPathComponent("UIReplayEvidence",isDirectory:true)}
+            if let suite=environment["MFT_UI_SUITE"],["navigation","layout","controls"].contains(suite){directory.appendPathComponent("UIEvidence-"+suite,isDirectory:true)}
             #endif
             let store = SaveStore(directory:directory,content:content)
             let loaded = store.load()
             self.content = content; self.store = store; document = loaded.document
             message = loaded.notice
-            recoveryBlocked = loaded.notice?.contains("無法恢復") == true
+            recoveryBlocked = loaded.preserveUnreadableFiles
             startupError = nil
             audio.configure(document.settings)
             #if DEBUG
@@ -272,6 +275,11 @@ final class AppModel: ObservableObject {
     func homeSaving() {pause();persist{[weak self] success in if success{self?.screen = .home}}}
     func endPlay() {pause();persist{[weak self] success in if success{self?.audio.pause();self?.screen = .ended}}}
     func openSettings() {if screen == .game{pause()};settingsPresented=true}
+    func closeSettingsFor(_ confirmation:Confirmation){confirmationAfterSettings=confirmation;settingsPresented=false}
+    func settingsDidDismiss(){
+        if let pending=confirmationAfterSettings{confirmationAfterSettings=nil;confirmation=pending}
+        else if screen == .home{audio.startMusic()}
+    }
     func updateTutorialForReplay() {nextIsPractice=true}
     func updateSettings(_ edit: (inout GameSettings)->Void) {edit(&document.settings);audio.configure(document.settings);syncKitchen();persist()}
     func confirmed(_ confirmation: Confirmation) {

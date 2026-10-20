@@ -49,7 +49,7 @@ struct GameRoot:View {
         .background(TruckTheme.cream)
         .environment(\.dynamicTypeSize,model.document.settings.largeText ? .xLarge:.large)
         .preferredColorScheme(model.screen == .home ? .dark:.light)
-        .sheet(isPresented:$model.settingsPresented,onDismiss:{if model.screen == .home{model.audio.startMusic()}}){SettingsScreen()}
+        .sheet(isPresented:$model.settingsPresented,onDismiss:{model.settingsDidDismiss()}){SettingsScreen()}
         .sheet(item:$model.confirmation){ConfirmationScreen(confirmation:$0)}
         .alert("餐車提醒",isPresented:Binding(get:{model.message != nil},set:{if !$0{model.message=nil}})) {Button("知道了"){model.message=nil}} message:{Text(model.message ?? "")}
         .onReceive(timer){_ in model.tick()}

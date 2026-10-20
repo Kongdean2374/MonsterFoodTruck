@@ -4,26 +4,8 @@ import argparse
 import hashlib
 import json
 import plistlib
-import struct
-import zlib
+import shutil
 from pathlib import Path
-
-def png_payload(data):
-    """Keep every PNG chunk except text; Xcode copypng strips only text with compression off."""
-    if data[:8]!=b'\x89PNG\r\n\x1a\n':raise ValueError('Invalid PNG signature')
-    payload=data[:8];position=8
-    while position+12<=len(data):
-        size=struct.unpack('>I',data[position:position+4])[0]
-        end=position+size+12
-        if end>len(data):raise ValueError('Truncated PNG chunk')
-        kind=data[position+4:position+8];body=data[position+8:position+8+size]
-        if zlib.crc32(kind+body)!=struct.unpack('>I',data[end-4:end])[0]:raise ValueError('Invalid PNG CRC')
-        if kind not in (b'tEXt',b'zTXt',b'iTXt'):payload+=data[position:end]
-        position=end
-        if kind==b'IEND':
-            if position!=len(data):raise ValueError('Unexpected data after PNG end')
-            return payload
-    raise ValueError('PNG end chunk missing')
 
 def inspect(app, platform, resources=None):
     app = Path(app)
@@ -62,15 +44,12 @@ def inspect(app, platform, resources=None):
     if resources is not None:
         sources=[p for p in Path(resources).rglob('*') if p.is_file()]
         if len({p.name for p in sources})!=len(sources):raise ValueError('Duplicate flat resource names')
-        hashes={};png_metadata={}
+        hashes={}
         for source in sorted(sources):
             target=app/source.name
             if not target.is_file():raise ValueError(f'Built app is missing offline resource: {source.name}')
-            target_data=target.read_bytes();source_data=source.read_bytes()
-            digest=hashlib.sha256(target_data).hexdigest();source_digest=hashlib.sha256(source_data).hexdigest()
-            if digest!=source_digest:
-                if source.suffix!='.png' or png_payload(target_data)!=png_payload(source_data):raise ValueError(f'Built offline resource differs from source: {source.name}')
-                png_metadata[source.name]=dict(source_sha256=source_digest,built_sha256=digest,payload_sha256=hashlib.sha256(png_payload(target_data)).hexdigest(),allowed_difference='PNG text metadata only; every other chunk identical')
+            digest=hashlib.sha256(target.read_bytes()).hexdigest()
+            if digest!=hashlib.sha256(source.read_bytes()).hexdigest():raise ValueError(f'Built offline resource differs from source: {source.name}')
             hashes[source.name]=digest
         content=json.loads((app/'Content.json').read_text())
         if [len(content[k]) for k in ('recipes','monsters','levels')]!=[3,3,6]:raise ValueError('Built app has incomplete game content')
@@ -78,7 +57,6 @@ def inspect(app, platform, resources=None):
         if not (app/'Assets.car').is_file():raise ValueError('Compiled app icon catalog is missing')
         if info.get('CFBundleIcons',{}).get('CFBundlePrimaryIcon',{}).get('CFBundleIconName')!='AppIcon':raise ValueError('Built app icon metadata is missing')
         report['offline_resource_sha256']=hashes
-        report['png_text_metadata_processing']=png_metadata
         report['content_counts']={key:len(content[key]) for key in ('recipes','monsters','levels')}
     return report
 
@@ -87,10 +65,19 @@ if __name__ == '__main__':
     parser.add_argument('app')
     parser.add_argument('--platform', required=True, choices=['iPhoneOS', 'iPhoneSimulator'])
     parser.add_argument('--output', required=True)
-    parser.add_argument('--resources', required=True, help='Verify every original offline resource against the built flat bundle')
+    parser.add_argument('--resources', help='Also verify every original offline resource against the built flat bundle')
     args = parser.parse_args()
-    report = inspect(args.app, args.platform, args.resources)
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        report = inspect(args.app, args.platform, args.resources)
+    except Exception as error:
+        failure=output.parent/'RESOURCE_FAILURE';failure.mkdir(exist_ok=True)
+        (failure/'FAILURE.json').write_text(json.dumps(dict(error=str(error),platform=args.platform,app=str(args.app)),indent=2)+'\n')
+        if args.resources:
+            for source in Path(args.resources).rglob('*.png'):
+                target=Path(args.app)/source.name
+                if target.is_file():shutil.copyfile(target,failure/source.name)
+        raise
     output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     print(output.read_text())

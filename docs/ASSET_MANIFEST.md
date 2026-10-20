@@ -40,3 +40,5 @@
 | audio_deerReaction | `MonsterFoodTruck/Resources/Audio/deerReaction.wav` | 原創 `Scripts/generate_audio.py`；單聲道 22050Hz PCM16，0.51秒；peak 0.1784、RMS 0.0548，未削波 | Codex 數值分析；**聽覺未驗證**，Dot 尚未監聽 |
 
 目前母版、Icon、圖集、音訊都不是完整品質驗收。角色分層、表情與動作及料理狀態仍需補足；不得把此清單視為 Dot 7.7 美術門檻已通過。
+
+分層試作：`ArtSource/Prototypes/dragon-layer-rig.png` 與相應 JSON；以既有焰尾龍母版作參考生成／編修，887×1774 RGBA，五頭部＋軀幹／手臂／尾焰，原 PNG 未修改。資源副本在 `Resources/Art`；目前只接 DEBUG 單角色預覽，尚未以實際小尺寸確認接合、邊緣、五種表情或動畫，也沒有 Dot 視覺通過。詳原始檔旁 README；不作正式三角色動畫完成聲明。

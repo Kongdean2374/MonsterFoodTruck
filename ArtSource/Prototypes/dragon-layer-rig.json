@@ -1,0 +1,56 @@
+{
+  "width": 887,
+  "height": 1774,
+  "rects": {
+    "body": [
+      37,
+      113,
+      396,
+      323
+    ],
+    "waiting": [
+      455,
+      64,
+      419,
+      374
+    ],
+    "expecting": [
+      11,
+      484,
+      422,
+      374
+    ],
+    "worried": [
+      454,
+      484,
+      421,
+      378
+    ],
+    "satisfied": [
+      12,
+      906,
+      421,
+      373
+    ],
+    "disappointed": [
+      454,
+      906,
+      423,
+      377
+    ],
+    "arm": [
+      92,
+      1383,
+      216,
+      270
+    ],
+    "tail": [
+      472,
+      1307,
+      363,
+      406
+    ]
+  },
+  "method": "Analysis of original RGBA alpha; bounding rectangles for runtime subtextures. Original PNG unmodified.",
+  "status": "Single-character prototype; not Dot accepted"
+}

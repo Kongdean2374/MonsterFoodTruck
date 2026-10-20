@@ -27,8 +27,8 @@ struct SettingsScreen:View {
                 }
                 Section("教學與資料"){
                     Button("重新查看操作教學"){dismiss();model.screen = .help}.frame(minHeight:44)
-                    Button("恢復預設設定"){model.settingsPresented=false;model.confirmation = .resetSettings}.frame(minHeight:44)
-                    Button("清除遊戲進度",role:.destructive){model.settingsPresented=false;model.confirmation = .resetProgress}.frame(minHeight:44)
+                    Button("恢復預設設定"){model.closeSettingsFor(.resetSettings)}.frame(minHeight:44)
+                    Button("清除遊戲進度",role:.destructive){model.closeSettingsFor(.resetProgress)}.frame(minHeight:44)
                 }
             }.navigationTitle("餐車設定").toolbar{ToolbarItem(placement:.confirmationAction){Button("完成"){model.persist();model.audio.pause();dismiss()}.frame(minHeight:44)}}
         }.preferredColorScheme(.light)

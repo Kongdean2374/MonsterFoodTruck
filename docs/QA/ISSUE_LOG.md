@@ -11,6 +11,7 @@
 - 狀態：IN_PROGRESS，等待新候選原失敗及尺寸回歸。
 - 中間候選 `1b90898e19032ce55883d9723f15ba1533f045f0` 的 [run 39437388402](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39437388402) 在編譯成功後、啟動測試前被新增資源完整性檢查攔下：Xcode CopyPNGFile 的預設轉換使輸出 PNG 位元組與來源 SHA-256 不同。此 run 沒有執行單元／UI，不宣稱原失敗消失。下一候選關閉原始資源 PNG 的建置重壓縮，保留逐檔校驗；另外增加所有退出階段的狀態摘要，建置前失敗不虛構截圖或測試數。
 - `e4865ea38af8e6c728463e4a7dcefd25bfc45d56` 的 [run 39437916409](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39437916409) 同樣在資源檢查失敗、沒有執行 XCTest。log 確認關閉壓縮後仍執行 `copypng -strip-PNG-text`，因此原檔雜湊仍不同。後續校驗僅允許 tEXt／zTXt／iTXt 文字中繼資料差異，驗證每個 PNG chunk 的 CRC，要求像素、色彩及全部非文字區塊完全一致；產出與來源 SHA-256 及共同 payload 雜湊均記錄。其他資源仍要求逐位元組一致，不以刪除資源檢查取得成功。
+- 上述中間方案 `e76f4a79c910be07a11eb043fe7215806e3d259b` 的 [run 39440235520](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39440235520) 仍被 PNG 區塊差異攔下，未執行 XCTest。Codex 新增的檢查未先配合 Xcode 資源處理，拖住了原 UI 回歸。後續改成明確以 opaque file 複製原始 PNG，關閉 PNG 文字移除，恢復逐位元組嚴格校驗；如仍失敗會連同實際輸出 PNG 保存以便查對，避免只依指令推測。必要 bundle 識別／native probe 仍在安裝前執行，完整資源檢查放到測試附件匯出之後獨立執行，任何失敗保留非零結果，不再阻止取得原教學及尺寸的實測證據。
 
 ## MFT-001（Codex 自測發現）
 

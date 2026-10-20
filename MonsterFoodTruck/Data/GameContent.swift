@@ -50,6 +50,7 @@ struct GameContent: Codable {
               Set(levels.map(\.id)).count == 6 else { throw GameError.invalid("遊戲資料版本或數量不正確。") }
         for r in recipes where !r.prep.isFinite || !r.cook.isFinite || !r.grace.isFinite || r.prep <= 0 || r.cook <= 0 || r.grace <= 0 { throw GameError.invalid("食譜時間不正確：\(r.id.rawValue)") }
         for m in monsters where !m.patience.isFinite || m.patience <= 0 { throw GameError.invalid("魔物耐心資料不正確。") }
+        guard Set(recipes.map(\.atlasColumn))==Set(0..<3),Set(monsters.map(\.atlasColumn))==Set(0..<3) else{throw GameError.invalid("料理或魔物素材映射不正確。")}
         for l in levels {
             guard !l.orders.isEmpty, Set(l.orders.map(\.id)).count == l.orders.count,
                   l.orders.allSatisfy({ $0.scheduledAt.isFinite && $0.scheduledAt >= 0 }),

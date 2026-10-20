@@ -18,7 +18,7 @@ trap stop_recording EXIT
 xcrun simctl io "$DEVICE" recordVideo --codec=h264 --force build/QA_EVIDENCE/journey/normal-six-level-journey.mov > build/journey-recording.log 2>&1 &
 VIDEO_PID=$!
 STATUS=0
-if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$DEVICE" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckUITests/FullJourneyTests -resultBundlePath build/Journey.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/journey.log; then
+if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$DEVICE" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckUITests/FullJourneyTests -only-testing:MonsterFoodTruckUITests/ControlFlowTests -resultBundlePath build/Journey.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/journey.log; then
   STATUS=0
 else
   STATUS=$?
@@ -33,7 +33,7 @@ python3 - "$DEVICE" "$STATUS" <<'PY'
 import json,os,subprocess,sys
 from pathlib import Path
 video=Path('build/QA_EVIDENCE/journey/normal-six-level-journey.mov')
-report=dict(source_sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),simulator_id=sys.argv[1],test_exit=int(sys.argv[2]),method='DEBUG engineering command driver; normal foreground clock; same validators as UI; real navigation and atomic settlement; not manual playtesting',audio='simctl video records picture only; does not verify sound or haptics',recording=video.name,recorded_bytes=video.stat().st_size if video.exists() else 0,workflow_run_id=os.getenv('GITHUB_RUN_ID'))
+report=dict(source_sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),simulator_id=sys.argv[1],test_exit=int(sys.argv[2]),method='FullJourneyTests: DEBUG engineering command driver; normal foreground clock; same validators as UI; real navigation and atomic settlement. ControlFlowTests: real taps and deliberate no-input failure; no state injection. Neither is human playtesting.',audio='simctl video records picture only; does not verify sound or haptics',recording=video.name,recorded_bytes=video.stat().st_size if video.exists() else 0,workflow_run_id=os.getenv('GITHUB_RUN_ID'))
 Path('build/QA_EVIDENCE/journey/RECORDING_METHOD.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 if int(sys.argv[2])==0 and report['recorded_bytes']<1024:raise SystemExit('Normal-speed journey recording is missing or empty')
 if int(sys.argv[2])==0 and len(list(Path('build/QA_EVIDENCE/journey/actual-model-snapshots').glob('actual-level_*.json')))!=6:raise SystemExit('Six actual runtime session histories were not exported')

@@ -61,14 +61,16 @@ for name,folder,kind in [("MonsterFoodTruck","MonsterFoodTruck","application"),(
         resource_files=[(str(f.relative_to(ROOT)), {".json":"text.json", ".png":"image.png", ".wav":"audio.wav"}.get(f.suffix,"file")) for f in sorted((ROOT/"MonsterFoodTruck/Resources").rglob("*")) if f.is_file()]
         for path,ftype in resource_files+[("MonsterFoodTruck/Assets.xcassets","folder.assetcatalog")]:
             if (ROOT/path).exists():
-                ref=obj(path,isa="PBXFileReference",lastKnownFileType=ftype,path=path,sourceTree="<group>")
+                # Preserve original PNG bytes instead of running Xcode's image rewrite rule.
+                type_field={"explicitFileType":"file"} if path.endswith(".png") else {"lastKnownFileType":ftype}
+                ref=obj(path,isa="PBXFileReference",**type_field,path=path,sourceTree="<group>")
                 children.append(ref)
                 resource_builds.append(obj(path+"build",isa="PBXBuildFile",fileRef=ref))
     phases.append(obj(name+"resources",isa="PBXResourcesBuildPhase",buildActionMask=2147483647,files=resource_builds,runOnlyForDeploymentPostprocessing=0))
     settings={"PRODUCT_NAME":name,"PRODUCT_BUNDLE_IDENTIFIER":"cc.chaihome.monsterfoodtruck"+("" if kind=="application" else "."+name),"GENERATE_INFOPLIST_FILE":"YES"}
     dependencies=[]
     if kind=="application":
-        settings |= {"INFOPLIST_FILE":"MonsterFoodTruck/Info.plist","GENERATE_INFOPLIST_FILE":"NO","ASSETCATALOG_COMPILER_APPICON_NAME":"AppIcon","ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME":"AccentColor","SUPPORTED_PLATFORMS":"iphoneos iphonesimulator","SUPPORTS_MACCATALYST":"NO","COMPRESS_PNG_FILES":"NO"}
+        settings |= {"INFOPLIST_FILE":"MonsterFoodTruck/Info.plist","GENERATE_INFOPLIST_FILE":"NO","ASSETCATALOG_COMPILER_APPICON_NAME":"AppIcon","ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME":"AccentColor","SUPPORTED_PLATFORMS":"iphoneos iphonesimulator","SUPPORTS_MACCATALYST":"NO","COMPRESS_PNG_FILES":"NO","STRIP_PNG_TEXT":"NO"}
     else:
         settings |= {"TEST_TARGET_NAME":"MonsterFoodTruck"}
         if kind=="bundle.unit-test":
