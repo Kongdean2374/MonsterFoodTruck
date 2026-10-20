@@ -6,7 +6,9 @@
 - 受測 SHA：`b88566e00ebc063d702f7b6eb27ed83f751e0359`；[run 39426228219](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39426228219)。11 個模型測試與六關雙模式參考重播通過，但存檔測試的前兩個非同步完成回呼等待逾時，整體 failure。
 - 重現：`testOrderedWritesBackupAndSettlementTransaction` 在同步 `wait(for:)` 等待由主佇列交付的完成回呼。
 - 修正：改為 XCTest 的 async 測試與 `await fulfillment`，讓執行器在等待時可交付主佇列回呼；保留原來五秒限制與全部檔案／備份／舊寫入拒絕斷言，不略過或只增加逾時。
-- 狀態：IN_PROGRESS，待新提交真實 CI 回歸，不從修改測試檔直接標通過。
+- 修復 SHA：`b12837c80dfc9f44ae6035c8bf7334f0fff66fdb`；[Validate run 39430419215](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39430419215)，job `118653712104` 整體 SUCCESS。14 項單元測試與 1 項啟動 UI 測試通過，原來兩處存檔寫入／結算回呼逾時消失。
+- 獨立查驗：使用者轉交 Dot 親自核對上述 SHA／run／job 的結果，確認目前核心與存檔回歸通過。這不代表完整 UI、美術、音效或整合分支的新提交通過。
+- 狀態：VERIFIED_CLOSED（僅此等待問題及該核心候選）。保留原失敗 run，不以後續成功改寫原紀錄。
 
 ## DOT-001
 

@@ -2,7 +2,7 @@
 
 測試檔不等於已通過。每次以實際完整 source SHA、Actions run 與 xcresult／JSON 摘要為準；任何 failure 都不視為完整驗收。
 
-目前實際結果：DOT-001 的 f8707b5 已有 2 passed／0 failed／0 skipped、同 SHA 裝置 IPA 及 Dot 獨立重測。b88566e 的 11 個 GameModelTests 實際通過，包含六關普通／舒緩三星參考解、重播、0.6 秒主要操作間隔、資源／命令／熱度／偷嚐／修整／截止點／背景時間等；SaveStore 回呼等待失敗，整體 failure。修正為 async XCTest 的 b12837c 正在回歸，尚未標成功。
+目前實際結果：DOT-001 的 f8707b5 已有 2 passed／0 failed／0 skipped、同 SHA 裝置 IPA 及 Dot 獨立重測。b88566e 的 11 個 GameModelTests 實際通過，包含六關普通／舒緩三星參考解、重播、0.6 秒主要操作間隔、資源／命令／熱度／偷嚐／修整／截止點／背景時間等；SaveStore 回呼等待失敗，整體 failure。修復 `b12837c80dfc9f44ae6035c8bf7334f0fff66fdb` 的 run `39430419215`／job `118653712104` SUCCESS，14 項單元與 1 項啟動 UI 測試通過；使用者已轉交 Dot 對此相同候選的獨立查核。範圍僅核心／存檔與啟動，整合 UI／音畫尚待驗證。
 
 核心回歸由 `Tests/GameModelTests.swift`、`SaveStoreTests.swift` 直接使用 App 的 Domain／Data／SaveStore，沒有另寫評分計算器或直接注入成功狀態。參考序列改以 XCTest JSON 附件保存，供後續候選匯出核對；真實 UI 截圖也由 XCTest 在運行時擷取。
 
