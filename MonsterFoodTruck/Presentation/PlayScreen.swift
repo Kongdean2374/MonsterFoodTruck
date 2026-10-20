@@ -52,8 +52,8 @@ struct KitchenCanvas:View {
             ZStack(alignment:.top){
                 RoundedRectangle(cornerRadius:24).fill(TruckTheme.moss.opacity(0.11))
                 if KitchenArt.enabled{
-                    if let body=KitchenArt.image("body"){Image(uiImage:body).resizable(capInsets:EdgeInsets(top:32,leading:22,bottom:20,trailing:22)).frame(width:geo.size.width,height:geo.size.height).clipShape(RoundedRectangle(cornerRadius:24)).accessibilityHidden(true)}
-                    if let forest=KitchenArt.image("forest"){Image(uiImage:forest).resizable().scaledToFill().frame(width:geo.size.width,height:80).clipped().clipShape(UnevenRoundedRectangle(topLeadingRadius:24,topTrailingRadius:24)).accessibilityHidden(true)}
+                    if let body=KitchenArt.image("body"){Image(uiImage:body).resizable(capInsets:EdgeInsets(top:32,leading:22,bottom:20,trailing:22)).frame(width:geo.size.width,height:geo.size.height).clipShape(RoundedRectangle(cornerRadius:24)).allowsHitTesting(false).accessibilityHidden(true)}
+                    if let forest=KitchenArt.image("forest"){Image(uiImage:forest).resizable().scaledToFill().frame(width:geo.size.width,height:80).clipped().clipShape(UnevenRoundedRectangle(topLeadingRadius:24,topTrailingRadius:24)).allowsHitTesting(false).accessibilityHidden(true)}
                 }
                 SpriteView(scene:model.kitchen,options:[.allowsTransparency]).allowsHitTesting(false).accessibilityHidden(true)
                 if let session=model.session,let content=model.content{
@@ -87,7 +87,7 @@ struct KitchenCanvas:View {
                     }
                 }
             }
-        }
+        }.contentShape(Rectangle())
     }
     func arrivalText(_ session:GameSession)->String{
         if let next=session.nextAdmissionAt, next-session.time<=GameRules.arrivalNotice{return "下位 \(Int(ceil(max(0,next-session.time))))秒"}

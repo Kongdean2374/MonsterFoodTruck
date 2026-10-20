@@ -1,0 +1,17 @@
+{
+  "source_sha": "7c79fe0e0111f9d44212fc8e36866ab9a80a9a29",
+  "exit_status": 65,
+  "last_stage": "baseline-tests-failed",
+  "baseline_tests": "executed; see native TEST_RESULT_SUMMARY.json",
+  "scoped_results": {
+    "TEST_RESULT_SUMMARY.json": {
+      "passedTests": 24,
+      "failedTests": 2,
+      "skippedTests": 0
+    }
+  },
+  "actual_png_count": 32,
+  "passed": 24,
+  "failed": 2,
+  "skipped": 0
+}

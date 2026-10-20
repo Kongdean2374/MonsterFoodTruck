@@ -25,5 +25,5 @@ enum KitchenArt {
 
 struct KitchenPiece:View{
     var name:String
-    var body:some View{Group{if let image=KitchenArt.image(name){Image(uiImage:image).resizable().scaledToFit()}}.accessibilityHidden(true)}
+    var body:some View{Group{if let image=KitchenArt.image(name){Image(uiImage:image).resizable().scaledToFit()}}.allowsHitTesting(false).accessibilityHidden(true)}
 }

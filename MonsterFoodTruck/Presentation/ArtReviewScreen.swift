@@ -6,18 +6,18 @@ import SpriteKit
 struct ArtReviewScreen:View {
     @EnvironmentObject var model:AppModel
     var dark:Bool
-    @State private var scene=ArtReviewScene(size:CGSize(width:351,height:480))
+    @State private var scene=ArtReviewScene(size:CGSize(width:351,height:500))
     var body:some View{
-        VStack(spacing:8){
+        VStack(spacing:4){
             Text("\(dark ? "深":"淺")底・三角色五表情・72×76pt").font(.caption.bold())
             GeometryReader{geo in
                 SpriteView(scene:scene).accessibilityHidden(true)
                     .onAppear{scene.configure(width:geo.size.width,dark:dark)}
                     .onChange(of:geo.size.width){_,width in scene.configure(width:width,dark:dark)}
-            }.frame(height:480)
+            }.frame(height:500)
             Button("播放部件動作"){scene.playDemo(reduced:model.reducesMotion)}.buttonStyle(TruckButtonStyle(primary:true))
             Button("返回首頁"){model.screen = .home}.frame(minHeight:44)
-        }.padding(12)
+        }.padding(10)
     }
 }
 
@@ -26,13 +26,13 @@ final class ArtReviewScene:SKScene {
     override init(size:CGSize){super.init(size:size);scaleMode = .resizeFill;isUserInteractionEnabled=false}
     required init?(coder:NSCoder){return nil}
     func configure(width:CGFloat,dark:Bool){
-        size=CGSize(width:width,height:480);removeAllChildren();removeAllActions();firstRow=[]
+        size=CGSize(width:width,height:500);removeAllChildren();removeAllActions();firstRow=[]
         backgroundColor=dark ? UIColor(red:0.231,green:0.169,blue:0.165,alpha:1):UIColor(red:1,green:0.953,blue:0.839,alpha:1)
         let names=["待機","期待","低耐心","滿意","離開／失望"]
         for (row,pose) in CharacterPose.allCases.enumerated(){
             for (column,monster) in MonsterID.allCases.enumerated(){
                 guard let rig=CharacterArt.make(monster) else{continue}
-                rig.setScale(CharacterArt.scale(monster,width:72));rig.position=CGPoint(x:width*(CGFloat(column)+0.5)/3,y:396-CGFloat(row)*96)
+                rig.setScale(CharacterArt.scale(monster,width:72));rig.position=CGPoint(x:width*(CGFloat(column)+0.5)/3,y:416-CGFloat(row)*96)
                 rig.preview(pose);addChild(rig)
                 if row==0{firstRow.append((monster,rig))}
                 let title=SKLabelNode(fontNamed:"PingFangTC-Semibold");title.text=names[row];title.fontSize=11;title.fontColor=dark ? .white:.black;title.position=CGPoint(x:rig.position.x,y:rig.position.y-17);addChild(title)

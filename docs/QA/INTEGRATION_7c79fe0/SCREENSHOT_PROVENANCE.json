@@ -1,0 +1,114 @@
+[
+  {
+    "file": "4CE43689-6262-4293-95A9-CDB6743AA097.png",
+    "sha256": "f6a46b20f8add6ec20ca67dc9f221a27e374341acbda8340f319c0ced0fc918b",
+    "test": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+      "deviceName": "iPhone 16 Pro",
+      "exportedFileName": "4CE43689-6262-4293-95A9-CDB6743AA097.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "ART-light-five-poses-game-size_0_1D4073DE-AFF5-4D10-BE23-22F96122DC0C.png",
+      "timestamp": 1792516018.024
+    }
+  },
+  {
+    "file": "4D089DDA-ED1B-4CF7-A205-FA65F10115B9.png",
+    "sha256": "45df77cd028a8f05a785a2595c8c7342d8621d74c02dc3e35e2dbfeaa0154875",
+    "test": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+      "deviceName": "iPhone 16 Pro",
+      "exportedFileName": "4D089DDA-ED1B-4CF7-A205-FA65F10115B9.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "ART-dark-motion-return-to-anchor_0_B3384C52-42C5-4A8D-B41F-591FC003E9B2.png",
+      "timestamp": 1792516007.826
+    }
+  },
+  {
+    "file": "704C4806-416D-4CE1-B87F-3DE0009F81ED.png",
+    "sha256": "48abb72fab2424583a722c907c1ccb17015643320fab2cb4c73f605744a6c61f",
+    "test": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+      "deviceName": "iPhone 16 Pro",
+      "exportedFileName": "704C4806-416D-4CE1-B87F-3DE0009F81ED.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "ART-dark-motion-reach_0_7F0970B3-5A77-487A-A483-6C10C085F083.png",
+      "timestamp": 1792516004.607
+    }
+  },
+  {
+    "file": "838915B3-9316-4CB9-BD9C-0FAF527AEF1D.png",
+    "sha256": "8f14487886fc7049dcf8de6ccbb187984d1cd185bd2e68a9572897c2e1b57c16",
+    "test": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+      "deviceName": "iPhone 16 Pro",
+      "exportedFileName": "838915B3-9316-4CB9-BD9C-0FAF527AEF1D.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "ART-dark-five-poses-game-size_0_455B2B94-495D-4E6F-A1B6-BD45DC264833.png",
+      "timestamp": 1792516003.305
+    }
+  },
+  {
+    "file": "EEA95D22-C697-4314-B261-74A7FD159CF0.png",
+    "sha256": "cd0612cf3282eaa0ec2906cc0988f8bfd34c3ef781b4cb1411d2f9f02e00c38a",
+    "test": "FlowTests/testDebugScenarioScreenshots()",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+      "deviceName": "iPhone 16 Pro",
+      "exportedFileName": "EEA95D22-C697-4314-B261-74A7FD159CF0.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "DEBUG-kitchen-prototype-standard-right_0_5EB90D7C-74FA-4A08-85DB-8A60838B5599.png",
+      "timestamp": 1792516086.778
+    }
+  },
+  {
+    "file": "81037746-8022-4AD5-A210-0C1A23A862FC.png",
+    "sha256": "b370d7b5a8fbee9ef7b70aba656576a6503f9174264ea1aebc22ccf86bd67823",
+    "test": "FlowTests/testNavigationTutorialPauseAndPersistence()",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+      "deviceName": "iPhone 16 Pro",
+      "exportedFileName": "81037746-8022-4AD5-A210-0C1A23A862FC.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "FAILED-actual-screen_0_2DE782C1-21E2-4991-AE9F-A6759A43F32B.png",
+      "timestamp": 1792516174.735
+    }
+  },
+  {
+    "file": "22FE236D-32E8-4E9C-85DB-A5930B6E9BB8.png",
+    "sha256": "f65f53346399095b6cf1d23860be005e6f93b467f1eb37f5f6b9dac9cc4be12a",
+    "test": "FlowTests/testNavigationTutorialPauseAndPersistence()",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+      "deviceName": "iPhone 16 Pro",
+      "exportedFileName": "22FE236D-32E8-4E9C-85DB-A5930B6E9BB8.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "normal-play-after-service_0_9F4E75EC-DA64-428B-8C7D-F0CAB7016E53.png",
+      "timestamp": 1792516171.34
+    }
+  },
+  {
+    "file": "F0FE16B3-1F01-4B36-B1B8-62FA840FAED0.png",
+    "sha256": "ca215870547264611a01dc634e3a5e8157ad53a89fe40c0d1a6fba71d01bdaca",
+    "test": "FlowTests/testNavigationTutorialPauseAndPersistence()",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+      "deviceName": "iPhone 16 Pro",
+      "exportedFileName": "F0FE16B3-1F01-4B36-B1B8-62FA840FAED0.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "tutorial-first-stable-3s_0_F28C948F-20F4-422A-A44C-A2A9581876C8.png",
+      "timestamp": 1792516151.16
+    }
+  }
+]

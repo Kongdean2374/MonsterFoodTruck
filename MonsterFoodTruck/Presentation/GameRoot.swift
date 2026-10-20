@@ -75,7 +75,7 @@ struct HomeScreen:View {
                     if let image=ArtAtlas.background {Image(uiImage:image).resizable().scaledToFill().frame(width:background.size.width,height:background.size.height).clipped()}
                     LinearGradient(colors:[.black.opacity(0.22),.clear,TruckTheme.moss.opacity(0.96)],startPoint:.top,endPoint:.bottom)
                 }
-            }.ignoresSafeArea()
+            }.ignoresSafeArea().allowsHitTesting(false).accessibilityHidden(true)
             GeometryReader{geo in
                 VStack(spacing:8){
                     Text("黃昏森林・今日營業").font(.caption.weight(.semibold)).tracking(3)
