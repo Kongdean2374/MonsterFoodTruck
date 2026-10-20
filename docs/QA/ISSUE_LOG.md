@@ -10,6 +10,7 @@
 - 真實畫面：[INTEGRATION_d59f212](INTEGRATION_d59f212/) 保存首頁、測試情境及大字／左手／高對比原始 PNG 與來源。首頁接縫在此畫面消失；同尺寸角色腳部仍與文字相疊，修正後需重拍。debug 情境與工程重播不代表完整真實點按 UI 通過。
 - 狀態：IN_PROGRESS，等待新候選原失敗及尺寸回歸。
 - 中間候選 `1b90898e19032ce55883d9723f15ba1533f045f0` 的 [run 39437388402](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39437388402) 在編譯成功後、啟動測試前被新增資源完整性檢查攔下：Xcode CopyPNGFile 的預設轉換使輸出 PNG 位元組與來源 SHA-256 不同。此 run 沒有執行單元／UI，不宣稱原失敗消失。下一候選關閉原始資源 PNG 的建置重壓縮，保留逐檔校驗；另外增加所有退出階段的狀態摘要，建置前失敗不虛構截圖或測試數。
+- `e4865ea38af8e6c728463e4a7dcefd25bfc45d56` 的 [run 39437916409](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39437916409) 同樣在資源檢查失敗、沒有執行 XCTest。log 確認關閉壓縮後仍執行 `copypng -strip-PNG-text`，因此原檔雜湊仍不同。後續校驗僅允許 tEXt／zTXt／iTXt 文字中繼資料差異，驗證每個 PNG chunk 的 CRC，要求像素、色彩及全部非文字區塊完全一致；產出與來源 SHA-256 及共同 payload 雜湊均記錄。其他資源仍要求逐位元組一致，不以刪除資源檢查取得成功。
 
 ## MFT-001（Codex 自測發現）
 

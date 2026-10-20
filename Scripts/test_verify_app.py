@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import plistlib
 import json
+import struct
+import zlib
 import tempfile
 import unittest
 from pathlib import Path
@@ -19,11 +21,20 @@ class VerifyAppTests(unittest.TestCase):
             self.assertEqual(inspect(app,'iPhoneSimulator')['CFBundleIdentifier'],info['CFBundleIdentifier'])
             resources=Path(directory)/'offline';resources.mkdir()
             (resources/'Content.json').write_text(json.dumps(dict(recipes=[{}]*3,monsters=[{}]*3,levels=[{}]*6)))
+            def chunk(kind,body):return struct.pack('>I',len(body))+kind+body+struct.pack('>I',zlib.crc32(kind+body))
+            pixels=chunk(b'IHDR',struct.pack('>IIBBBBB',1,1,8,6,0,0,0))+chunk(b'IDAT',zlib.compress(b'\0\x20\x40\x60\xff'))+chunk(b'IEND',b'')
+            png=b'\x89PNG\r\n\x1a\n'+chunk(b'tEXt',b'Title\0fixture')+pixels
+            (resources/'art.png').write_bytes(png)
             for index in range(25):(resources/f'event-{index}.wav').write_bytes(b'fixture PCM')
             for source in resources.iterdir():(app/source.name).write_bytes(source.read_bytes())
             (app/'Assets.car').write_bytes(b'fixture compiled catalog')
             info['CFBundleIcons']={'CFBundlePrimaryIcon':{'CFBundleIconName':'AppIcon'}};write(info)
             self.assertEqual(inspect(app,'iPhoneSimulator',resources)['content_counts']['levels'],6)
+            (app/'art.png').write_bytes(b'\x89PNG\r\n\x1a\n'+pixels)
+            self.assertIn('art.png',inspect(app,'iPhoneSimulator',resources)['png_text_metadata_processing'])
+            (app/'art.png').write_bytes(b'\x89PNG\r\n\x1a\n'+pixels.replace(b'IDAT',b'IDAb'))
+            with self.assertRaisesRegex(ValueError,'Invalid PNG CRC'):inspect(app,'iPhoneSimulator',resources)
+            (app/'art.png').write_bytes(png)
             (app/'event-0.wav').unlink()
             with self.assertRaisesRegex(ValueError,'missing offline resource'):inspect(app,'iPhoneSimulator',resources)
             (app/'event-0.wav').write_bytes(b'corrupt audio')
