@@ -25,7 +25,7 @@ trap stop_recording EXIT
 xcrun simctl io "$DEVICE" recordVideo --codec=h264 --force build/QA_EVIDENCE/journey/normal-six-level-journey.mov > build/journey-recording.log 2>&1 &
 VIDEO_PID=$!
 STATUS=0
-if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$DEVICE" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckUITests/FullJourneyTests -only-testing:MonsterFoodTruckUITests/ControlFlowTests -resultBundlePath build/Journey.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/journey.log; then
+if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$DEVICE" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckUITests/FullJourneyTests -only-testing:MonsterFoodTruckUITests/ControlFlowTests -resultBundlePath build/Journey.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO CURRENT_PROJECT_VERSION="${GITHUB_RUN_NUMBER:-1}" | tee build/journey.log; then
   STATUS=0
 else
   STATUS=$?

@@ -29,6 +29,10 @@ final class FlowTests: XCTestCase {
         app.buttons["beginLevel"].tap()
         if app.buttons["放棄目前這局並開始"].waitForExistence(timeout:2){app.buttons["放棄目前這局並開始"].tap()}
         XCTAssertTrue(app.buttons["知道了，繼續"].waitForExistence(timeout:5));capture("tutorial-first",app)
+        RunLoop.current.run(until:Date().addingTimeInterval(1))
+        XCTAssertTrue(app.buttons["知道了，繼續"].exists);capture("tutorial-first-stable-1s",app)
+        RunLoop.current.run(until:Date().addingTimeInterval(2))
+        XCTAssertTrue(app.buttons["知道了，繼續"].exists);capture("tutorial-first-stable-3s",app)
         app.buttons["知道了，繼續"].tap();app.buttons["quick-L1-1"].tap()
         for action in ["備料","下鍋","裝盤","出餐"]{perform(action,app)}
         capture("normal-play-after-service",app)
@@ -117,12 +121,24 @@ final class FlowTests: XCTestCase {
         XCTFail("Expected legal UI action did not become available: \(label)")
     }
     func reveal(_ element:XCUIElement,_ app:XCUIApplication,up:Bool){
-        for _ in 0..<4{if element.isHittable{return};if up{app.swipeUp()}else{app.swipeDown()}}
-        XCTAssertTrue(element.isHittable)
+        // SwiftUI can report a partially offscreen Form row as hittable. Require
+        // its tap centre to clear the sheet toolbar and bottom safe area too.
+        for _ in 0..<6{
+            let frame=element.frame,viewport=app.frame
+            let above=frame.midY<viewport.minY+150,below=frame.midY>viewport.maxY-100
+            if element.isHittable && !above && !below{return}
+            if above{app.swipeDown()}else if below || up{app.swipeUp()}else{app.swipeDown()}
+        }
+        let frame=element.frame
+        XCTAssertTrue(element.isHittable && frame.midY>=app.frame.minY+150 && frame.midY<=app.frame.maxY-100,"Control centre remains outside visible form: \(frame)")
     }
     func testHomeLayouts(){
         let app=XCUIApplication();app.launchEnvironment["MFT_UI_SUITE"]="layout";app.launch()
         XCTAssertTrue(app.buttons["start"].waitForExistence(timeout:10));capture("layout-home-standard",app)
+        app.buttons["關於"].tap();XCTAssertTrue(app.staticTexts["關於餐車"].waitForExistence(timeout:5));capture("layout-about-local-version-and-sources",app)
+        app.buttons["首頁"].tap();app.buttons["遊戲說明"].tap()
+        XCTAssertTrue(app.staticTexts["餐車小手冊"].waitForExistence(timeout:5));capture("layout-offline-instructions",app)
+        app.buttons["首頁"].tap()
         app.buttons["設定"].tap();XCTAssertTrue(app.navigationBars["餐車設定"].waitForExistence(timeout:5))
         for label in ["高對比資訊","大字介面","左手單手配置"]{reveal(app.switches[label],app,up:true);app.switches[label].tap();XCTAssertEqual(app.switches[label].value as? String,"1")}
         app.buttons["完成"].tap();capture("layout-home-large-contrast-left",app)
@@ -130,10 +146,11 @@ final class FlowTests: XCTestCase {
         app.buttons["level-level_01"].tap();XCTAssertTrue(app.buttons["beginLevel"].waitForExistence(timeout:5));capture("layout-intro-large-contrast",app)
     }
     func testDebugScenarioScreenshots(){
-        for (name,large) in [("busy",false),("warning",false),("covered",false),("tidy",false),("scorched",false),("busy",true),("rig-prototype",false)]{
-            let scenario=name=="rig-prototype" ? "busy":name
+        for (name,large) in [("busy",false),("warning",false),("covered",false),("tidy",false),("scorched",false),("busy",true),("rig-prototype",false),("kitchen-prototype",false),("kitchen-prototype",true)]{
+            let scenario=name=="rig-prototype" || name=="kitchen-prototype" ? "busy":name
             let app=XCUIApplication();app.launchEnvironment["MFT_UI_SCENARIO"]=scenario
-            if name=="rig-prototype"{app.launchEnvironment["MFT_DRAGON_RIG"]="1"}
+            if name=="rig-prototype" || name=="kitchen-prototype"{app.launchEnvironment["MFT_DRAGON_RIG"]="1"}
+            if name=="kitchen-prototype"{app.launchEnvironment["MFT_KITCHEN_LAYERS"]="1"}
             if large{
                 app.launchEnvironment["MFT_LARGE_TEXT"]="1";app.launchEnvironment["MFT_HIGH_CONTRAST"]="1";app.launchEnvironment["MFT_LEFT_HAND"]="1"
             }

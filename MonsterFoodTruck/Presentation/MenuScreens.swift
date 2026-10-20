@@ -77,11 +77,14 @@ struct ResultScreen:View {
                 Text(session.isPractice ? "教學重看・不更新正式紀錄":stars>0 ? "通過・紀錄已儲存":"未通過").font(.headline)
                 VStack(spacing:10){stat("成功訂單",session.served);stat("偏好達成",session.preferences);stat("失單",session.lost);stat("料理過熟",session.scorchCount);stat("被偷嚐",session.nibbleCount)}.padding(20).background(.white.opacity(0.7),in:RoundedRectangle(cornerRadius:20))
                 ForEach(session.hints,id:\.self){Text($0).font(.subheadline).frame(maxWidth:.infinity,alignment:.leading)}
-                if stars>0,let index=content.levels.firstIndex(where:{$0.id==session.levelID}){
+                if stars>0,!session.isPractice,let index=content.levels.firstIndex(where:{$0.id==session.levelID}){
                     if index<5{Button("下一關"){model.screen = .introduction(content.levels[index+1].id)}.buttonStyle(TruckButtonStyle(primary:true))}
                     else{Button("六關完成，收店囉"){model.screen = .complete}.buttonStyle(TruckButtonStyle(primary:true))}
                 }
-                Button("再玩一次"){model.begin(session.levelID)}.buttonStyle(TruckButtonStyle())
+                if session.isPractice{
+                    Button("正式開始第一關"){model.begin("level_01")}.buttonStyle(TruckButtonStyle(primary:true))
+                    Button("再看一次教學"){model.updateTutorialForReplay();model.begin("level_01")}.buttonStyle(TruckButtonStyle())
+                }else{Button("再玩一次"){model.begin(session.levelID)}.buttonStyle(TruckButtonStyle())}
                 Button("關卡選擇"){model.screen = .levels}.buttonStyle(TruckButtonStyle())
                 Button("回首頁"){model.screen = .home}.frame(minHeight:44)
             }

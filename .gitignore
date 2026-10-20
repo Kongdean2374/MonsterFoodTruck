@@ -11,4 +11,5 @@ __pycache__/
 *.pyc
 QA_EVIDENCE/
 MonsterFoodTruck/Assets.xcassets/AppIcon.appiconset/Icon.png
+MonsterFoodTruck/Assets.xcassets/LaunchMark.imageset/*.png
 

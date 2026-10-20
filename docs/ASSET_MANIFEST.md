@@ -42,3 +42,7 @@
 目前母版、Icon、圖集、音訊都不是完整品質驗收。角色分層、表情與動作及料理狀態仍需補足；不得把此清單視為 Dot 7.7 美術門檻已通過。
 
 分層試作：`ArtSource/Prototypes/dragon-layer-rig.png` 與相應 JSON；以既有焰尾龍母版作參考生成／編修，887×1774 RGBA，五頭部＋軀幹／手臂／尾焰，原 PNG 未修改。資源副本在 `Resources/Art`；目前只接 DEBUG 單角色預覽，尚未以實際小尺寸確認接合、邊緣、五種表情或動畫，也沒有 Dot 視覺通過。詳原始檔旁 README；不作正式三角色動畫完成聲明。
+
+餐車分層初稿：`ArtSource/Prototypes/kitchen-layers.png`、相應 JSON 及 `Resources/Art` 原檔副本；參考同一森林餐車與料理母版生成，1536×1024 RGBA，六部件，執行時裁切。只在 DEBUG 明確開啟試裝，爐具固定火焰尚須改為狀態分層，不作正式資產或 Dot 通過聲明。
+
+啟動畫面：同一原創圖示母版透過 macOS sips 正規化成 LaunchMark 的 100／200／300px 圖集，保留來源，不新增圖像創作或外部素材。須由實際編譯的 Assets.car 讀取測試確認。

@@ -45,6 +45,10 @@ struct KitchenCanvas:View {
         GeometryReader{geo in
             ZStack(alignment:.top){
                 RoundedRectangle(cornerRadius:24).fill(TruckTheme.moss.opacity(0.11))
+                if KitchenArt.enabled{
+                    if let body=KitchenArt.image("body"){Image(uiImage:body).resizable(capInsets:EdgeInsets(top:32,leading:22,bottom:20,trailing:22)).frame(width:geo.size.width,height:geo.size.height).clipShape(RoundedRectangle(cornerRadius:24)).accessibilityHidden(true)}
+                    if let forest=KitchenArt.image("forest"){Image(uiImage:forest).resizable().scaledToFill().frame(width:geo.size.width,height:80).clipped().clipShape(UnevenRoundedRectangle(topLeadingRadius:24,topTrailingRadius:24)).accessibilityHidden(true)}
+                }
                 SpriteView(scene:model.kitchen,options:[.allowsTransparency]).allowsHitTesting(false).accessibilityHidden(true)
                 if let session=model.session,let content=model.content{
                     VStack(spacing:0){
@@ -56,18 +60,19 @@ struct KitchenCanvas:View {
                                         VStack(spacing:2){Spacer(minLength:80);Text(content.recipe(order.recipe).name).font(.caption.bold()).lineLimit(1)
                                             HStack(spacing:2){Image(systemName:order.monster == .emberDragon ? "thermometer.sun.fill":order.monster == .mossDeer ? "leaf.fill":"star.fill");Text(content.monster(order.monster).preference).lineLimit(1)}.font(.system(size:model.document.settings.largeText ? 13:11,weight:.semibold))
                                             HStack(spacing:3){Image(systemName:order.deadline-session.time<=10 ? "exclamationmark.triangle.fill":"hourglass");ProgressView(value:max(0,order.deadline-session.time),total:content.monster(order.monster).patience*session.mode.multiplier).tint(TruckTheme.teal);Text("\(Int(ceil(max(0,order.deadline-session.time))))").monospacedDigit()}.font(.caption2)
-                                        }.frame(maxWidth:.infinity).padding(.horizontal,4).padding(.bottom,5)
+                                        }.frame(maxWidth:.infinity).padding(.horizontal,8).padding(.bottom,5)
                                             .background(RoundedRectangle(cornerRadius:16).stroke(model.selectedOrder==order.id ? TruckTheme.moss:.clear,lineWidth:3))
                                     }.buttonStyle(.plain).accessibilityIdentifier("customer-\(order.id)").accessibilityLabel("\(content.monster(order.monster).name)，\(content.recipe(order.recipe).name)，偏好\(content.monster(order.monster).preference)，耐心剩\(Int(max(0,order.deadline-session.time)))秒")
                                 }else{VStack(spacing:4){Image(systemName:"leaf");Text(session.waitingForSlot ? "等候入場":arrivalText(session))}.font(.caption).foregroundStyle(TruckTheme.cocoa.opacity(0.65)).frame(maxWidth:.infinity,maxHeight:.infinity).accessibilityElement(children:.combine)}
                             }
-                        }.frame(height:132)
+                        }.frame(height:132).background(alignment:.bottom){if KitchenArt.enabled{TruckTheme.cream.frame(height:52)}}
                         ForEach([Station.plate,.stove,.prep],id:\.self){station in
                             HStack(spacing:6){Text(station == .plate ? "成品":station == .stove ? "爐台":"備料").font(.caption.bold()).frame(width:30)
                                 ForEach(0..<2,id:\.self){slot in
                                     StationControl(station:station,slot:slot,order:session.activeOrders.first{$0.station==station && $0.slot==slot})
                                 }
                             }.frame(height:(geo.size.height-132)/3).padding(.horizontal,6)
+                                .background{if KitchenArt.enabled{KitchenPiece(name:"counter").padding(.leading,32).padding(.horizontal,3)}}
                         }
                     }
                     if let target=session.nibbleTarget,let plate=session.orders.first(where:{$0.id==target})?.slot,
@@ -96,6 +101,7 @@ struct StationControl:View {
             HStack(spacing:3){
                 if let order,let content=model.content,let session=model.session{
                     ZStack{
+                        if KitchenArt.enabled{KitchenPiece(name:KitchenArt.workSurface(station)).frame(width:62,height:48).saturation(station == .stove && order.stage != .cooking ? 0.25:1)}
                         DishImage(column:content.recipe(order.recipe).atlasColumn)
                         if order.isCovered{ClocheView()}
                         if order.needsTidy{Image(systemName:order.everNibbled ? "hand.raised.fill":"exclamationmark.triangle.fill").font(.caption).foregroundStyle(TruckTheme.cocoa).padding(4).background(TruckTheme.cream,in:Circle()).offset(x:16,y:-12)}
@@ -112,7 +118,11 @@ struct StationControl:View {
                         if order.monster == .emberDragon,let cooked=order.cookedAt{Text("熱度 \(Int(ceil(max(0,cooked+GameRules.heatWindow*session.mode.multiplier-session.time))))秒").font(.caption2).bold()}
                         if order.isCovered,let remaining=order.warningRemaining{Text("預告暫停 \(Int(ceil(remaining)))秒").font(.caption2).bold()}
                     }
-                }else{Image(systemName:station == .stove ? "flame":station == .prep ? "carrot":"circle.dashed");Text("空位 \(slot+1)").font(.caption)}
+                }else{
+                    if KitchenArt.enabled{KitchenPiece(name:KitchenArt.workSurface(station)).frame(width:58,height:46).saturation(station == .stove ? 0.1:1)}
+                    else{Image(systemName:station == .stove ? "flame":station == .prep ? "carrot":"circle.dashed")}
+                    Text("空位 \(slot+1)").font(.caption)
+                }
             }.frame(maxWidth:.infinity,minHeight:48,maxHeight:.infinity)
                 .padding(.horizontal,3)
                 .background(TruckTheme.cream,in:RoundedRectangle(cornerRadius:13))
@@ -137,7 +147,7 @@ struct WarningConnector:View{
         GeometryReader{geometry in
             let width=geometry.size.width
             let start=CGPoint(x:width*(CGFloat(actor)+0.5)/3+12,y:58)
-            let side:CGFloat=actor==0 ? 7:width-7
+            let side:CGFloat=actor==0 ? 3:width-3
             let destination=CGPoint(x:plate==0 ? width/4+28.5:width*0.75+7.5,y:153)
             Canvas{context,_ in
                 var path=Path();path.move(to:start);path.addLines([CGPoint(x:side,y:73),CGPoint(x:side,y:142),CGPoint(x:destination.x,y:142),destination])

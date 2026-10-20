@@ -1,0 +1,17 @@
+{
+  "source_sha": "0171012506fd63161b0d3911de0de6f294ff8f43",
+  "exit_status": 65,
+  "last_stage": "layout-tests-failed",
+  "baseline_tests": "not scheduled in this layout-only job",
+  "scoped_results": {
+    "LAYOUT_TEST_SUMMARY_large.json": {
+      "passedTests": 1,
+      "failedTests": 1,
+      "skippedTests": 0
+    }
+  },
+  "actual_png_count": 9,
+  "passed": 1,
+  "failed": 1,
+  "skipped": 0
+}

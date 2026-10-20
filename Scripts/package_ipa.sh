@@ -31,6 +31,9 @@ import datetime,hashlib,json,os,plistlib,subprocess,sys
 from pathlib import Path
 app,ipa=Path(sys.argv[1]),sys.argv[2]
 p=plistlib.loads((app/'Info.plist').read_bytes())
+sim=plistlib.loads(Path('build/SIMULATOR_APP_INFO.plist').read_bytes())
+for key in ('CFBundleIdentifier','CFBundleShortVersionString','CFBundleVersion','MinimumOSVersion'):
+ assert p[key]==sim[key],f'Device and validated simulator disagree on {key}'
 assert p['CFBundleIdentifier']=='cc.chaihome.monsterfoodtruck'
 assert p['CFBundleSupportedPlatforms']==['iPhoneOS']
 assert p['MinimumOSVersion']=='17.0'

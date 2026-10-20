@@ -32,6 +32,8 @@ assert png_info(RES/'Art/characters-and-dishes.png')[:2]==(1536,1024)
 assert png_info(RES/'Art/characters-and-dishes.png')[3]==6
 assert png_info(ROOT/'MonsterFoodTruck/Assets.xcassets/AppIcon.appiconset/Icon.png')[:2]==(1024,1024)
 assert png_info(ROOT/'MonsterFoodTruck/Assets.xcassets/AppIcon.appiconset/Icon.png')[3]==2
+for scale in (1,2,3):
+ assert png_info(ROOT/f'MonsterFoodTruck/Assets.xcassets/LaunchMark.imageset/Mark-{scale}x.png')[:2]==(100*scale,100*scale)
 audio=json.loads((RES/'Audio/audio-analysis.json').read_text())
 assert len(audio)==25
 for record in audio:

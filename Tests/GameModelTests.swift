@@ -126,6 +126,23 @@ final class GameModelTests: XCTestCase {
         var (c,s)=try fixture(.nibbleImp);plate(&s,content:c)
         s.advance(to:35,content:c);XCTAssertNil(s.nibbleTarget);XCTAssertEqual(s.nibbleCount,0)
     }
+    func testCoveredServiceReturnsClocheAndServingActorCancelsWarning() throws{
+        var (c,s)=try fixture(withImp:true);plate(&s,content:c)
+        XCTAssertNil(s.send(.cover("test-1"),content:c));XCTAssertNil(s.send(.serve("test-1"),content:c))
+        XCTAssertFalse(s.orders[0].isCovered)
+        plate(&s,content:c,id:"test-2");XCTAssertNil(s.send(.cover("test-2"),content:c))
+        XCTAssertNil(s.send(.serve("test-2"),content:c));XCTAssertFalse(s.activeOrders.contains(where:\.isCovered));try s.validate(content:c)
+
+        var (_,a)=try fixture(withImp:true)
+        XCTAssertNil(a.send(.prepare("test-1"),content:c));a.advance(to:3,content:c);XCTAssertNil(a.send(.cook("test-1"),content:c))
+        a.advance(to:4,content:c);XCTAssertNil(a.send(.prepare("test-2"),content:c))
+        a.advance(to:8,content:c);XCTAssertNil(a.send(.cook("test-2"),content:c))
+        a.advance(to:13,content:c);XCTAssertNil(a.send(.plate("test-1"),content:c))
+        a.advance(to:16,content:c);XCTAssertNil(a.send(.plate("test-2"),content:c))
+        a.advance(to:20,content:c);XCTAssertEqual(a.nibbleTarget,"test-1")
+        XCTAssertNil(a.send(.serve("test-2"),content:c));XCTAssertNil(a.nibbleActor);XCTAssertNil(a.nibbleTarget)
+        a.advance(to:25,content:c);XCTAssertEqual(a.nibbleCount,0);try a.validate(content:c)
+    }
     func testCorruptSnapshotRejectsInvalidStationAndVersion() throws {
         let (c,s)=try fixture()
         let encoded=try JSONEncoder().encode(s)

@@ -61,7 +61,8 @@ jobs:
             build/*.log
           if-no-files-found: error
   layouts:
-    if: ${{ inputs.layout_qa }}
+    needs: validate
+    if: ${{ always() && inputs.layout_qa }}
     name: layout-${{ matrix.size }}
     strategy:
       fail-fast: false

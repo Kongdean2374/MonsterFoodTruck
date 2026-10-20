@@ -1,0 +1,92 @@
+[
+  {
+    "size": "small",
+    "file": "small-11640A36-4E09-48C4-A8D2-D206DFE8B06E.png",
+    "sha256": "040a29676405566344126b2b894c33eec2c595baef8355c6b3db9c5baafa3497",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "9569C06D-51D6-49F6-BB53-FBA61A5EBDF9",
+      "deviceName": "MonsterFoodTruck-small",
+      "exportedFileName": "11640A36-4E09-48C4-A8D2-D206DFE8B06E.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "DEBUG-rig-prototype-standard-right_0_C06444D8-E966-46B8-A933-1185BFD7FBEE.png",
+      "timestamp": 1792510066.163
+    },
+    "test": "FlowTests/testDebugScenarioScreenshots()"
+  },
+  {
+    "size": "small",
+    "file": "small-6681EC07-F701-4CB1-85A5-9CFEC8865E08.png",
+    "sha256": "0a034ffee7b049b6ef9633036a057f277a99d7f770dceaaf71870244073aab8e",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "9569C06D-51D6-49F6-BB53-FBA61A5EBDF9",
+      "deviceName": "MonsterFoodTruck-small",
+      "exportedFileName": "6681EC07-F701-4CB1-85A5-9CFEC8865E08.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "DEBUG-busy-large-contrast-left_0_68321B67-25FD-4001-96B0-33CF4C108DA6.png",
+      "timestamp": 1792510053.576
+    },
+    "test": "FlowTests/testDebugScenarioScreenshots()"
+  },
+  {
+    "size": "small",
+    "file": "small-024C5ECE-CD25-4102-8C35-F6B093017607.png",
+    "sha256": "939d7efbb658abddcbecdcba6ef8103b1fb7c7c4e974ce8b13bc24bc5cf50832",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "9569C06D-51D6-49F6-BB53-FBA61A5EBDF9",
+      "deviceName": "MonsterFoodTruck-small",
+      "exportedFileName": "024C5ECE-CD25-4102-8C35-F6B093017607.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "layout-home-large-contrast-left_0_64F4AF53-E63B-46B6-A994-9603EE377A40.png",
+      "timestamp": 1792510101.326
+    },
+    "test": "FlowTests/testHomeLayouts()"
+  },
+  {
+    "size": "large",
+    "file": "large-6091D2DD-1EC0-4B79-B48B-F57DDFB78676.png",
+    "sha256": "c0b9608f26e86a919cf5bc911677cd941e763f1b644be816c579e36068bc8040",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "9CEF3151-3DAD-49D3-B3E9-36637EAB3CCA",
+      "deviceName": "MonsterFoodTruck-large",
+      "exportedFileName": "6091D2DD-1EC0-4B79-B48B-F57DDFB78676.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "DEBUG-rig-prototype-standard-right_0_98819143-BD22-4967-AC87-C73AF85548B9.png",
+      "timestamp": 1792510164.333
+    },
+    "test": "FlowTests/testDebugScenarioScreenshots()"
+  },
+  {
+    "size": "large",
+    "file": "large-1BDE4260-C400-4D67-B897-41180B40E4B9.png",
+    "sha256": "8d56457c9d28c3892360f5479177b0f91a14ec3f6ead4d94cffafa118d49d761",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "9CEF3151-3DAD-49D3-B3E9-36637EAB3CCA",
+      "deviceName": "MonsterFoodTruck-large",
+      "exportedFileName": "1BDE4260-C400-4D67-B897-41180B40E4B9.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "DEBUG-warning-standard-right_0_611D8313-8F0E-48A3-8E29-25BD8CCA725D.png",
+      "timestamp": 1792510131.365
+    },
+    "test": "FlowTests/testDebugScenarioScreenshots()"
+  },
+  {
+    "size": "large",
+    "file": "large-D9E72E54-F505-4EB1-9530-4A81CDDE0836.png",
+    "sha256": "7b34030bc4faac6cf6d924ac591a455bb31bed5da157e0a56a5ca030537f969a",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "9CEF3151-3DAD-49D3-B3E9-36637EAB3CCA",
+      "deviceName": "MonsterFoodTruck-large",
+      "exportedFileName": "D9E72E54-F505-4EB1-9530-4A81CDDE0836.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "FAILED-actual-screen_0_E3F62C49-358A-4DDA-B8D9-F96210C1D44A.png",
+      "timestamp": 1792510178.298
+    },
+    "test": "FlowTests/testHomeLayouts()"
+  }
+]

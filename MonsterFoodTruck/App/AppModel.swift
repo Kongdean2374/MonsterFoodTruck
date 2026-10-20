@@ -33,6 +33,7 @@ final class AppModel: ObservableObject {
     @Published private(set) var resultSession: GameSession?
     let kitchen = KitchenScene()
     let audio = GameAudio()
+    private let saveDirectoryOverride:URL?
     private var store: SaveStore?
     private var lastUptime: Double?
     private var lastSnapshotTime: Double = 0
@@ -48,12 +49,14 @@ final class AppModel: ObservableObject {
         case replace(String), restart, abandon, resetSettings, resetProgress
         var id: String { String(describing:self) }
     }
-    init() { load() }
+    init(saveDirectory:URL?=nil) {saveDirectoryOverride=saveDirectory;load()}
     func load() {
         do {
             let content = try GameContent.load()
             try ArtAtlas.preload()
-            var directory=try SaveStore.applicationDirectory()
+            if KitchenArt.enabled{try KitchenArt.preload()}
+            var directory:URL
+            if let saveDirectoryOverride{directory=saveDirectoryOverride}else{directory=try SaveStore.applicationDirectory()}
             #if DEBUG
             let environment=ProcessInfo.processInfo.environment
             if environment["MFT_NORMAL_REPLAY"]=="1"{directory.appendPathComponent("UIReplayEvidence",isDirectory:true)}
@@ -114,7 +117,7 @@ final class AppModel: ObservableObject {
         nextIsPractice = false
         selectedOrder = document.session?.activeOrders.first?.id
         resultSession = nil; lastEvent = -1; lastSnapshotTime = 0; lastUptime = nil; tutorialPhase = 0
-        screen = .game; persist()
+        screen = .game;syncKitchen();persist()
         #if DEBUG
         if normalReplay {
             do{replayInputs=try CommandReplayPlanner.run(level:content.levels[index],mode:document.settings.nextMode,content:content).inputs;replayCursor=0;lastReplayCommand = -1}
@@ -199,7 +202,8 @@ final class AppModel: ObservableObject {
         case .prepare:legal=order.stage == .none && session.activeOrders.filter{$0.station == .prep}.count<2
         case .cook:legal=order.stage == .prepared && session.activeOrders.filter{$0.station == .stove}.count<2
         case .plate:legal=order.stage == .ready && session.activeOrders.filter{$0.station == .plate}.count<2
-        case .garnish,.serve:legal=order.stage == .plated && !order.needsTidy && !order.isCovered
+        case .garnish:legal=order.stage == .plated && !order.needsTidy && !order.isCovered
+        case .serve:legal=order.stage == .plated && !order.needsTidy
         case .tidy:legal=order.stage == .plated && order.needsTidy && !order.isCovered
         case .cover:legal=order.stage == .plated && !order.isCovered
         case .uncover:legal=order.isCovered

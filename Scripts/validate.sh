@@ -20,7 +20,7 @@ print(candidates[0]['udid'])
 PY
 )
 echo "$SIM_ID" > build/simulator-id.txt
-xcodebuild build-for-testing -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/compile.log
+xcodebuild build-for-testing -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO CURRENT_PROJECT_VERSION="${GITHUB_RUN_NUMBER:-1}" | tee build/compile.log
 SIM_APP=build/DerivedData/Build/Products/Debug-iphonesimulator/MonsterFoodTruck.app
 VALIDATION_STAGE=built-bundle-identity
 plutil -p "$SIM_APP/Info.plist"
@@ -41,7 +41,7 @@ if [ "${MFT_LAYOUT_ONLY:-0}" = 1 ]; then
 fi
 TEST_STATUS=0
 VALIDATION_STAGE=baseline-tests
-if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckTests -only-testing:MonsterFoodTruckUITests/FlowTests -resultBundlePath build/Validation.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/validate.log; then
+if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckTests -only-testing:MonsterFoodTruckUITests/FlowTests -resultBundlePath build/Validation.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO CURRENT_PROJECT_VERSION="${GITHUB_RUN_NUMBER:-1}" | tee build/validate.log; then
   TEST_STATUS=0
 else
   TEST_STATUS=$?
