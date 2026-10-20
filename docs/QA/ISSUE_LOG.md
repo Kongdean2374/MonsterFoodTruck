@@ -15,5 +15,7 @@
 - 修正：`e9f9fafd2400c2e2cfdc6b266036c976582865e8` 補 `CFBundleInfoDictionaryVersion=6.0`，拆分 build-for-testing／test-without-building 並輸出實際 plist；後續提交增加 `Scripts/verify_app.py` 對實際 simulator／device App 的必要識別、平台、執行檔與資源檢查，保留 plist／JSON 證據。
 - 回歸：腳本缺欄位／未展開值／錯平台／缺執行檔拒絕測試；真正模擬器單元與 UI 測試；同 SHA Release 裝置 archive、Mach-O 平台與未簽名 IPA 檢查。
 - Codex 狀態：IN_PROGRESS；等待新候選的實際 Actions 結果。
+- 中間回歸：`e9f9fafd2400c2e2cfdc6b266036c976582865e8` 的 [IPA run 39422475892](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39422475892) 再次失敗。日誌顯示實際 plist 已含正確 `CFBundleIdentifier`／`CFBundleInfoDictionaryVersion`，但模擬器仍回報 Missing bundle ID；補欄位本身並非完整修復，不宣稱已解決。
+- 深入診斷：原工程將來源 Resources 作為藍色 folder reference，輸出 `.app/Resources/`。此保留目錄可能使 CFBundle 採舊式包結構查找 plist。改為標準逐檔 PBXResourcesBuildPhase、輸出扁平 iOS bundle，並加入 Foundation Bundle 識別 probe 及 native 新舊布局重現；必須等 CI 證明假設與實際安裝，不從靜態 plist 直接判定通過。
 - Dot 重測：尚未取得；Codex 不代簽關閉。
 - 歷史：OPEN（使用者轉交 Dot 問題）→ IN_PROGRESS。

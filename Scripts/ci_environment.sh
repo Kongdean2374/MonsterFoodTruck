@@ -14,3 +14,4 @@ test -z "$(git status --porcelain --untracked-files=no)"
 python3 Scripts/generate_project.py
 git diff --exit-code -- MonsterFoodTruck.xcodeproj
 python3 Scripts/test_verify_app.py
+xcrun swift Scripts/test_bundle_layout.swift | tee build/BUNDLE_LAYOUT_REGRESSION.txt

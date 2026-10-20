@@ -31,8 +31,10 @@ def inspect(app, platform):
         raise ValueError('Expected iPhone portrait-only app')
     if not str(info['CFBundleVersion']).isdigit() or int(info['CFBundleVersion']) < 1:
         raise ValueError('Invalid build number')
-    if not (app / 'Resources' / 'ContentVersion.json').is_file():
-        raise ValueError('Offline resource directory was not copied into built app')
+    if (app / 'Resources').exists() or (app / 'Contents').exists():
+        raise ValueError('Reserved Resources/Contents folder changes CFBundle layout detection')
+    if not (app / 'ContentVersion.json').is_file():
+        raise ValueError('Offline resource was not copied into built app root')
     for suffix in ('*.mobileprovision', '*.p12', '*.key'):
         if any(app.rglob(suffix)):
             raise ValueError('Unexpected signing material in app')

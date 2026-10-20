@@ -9,9 +9,9 @@ class VerifyAppTests(unittest.TestCase):
     def test_real_bundle_validation_rejects_missing_unexpanded_and_wrong_platform(self):
         with tempfile.TemporaryDirectory() as directory:
             app=Path(directory)/'MonsterFoodTruck.app'
-            (app/'Resources').mkdir(parents=True)
+            app.mkdir(parents=True)
             (app/'MonsterFoodTruck').write_bytes(b'fixture executable')
-            (app/'Resources'/'ContentVersion.json').write_text('{}')
+            (app/'ContentVersion.json').write_text('{}')
             info=dict(CFBundleIdentifier='cc.chaihome.monsterfoodtruck',CFBundleExecutable='MonsterFoodTruck',CFBundleName='MonsterFoodTruck',CFBundlePackageType='APPL',CFBundleInfoDictionaryVersion='6.0',CFBundleShortVersionString='1.0.0',CFBundleVersion='1',MinimumOSVersion='17.0',CFBundleSupportedPlatforms=['iPhoneSimulator'],UIDeviceFamily=[1],UISupportedInterfaceOrientations=['UIInterfaceOrientationPortrait'])
             def write(value): (app/'Info.plist').write_bytes(plistlib.dumps(value))
             write(info)
@@ -23,6 +23,9 @@ class VerifyAppTests(unittest.TestCase):
             with self.assertRaises(ValueError):inspect(app,'iPhoneSimulator')
             write(info)
             with self.assertRaises(ValueError):inspect(app,'iPhoneOS')
+            (app/'Resources').mkdir()
+            with self.assertRaises(ValueError):inspect(app,'iPhoneSimulator')
+            (app/'Resources').rmdir()
             (app/'MonsterFoodTruck').unlink()
             with self.assertRaises(ValueError):inspect(app,'iPhoneSimulator')
 

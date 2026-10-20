@@ -7,6 +7,7 @@ APP=build/MonsterFoodTruck.xcarchive/Products/Applications/MonsterFoodTruck.app
 test -f "$APP/MonsterFoodTruck"
 cp "$APP/Info.plist" build/delivery/DEVICE_APP_INFO.plist
 python3 Scripts/verify_app.py "$APP" --platform iPhoneOS --output build/delivery/DEVICE_APP_IDENTITY.json
+xcrun swift Scripts/probe_bundle.swift "$PWD/$APP" | tee build/delivery/DEVICE_BUNDLE_PROBE.txt
 xcrun vtool -show-build "$APP/MonsterFoodTruck" | tee build/delivery/MACHO_PLATFORM.txt
 grep -Eq 'platform[[:space:]]+IOS$' build/delivery/MACHO_PLATFORM.txt
 if find "$APP" \( -name '*.mobileprovision' -o -name '*.p12' -o -name '*.key' \) | grep -q .; then

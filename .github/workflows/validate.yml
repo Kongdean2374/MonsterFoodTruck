@@ -34,6 +34,8 @@ jobs:
             build/ENVIRONMENT.txt
             build/SIMULATOR_APP_INFO.plist
             build/SIMULATOR_APP_IDENTITY.json
+            build/SIMULATOR_BUNDLE_PROBE.txt
+            build/BUNDLE_LAYOUT_REGRESSION.txt
             build/Validation.xcresult
             build/QA_EVIDENCE
             build/TEST_SUMMARY.md

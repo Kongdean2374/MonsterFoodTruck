@@ -56,7 +56,10 @@ for name,folder,kind in [("MonsterFoodTruck","MonsterFoodTruck","application"),(
     phases=[obj(name+"sources",isa="PBXSourcesBuildPhase",buildActionMask=2147483647,files=source_builds,runOnlyForDeploymentPostprocessing=0)]
     resource_builds=[]
     if kind=="application":
-        for path,ftype in [("MonsterFoodTruck/Resources","folder"),("MonsterFoodTruck/Assets.xcassets","folder.assetcatalog")]:
+        # A root directory literally named Resources makes CFBundle detect a legacy
+        # macOS bundle layout. Copy ordinary resource files using standard phases.
+        resource_files=[(str(f.relative_to(ROOT)), {".json":"text.json", ".png":"image.png", ".wav":"audio.wav"}.get(f.suffix,"file")) for f in sorted((ROOT/"MonsterFoodTruck/Resources").rglob("*")) if f.is_file()]
+        for path,ftype in resource_files+[("MonsterFoodTruck/Assets.xcassets","folder.assetcatalog")]:
             if (ROOT/path).exists():
                 ref=obj(path,isa="PBXFileReference",lastKnownFileType=ftype,path=path,sourceTree="<group>")
                 children.append(ref)
