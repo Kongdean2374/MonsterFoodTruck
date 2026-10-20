@@ -1,5 +1,13 @@
 # 品質問題紀錄
 
+## 最新原生回歸：d09011f（未通過完整候選）
+
+- Validate 39489728099／主 job 118859372658：基礎 31／0／0，延伸 3／1／0；原 review artifact 12297477079 已下載核對 digest。見 [原生摘要、失敗圖與實際存檔](INTEGRATION_d09011f/)。沒有略過失敗方法；兩尺寸各 3／0／0，封裝依門檻 skipped，無完整 IPA。
+- MFT-015 仍 IN_PROGRESS：原鹿料理在第一次整理完成後，香草 hittability 查詢期間被偷嚐；實際 session 確定整理完成 45.6657、偷嚐 47.8769 秒、沒有香草輸入。下一候選等待這次真正偷嚐後才整理／加香草／服務，保留原斷言與正常時鐘；不是把消失控制項強制點擊或忽略失敗。
+- MFT-016 原 Performance 方法通過，完整 SpriteKit 後代首次有真正量測：二十次入場／暫停及 update 取樣最大值都是根層 1、後代 5，audio players 49。只限當次第一位鹿流程，非所有場景、游離配置或真機效能。狀態 READY_FOR_RETEST（量測範圍更正），未代稱 Dot 關閉。
+- MFT-017 在同一 d090 原 Performance 方法未重現；二十次確實執行並有新原始 JSON。狀態 READY_FOR_RETEST，原 28e 啟動失敗保留，沒有據此推定唯一根因。
+- MFT-013 主及小大 HomeLayouts 的原設定保存／關閉與重開值斷言均通過，兩尺寸各 3／0／0；只確認此回歸，不代稱完整候選或 Dot 通過。
+
 ## MFT-017（延伸效能案例啟動時終止前一 App 失敗）
 
 - Source 28e474d／Validate 39481483503／job 118832059204，PerformanceTests.swift:13 在 `app.launch()` 自動終止前一程序時回報 `Failed to terminate ...:58814 ...:0`。該方法 failed，沒有開始二十次進場；本 SHA 沒有二十次新效能取樣，不能套用 2bb 舊資料。

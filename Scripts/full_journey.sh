@@ -86,6 +86,10 @@ if int(sys.argv[2])==0:
  commands=[row['command'] for row in session['inputs']]
  assert sum('cover' in c for c in commands)>=3 and sum('uncover' in c for c in commands)>=2,'Actual cover/uncover/reuse commands missing from late UI save'
  assert any(c.get('garnish',{}).get('_0')=='L5-1' and c['garnish'].get('_1')=='香草芽' for c in commands),'Original actual herb command missing'
+ events=session['events']
+ bites=[e for e in events if e['kind']=='nibbled' and e.get('orderID')=='L5-1']
+ assert len(bites)==1,'Expected exactly one actual theft from the original stew'
+ assert any(e['kind']=='tidyDone' and e.get('orderID')=='L5-1' and e['time']>bites[0]['time'] for e in events),'Actual stolen stew was not repaired before the retained herb and service assertions'
 if report['recording_required_forced_termination']:raise SystemExit('Recording required forced termination; original XCTest summary and PNGs were preserved, but this is not a successful video validation')
 if int(sys.argv[2])==0 and report['recorded_bytes']<1024:raise SystemExit('Normal-speed journey recording is missing or empty')
 if int(sys.argv[2])==0 and len(list(Path('build/QA_EVIDENCE/journey/actual-model-snapshots').glob('actual-level_*.json')))!=6:raise SystemExit('Six actual runtime session histories were not exported')

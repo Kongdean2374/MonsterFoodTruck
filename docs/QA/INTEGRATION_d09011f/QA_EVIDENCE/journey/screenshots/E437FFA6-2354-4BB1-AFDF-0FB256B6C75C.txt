@@ -1,0 +1,104 @@
+Attributes: Application, 0x112f0a0f0, pid: 60012, label: '魔物餐車'
+Element subtree:
+ →Application, 0x112f0a0f0, pid: 60012, label: '魔物餐車'
+    Window (Main), 0x103bf74e0, {{0.0, 0.0}, {402.0, 874.0}}
+      Other, 0x103bfa360, {{0.0, 0.0}, {402.0, 874.0}}
+        Other, 0x103bf94e0, {{0.0, 0.0}, {402.0, 874.0}}
+          Other, 0x103bf84d0, {{0.0, 0.0}, {402.0, 874.0}}
+            Other, 0x103bfa9c0, {{0.0, 0.0}, {402.0, 874.0}}
+              Image, 0x103bfad80, {{12.0, 126.0}, {378.0, 538.0}}
+              Image, 0x103bfb1a0, {{12.0, 8.7}, {378.0, 315.0}}
+              Other, 0x103bfa780, {{12.0, 126.0}, {378.0, 538.0}}
+                Other, 0x103bfa8a0, {{12.0, 126.0}, {378.0, 538.0}}
+                  Other, 0x103bf9d40, {{323.0, 204.0}, {0.0, 0.0}}, label: 'L5-4'
+                    Other, 0x103bf9e60, {{284.5, 128.0}, {47.3, 39.6}}
+                    Other, 0x103bf9f80, {{305.1, 181.6}, {16.6, 22.4}}
+                    Other, 0x103bfb5d0, {{300.0, 161.9}, {46.0, 42.1}}
+                    Other, 0x103bfb6f0, {{338.9, 167.2}, {17.6, 15.8}}
+                  Other, 0x103bfb810, {{197.0, 204.0}, {0.0, 0.0}}, label: 'L5-3'
+                    Other, 0x103bfb930, {{182.3, 181.6}, {15.1, 14.4}}
+                    Other, 0x103bfba50, {{167.7, 141.8}, {61.5, 39.3}}
+                    Other, 0x103bfbbf0, {{196.0, 181.6}, {15.1, 14.4}}
+                    Other, 0x103bfbd10, {{178.0, 173.7}, {38.0, 30.3}}
+                    Other, 0x103bfbe30, {{160.4, 179.3}, {27.7, 22.5}}
+                  Other, 0x103d90d90, {{71.0, 204.0}, {0.0, 0.0}}, label: 'L5-1'
+                    Other, 0x103d90a30, {{32.3, 128.0}, {47.3, 39.6}}
+                    Other, 0x103d906e0, {{53.1, 181.6}, {16.6, 22.4}}
+                    Other, 0x103d91120, {{48.0, 162.2}, {46.0, 41.8}}
+                    Other, 0x103d91470, {{87.5, 167.9}, {16.9, 15.0}}
+              Button, 0x103d917f0, {{10.5, 124.5}, {126.3, 135.0}}, identifier: 'customer-L5-1', label: '苔角鹿，雲菇燉菜，偏好香草芽，耐心剩14秒', value: 23%
+                StaticText, 0x103d91b40, {{49.7, 208.0}, {48.0, 14.3}}, label: '雲菇燉菜'
+                Image, 0x103d91ea0, {{50.3, 226.0}, {12.0, 10.3}}, identifier: 'leaf.fill', label: 'Leaf'
+                StaticText, 0x103d921f0, {{65.2, 224.4}, {33.0, 13.3}}, label: '香草芽'
+                Image, 0x103d92530, {{21.3, 241.3}, {6.3, 10.0}}, identifier: 'hourglass', label: 'Duration'
+                ProgressIndicator, 0x103d928a0, {{32.0, 244.3}, {78.3, 4.0}}, value: 23%
+                  ProgressIndicator, 0x103d92c10, {{32.0, 234.3}, {78.3, 24.0}}, value: 23%
+                StaticText, 0x103d92f60, {{113.3, 239.7}, {14.0, 13.3}}, label: '15'
+              Button, 0x103d932c0, {{148.3, 207.7}, {106.3, 45.7}}, identifier: 'customer-L5-3', label: '饞嘴小鬼，月角脆餅，偏好星脆片，耐心剩5秒', value: 12%
+                StaticText, 0x103d93610, {{177.0, 207.7}, {48.0, 14.3}}, label: '月角脆餅'
+                Image, 0x103d93970, {{177.3, 225.0}, {12.7, 12.0}}, identifier: 'star.fill', label: 'Favorite'
+                StaticText, 0x103d93cc0, {{192.8, 224.4}, {33.0, 13.3}}, label: '星脆片'
+                Image, 0x103d94040, {{148.3, 241.7}, {11.3, 10.3}}, identifier: 'exclamationmark.triangle.fill', label: 'Warning'
+                ProgressIndicator, 0x103d943a0, {{163.7, 244.7}, {81.0, 4.0}}, value: 12%
+                  ProgressIndicator, 0x103d94710, {{163.7, 234.7}, {81.0, 24.0}}, value: 12%
+                StaticText, 0x103d94a70, {{247.7, 240.0}, {7.0, 13.3}}, label: '6'
+              Button, 0x103d94de0, {{276.0, 208.0}, {106.0, 45.0}}, identifier: 'customer-L5-4', label: '苔角鹿，星火濃湯，偏好香草芽，耐心剩52秒', value: 81%
+                StaticText, 0x103d95140, {{304.3, 208.0}, {48.0, 14.3}}, label: '星火濃湯'
+                Image, 0x103d954d0, {{305.0, 226.0}, {12.0, 10.3}}, identifier: 'leaf.fill', label: 'Leaf'
+                StaticText, 0x103d95860, {{319.8, 224.4}, {33.0, 13.3}}, label: '香草芽'
+                Image, 0x103d95bd0, {{276.0, 241.3}, {6.3, 10.0}}, identifier: 'hourglass', label: 'Duration'
+                ProgressIndicator, 0x103d95f20, {{286.7, 244.3}, {78.3, 4.0}}, value: 81%
+                  ProgressIndicator, 0x103d962c0, {{286.7, 234.3}, {78.3, 24.0}}, value: 81%
+                StaticText, 0x103d96620, {{368.0, 239.7}, {14.0, 13.3}}, label: '53'
+              Image, 0x103d969a0, {{51.0, 281.3}, {336.0, 88.7}}
+              StaticText, 0x103d96d10, {{23.0, 318.5}, {24.0, 14.3}}, label: '成品'
+              Button, 0x103d97070, {{56.8, 259.8}, {162.5, 131.8}}, label: '雲菇燉菜，苔角鹿的餐點，被偷嚐・待整理'
+                Image, 0x103d973f0, {{62.7, 305.3}, {64.0, 40.7}}
+                Image, 0x103d97740, {{71.7, 307.7}, {46.0, 36.0}}
+                Image, 0x103d97aa0, {{106.3, 307.3}, {9.7, 12.7}}, identifier: 'hand.raised.fill', label: 'Block'
+                StaticText, 0x103d97e00, {{130.7, 318.5}, {83.7, 14.3}}, label: '被偷嚐・待整理'
+              Button, 0x103d98170, {{223.5, 260.5}, {161.0, 130.3}}, label: '成品位空位2', Disabled
+                Image, 0x103d984e0, {{256.3, 307.3}, {58.0, 37.0}}, Disabled
+                StaticText, 0x103d98840, {{317.2, 318.5}, {34.7, 14.3}}, label: '空位 2', Disabled
+              Image, 0x103bfbf50, {{51.0, 416.7}, {336.0, 88.7}}
+              StaticText, 0x103bfc070, {{23.0, 453.9}, {24.0, 14.3}}, label: '爐台'
+              Button, 0x103bfc190, {{57.5, 395.8}, {161.0, 130.3}}, label: '爐位空位1', Disabled
+                Image, 0x103bfc2b0, {{91.3, 438.0}, {57.3, 46.0}}, Disabled
+                StaticText, 0x103bfc3d0, {{152.0, 453.9}, {33.0, 14.3}}, label: '空位 1', Disabled
+              Button, 0x103bfc4f0, {{223.5, 395.8}, {161.0, 130.3}}, label: '爐位空位2', Disabled
+                Image, 0x103bfc610, {{256.7, 438.0}, {57.0, 46.0}}, Disabled
+                StaticText, 0x103bfc730, {{317.2, 453.9}, {34.7, 14.3}}, label: '空位 2', Disabled
+              Image, 0x103bfc850, {{51.0, 552.0}, {336.0, 88.7}}
+              StaticText, 0x103bfc970, {{23.0, 589.2}, {24.0, 14.3}}, label: '備料'
+              Button, 0x103bfca90, {{57.5, 531.2}, {161.0, 130.3}}, label: '備料槽空位1', Disabled
+                Image, 0x103bfcbb0, {{91.0, 577.7}, {58.0, 37.3}}, Disabled
+                StaticText, 0x103bfccd0, {{152.0, 589.2}, {33.0, 14.3}}, label: '空位 1', Disabled
+              Button, 0x103bfcdf0, {{223.5, 531.2}, {161.0, 130.3}}, label: '備料槽空位2', Disabled
+                Image, 0x103bfcf10, {{256.3, 577.7}, {58.0, 37.3}}, Disabled
+                StaticText, 0x103bfd030, {{317.2, 589.2}, {34.7, 14.3}}, label: '空位 2', Disabled
+              Button, 0x103bfd150, {{20.0, 678.0}, {116.7, 44.0}}, identifier: 'quick-L5-1', label: '選取苔角鹿的雲菇燉菜'
+                StaticText, 0x103bfd270, {{61.8, 683.8}, {33.0, 13.3}}, label: '苔角鹿'
+                StaticText, 0x103bfd390, {{50.5, 699.2}, {55.7, 17.0}}, label: '雲菇燉菜'
+              Button, 0x103bfd4b0, {{142.7, 678.0}, {116.7, 44.0}}, identifier: 'quick-L5-3', label: '選取饞嘴小鬼的月角脆餅'
+                StaticText, 0x103bfd5d0, {{179.0, 683.8}, {44.0, 13.3}}, label: '饞嘴小鬼'
+                StaticText, 0x103bfd6f0, {{173.2, 699.2}, {55.7, 17.0}}, label: '月角脆餅'
+              Button, 0x103bfd810, {{265.3, 678.0}, {116.7, 44.0}}, identifier: 'quick-L5-4', label: '選取苔角鹿的星火濃湯'
+                StaticText, 0x103bfd930, {{307.2, 683.8}, {33.0, 13.3}}, label: '苔角鹿'
+                StaticText, 0x103bfda50, {{295.8, 699.2}, {55.7, 17.0}}, label: '星火濃湯'
+              Button, 0x103bfdb70, {{20.0, 728.0}, {74.0, 48.0}}, label: '蓋上'
+              Button, 0x103bfdc90, {{102.0, 728.0}, {280.0, 48.0}}, identifier: 'primaryCommand', label: '整理 3 秒'
+              StaticText, 0x103bfddb0, {{93.7, 796.8}, {214.7, 14.3}}, label: '兩爐功能相同，工作站會自動完成計時。'
+              StaticText, 0x103bfded0, {{12.0, 68.0}, {84.3, 20.3}}, label: '小鬼來偷嚐'
+              StaticText, 0x103bfdff0, {{12.0, 90.3}, {102.7, 14.3}}, label: '已服務 1／7 ・一般'
+              Image, 0x103bfe110, {{13.3, 107.7}, {16.3, 11.0}}, identifier: 'figure.stand.line.dotted.figure.stand', label: 'figure.stand.line.dotted.figure.stand'
+              StaticText, 0x103bfe380, {{13.3, 106.7}, {135.3, 13.3}}, label: '下一位客人在等候入場'
+              Button, 0x103bfe4a0, {{318.0, 72.0}, {72.0, 44.0}}, identifier: 'pause', label: '暫停'
+                Image, 0x103bfe5c0, {{328.0, 87.3}, {10.3, 14.0}}, identifier: 'pause.fill', label: 'Pause'
+                StaticText, 0x103bfe6e0, {{318.0, 72.0}, {72.0, 44.0}}, label: '暫停'
+Path to element:
+ →Application, 0x112f0a0f0, pid: 60012, label: '魔物餐車'
+Query chain:
+ →Find: Target Application 'cc.chaihome.monsterfoodtruck'
+  Output: {
+    Application, 0x103d992c0, pid: 60012, label: '魔物餐車'
+  }

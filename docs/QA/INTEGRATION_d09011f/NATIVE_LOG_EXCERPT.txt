@@ -1,0 +1,58 @@
+2026-10-20T20:41:52.1564270Z     t =   479.54s     Synthesize event
+2026-10-20T20:41:52.5202750Z     t =   479.97s     Wait for cc.chaihome.monsterfoodtruck to idle
+2026-10-20T20:41:52.5362120Z     t =   479.97s Waiting 5.0s for "primaryCommand" Button to exist
+2026-10-20T20:41:53.5251110Z     t =   481.00s     Checking `Expect predicate `existsNoRetry == 1` for object "primaryCommand" Button`
+2026-10-20T20:41:53.5263200Z     t =   481.00s         Checking existence of `"primaryCommand" Button`
+2026-10-20T20:41:53.5901660Z     t =   481.07s Find the "primaryCommand" Button
+2026-10-20T20:41:53.6724530Z     t =   481.15s Checking existence of `"香草芽" Button`
+2026-10-20T20:41:53.7236890Z     t =   481.21s Find the Target Application 'cc.chaihome.monsterfoodtruck'
+2026-10-20T20:41:53.9787940Z     t =   481.46s Added attachment named 'actual-late-damaged-stew-before-tidy'
+2026-10-20T20:41:53.9945890Z     t =   481.46s Added attachment named 'actual-late-damaged-stew-before-tidy-method'
+2026-10-20T20:41:54.0119030Z     t =   481.46s Checking existence of `"知道了，繼續" Button`
+2026-10-20T20:41:54.0574700Z     t =   481.54s Checking existence of `"primaryCommand" Button`
+2026-10-20T20:41:54.1245320Z     t =   481.61s Find the "primaryCommand" Button
+2026-10-20T20:41:54.2545240Z     t =   481.70s Find the "primaryCommand" Button
+2026-10-20T20:41:54.3891630Z     t =   481.87s Find the "primaryCommand" Button
+2026-10-20T20:41:54.5233630Z     t =   482.00s Tap "primaryCommand" Button
+2026-10-20T20:41:54.5335960Z     t =   482.00s     Wait for cc.chaihome.monsterfoodtruck to idle
+2026-10-20T20:41:54.5394450Z     t =   482.01s     Find the "primaryCommand" Button
+2026-10-20T20:41:54.6656290Z     t =   482.14s     Check for interrupting elements affecting "primaryCommand" Button
+2026-10-20T20:41:54.7665610Z     t =   482.24s     Synthesize event
+2026-10-20T20:41:55.1646780Z     t =   482.60s     Wait for cc.chaihome.monsterfoodtruck to idle
+2026-10-20T20:41:55.3811430Z     t =   482.84s Checking existence of `"知道了，繼續" Button`
+2026-10-20T20:41:55.5341690Z     t =   482.95s Checking existence of `"primaryCommand" Button`
+2026-10-20T20:41:55.6776520Z     t =   483.07s Find the "primaryCommand" Button
+2026-10-20T20:41:55.7385770Z     t =   483.22s Added attachment named 'actual-command-整理 3 秒-transitions'
+2026-10-20T20:41:55.7408750Z     t =   483.22s Waiting 5.0s for Button (First Match) to exist
+2026-10-20T20:41:56.8239040Z     t =   484.27s     Checking `Expect predicate `existsNoRetry == 1` for object Button (First Match)`
+2026-10-20T20:41:56.8347340Z     t =   484.27s         Checking existence of `Button (First Match)`
+2026-10-20T20:41:56.9800940Z     t =   484.45s         Capturing element debug description
+2026-10-20T20:41:57.8434450Z     t =   485.30s     Checking `Expect predicate `existsNoRetry == 1` for object Button (First Match)`
+2026-10-20T20:41:57.8552690Z     t =   485.30s         Checking existence of `Button (First Match)`
+2026-10-20T20:41:58.2224490Z     t =   485.60s         Capturing element debug description
+2026-10-20T20:41:58.7631820Z     t =   486.23s     Checking `Expect predicate `existsNoRetry == 1` for object Button (First Match)`
+2026-10-20T20:41:58.7734960Z     t =   486.23s         Checking existence of `Button (First Match)`
+2026-10-20T20:41:58.7904970Z     t =   486.27s Waiting 5.0s for "香草芽" Button to exist
+2026-10-20T20:41:59.9162780Z     t =   487.35s     Checking `Expect predicate `existsNoRetry == 1` for object "香草芽" Button`
+2026-10-20T20:41:59.9271850Z     t =   487.35s         Checking existence of `"香草芽" Button`
+2026-10-20T20:41:59.9458180Z     t =   487.42s Find the "香草芽" Button
+2026-10-20T20:42:00.3722510Z     t =   487.80s Requesting snapshot of accessibility hierarchy for app with pid 60012
+2026-10-20T20:42:02.1302760Z /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/UITests/FullJourneyTests.swift:80: error: -[MonsterFoodTruckUITests.FullJourneyTests testSixLevelsAtNormalSpeed] : Failed to determine hittability of "香草芽" Button: Activation point invalid and no suggested hit points based on element frame
+2026-10-20T20:42:02.1432950Z     t =   489.61s Tear Down
+2026-10-20T20:42:02.3958410Z     t =   489.85s     Added attachment named 'FAILED-journey-actual-screen'
+2026-10-20T20:42:02.4060830Z     t =   489.85s     Requesting snapshot of accessibility hierarchy for app with pid 60012
+2026-10-20T20:42:02.8415530Z     t =   490.21s     Requesting snapshot of accessibility hierarchy for app with pid 60012
+2026-10-20T20:42:02.8529820Z     t =   490.32s     Added attachment named 'FAILED-journey-accessibility'
+2026-10-20T20:42:02.8954570Z     t =   490.32s     Checking existence of `"pause" Button`
+2026-10-20T20:42:02.9631440Z     t =   490.43s     Find the "pause" Button
+2026-10-20T20:42:03.1693050Z     t =   490.62s     Tap "pause" Button
+2026-10-20T20:42:03.1795490Z     t =   490.62s         Wait for cc.chaihome.monsterfoodtruck to idle
+2026-10-20T20:42:03.1929280Z     t =   490.63s         Find the "pause" Button
+2026-10-20T20:42:03.3058290Z     t =   490.77s         Check for interrupting elements affecting "pause" Button
+2026-10-20T20:42:03.4488990Z     t =   490.89s         Synthesize event
+2026-10-20T20:42:03.7904790Z     t =   491.26s         Wait for cc.chaihome.monsterfoodtruck to idle
+2026-10-20T20:42:04.0938660Z Test Case '-[MonsterFoodTruckUITests.FullJourneyTests testSixLevelsAtNormalSpeed]' failed (491.569 seconds).
+2026-10-20T20:47:09.4876800Z Test Case '-[MonsterFoodTruckUITests.PerformanceTests testTwentyRealSceneEntriesKeepNodesAndAudioBounded]' passed (305.396 seconds).
+2026-10-20T20:47:09.4880630Z 	 Executed 4 tests, with 1 failure (0 unexpected) in 1010.394 (1010.399) seconds
+2026-10-20T20:47:09.4881510Z 	 Executed 4 tests, with 1 failure (0 unexpected) in 1010.394 (1010.401) seconds
+2026-10-20T20:47:54.3916100Z ** TEST EXECUTE FAILED **

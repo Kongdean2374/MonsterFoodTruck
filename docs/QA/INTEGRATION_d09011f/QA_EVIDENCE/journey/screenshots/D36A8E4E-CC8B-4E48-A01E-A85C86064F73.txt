@@ -1,0 +1,2 @@
+1792528914.170409: wanted=整理 3 秒, actual=整理 3 秒, tapped=false
+1792528915.7357368: wanted=整理 3 秒, actual=整理中…, tapped=true

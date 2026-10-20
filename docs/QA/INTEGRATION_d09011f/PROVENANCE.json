@@ -1,0 +1,182 @@
+{
+  "source_sha": "d09011f5c55c8ab29632e6d7ffbf4cc15f16743e",
+  "run_id": 39489728099,
+  "job_id": 118859372658,
+  "job_conclusion": "failure",
+  "review_artifact": {
+    "id": 12297477079,
+    "bytes": 141804776,
+    "sha256": "a9e5266d9e79170525a0ddf6b4dd8b20467ec561381eab6fdc5918e11cfe4ee2"
+  },
+  "full_artifact": {
+    "id": 12296993325,
+    "bytes": 3645450526,
+    "sha256": "5bab929deb70093aa048b9e69b279c8b8ae990ad3047b9b26d38d2948c4f180d",
+    "downloaded": false,
+    "reason": "Exceeds connector 512 MiB download limit; original retained in Actions."
+  },
+  "method": "Original review archive downloaded and SHA-256 verified against GitHub digest. Selected files copied byte-for-byte; native failure retained. All original jobs completed; both layout archives downloaded and digests verified; package-device correctly skipped after primary failure.",
+  "files": [
+    {
+      "path": "TEST_RESULT_SUMMARY.json",
+      "bytes": 1177,
+      "sha256": "eb6dc7682a2be603032f0413f5f248503a6708e5104f3510ff145c2a3ad5110d"
+    },
+    {
+      "path": "JOURNEY_TEST_SUMMARY.json",
+      "bytes": 1498,
+      "sha256": "552d1d8a8ede0f2ffaadb516d9c82f929949adc29766393b8eb61c514afc9a00"
+    },
+    {
+      "path": "VALIDATION_STATUS.json",
+      "bytes": 525,
+      "sha256": "d62bcc42c6ec83ded2c37d57d366c71c3c3494bf667c219585704ab8d59467d0"
+    },
+    {
+      "path": "ENVIRONMENT.txt",
+      "bytes": 2157,
+      "sha256": "e3989278d75e3f0b54ad3e98ebbd86394d8fab66be035fbef71a8c10ecce1c73"
+    },
+    {
+      "path": "TEST_SUMMARY.md",
+      "bytes": 1053,
+      "sha256": "9f64bafba47cd15f278e5af3da8ef31cd85cc302db3b40c553c1a65e00abcdd7"
+    },
+    {
+      "path": "SIMULATOR_APP_IDENTITY.json",
+      "bytes": 4899,
+      "sha256": "7e5a506fc3d94bd29284fed8f4117a282a062237c2af7101387e043df135083f"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/PERFORMANCE.json",
+      "bytes": 222583,
+      "sha256": "7d437aa3389cdfe616dea436cffa1617041ddf6c8f9401366e0ee96aef823b19"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/PERFORMANCE_SUMMARY.json",
+      "bytes": 14337,
+      "sha256": "b0bccb2ae01fed7a5e5b320355be06d2286b65be9dceada7fbe9afbdcd78ab14"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/VIDEO_METADATA.json",
+      "bytes": 7731,
+      "sha256": "51cefe11cc706602cabbb7d9f00cb382a8dadc34df8fc66853294b0c4e556492"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/RECORDING_METHOD.json",
+      "bytes": 873,
+      "sha256": "9beaa52fa6b15cb4fbd0a9c6ff9760da1e82f8672a8b190923b579a08ef61599"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-late-session/save-v1.json",
+      "bytes": 5775,
+      "sha256": "fb98a9c1288b188a87ae3491f469e247ba7647e6807130270146c44cd345aa66"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-late-session/save-v1.backup.json",
+      "bytes": 5775,
+      "sha256": "5dfac1f1b5176c0c17fa727bfbc3362c9da6e50e0c0352981bb9ef69fcb9a41f"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-late-session/PROVENANCE.json",
+      "bytes": 395,
+      "sha256": "8ddadd323839c2e1a210d91d9d97b624a4975cf62bc642c2ad663cc6838ff562"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/EB111C5C-08DC-411A-90BE-4719DB6D0CC4.png",
+      "bytes": 1965963,
+      "sha256": "82a1a5ba57ff774929db48e6c46ad4a80c8391c877d07281c35045dbe086ac79"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/BE9E28FF-D797-4607-B5B9-571FED7AD929.png",
+      "bytes": 1965384,
+      "sha256": "bae16118e2d1d0a225c0b03eb988156142c1402a114f2fe9a0757152545ce533"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/E437FFA6-2354-4BB1-AFDF-0FB256B6C75C.txt",
+      "bytes": 9096,
+      "sha256": "3e439437024d13f57d84647bbd2cc01b6751f31bfbf926453c558a10933834f8"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/D36A8E4E-CC8B-4E48-A01E-A85C86064F73.txt",
+      "bytes": 147,
+      "sha256": "7b5a52b31c5b9fba377023ce2a98b0871a3b71e25761246032390437c40473d0"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_01.json",
+      "bytes": 5137,
+      "sha256": "2dc8f68d2e80e03c9d4ad015a9ee55d8221ade31cee00b9b0b50b3b39d607556"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_02.json",
+      "bytes": 6097,
+      "sha256": "d4cde4d42a9fc2eb9c58ea2e60ae19e923599cb0721868e5f9b82cac6c9b192a"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_03.json",
+      "bytes": 7876,
+      "sha256": "9c09956b2cd12d0205b008987ccf1c162a9f60ca66028f77ce52fc4bb39c4886"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_04.json",
+      "bytes": 9381,
+      "sha256": "bfdf536ab49e108d65b8e64f87ca5fe086c0a44ede5ff539ea145fed10199567"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_05.json",
+      "bytes": 12372,
+      "sha256": "40c70a967ba06970d56700aecf5e30f8bbc4c91186dd79abdbf541f0f257d223"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_06.json",
+      "bytes": 15058,
+      "sha256": "577b9c6f7da5159f4e3dfaca1f030af0ce59178202735cb1d93bb27088bcf5b2"
+    },
+    {
+      "path": "LAYOUT_TEST_SUMMARY_small.json",
+      "bytes": 1006,
+      "sha256": "c639551063e37079f8151cefa9db96a00cc4a0e511bd92e4c09d3e011bb0c18d"
+    },
+    {
+      "path": "LAYOUT_TEST_SUMMARY_large.json",
+      "bytes": 997,
+      "sha256": "efa926b6a8a93e65bd71ec315744ef5ba5e2d3226731045b6a79a24d501edf21"
+    }
+  ],
+  "derived_files": [
+    {
+      "path": "NATIVE_LOG_EXCERPT.txt",
+      "sha256": "a823f57d8b7d0c7ef88eb97edcd2718b293b6f9eac057cdd0ed389fe80b493a0",
+      "method": "Unchanged lines selected from original completed primary job logs returned by GitHub connector; not a full log download."
+    }
+  ],
+  "layout_small": {
+    "artifact_id": 12298336346,
+    "job_id": 118880036118,
+    "archive_bytes": 27400404,
+    "archive_sha256": "0c726a482710c3bb7177b8fcd31e074a128efd7ef9fdef733bfc0109d5ea265a",
+    "conclusion": "success",
+    "counts": {
+      "passedTests": 3,
+      "failedTests": 0,
+      "skippedTests": 0
+    }
+  },
+  "layout_large": {
+    "artifact_id": 12298705930,
+    "job_id": 118880035916,
+    "archive_bytes": 66366448,
+    "archive_sha256": "afd8c62fc17dec607d126a8df9ec8ddfc5edc6d2f5c4ba6ba96d336ecb5163ee",
+    "conclusion": "success",
+    "counts": {
+      "passedTests": 3,
+      "failedTests": 0,
+      "skippedTests": 0
+    }
+  },
+  "package_device": {
+    "job_id": 118882342403,
+    "conclusion": "skipped",
+    "reason": "Primary native job failure; no IPA. This is not a skipped XCTest."
+  }
+}

@@ -1,6 +1,6 @@
 # 工作狀態
 
-2026-10-20。完整遊戲仍在製作與回歸，沒有最終驗收或完整遊戲 IPA。最近已完成原生的 source `28e474db37fdc8c9be40a490cd9c51a1070bd888`，[Validate 39481483503](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39481483503) 基礎 31／0／0、延伸 2／2／0、small 與 large 各 3／0／0；整體 failure，裝置封裝依門檻未執行。沒有取消或重開舊 run。
+2026-10-20。完整遊戲仍在回歸，沒有最終驗收或完整遊戲 IPA。最新 source `d09011f5c55c8ab29632e6d7ffbf4cc15f16743e`，[Validate 39489728099](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39489728099) 主 job 自行 failure：基礎 31／0／0、延伸 3／1／0；small／large 各 3／0／0，封裝依門檻 skipped。實際後段保存檔已確定香草可點性查詢期間遭偷嚐；下一候選只修此真實 UI 操作順序，原斷言／時鐘及失敗證據均保留。二十次完整 SpriteKit 子樹已有新原生量測，見 [實物與範圍](QA/INTEGRATION_d09011f/)。查詢節奏約 5–10 分鐘，無結果不固定回報。
 
 ## 恢復入口與單一寫入者
 

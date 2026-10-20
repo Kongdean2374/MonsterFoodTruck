@@ -63,45 +63,29 @@ final class FullJourneyTests:XCTestCase {
         app.buttons["quick-L5-1"].tap();perform("裝盤",app)
         app.buttons["蓋上"].tap();XCTAssertTrue(app.buttons["取下"].waitForExistence(timeout:5));captureRealTaps("actual-late-cloche-reused-on-deer",app)
         app.buttons["取下"].tap()
-        // Real clock and UI automation can leave the earlier stew scorched while
-        // the dragon is covered and served. Covering does not repair that damage.
-        // Follow the displayed recovery action before asserting garnishing.
+        // Real clock and UI automation can leave the earlier stew scorched.
+        // A pending theft keeps advancing after uncovering. Let that visible,
+        // one-per-plate event finish before tidying and testing the herb controls;
+        // otherwise the control can legitimately disappear between AX queries.
         let command=app.buttons["primaryCommand"]
         XCTAssertTrue(command.waitForExistence(timeout:5))
         if command.label == "整理 3 秒"{
             XCTAssertFalse(app.buttons["香草芽"].exists,"Damaged meals must be tidied before garnishing")
             captureRealTaps("actual-late-damaged-stew-before-tidy",app)
-            perform("整理 3 秒",app)
-            let repaired=app.buttons.matching(NSPredicate(format:"value == %@","已整理・偏好失效")).firstMatch
-            XCTAssertTrue(repaired.waitForExistence(timeout:5),"Tidying must retain the lost preference qualification")
         }
+        let stolen=app.buttons.matching(NSPredicate(format:"label CONTAINS %@","雲菇燉菜，苔角鹿的餐點，被偷嚐・待整理")).firstMatch
+        XCTAssertTrue(stolen.waitForExistence(timeout:10),"The actual uncovered stew must show the pending theft before its recovery")
+        XCTAssertTrue(app.buttons["quick-L5-1"].exists,"The original customer must still be present")
+        XCTAssertFalse(app.buttons["香草芽"].exists,"A stolen meal must be tidied before garnishing")
+        captureRealTaps("actual-late-stolen-stew-before-tidy",app)
+        perform("整理 3 秒",app)
+        let repaired=app.buttons.matching(NSPredicate(format:"value == %@","已整理・偏好失效")).firstMatch
+        XCTAssertTrue(repaired.waitForExistence(timeout:5),"Tidying must retain the lost preference qualification")
         let herb=app.buttons["香草芽"]
         XCTAssertTrue(herb.waitForExistence(timeout:5),"Uncovered, tidied stew must offer the original herb action")
-        XCTAssertTrue(herb.isHittable);herb.tap();serveHerbedMeal("L5-1",app)
+        XCTAssertTrue(herb.isHittable);herb.tap();perform("出餐",app)
         XCTAssertTrue(app.staticTexts["已服務 2／7 ・一般"].waitForExistence(timeout:5));captureRealTaps("actual-late-two-served-with-cloche",app)
         app.buttons["pause"].tap();app.buttons["保存並回首頁"].tap();XCTAssertTrue(app.buttons["繼續遊玩"].waitForExistence(timeout:5))
-    }
-    private func serveHerbedMeal(_ orderID:String,_ app:XCUIApplication){
-        // Scorch repair does not erase a pending theft. A later bite can cancel
-        // the first herb operation; respond to that displayed state, once.
-        for recovery in 0...1{
-            XCTAssertTrue(app.buttons["quick-\(orderID)"].exists,"The original customer must still be present")
-            let ready=app.buttons.matching(NSPredicate(format:"identifier == %@ AND label IN %@ AND enabled == true",argumentArray:["primaryCommand",["出餐","整理 3 秒"]])).firstMatch
-            XCTAssertTrue(ready.waitForExistence(timeout:10),"Herb work must finish or expose its actual interrupted recovery action")
-            let action=ready.label
-            let note=XCTAttachment(string:"Actual normal-clock UI after herb: \(action); recovery=\(recovery); expected order=\(orderID)")
-            note.name="actual-late-post-herb-action-\(recovery)";note.lifetime = .keepAlways;add(note)
-            if action == "出餐"{perform("出餐",app);return}
-            XCTAssertEqual(action,"整理 3 秒");XCTAssertEqual(recovery,0,"One plate can be stolen from only once; do not conceal repeated damage")
-            captureRealTaps("actual-late-herb-interrupted-needs-tidy",app)
-            perform("整理 3 秒",app)
-            let herb=app.buttons["香草芽"]
-            XCTAssertTrue(herb.waitForExistence(timeout:5));XCTAssertTrue(herb.isHittable)
-            let repaired=app.buttons.matching(NSPredicate(format:"value == %@","已整理・偏好失效")).firstMatch
-            XCTAssertTrue(repaired.exists,"A second repair must still retain the lost preference qualification")
-            herb.tap()
-        }
-        XCTFail("The original herbed meal was not served after its legal recovery")
     }
     private func revealLevel(_ id:String,_ app:XCUIApplication)->XCUIElement{
         let level=app.buttons["level-\(id)"]

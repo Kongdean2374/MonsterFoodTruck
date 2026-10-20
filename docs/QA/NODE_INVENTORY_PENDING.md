@@ -1,4 +1,6 @@
-# 場景節點必要驗收準備（未有原生新結果）
+# 場景節點量測範圍與原生結果
+
+後續 source d09011f／Validate 39489728099 已由 Apple SDK 編譯且原 Performance 方法通過。二十次入場／暫停直接子節點均 1、完整 SpriteKit 後代均 5，update 取樣最大值也分別 1／5；原始 JSON 和重新計算逐位元組相同的 summary 見 [INTEGRATION_d09011f](INTEGRATION_d09011f/)。整體另有真實後關點按失敗，沒有 IPA，也未代稱 Dot 或所有場景效能通過。以下保留準備時的歷史與範圍。
 
 Dot 指出 2bb 的 `nodes=1` 後，已查明只取 `scene.children.count`。原 raw JSON／摘要保留，不能轉寫成全部部件穩定。
 
