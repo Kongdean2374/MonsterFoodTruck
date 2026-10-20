@@ -1,4 +1,5 @@
 name: Validate iOS
+run-name: ${{ inputs.evidence_artifact_id && format('Export artifact {0} (no build or tests)', inputs.evidence_artifact_id) || format('Validate {0}', github.sha) }}
 on:
   push:
     branches: [main]
@@ -14,13 +15,18 @@ on:
         description: Run six normal-speed levels and preserve actual simulator video
         type: boolean
         default: false
+      evidence_artifact_id:
+        description: Export small original PNGs and summaries from an existing artifact; no validation or build
+        type: string
+        default: ''
 permissions:
   contents: read
 concurrency:
-  group: validate-${{ github.ref }}
+  group: ${{ inputs.evidence_artifact_id && format('evidence-{0}', inputs.evidence_artifact_id) || format('validate-{0}', github.ref) }}
   cancel-in-progress: false
 jobs:
   validate:
+    if: ${{ !inputs.evidence_artifact_id }}
     runs-on: macos-15
     timeout-minutes: 45
     env:
@@ -60,9 +66,26 @@ jobs:
             build/Layout-*.xcresult
             build/*.log
           if-no-files-found: error
+      - name: Upload small original review files
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: review-${{ github.run_number }}-${{ github.sha }}
+          retention-days: 14
+          path: |
+            build/ENVIRONMENT.txt
+            build/VALIDATION_STATUS.json
+            build/*TEST_SUMMARY*.json
+            build/TEST_RESULT_SUMMARY.json
+            build/TEST_SUMMARY.md
+            build/SIMULATOR_APP_IDENTITY.json
+            build/QA_EVIDENCE/**/*.png
+            build/QA_EVIDENCE/**/*.json
+            build/QA_EVIDENCE/**/*.txt
+          if-no-files-found: error
   layouts:
     needs: validate
-    if: ${{ always() && inputs.layout_qa }}
+    if: ${{ always() && inputs.layout_qa && !inputs.evidence_artifact_id }}
     name: layout-${{ matrix.size }}
     strategy:
       fail-fast: false
@@ -101,4 +124,27 @@ jobs:
             build/LAYOUT_ENVIRONMENT.txt
             build/Layout-*.xcresult
             build/*.log
+          if-no-files-found: error
+  export-existing-evidence:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.evidence_artifact_id && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/integration/full-game') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Export unchanged review evidence from the original run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MFT_SOURCE_ARTIFACT: ${{ inputs.evidence_artifact_id }}
+        run: python3 Scripts/export_existing_evidence.py
+      - name: Upload original small evidence with source provenance
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: existing-evidence-${{ inputs.evidence_artifact_id }}
+          retention-days: 14
+          path: build/existing-evidence/review
           if-no-files-found: error

@@ -32,7 +32,23 @@ jobs:
           retention-days: 14
           path: |
             build/delivery
-            build/QA_EVIDENCE
+          if-no-files-found: error
+      - name: Upload original review images and summaries separately from large xcresult
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: review-ipa-${{ github.run_number }}-${{ github.sha }}
+          retention-days: 14
+          path: |
+            build/ENVIRONMENT.txt
+            build/VALIDATION_STATUS.json
+            build/*TEST_SUMMARY*.json
+            build/TEST_RESULT_SUMMARY.json
+            build/TEST_SUMMARY.md
+            build/SIMULATOR_APP_IDENTITY.json
+            build/QA_EVIDENCE/**/*.png
+            build/QA_EVIDENCE/**/*.json
+            build/QA_EVIDENCE/**/*.txt
           if-no-files-found: error
       - name: Preserve diagnostics
         if: always()
