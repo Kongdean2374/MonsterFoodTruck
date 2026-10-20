@@ -2,8 +2,8 @@
 
 - 目標倉庫：https://github.com/Kongdean2374/MonsterFoodTruck
 - 分支：`main`
-- 階段：P1 最小原生工程與 CI 驗證中。
-- 最近交付審核 source SHA：尚無候選版本。
+- 階段：P1 工程建置已打通，DOT-001 READY_FOR_RETEST；視覺與完整玩法整合尚未完成。
+- 最近交付審核 source SHA：`f8707b553758ba86605d0b70b6f97be35b516b8e`（DOT-001 工程修復，非完整遊戲候選）。
 - 活動任務識別：未另建外部任務。
 - 產品檔案寫入者：目前 Codex 對話，單一寫入者。
 - Dot 狀態：尚未啟動獨立驗收，不宣稱已通過。
@@ -21,15 +21,16 @@
 
 - Git／GitHub CLI／GitHub 連接器可用。
 - 已提供圖片生成與圖片檢視工具；尚未生成或驗收正式素材。
-- 本地 Linux 沒有 Xcode、iOS SDK 或 iOS 模擬器；macOS Actions 尚未驗證。
+- 本地 Linux 沒有 Xcode、iOS SDK 或 iOS 模擬器；已實際使用 macos-15／Xcode 16.4／iOS 18.5 SDK 與 iPhone 16 Pro Simulator 完成最小工程的單元／UI 測試及無簽名裝置 archive。
 - 音訊製作、播放與聽覺驗證尚未執行。
-- 已建立最小 SwiftUI／SpriteKit 工程、決定性工程產生器、單元與啟動 UI 測試、兩條 Actions 工作流程；本地 Python 與 shell 語法檢查完成。尚待實際 macOS CI，不能視為已編譯成功。
+- 已建立最小 SwiftUI／SpriteKit 工程、決定性工程產生器、單元與啟動 UI 測試、兩條 Actions；DOT-001 對應的 Validate run `39424665706` 與 IPA run `39424665179` 同 SHA 均 SUCCESS，2 passed、0 failed、0 skipped。已下載實際 IPA 比對校驗碼與裝置 Mach-O，已檢視真實截圖；詳 `docs/QA/ISSUE_LOG.md`。
+- 本地保留尚未整合／編譯的核心模型、六關資料、模型與存檔測試、存檔／音訊服務、後續介面程式、兩張原創美術母版與音訊生成輸出。這些不在上述修復 App 中，不能把該 App 的測試成功套用到它們。
 - 尚無完整遊戲、正式美術音訊、效能、真機或 Dot 驗收結果。
 
 ## 阻礙與下一步
 
 - 先前自動建庫因 integration 缺少建立倉庫權限失敗；目前使用者已提供可存取的倉庫，已實際驗證既有倉庫可 clone、push 及讀回。建庫阻礙已解除。
-- 下一個實際動作：推送工程與 workflow，確認 Actions 執行權限及實際 Xcode／模擬器／裝置建置；再製作美術母版及核心模型。
+- 下一個實際動作：完成並整合既有模型／介面／資產，新增實際模型與流程回歸，取得真實小尺寸畫面；Dot 可依 f8707b5 的修復證據獨立重測 DOT-001。
 - 查詢 Actions 管理設定 API 回傳 403，這不等於 workflow 無法執行；以實際推送及工作流程結果確認，不修改帳號安全設定。
-- 未結問題 ID：尚未建立 Dot 問題單；未達最終交付條件。
+- 未結問題 ID：DOT-001 READY_FOR_RETEST；Dot 尚未關閉，未達最終交付條件。
 

@@ -1,0 +1,16 @@
+{
+  "source_sha": "f8707b553758ba86605d0b70b6f97be35b516b8e",
+  "version": "1.0.0",
+  "build": "5",
+  "bundle_id": "cc.chaihome.monsterfoodtruck",
+  "platform": "iOS device",
+  "signature": "unsigned",
+  "runner_image": "20260907.0337.1",
+  "xcode": "Xcode 16.4\nBuild version 16F6",
+  "sdk": "18.5",
+  "workflow_run_id": "39424665179",
+  "ipa": "MonsterFoodTruck-unsigned-1.0.0-5.ipa",
+  "ipa_sha256": "4f43e4c8abd4d0a9eb39b09a26b7284cc0f535d6ee99e49aac86229c98192173",
+  "created_at": "2026-10-20T12:48:46.702067+00:00",
+  "validation": "See TEST_SUMMARY.md; not a final acceptance"
+}

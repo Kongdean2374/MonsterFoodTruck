@@ -1,0 +1,17 @@
+{
+  "CFBundleIdentifier": "cc.chaihome.monsterfoodtruck",
+  "CFBundleExecutable": "MonsterFoodTruck",
+  "CFBundleName": "MonsterFoodTruck",
+  "CFBundlePackageType": "APPL",
+  "CFBundleInfoDictionaryVersion": "6.0",
+  "CFBundleShortVersionString": "1.0.0",
+  "CFBundleVersion": "5",
+  "MinimumOSVersion": "17.0",
+  "CFBundleSupportedPlatforms": [
+    "iPhoneOS"
+  ],
+  "UIDeviceFamily": [
+    1
+  ],
+  "app": "MonsterFoodTruck.app"
+}
