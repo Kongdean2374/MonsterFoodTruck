@@ -28,3 +28,7 @@ if not screenshots or not all(p.stat().st_size>0 for p in screenshots):
     raise SystemExit('Required actual XCTest screenshot attachments were not exported')
 Path('build/TEST_SUMMARY.md').write_text('xcodebuild build-for-testing and test-without-building completed successfully. See TEST_RESULT_SUMMARY.json and Validation.xcresult for executed, failed and skipped test counts. QA_EVIDENCE contains actual screenshots captured inside the running app by XCTest, exported from that result bundle. This is simulator validation, not device or full-game acceptance.\n')
 PY
+if [ "${MFT_LAYOUT_QA:-0}" = 1 ]; then
+  bash Scripts/layout_smoke.sh
+  printf '\nAdditional small/large simulator UI layout tests ran; see LAYOUT_TEST_SUMMARY_*.json and QA_EVIDENCE/layout-*.\n' >> build/TEST_SUMMARY.md
+fi

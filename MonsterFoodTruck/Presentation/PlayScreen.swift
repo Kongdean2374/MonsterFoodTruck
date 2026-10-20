@@ -6,8 +6,9 @@ struct PlayScreen:View {
     var body:some View{
         ZStack {
             VStack(spacing:6){
+                if let label=model.debugScenarioLabel{Text(label).font(.caption2.bold()).foregroundStyle(TruckTheme.teal)}
                 if let session=model.session,let content=model.content{
-                    HStack{VStack(alignment:.leading,spacing:2){Text(session.level(content).name).font(.headline);Text("已服務 \(session.served)／\(session.level(content).orders.count) ・\(session.mode.rawValue)").font(.caption)};Spacer();Button{model.pause()}label:{Label("暫停",systemImage:"pause.fill").frame(minWidth:72,minHeight:44)}}
+                    HStack{VStack(alignment:.leading,spacing:2){Text(session.level(content).name).font(.headline);Text("已服務 \(session.served)／\(session.level(content).orders.count) ・\(session.mode.rawValue)").font(.caption)};Spacer();Button{model.pause()}label:{Label("暫停",systemImage:"pause.fill").frame(minWidth:72,minHeight:44)}.accessibilityIdentifier("pause")}
                     KitchenCanvas().frame(minHeight:324,maxHeight:.infinity)
                     CommandPanel()
                 }
@@ -52,7 +53,7 @@ struct KitchenCanvas:View {
                                             HStack(spacing:3){Image(systemName:"hourglass");ProgressView(value:max(0,order.deadline-session.time),total:content.monster(order.monster).patience*session.mode.multiplier).tint(TruckTheme.teal);Text("\(Int(ceil(max(0,order.deadline-session.time))))").monospacedDigit()}.font(.caption2)
                                         }.frame(maxWidth:.infinity).padding(.horizontal,4).padding(.bottom,5)
                                             .background(RoundedRectangle(cornerRadius:16).stroke(model.selectedOrder==order.id ? TruckTheme.moss:.clear,lineWidth:3))
-                                    }.buttonStyle(.plain).accessibilityLabel("\(content.monster(order.monster).name)，\(content.recipe(order.recipe).name)，偏好\(content.monster(order.monster).preference)，耐心剩\(Int(max(0,order.deadline-session.time)))秒")
+                                    }.buttonStyle(.plain).accessibilityIdentifier("customer-\(order.id)").accessibilityLabel("\(content.monster(order.monster).name)，\(content.recipe(order.recipe).name)，偏好\(content.monster(order.monster).preference)，耐心剩\(Int(max(0,order.deadline-session.time)))秒")
                                 }else{VStack(spacing:4){Image(systemName:"leaf");Text(session.waitingForSlot ? "等候入場":arrivalText(session))}.font(.caption).foregroundStyle(TruckTheme.cocoa.opacity(0.65)).frame(maxWidth:.infinity,maxHeight:.infinity).accessibilityElement(children:.combine)}
                             }
                         }.frame(height:132)
@@ -123,7 +124,7 @@ struct CommandPanel:View {
         VStack(spacing:6){
             if let session=model.session,let content=model.content{
                 HStack(spacing:6){ForEach(session.activeOrders){order in
-                    Button{model.select(order.id)}label:{Text(content.recipe(order.recipe).name).font(.system(size:model.document.settings.largeText ? 16:14,weight:.bold)).frame(maxWidth:.infinity,minHeight:44).background(model.selectedOrder==order.id ? TruckTheme.moss:TruckTheme.cream,in:RoundedRectangle(cornerRadius:12)).foregroundStyle(model.selectedOrder==order.id ? TruckTheme.cream:TruckTheme.cocoa)}.accessibilityLabel("選取\(content.monster(order.monster).name)的\(content.recipe(order.recipe).name)")
+                    Button{model.select(order.id)}label:{Text(content.recipe(order.recipe).name).font(.system(size:model.document.settings.largeText ? 16:14,weight:.bold)).frame(maxWidth:.infinity,minHeight:44).background(model.selectedOrder==order.id ? TruckTheme.moss:TruckTheme.cream,in:RoundedRectangle(cornerRadius:12)).foregroundStyle(model.selectedOrder==order.id ? TruckTheme.cream:TruckTheme.cocoa)}.accessibilityIdentifier("quick-\(order.id)").accessibilityLabel("選取\(content.monster(order.monster).name)的\(content.recipe(order.recipe).name)")
                 }}
             }
             if let order=model.selected {

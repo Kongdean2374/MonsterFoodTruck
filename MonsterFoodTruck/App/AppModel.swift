@@ -16,6 +16,8 @@ final class AppModel: ObservableObject {
     @Published var startupError: String?
     @Published var confirmation: Confirmation?
     @Published var isSaving = false
+    @Published private(set) var debugScenarioLabel:String?
+    private var debugFrozen=false
     @Published private(set) var resultSession: GameSession?
     let kitchen = KitchenScene()
     let audio = GameAudio()
@@ -45,6 +47,20 @@ final class AppModel: ObservableObject {
             recoveryBlocked = loaded.notice?.contains("無法恢復") == true
             startupError = nil
             audio.configure(document.settings)
+            #if DEBUG
+            let environment=ProcessInfo.processInfo.environment
+            if let scenario=environment["MFT_UI_SCENARIO"], ["busy","warning","covered","tidy","scorched"].contains(scenario) {
+                document.settings=GameSettings()
+                document.session=try DebugScenarios.make(scenario,content:content)
+                debugScenarioLabel="測試情境：\(scenario)・不列正式成績"
+                debugFrozen=true;screen = .game;selectedOrder="L6-2"
+                lastEvent=document.session?.events.last?.id ?? -1
+                if environment["MFT_LARGE_TEXT"]=="1" {document.settings.largeText=true}
+                if environment["MFT_HIGH_CONTRAST"]=="1" {document.settings.highContrast=true}
+                if environment["MFT_LEFT_HAND"]=="1" {document.settings.leftHanded=true}
+                syncKitchen()
+            }
+            #endif
         } catch { startupError = error.localizedDescription }
     }
     var session: GameSession? { document.session }
@@ -109,6 +125,7 @@ final class AppModel: ObservableObject {
         syncKitchen()
     }
     func tick() {
+        guard !debugFrozen else{return}
         guard screen == .game, var session = document.session, !session.isPaused, lesson == nil, let content else { return }
         let uptime = ProcessInfo.processInfo.systemUptime
         let delta = lastUptime.map { max(0,uptime-$0) } ?? 0
@@ -201,6 +218,7 @@ final class AppModel: ObservableObject {
         self.confirmation=nil
     }
     func persist(completion: ((Bool)->Void)? = nil) {
+        guard !debugFrozen else{completion?(true);return}
         guard !isSettling else{completion?(false);return}
         guard let store else{message="存檔服務尚未可用。";completion?(false);return}
         guard !recoveryBlocked else{message="存檔無法恢復，尚未儲存新的進度。可重新開始，或保留原檔離開。";completion?(false);return}

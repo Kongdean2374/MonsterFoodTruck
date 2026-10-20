@@ -34,4 +34,5 @@
 - 查詢 Actions 管理設定 API 回傳 403，這不等於 workflow 無法執行；以實際推送及工作流程結果確認，不修改帳號安全設定。
 - 問題 ID：DOT-001 VERIFIED_CLOSED；完整產品、美術、流程及最終候選仍須查驗，未達最終交付條件。
 - 整合首輪：b84b983 的 run 39432021237 在編譯失敗，`KitchenScene` 的 convenience init 缺少 override。資產前置檢查已通過，但沒有啟動 App；修正後重新執行，不沿用核心候選的成功替它背書。
+- 修復整合：`3b7dce8ab0871d09e6b794c5b0da8d9055faaa74` 的 run `39432461903` SUCCESS，14 單元＋1 啟動 UI 測試，15 passed／0 failed／0 skipped。已下載並檢視首頁真實截圖、保存十二份模型重播；見 `docs/QA/INTEGRATION_3b7dce8`。完整操作與三尺寸尚待新增 UI 回歸驗證。
 

@@ -5,6 +5,11 @@ on:
     paths: ['MonsterFoodTruck/**', 'MonsterFoodTruck.xcodeproj/**', 'Tests/**', 'UITests/**', 'Scripts/**', '.github/workflows/**']
   pull_request:
   workflow_dispatch:
+    inputs:
+      layout_qa:
+        description: Run additional small and large simulator layouts
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -16,6 +21,7 @@ jobs:
     timeout-minutes: 30
     env:
       DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+      MFT_LAYOUT_QA: ${{ inputs.layout_qa && '1' || '0' }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -40,5 +46,8 @@ jobs:
             build/QA_EVIDENCE
             build/TEST_SUMMARY.md
             build/TEST_RESULT_SUMMARY.json
+            build/LAYOUT_*.json
+            build/LAYOUT_ENVIRONMENT.txt
+            build/Layout-*.xcresult
             build/*.log
           if-no-files-found: error

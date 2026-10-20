@@ -1,0 +1,116 @@
+{
+  "source_sha": "3b7dce8ab0871d09e6b794c5b0da8d9055faaa74",
+  "workflow_run_id": 39432461903,
+  "artifact_id": 12268383631,
+  "scope": "14 unit tests and 1 launch UI test; full game and visual acceptance not completed",
+  "replays": [
+    {
+      "file": "ReferenceReplays/reference-level_06-gentle.json",
+      "level": "level_06",
+      "mode": "舒緩",
+      "commands": 42,
+      "min_command_interval": 0.5999999999999943,
+      "served": 9,
+      "preferences": 9
+    },
+    {
+      "file": "ReferenceReplays/reference-level_05-gentle.json",
+      "level": "level_05",
+      "mode": "舒緩",
+      "commands": 33,
+      "min_command_interval": 0.5999999999999943,
+      "served": 7,
+      "preferences": 7
+    },
+    {
+      "file": "ReferenceReplays/reference-level_04-gentle.json",
+      "level": "level_04",
+      "mode": "舒緩",
+      "commands": 27,
+      "min_command_interval": 0.5999999999999943,
+      "served": 6,
+      "preferences": 6
+    },
+    {
+      "file": "ReferenceReplays/reference-level_03-gentle.json",
+      "level": "level_03",
+      "mode": "舒緩",
+      "commands": 23,
+      "min_command_interval": 0.5999999999999943,
+      "served": 5,
+      "preferences": 5
+    },
+    {
+      "file": "ReferenceReplays/reference-level_02-gentle.json",
+      "level": "level_02",
+      "mode": "舒緩",
+      "commands": 18,
+      "min_command_interval": 0.5999999999999996,
+      "served": 4,
+      "preferences": 4
+    },
+    {
+      "file": "ReferenceReplays/reference-level_01-gentle.json",
+      "level": "level_01",
+      "mode": "舒緩",
+      "commands": 15,
+      "min_command_interval": 0.5999999999999996,
+      "served": 3,
+      "preferences": 3
+    },
+    {
+      "file": "ReferenceReplays/reference-level_06-normal.json",
+      "level": "level_06",
+      "mode": "一般",
+      "commands": 42,
+      "min_command_interval": 0.5999999999999943,
+      "served": 9,
+      "preferences": 9
+    },
+    {
+      "file": "ReferenceReplays/reference-level_05-normal.json",
+      "level": "level_05",
+      "mode": "一般",
+      "commands": 33,
+      "min_command_interval": 0.5999999999999943,
+      "served": 7,
+      "preferences": 7
+    },
+    {
+      "file": "ReferenceReplays/reference-level_04-normal.json",
+      "level": "level_04",
+      "mode": "一般",
+      "commands": 27,
+      "min_command_interval": 0.5999999999999943,
+      "served": 6,
+      "preferences": 6
+    },
+    {
+      "file": "ReferenceReplays/reference-level_03-normal.json",
+      "level": "level_03",
+      "mode": "一般",
+      "commands": 23,
+      "min_command_interval": 0.5999999999999943,
+      "served": 5,
+      "preferences": 5
+    },
+    {
+      "file": "ReferenceReplays/reference-level_02-normal.json",
+      "level": "level_02",
+      "mode": "一般",
+      "commands": 18,
+      "min_command_interval": 0.5999999999999996,
+      "served": 4,
+      "preferences": 4
+    },
+    {
+      "file": "ReferenceReplays/reference-level_01-normal.json",
+      "level": "level_01",
+      "mode": "一般",
+      "commands": 15,
+      "min_command_interval": 0.5999999999999996,
+      "served": 3,
+      "preferences": 3
+    }
+  ]
+}

@@ -31,7 +31,7 @@ struct SettingsScreen:View {
                     Button("清除遊戲進度",role:.destructive){model.settingsPresented=false;model.confirmation = .resetProgress}.frame(minHeight:44)
                 }
             }.navigationTitle("餐車設定").toolbar{ToolbarItem(placement:.confirmationAction){Button("完成"){model.persist();model.audio.pause();dismiss()}.frame(minHeight:44)}}
-        }
+        }.preferredColorScheme(.light)
     }
 }
 struct ConfirmationScreen:View {

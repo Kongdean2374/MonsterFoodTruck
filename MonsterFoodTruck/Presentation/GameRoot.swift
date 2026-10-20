@@ -48,7 +48,7 @@ struct GameRoot:View {
         .frame(maxWidth:.infinity,maxHeight:.infinity)
         .background(TruckTheme.cream)
         .environment(\.dynamicTypeSize,model.document.settings.largeText ? .xLarge:.large)
-        .preferredColorScheme(.light)
+        .preferredColorScheme(model.screen == .home ? .dark:.light)
         .sheet(isPresented:$model.settingsPresented,onDismiss:{if model.screen == .home{model.audio.startMusic()}}){SettingsScreen()}
         .sheet(item:$model.confirmation){ConfirmationScreen(confirmation:$0)}
         .alert("餐車提醒",isPresented:Binding(get:{model.message != nil},set:{if !$0{model.message=nil}})) {Button("知道了"){model.message=nil}} message:{Text(model.message ?? "")}
@@ -61,10 +61,14 @@ struct GameRoot:View {
 struct HomeScreen:View {
     @EnvironmentObject var model:AppModel
     var body:some View {
-        GeometryReader{geo in
-            ZStack {
-                if let image=ArtAtlas.background {Image(uiImage:image).resizable().scaledToFill().frame(width:geo.size.width,height:geo.size.height).clipped().ignoresSafeArea()}
-                LinearGradient(colors:[.black.opacity(0.22),.clear,TruckTheme.moss.opacity(0.96)],startPoint:.top,endPoint:.bottom).ignoresSafeArea()
+        ZStack {
+            GeometryReader{background in
+                ZStack{
+                    if let image=ArtAtlas.background {Image(uiImage:image).resizable().scaledToFill().frame(width:background.size.width,height:background.size.height).clipped()}
+                    LinearGradient(colors:[.black.opacity(0.22),.clear,TruckTheme.moss.opacity(0.96)],startPoint:.top,endPoint:.bottom)
+                }
+            }.ignoresSafeArea()
+            GeometryReader{geo in
                 VStack(spacing:8){
                     Text("黃昏森林・今日營業").font(.caption.weight(.semibold)).tracking(3)
                     Text("魔物餐車").font(.system(size:geo.size.height<650 ? 40:48,weight:.black,design:.rounded)).shadow(color:.black.opacity(0.2),radius:5,y:3)
@@ -100,7 +104,7 @@ struct LevelScreen:View {
                                 VStack(alignment:.leading,spacing:5){Text(level.name).font(.headline);Text(level.focus).font(.caption).multilineTextAlignment(.leading);Text(starsText(model.document.records[level.id]?.best ?? 0)).foregroundStyle(TruckTheme.teal)}
                                 Spacer(minLength:0);Image(systemName:unlocked ? "chevron.right":"lock.fill")
                             }.padding(16).frame(maxWidth:.infinity,minHeight:104).background(.white.opacity(0.7),in:RoundedRectangle(cornerRadius:20))
-                        }.disabled(!unlocked).opacity(unlocked ? 1:0.65).accessibilityLabel("第\(index+1)關，\(level.name)，\(unlocked ? "可玩":"鎖定")，最高\(model.document.records[level.id]?.best ?? 0)星")
+                        }.disabled(!unlocked).opacity(unlocked ? 1:0.65).accessibilityIdentifier("level-\(level.id)").accessibilityLabel("第\(index+1)關，\(level.name)，\(unlocked ? "可玩":"鎖定")，最高\(model.document.records[level.id]?.best ?? 0)星")
                     }}.padding(.bottom,20)
                 }
             }

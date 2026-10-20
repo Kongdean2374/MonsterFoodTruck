@@ -23,6 +23,7 @@ BUILD=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' "$APP/Info.plist")
 IPA="MonsterFoodTruck-unsigned-$VERSION-$BUILD.ipa"
 (cd build/package && zip -qry "../delivery/$IPA" Payload)
 cp build/ENVIRONMENT.txt build/TEST_SUMMARY.md build/TEST_RESULT_SUMMARY.json build/delivery/
+if [ "${MFT_LAYOUT_QA:-0}" = 1 ]; then cp build/LAYOUT_TEST_SUMMARY_*.json build/LAYOUT_ENVIRONMENT.txt build/delivery/; fi
 cp PLAYTEST_GUIDE.md build/delivery/
 python3 - "$APP" "$IPA" <<'PY'
 import datetime,hashlib,json,os,plistlib,subprocess,sys
