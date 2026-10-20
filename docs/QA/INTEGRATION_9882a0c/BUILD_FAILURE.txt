@@ -1,14 +1,14 @@
 2026-10-20T18:05:11.2199630Z 	Building project MonsterFoodTruck for testing with scheme MonsterFoodTruck
 2026-10-20T18:05:11.2200090Z (3 failures)
-2026-10-20T18:05:11.2200270Z 
+2026-10-20T18:05:11.2200270Z
 2026-10-20T18:05:11.2200910Z SwiftCompile normal arm64 /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/Tests/SceneLifecycleTests.swift (in target 'MonsterFoodTruckTests' from project 'MonsterFoodTruck')
 2026-10-20T18:05:11.2201690Z     cd /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck
-2026-10-20T18:05:11.2201970Z     
+2026-10-20T18:05:11.2201970Z
 2026-10-20T18:05:11.2203160Z /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/Tests/SceneLifecycleTests.swift:10:31: error: cannot assign through subscript: 'document' setter is inaccessible
 2026-10-20T18:05:11.2203970Z         model.document.records["level_01"]=LevelRecord(normal:2,gentle:0)
 2026-10-20T18:05:11.2204350Z         ~~~~~~~~~~~~~~        ^
-2026-10-20T18:05:11.2204490Z 
+2026-10-20T18:05:11.2204490Z
 2026-10-20T18:05:11.2204970Z SwiftCompile normal arm64 /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/Tests/SmokeTests.swift (in target 'MonsterFoodTruckTests' from project 'MonsterFoodTruck')
 2026-10-20T18:05:11.2205740Z     cd /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck
-2026-10-20T18:05:11.2205990Z     
-2026-10-20T18:05:11.2206060Z \n
+2026-10-20T18:05:11.2205990Z
+2026-10-20T18:05:11.2206060Z

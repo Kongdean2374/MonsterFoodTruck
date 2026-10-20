@@ -1,0 +1,49 @@
+{
+  "devicesAndConfigurations" : [
+    {
+      "device" : {
+        "architecture" : "arm64",
+        "deviceId" : "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+        "deviceName" : "iPhone 16 Pro",
+        "modelName" : "iPhone 16 Pro",
+        "osBuildNumber" : "22F77",
+        "osVersion" : "18.5",
+        "platform" : "iOS Simulator"
+      },
+      "expectedFailures" : 0,
+      "failedTests" : 1,
+      "passedTests" : 3,
+      "skippedTests" : 0,
+      "testPlanConfiguration" : {
+        "configurationId" : "1",
+        "configurationName" : "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription" : "MonsterFoodTruck · Built with macOS 15.7.9",
+  "expectedFailures" : 0,
+  "failedTests" : 1,
+  "finishTime" : 1792522276.072,
+  "passedTests" : 3,
+  "result" : "Failed",
+  "skippedTests" : 0,
+  "startTime" : 1792521162.104,
+  "statistics" : [
+
+  ],
+  "testFailures" : [
+    {
+      "failureText" : "Failed to tap \"香草芽\" Button: No matches found for Elements matching predicate '\"香草芽\" IN identifiers' from input {(\n    Button, identifier: 'customer-L5-1', label: '苔角鹿，雲菇燉菜，偏好香草芽，耐心剩18秒', value: 28%,\n    Button, identifier: 'customer-L5-3', label: '饞嘴小鬼，月角脆餅，偏好星脆片，耐心剩9秒', value: 19%,\n    Button, identifier: 'customer-L5-4', label: '苔角鹿，星火濃湯，偏好香草芽，耐心剩61秒', value: 94%,\n    Button, label: '雲菇燉菜，苔角鹿的餐點，焦邊・待整理',\n    Button, label: '成品位空位2', Disabled,\n    Button, label: '爐位空位1', Disabled,\n    Button, label: '爐位空位2', Disabled,\n    Button, label: '月角脆餅，饞嘴小鬼的餐點，備妥・可下鍋',\n    Button, label: '備料槽空位2', Disabled,\n    Button, identifier: 'quick-L5-1', label: '選取苔角鹿的雲菇燉菜',\n    Button, identifier: 'quick-L5-3', label: '選取饞嘴小鬼的月角脆餅',\n    Button, identifier: 'quick-L5-4', label: '選取苔角鹿的星火濃湯',\n    Button, label: '蓋上',\n    Button, identifier: 'primaryCommand', label: '整理 3 秒',\n    Button, identifier: 'pause', label: '暫停'\n)}\nPossibly caused by runtime issues:\nAutomation type mismatch: computed Button from legacy attributes vs ProgressIndicator from modern attribute. Input attributes and values: {\n    \"XC_kAXXCAttributeAutomationType\" = 35;\n    \"XC_kAXXCAttributeElementBaseType\" = UIResponder;\n    \"XC_kAXXCAttributeElementType\" = \"SwiftUI.AccessibilityNode\";\n    \"XC_kAXXCAttributeTraits\" = 8589935105;\n}\nSee test report attachments for more detail.",
+      "targetName" : "MonsterFoodTruckUITests",
+      "testIdentifier" : 3,
+      "testIdentifierString" : "FullJourneyTests/testSixLevelsAtNormalSpeed()",
+      "testIdentifierURL" : "test://com.apple.xcode/MonsterFoodTruck/MonsterFoodTruckUITests/FullJourneyTests/testSixLevelsAtNormalSpeed",
+      "testName" : "testSixLevelsAtNormalSpeed()"
+    }
+  ],
+  "title" : "Test - MonsterFoodTruck",
+  "topInsights" : [
+
+  ],
+  "totalTestCount" : 4
+}

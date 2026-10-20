@@ -1,0 +1,11 @@
+{
+  "method": "Actual noninteractive bash background launch on Linux; a signal-disposition fixture stands in for xcrun. No Apple API, image or movie generated. Native simctl behavior remains pending.",
+  "before": {
+    "sigint_ignored": true,
+    "method": "POSIX signal fixture only; no simulator or video"
+  },
+  "after": {
+    "sigint_ignored": false,
+    "method": "POSIX signal fixture only; no simulator or video"
+  }
+}

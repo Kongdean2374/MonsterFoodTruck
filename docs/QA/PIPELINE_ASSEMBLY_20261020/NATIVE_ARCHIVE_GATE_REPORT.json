@@ -1,0 +1,40 @@
+[
+  {
+    "source_sha": "b53ff6020f9f5227c6a636f66859d393277a41ca",
+    "run_id": 39466494713,
+    "artifact_id": 12286378128,
+    "scope": "layout-small",
+    "original_archive_sha256": "3dc86a73b279df9b2e94f11bc9fafcb6ba41a9e210fa6042c026d7604a6d3197",
+    "actual_native_summaries": {
+      "LAYOUT_TEST_SUMMARY_small.json": {
+        "passedTests": 3,
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "unchanged_selected_file_count": 42
+  },
+  {
+    "source_sha": "b53ff6020f9f5227c6a636f66859d393277a41ca",
+    "run_id": 39466494713,
+    "artifact_id": 12285968405,
+    "scope": "layout-large",
+    "original_archive_sha256": "9d2c9a08e30e688c0db12c3df07184b1b1079a4069d3c488069939768a4f408b",
+    "actual_native_summaries": {
+      "LAYOUT_TEST_SUMMARY_large.json": {
+        "passedTests": 3,
+        "failedTests": 0,
+        "skippedTests": 0
+      }
+    },
+    "unchanged_selected_file_count": 42
+  },
+  {
+    "source_sha": "9882a0c3793ba1faccf240afb0b4deb9562acce9",
+    "run_id": 39471446711,
+    "artifact_id": 12286459099,
+    "scope": "validate",
+    "packaging_rejected": true,
+    "reason": "Native validation did not finish successfully"
+  }
+]

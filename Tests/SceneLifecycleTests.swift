@@ -3,11 +3,12 @@ import SpriteKit
 @testable import MonsterFoodTruck
 
 final class SceneLifecycleTests:XCTestCase{
-    @MainActor func testSettingsToConfirmationPreservesOnePresentationAndCancelKeepsData() async throws{
+    @MainActor func testSettingsConfirmationCancelKeepsDataAndConfirmedClearKeepsSettings() async throws{
         let directory=FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         defer{do{try FileManager.default.removeItem(at:directory)}catch{XCTFail("Fixture cleanup failed: \(error)")}}
         let content=try GameContent.load(),store=SaveStore(directory:directory,content:content)
         var seed=SaveDocument();seed.revision=1;seed.records["level_01"]=LevelRecord(normal:2,gentle:0)
+        seed.tutorialDone=true;seed.seenLessons=["hot"];seed.session=GameSession(level:content.levels[0],mode:.normal,content:content)
         try await withCheckedThrowingContinuation{(continuation:CheckedContinuation<Void,Error>) in store.write(seed){continuation.resume(with:$0)}}
         let model=AppModel(saveDirectory:directory)
         model.openSettings();model.updateSettings{$0.music=0.2;$0.haptics=false};model.closeSettingsFor(.resetProgress)
@@ -19,6 +20,14 @@ final class SceneLifecycleTests:XCTestCase{
         XCTAssertNil(model.confirmation);XCTAssertFalse(model.settingsPresented)
         let saved=SaveStore(directory:directory,content:try XCTUnwrap(model.content)).load().document
         XCTAssertEqual(saved.totalStars,2);XCTAssertEqual(saved.settings.music,0.2);XCTAssertFalse(saved.settings.haptics)
+        XCTAssertNotNil(saved.session);XCTAssertTrue(saved.tutorialDone);XCTAssertEqual(saved.seenLessons,["hot"])
+        model.confirmed(.resetProgress)
+        let cleared=await withCheckedContinuation{continuation in model.persist{continuation.resume(returning:$0)}}
+        XCTAssertTrue(cleared)
+        let restarted=SaveStore(directory:directory,content:content).load().document
+        XCTAssertEqual(restarted.totalStars,0);XCTAssertNil(restarted.session)
+        XCTAssertFalse(restarted.tutorialDone);XCTAssertTrue(restarted.seenLessons.isEmpty)
+        XCTAssertEqual(restarted.settings,saved.settings,"Confirmed progress clear must keep nondefault volume and haptic settings after reload")
     }
     @MainActor func testReducedMotionRemovesFinishedDeparturesWithoutFreezingGhosts() throws{
         var content=try GameContent.load()

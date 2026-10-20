@@ -46,6 +46,9 @@ cp build/ENVIRONMENT.txt build/TEST_SUMMARY.md build/TEST_RESULT_SUMMARY.json bu
 if [ "${MFT_FULL_QA:-0}" = 1 ]; then cp build/JOURNEY_TEST_SUMMARY.json build/delivery/; fi
 if [ "${MFT_LAYOUT_QA:-0}" = 1 ]; then cp build/LAYOUT_TEST_SUMMARY_*.json build/LAYOUT_ENVIRONMENT.txt build/delivery/; fi
 cp PLAYTEST_GUIDE.md build/delivery/
+for REPORT in DEVICE_BUILD_ENVIRONMENT.txt VALIDATION_ASSEMBLY.json; do
+  if [ -f "build/$REPORT" ]; then cp "build/$REPORT" build/delivery/; fi
+done
 python3 - "$APP" "$IPA" <<'PY'
 import datetime,hashlib,json,os,plistlib,subprocess,sys
 from pathlib import Path

@@ -29,9 +29,15 @@ DOT-001 回歸：先 `build-for-testing`，直接讀取真正產出 `.app/Info.p
 
 截圖直接由 UI 測試在 App 運行期間擷取，附在 xcresult，再用 `xcresulttool export attachments` 匯出至 `QA_EVIDENCE`；不在 XCTest 結束後向可能沒有 framebuffer 的模擬器索取截圖。沒有非空實際 PNG 時驗證仍失敗。
 
+延伸套件完成後先匯出原生摘要／PNG，再停止錄影與讀取影片 metadata。錄影 SIGINT 收尾最多等待 30 秒，必要清理最多再 5 秒；若需強制終止，保留原生測試證據但影片驗證仍失敗。測試 step 有獨立逾時，保留 job 的上傳時間，SIGINT／SIGTERM 也寫入實際終止狀態；沒有結果的 scope 明寫未執行／未回報，不推算通過數。
+
+錄影 probe 另唯讀解碼 36 個原尺寸時間點，取樣 PNG 隨小型 review artifact 提供，VIDEO_METADATA 記錄要求／實際秒數與取樣錯誤；不縮放、合成或編修原母版。完整 MOV 與 SHA-256 仍保留在原始 QA 證據，取樣不代表已看完整段動畫，也不能關閉原 PNG 的 Alpha 缺陷。
+
 `validate.yml` 手動 `full_qa=true` 執行正常時鐘六關工程重播、實際點按取消／重試／背景路徑及延伸診斷；`layout_qa=true` 隨後執行 SE3 與 15 Pro Max 兩個獨立尺寸 job。主 job 失敗後尺寸仍會執行，三者各有自己的原生統計及 artifact。先執行主 job 是因 0171012 的主 job 曾未取得 hosted macOS runner 而被 GitHub 取消；不能把該取消當測試成功。
 
 指定整合分支的程式／工程／測試／腳本／workflow push 自動開啟相同的 full 與 layout scopes；純文件提交不觸發。手動觸發仍保留。CLI 憑證失效時可由已連接的 GitHub 倉庫工具提交修正並取得同 SHA 的 CI，不重跑原失敗候選，也不需要更改 main。
+
+完整 Validate 的三個原生 job 全部 success 後，指定整合分支 push（或可信 ref 明確開 full／layout 的手動執行）才進入 `package-device`。它下載同次三份原始 artifact、核對 digest／run ID／source SHA／complete 狀態與四份原生摘要，保留原影片／PNG／session 歷史，不重跑已通過測試。Release archive 仍使用同 SHA、相同 build 號並重新檢查實際 iPhoneOS 包；產物也叫 `unsigned-ipa-<run>-<SHA>`，可從該 Validate 執行頁取得。VALIDATION_ASSEMBLY 記錄原證據來源；任何原生 failure／skip／缺摘要／錯 source 都阻止封裝。獨立 unsigned workflow 仍可手動從頭執行完整四 scopes。
 
 大型 xcresult／影片另保留診斷 artifact；Validate 另有 `review-<run>-<SHA>` 小型 artifact，裝置包的 `unsigned-ipa-*` 只包含 delivery，圖片／摘要另放 `review-ipa-*`。小型檔保留原測試失敗數，不代表通過。若舊 artifact 超過下載工具大小上限，可手動提供 `evidence_artifact_id`：僅 Ubuntu 讀取既有 artifact、檢查原 archive digest 與 source SHA、原樣複製 PNG／JSON／TXT／摘要並附 EXPORT_PROVENANCE，沒有重建、重跑或產 IPA，且使用獨立 concurrency group，不影響既有 Mac CI。
 

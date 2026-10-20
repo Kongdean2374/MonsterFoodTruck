@@ -150,6 +150,11 @@ struct StationControl:View {
                 .overlay(RoundedRectangle(cornerRadius:13).stroke(isTarget ? TruckTheme.plum:model.selectedOrder==order?.id && order != nil ? TruckTheme.moss:TruckTheme.cocoa.opacity(0.18),lineWidth:isTarget ? 3:model.selectedOrder==order?.id && order != nil ? 2.5:1))
         }.buttonStyle(.plain).disabled(order==nil).padding(.vertical,3)
             .accessibilityLabel(accessibilityText)
+            .accessibilityValue(accessibilityConsequence)
+    }
+    var accessibilityConsequence:String{
+        guard let order,!order.needsTidy,order.everScorched || order.everNibbled else{return ""}
+        return "已整理・偏好失效"
     }
     var accessibilityText:String{
         guard let order,let content=model.content,let session=model.session else{return "\(station == .prep ? "備料槽":station == .stove ? "爐位":"成品位")空位\(slot+1)"}

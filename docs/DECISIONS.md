@@ -16,3 +16,4 @@
 
 - 指定整合分支可手動產出候選 IPA，與 main 相同全套四 scopes／無失敗或略過門檻；僅此兩個 ref，沒有 fork／PR 觸發、secrets 或寫權。讓未獨立驗收候選留在整合分支，不為產包先改 main。包檢查新增原生 lipo／otool／vtool 的 arm64、無 LC_CODE_SIGNATURE、minos 17.0 證據。
 - 大型原生結果與可直接查閱的原始 PNG／摘要分 artifact 保存；舊結果可用只讀匯出保留 provenance，匯出 workflow success 絕不當驗證 success。整合分支的產品 push 自動執行 full／layout 相同 scopes，純文件不觸發，保留不取消舊 job 的規則。
+- 完整 Validate 三個原生 job 成功後可銜接同 SHA 裝置 archive。由各原始 artifact 的 digest／run／source／complete 狀態及四份零失敗零略過摘要把關，原圖／影片／模型歷史逐檔保留，不重跑已成功 XCTest；Release 包仍重新建置並檢查。失敗的真實 9882a0c archive 已確認會被收集器拒絕，不能用工具檢查替代實際遊戲結果。

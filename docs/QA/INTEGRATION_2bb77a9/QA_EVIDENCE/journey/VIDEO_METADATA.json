@@ -1,0 +1,8 @@
+{
+  "audio_tracks" : 0,
+  "capture_nominal_fps" : 40.299556732177734,
+  "duration_seconds" : 1122.5283333333334,
+  "height" : 2622,
+  "scope" : "Capture metadata only; nominal capture rate does not prove game FPS, image correctness, or audible playback.",
+  "width" : 1206
+}

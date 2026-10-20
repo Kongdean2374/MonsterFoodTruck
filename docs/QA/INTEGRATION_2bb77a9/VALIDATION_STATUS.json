@@ -1,0 +1,22 @@
+{
+  "source_sha": "2bb77a9af1064272f1d4ca50a0dc950fecf7f04a",
+  "exit_status": 65,
+  "last_stage": "normal-six-level-journey",
+  "baseline_tests": "executed; see native TEST_RESULT_SUMMARY.json",
+  "scoped_results": {
+    "TEST_RESULT_SUMMARY.json": {
+      "passedTests": 31,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    "JOURNEY_TEST_SUMMARY.json": {
+      "passedTests": 3,
+      "failedTests": 1,
+      "skippedTests": 0
+    }
+  },
+  "actual_png_count": 68,
+  "passed": 34,
+  "failed": 1,
+  "skipped": 0
+}

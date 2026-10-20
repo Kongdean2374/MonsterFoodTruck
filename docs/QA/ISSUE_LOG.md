@@ -1,6 +1,22 @@
 # 品質問題紀錄
 
+## MFT-016（場景節點診斷只計直接子節點）
+
+- 使用者轉交 Dot 獨立核對 2bb 的二十次進場診斷，要求確認 nodes=1 範圍。Codex 檢查 `PerformanceDiagnostics.enter` 使用 `scene.children.count`，UI diagnostic 同樣只取 `model.kitchen.children.count`；確實未遞迴計算 ForestRig／DragonRig 後代，也不是節點連續峰值。
+- 原 raw JSON／summary 完整保留，解讀只限直接子節點沒有增加、預載音訊實例 49 固定，不宣稱全部場景節點穩定。舊 20 次原生方法仍通過其實際斷言，不能擴張斷言含義。
+- 狀態 OPEN：文件已更正範圍；依使用者要求先完成既有 MFT-015 流程及同 SHA 回歸，再補原規格需要的完整後代／生命週期證據，不為此新增產品功能。
+
+## MFT-015（後關實際餐蓋點按未先整理受損料理）
+
+- P1，規格 4.6／12.2／12.3，source `2bb77a9af1064272f1d4ca50a0dc950fecf7f04a`／Validate 39472144828／主 job 118798719852。基礎 31 passed／0 failed／0 skipped；延伸 3 passed／1 failed／0 skipped，整體 failure。
+- `FullJourneyTests.swift:60` 在真實第五關關閉 driver、餐蓋重用後直接點香草芽，原生 hierarchy 明列燉菜「焦邊・待整理」、主要命令「整理 3 秒」。原 PNG 蓋住龍餐時就已顯示旁邊燉菜焦邊，失敗圖稍後再遭偷嚐；配料被合法禁用，不是單純不存在等待或 timeout。前面六次工程 session／結算／重開解鎖已走過，但不能把後續失敗的整個方法標成功。
+- 使用者轉交 Dot 18:56 UTC 獨立查核測試已失敗／附件仍上傳；已保留原 job，待上傳完成才下載核對具體失敗。原 PNG／摘要／SHA-256 見 [INTEGRATION_2bb77a9](INTEGRATION_2bb77a9/)。上傳成功不等於測試成功。
+- 下一候選依畫面可用命令執行正常三秒整理，確認不恢復偏好後保留原香草芽、出餐兩次、餐蓋取下／直接服務／歸還重用斷言；取消與這個檢查無關的小鬼備料，仍等待真實小鬼入場，不改訂單或時鐘。工位的輔助使用 value 同步提供畫面已有的「已整理・偏好失效」，不只向看得到字幕的人揭示後果。
+- 狀態 IN_PROGRESS，修正待新 SHA 原生，原失敗保留。
+
 ## MFT-014（新增呈現狀態回歸案例無法編譯）
+
+- 後續 `2bb77a9` 原生已編譯並執行通過全部 26 單元（含 5 項 SceneLifecycle）；測試 fixture 使用 SaveStore 真實寫入，沒有擴大 private(set) setter。基礎 31／0／0，延伸另因 MFT-015 失敗。狀態 READY_FOR_RETEST，未代稱 Dot 獨立關閉。
 
 - P1，規格 12.2。9882a0c／Validate 39471446711／主 job 118796263167，新增 SceneLifecycleTests.swift:10 直接修改 private(set) document，test build exit 65。沒有執行 XCTest，counts 未回報、沒有本候選 App PNG；不是 0 failed 的成功驗證。
 - 修 fixture 先經 SaveStore 真實寫入永久紀錄，再載入 AppModel；不改產品 setter 可見性，保留原斷言。原錯誤／狀態在 INTEGRATION_9882a0c。狀態 IN_PROGRESS，待新 SHA 原生重測。
@@ -38,6 +54,8 @@
 - 狀態 READY_FOR_RETEST（評分回歸範圍），未代稱 Dot 關閉。
 
 ## MFT-008（設定還原確認窗未關閉）
+
+- 後續 `2bb77a9` 的原完整 Flow 方法已通過，包含原清除取消／雙確認／設定值重開斷言；新增單一呈現取消模型也通過。基礎 31／0／0，原生 PNG／摘要見 INTEGRATION_2bb77a9。狀態 READY_FOR_RETEST，僅這項回歸已有 Codex 原生證據，沒有代稱 Dot 關閉或全 run 成功。
 
 - P2，規格 3.4／12.2。146a7ca 的 run 39455229683 主 job 118740237075，25 項中 24 passed／1 failed／0 skipped。原設定重開保存已通過，之後按「還原設定」仍見確認窗，首頁關卡選擇存在但無法點按。深色繼承亦使文字對比不足；見 INTEGRATION_146a7ca。
 - 下一候選明確 dismiss、固定確認窗淺色、完整按鈕命中區，測試等首頁真正 hittable。原清除雙確認、取消與保留進度斷言不移除。尚未證明單一根因，狀態 IN_PROGRESS。

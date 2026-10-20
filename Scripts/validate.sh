@@ -8,14 +8,16 @@ finish_validation(){
   exit "$STATUS"
 }
 trap finish_validation EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
 python3 Scripts/generate_project.py
 mkdir -p build/QA_EVIDENCE
 xcrun simctl list devices available --json > build/devices.json
 SIM_ID=$(python3 - <<'PY'
 import json
 devices=json.load(open('build/devices.json'))['devices']
-candidates=[d for runtime,ds in devices.items() if 'iOS' in runtime for d in ds if d.get('isAvailable') and d['name']=='iPhone 16 Pro']
-if not candidates: raise SystemExit('Required iPhone 16 Pro simulator not available; inspect ENVIRONMENT.txt')
+candidates=[d for runtime,ds in devices.items() if runtime=='com.apple.CoreSimulator.SimRuntime.iOS-18-5' for d in ds if d.get('isAvailable') and d['name']=='iPhone 16 Pro']
+if len(candidates)!=1: raise SystemExit('Required unique iPhone 16 Pro / iOS 18.5 simulator not available; inspect ENVIRONMENT.txt')
 print(candidates[0]['udid'])
 PY
 )

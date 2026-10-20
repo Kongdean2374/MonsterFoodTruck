@@ -15,4 +15,5 @@ bash Scripts/prepare_assets.sh
 python3 Scripts/generate_project.py
 git diff --exit-code -- MonsterFoodTruck.xcodeproj
 python3 Scripts/test_verify_app.py
+python3 Scripts/test_assemble_validation.py
 xcrun swift Scripts/test_bundle_layout.swift | tee build/BUNDLE_LAYOUT_REGRESSION.txt

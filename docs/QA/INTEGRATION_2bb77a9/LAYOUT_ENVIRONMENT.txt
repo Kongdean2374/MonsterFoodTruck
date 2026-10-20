@@ -1,0 +1,1 @@
+small com.apple.CoreSimulator.SimDeviceType.iPhone-SE-3rd-generation F8C0209E-6AAB-41A7-9AEE-07065DBC0A17 com.apple.CoreSimulator.SimRuntime.iOS-18-5

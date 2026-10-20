@@ -3,6 +3,9 @@ import UIKit
 
 @MainActor
 final class GameAudio {
+    // Shared headroom preserves independent slider ratios. The exact shipped
+    // PCM peak bound for six effect voices plus music stays below full scale.
+    private static let mixGain:Float=0.6
     private var music: AVAudioPlayer?
     private var sounds: [String: [AVAudioPlayer]] = [:]
     private var settings = GameSettings()
@@ -24,7 +27,7 @@ final class GameAudio {
             catch{loadWarnings.append("音效無法載入：\(name)：\(error.localizedDescription)")}
         }
     }
-    func configure(_ settings: GameSettings) {self.settings=settings;music?.volume=Float(settings.music);for voices in sounds.values{for voice in voices{voice.volume=Float(settings.effects)}}}
+    func configure(_ settings: GameSettings) {self.settings=settings;music?.volume=Float(settings.music)*Self.mixGain;for voices in sounds.values{for voice in voices{voice.volume=Float(settings.effects)*Self.mixGain}}}
     func startMusic() {if settings.music>0{music?.play()}}
     func preview() {startMusic();play("cookDone")}
     func pause() {music?.pause();for voices in sounds.values{for voice in voices{voice.stop()}}}
@@ -39,6 +42,6 @@ final class GameAudio {
             playing.first?.stop()
         }
         let voice=voices.first{!$0.isPlaying} ?? voices[0]
-        voice.currentTime=0;voice.volume=Float(settings.effects);voice.play()
+        voice.currentTime=0;voice.volume=Float(settings.effects)*Self.mixGain;voice.play()
     }
 }

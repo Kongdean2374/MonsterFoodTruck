@@ -10,7 +10,7 @@ jobs:
   build:
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/integration/full-game'
     runs-on: macos-15
-    timeout-minutes: 50
+    timeout-minutes: 75
     env:
       DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
       MFT_LAYOUT_QA: '1'
@@ -22,6 +22,7 @@ jobs:
       - name: Record environment and verify reproducible project
         run: bash Scripts/ci_environment.sh
       - name: Validate this same source SHA
+        timeout-minutes: 60
         run: bash Scripts/validate.sh
       - name: Archive device app and verify unsigned IPA
         run: bash Scripts/package_ipa.sh

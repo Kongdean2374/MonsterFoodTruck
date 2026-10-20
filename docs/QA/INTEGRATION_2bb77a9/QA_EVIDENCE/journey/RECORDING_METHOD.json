@@ -1,0 +1,10 @@
+{
+  "source_sha": "2bb77a9af1064272f1d4ca50a0dc950fecf7f04a",
+  "simulator_id": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+  "test_exit": 65,
+  "method": "FullJourneyTests: six levels through a DEBUG engineering command driver and normal foreground clock, followed in the same test by real late-level cloche taps with the driver disabled; unlocks restored from those actual saved settlements. Practice uses isolated storage. ControlFlowTests: real taps and deliberate no-input failure; no state injection. Neither is human playtesting.",
+  "audio": "simctl video records picture only; does not verify sound or haptics",
+  "recording": "normal-six-level-journey.mov",
+  "recorded_bytes": 1065126399,
+  "workflow_run_id": "39472144828"
+}

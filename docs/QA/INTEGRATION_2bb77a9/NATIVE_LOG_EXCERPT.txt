@@ -1,0 +1,33 @@
+2026-10-20T18:21:32.0117190Z Test Suite 'GameModelTests' started at 2026-10-20 18:21:31.872.
+2026-10-20T18:21:39.0126360Z Test Suite 'GameModelTests' passed at 2026-10-20 18:21:34.539.
+2026-10-20T18:21:39.0488010Z Test Suite 'SaveStoreTests' started at 2026-10-20 18:21:34.539.
+2026-10-20T18:21:39.4784910Z Test Suite 'SaveStoreTests' passed at 2026-10-20 18:21:35.741.
+2026-10-20T18:21:39.4906740Z 	 Executed 4 tests, with 0 failures (0 unexpected) in 1.200 (1.201) seconds
+2026-10-20T18:21:39.5149950Z Test Suite 'SceneLifecycleTests' started at 2026-10-20 18:21:35.741.
+2026-10-20T18:21:41.0967390Z Test Suite 'SceneLifecycleTests' passed at 2026-10-20 18:21:40.994.
+2026-10-20T18:21:41.2377730Z 	 Executed 1 test, with 0 failures (0 unexpected) in 0.014 (0.014) seconds
+2026-10-20T18:21:42.6347230Z 	 Executed 1 test, with 0 failures (0 unexpected) in 1.075 (1.075) seconds
+2026-10-20T18:21:42.6853280Z 	 Executed 26 tests, with 0 failures (0 unexpected) in 6.785 (10.212) seconds
+2026-10-20T18:21:42.7086130Z 	 Executed 26 tests, with 0 failures (0 unexpected) in 6.785 (10.213) seconds
+2026-10-20T18:22:22.9723390Z 	 Executed 1 test, with 0 failures (0 unexpected) in 25.479 (25.479) seconds
+2026-10-20T18:22:22.9724470Z Test Suite 'FlowTests' started at 2026-10-20 18:22:22.963.
+2026-10-20T18:28:30.9045500Z Test Suite 'FlowTests' passed at 2026-10-20 18:28:30.901.
+2026-10-20T18:28:30.9071440Z 	 Executed 4 tests, with 0 failures (0 unexpected) in 367.935 (367.938) seconds
+2026-10-20T18:28:33.1753690Z ** TEST EXECUTE SUCCEEDED **
+2026-10-20T18:33:22.6319680Z Test Suite 'ControlFlowTests' started at 2026-10-20 18:33:22.466.
+2026-10-20T18:35:45.1894660Z Test Suite 'ControlFlowTests' passed at 2026-10-20 18:35:45.182.
+2026-10-20T18:35:45.1895740Z 	 Executed 1 test, with 0 failures (0 unexpected) in 142.716 (142.716) seconds
+2026-10-20T18:35:45.1896410Z Test Suite 'FullJourneyTests' started at 2026-10-20 18:35:45.183.
+2026-10-20T18:45:12.8024130Z /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/UITests/FullJourneyTests.swift:60: error: -[MonsterFoodTruckUITests.FullJourneyTests testSixLevelsAtNormalSpeed] : Failed to tap "香草芽" Button: No matches found for Elements matching predicate '"香草芽" IN identifiers' from input {(
+2026-10-20T18:45:12.9847440Z     Button, label: '雲菇燉菜，苔角鹿的餐點，焦邊・待整理',
+2026-10-20T18:45:13.1415380Z     Button, identifier: 'primaryCommand', label: '整理 3 秒',
+2026-10-20T18:45:13.4171990Z Test Suite 'FullJourneyTests' failed at 2026-10-20 18:45:13.378.
+2026-10-20T18:45:13.4360620Z 	 Executed 2 tests, with 1 failure (0 unexpected) in 568.194 (568.195) seconds
+2026-10-20T18:45:13.4574180Z Test Suite 'PerformanceTests' started at 2026-10-20 18:45:13.379.
+2026-10-20T18:50:29.4169970Z Test Suite 'PerformanceTests' passed at 2026-10-20 18:50:29.410.
+2026-10-20T18:50:29.4173110Z 	 Executed 1 test, with 0 failures (0 unexpected) in 316.030 (316.031) seconds
+2026-10-20T18:50:29.4201360Z 	 Executed 4 tests, with 1 failure (0 unexpected) in 1026.939 (1026.944) seconds
+2026-10-20T18:50:29.4210100Z 	 Executed 4 tests, with 1 failure (0 unexpected) in 1026.939 (1026.946) seconds
+2026-10-20T18:51:16.1300960Z ** TEST EXECUTE FAILED **
+2026-10-20T18:56:42.1628830Z SHA256 digest of uploaded artifact zip is 9e2c0e4cc01e5a6a15d0ede68d6243b4aabf645bd15d589eb8a963bb588c9555
+2026-10-20T18:56:50.0540470Z SHA256 digest of uploaded artifact zip is d507cacb3214ddae09933ac7c5fa69ab1507cfbc33cb222df094201212cd2d9d

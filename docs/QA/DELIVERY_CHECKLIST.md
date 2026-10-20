@@ -5,17 +5,17 @@
 | 查驗內容 | 必須可追溯的證據 | 目前狀態 |
 |---|---|---|
 | 生成工程／安裝／識別 | Source SHA、ENVIRONMENT、實際 plist、Foundation probe | P1 已獨立關閉；完整候選仍須重測 |
-| 三菜／三角色／六關與所有核心規則 | 原生 GameModel／SaveStore／SceneLifecycle／Strategy xcresult、JSON | 舊核心通過；Content v2 與新分層候選待原生結果 |
-| 真實首次教學至第一關、存檔恢復與設定 | 原 Flow 全部斷言，原生摘要、PNG | 尚有 SE／確認窗未關閉問題 |
-| 六關與結算／最終畫面／解鎖重開保存 | 正常時鐘六次實際 session、UI 摘要、錄影 | 尚未完成 |
-| 餐蓋正常開合／服務／回收重用 | 無 driver 的真實後關點按與原生截圖 | 已寫測試，尚未執行 |
-| 練習不獎勵、背景、失敗／同關重試、各確認取消 | FullJourney／ControlFlow 原生結果及圖 | 練習模型通過，完整延伸尚未執行 |
-| 三尺寸、大字／高對比／左右手及關鍵狀態 | 同 SHA 三 scopes、各 PNG／摘要 | SE 查找仍失敗，不套用 large 成功 |
+| 三菜／三角色／六關與所有核心規則 | 原生 GameModel／SaveStore／SceneLifecycle／Strategy xcresult、JSON | 2bb 26 單元已過；後續擴充清除設定保留仍待新候選 |
+| 真實首次教學至第一關、存檔恢復與設定 | 原 Flow 全部斷言，原生摘要、PNG | 2bb 原完整基礎 Flow 通過，未代稱 Dot 驗收 |
+| 六關與結算／最終畫面／解鎖重開保存 | 正常時鐘六次實際 session、UI 摘要、錄影 | 2bb 工程正常時鐘六次 session／結算走過，同一方法後續點按仍失敗 |
+| 餐蓋正常開合／服務／回收重用 | 無 driver 的真實後關點按與原生截圖 | 2bb 龍餐蓋與歸還走過，燉菜未整理即配料失敗，原案例未通過 |
+| 練習不獎勵、背景、失敗／同關重試、各確認取消 | FullJourney／ControlFlow 原生結果及圖 | 2bb 練習／ControlFlow 原生方法通過；全延伸仍有一失敗 |
+| 三尺寸、大字／高對比／左右手及關鍵狀態 | 同 SHA 三 scopes、各 PNG／摘要 | 2bb 主基礎過、small job 成功；large 原 job 與實圖覆核尚待 |
 | 三角色五表情／部件動作、三菜狀態、餐車 | 深淺底實際大小 PNG、遊玩及動態影片、來源清單 | 母版方向通過；正式擴作待實圖，MFT-007 開放 |
 | 配樂／提示可辨、音量與觸覺 | 25 WAV、實際監聽／真機紀錄 | 靜態及程式整合；監聽／觸覺未驗收 |
-| 二十次場景重進與效能 | 原始 PERFORMANCE、取樣方式、summary | 尚未執行，不宣稱 60fps／100ms |
+| 二十次場景重進與效能 | 原始 PERFORMANCE、取樣方式、summary | 2bb 二十次原生方法通過；有實際取樣，不宣稱物理 60fps／100ms |
 | 無網路依賴／飛航模式 | 本地資源包及源碼、實際離線裝置流程 | 本地資源完整性有檢查；飛航真機未測 |
-| 同 SHA 未簽名 iPhoneOS 裝置 IPA | BUILD_MANIFEST、DEVICE_APP_IDENTITY、Mach-O platform=2、無簽名、SHA256SUMS | 只有 P1 小包，沒有完整遊戲 IPA |
+| 同 SHA 未簽名 iPhoneOS 裝置 IPA | BUILD_MANIFEST、DEVICE_APP_IDENTITY、Mach-O platform=2、無簽名、SHA256SUMS | 只有 P1 小包；完整 Validate 成功後銜接同 SHA archive 尚待實跑 |
 | Dot 獨立完整驗收 | 7.7 六項每項≥3、總分≥20／24；實際證據及明確判定 | 尚未取得，Codex 不代簽 |
 
 原生影片目前由 simctl 取得畫面，沒有遊戲音訊；聽覺不能從該影片推論。無簽名 IPA 需使用者自行簽名安裝，本輪不操作 Apple 帳號或發布。

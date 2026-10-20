@@ -28,7 +28,7 @@ jobs:
   validate:
     if: ${{ !inputs.evidence_artifact_id }}
     runs-on: macos-15
-    timeout-minutes: 45
+    timeout-minutes: 60
     env:
       DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
       MFT_LAYOUT_QA: '0'
@@ -40,7 +40,25 @@ jobs:
       - name: Record environment and verify reproducible project
         run: bash Scripts/ci_environment.sh
       - name: Unit and simulator UI tests
+        timeout-minutes: 50
         run: bash Scripts/validate.sh
+      - name: Upload small original review files
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: review-${{ github.run_number }}-${{ github.sha }}
+          retention-days: 14
+          path: |
+            build/ENVIRONMENT.txt
+            build/VALIDATION_STATUS.json
+            build/*TEST_SUMMARY*.json
+            build/TEST_RESULT_SUMMARY.json
+            build/TEST_SUMMARY.md
+            build/SIMULATOR_APP_IDENTITY.json
+            build/QA_EVIDENCE/**/*.png
+            build/QA_EVIDENCE/**/*.json
+            build/QA_EVIDENCE/**/*.txt
+          if-no-files-found: error
       - name: Upload actual test evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -66,23 +84,6 @@ jobs:
             build/Layout-*.xcresult
             build/*.log
           if-no-files-found: error
-      - name: Upload small original review files
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: review-${{ github.run_number }}-${{ github.sha }}
-          retention-days: 14
-          path: |
-            build/ENVIRONMENT.txt
-            build/VALIDATION_STATUS.json
-            build/*TEST_SUMMARY*.json
-            build/TEST_RESULT_SUMMARY.json
-            build/TEST_SUMMARY.md
-            build/SIMULATOR_APP_IDENTITY.json
-            build/QA_EVIDENCE/**/*.png
-            build/QA_EVIDENCE/**/*.json
-            build/QA_EVIDENCE/**/*.txt
-          if-no-files-found: error
   layouts:
     needs: validate
     if: ${{ always() && (inputs.layout_qa || (github.event_name == 'push' && github.ref == 'refs/heads/integration/full-game')) && !inputs.evidence_artifact_id }}
@@ -104,6 +105,7 @@ jobs:
       - name: Record environment and verify reproducible project
         run: bash Scripts/ci_environment.sh
       - name: Build this same source and run actual layout UI tests
+        timeout-minutes: 20
         run: bash Scripts/validate.sh
       - name: Upload actual layout evidence even on failure
         if: always()
@@ -124,6 +126,51 @@ jobs:
             build/LAYOUT_ENVIRONMENT.txt
             build/Layout-*.xcresult
             build/*.log
+          if-no-files-found: error
+  package-device:
+    needs: [validate, layouts]
+    if: ${{ needs.validate.result == 'success' && needs.layouts.result == 'success' && !inputs.evidence_artifact_id && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/integration/full-game') && ((github.event_name == 'push' && github.ref == 'refs/heads/integration/full-game') || (github.event_name == 'workflow_dispatch' && inputs.full_qa && inputs.layout_qa)) }}
+    runs-on: macos-15
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      actions: read
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+      MFT_LAYOUT_QA: '1'
+      MFT_FULL_QA: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Record device build environment and verify project
+        run: |
+          bash Scripts/ci_environment.sh
+          cp build/ENVIRONMENT.txt build/DEVICE_BUILD_ENVIRONMENT.txt
+      - name: Verify and collect this same run's original successful evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 Scripts/assemble_validation.py
+      - name: Archive and inspect unsigned iPhoneOS app from this same source
+        run: bash Scripts/package_ipa.sh
+      - name: Upload unsigned device build and checksums
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: unsigned-ipa-${{ github.run_number }}-${{ github.sha }}
+          retention-days: 14
+          path: build/delivery
+          if-no-files-found: error
+      - name: Preserve device archive diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: device-diagnostics-${{ github.run_number }}-${{ github.sha }}
+          retention-days: 14
+          path: |
+            build/DEVICE_BUILD_ENVIRONMENT.txt
+            build/VALIDATION_ASSEMBLY.json
+            build/archive.log
+            build/delivery
           if-no-files-found: error
   export-existing-evidence:
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.evidence_artifact_id && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/integration/full-game') }}

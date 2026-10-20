@@ -12,6 +12,6 @@ P1 啟動工程的安裝／測試／未簽名裝置封裝已由 Dot 對 `f8707b5
 
 最終交付為 GitHub Actions 實際建出的未簽名 iPhone IPA，需使用者自行簽名安裝。本輪不操作 Apple 帳號、不簽名、不上傳 TestFlight 或 App Store。
 
-從倉庫 Actions 選擇成功的「Unsigned iPhone IPA」執行，再下載 `unsigned-ipa-<build>-<SHA>` artifact；可能需要 GitHub 登入，保留 14 天。先核對 BUILD_MANIFEST 的完整 source SHA 與驗收報告，再用 SHA256SUMS 核對檔案。現在唯一已獨立查驗的產物仍是上述 P1 工程包；完整遊戲候選尚未產出。
+從倉庫 Actions 選擇完整成功且有 `package-device` 的「Validate」，或手動成功的「Unsigned iPhone IPA」，下載 `unsigned-ipa-<build>-<SHA>` artifact；可能需要 GitHub 登入，保留 14 天。先核對 BUILD_MANIFEST 的完整 source SHA 與驗收報告，再用 SHA256SUMS 核對檔案。現在唯一已獨立查驗的產物仍是上述 P1 工程包；完整遊戲候選尚未產出。
 
 本倉庫公開可見不代表原創內容已採用任何特定再利用授權；尚未指定開源授權。

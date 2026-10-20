@@ -1,0 +1,172 @@
+{
+  "source_sha": "2bb77a9af1064272f1d4ca50a0dc950fecf7f04a",
+  "workflow_run_id": 39472144828,
+  "job_id": 118798719852,
+  "job_conclusion": "failure",
+  "review_artifact": {
+    "id": 12290551843,
+    "bytes": 70290396,
+    "sha256": "d507cacb3214ddae09933ac7c5fa69ab1507cfbc33cb222df094201212cd2d9d"
+  },
+  "full_artifact": {
+    "id": 12290916626,
+    "bytes": 3257540568,
+    "sha256": "9e2c0e4cc01e5a6a15d0ede68d6243b4aabf645bd15d589eb8a963bb588c9555",
+    "downloaded": false,
+    "reason": "Exceeds connector 512 MiB limit; original remains in source Actions run. Review archive preserves exported native PNGs and summaries."
+  },
+  "method": "Downloaded original review archive, verified its GitHub archive digest and copied selected original files unchanged. Native failure retained. No image editing, rebuild or test rerun.",
+  "files": [
+    {
+      "path": "TEST_RESULT_SUMMARY.json",
+      "bytes": 1176,
+      "sha256": "ccd867f6f7e157089047e14ba114186b379fa0b01436875a2df958c4becaf50c"
+    },
+    {
+      "path": "JOURNEY_TEST_SUMMARY.json",
+      "bytes": 3063,
+      "sha256": "c2367f39a9083f73d7f134e2b4a51c9858b1f12a10da7f23c2e309ccf7639f81"
+    },
+    {
+      "path": "VALIDATION_STATUS.json",
+      "bytes": 524,
+      "sha256": "1101e4d4da2d176ac56f138300c56165c4785d767fa58f314d4fc9db1dc36980"
+    },
+    {
+      "path": "TEST_SUMMARY.md",
+      "bytes": 1052,
+      "sha256": "697cb247f110c4fe76100b9bc9666d065aaa51085d7fab32d95b4899d4b62d76"
+    },
+    {
+      "path": "ENVIRONMENT.txt",
+      "bytes": 2157,
+      "sha256": "25bdb5574f6c03dd75eba80431042731c9fdd2f15a55504c0c1c03e41f73284d"
+    },
+    {
+      "path": "SIMULATOR_APP_IDENTITY.json",
+      "bytes": 4899,
+      "sha256": "7617a86ebcdcb4976e6338666228f7fb66abde15b1afe766c1c46eb9afcaf33a"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/RECORDING_METHOD.json",
+      "bytes": 733,
+      "sha256": "d721937d327475bec8d5649bb1db0faf57eebf52cafcc56ee990602bc1e69793"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/VIDEO_METADATA.json",
+      "bytes": 275,
+      "sha256": "0d83d9e7fec81c0336a69a9bbfe8977c108e1b232df9e7169b5d707406d789cb"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/PERFORMANCE_SUMMARY.json",
+      "bytes": 9396,
+      "sha256": "b4d5a9af899874a2050b8397052c3caadd14898b945a669909feed23a7f23eeb"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/PERFORMANCE.json",
+      "bytes": 229800,
+      "sha256": "61d0d94c5c4f3719cdf60cf081f38d58e80450ce4393a5b3f7f909f659379f00"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_01.json",
+      "bytes": 5119,
+      "sha256": "a108a8afb22907b51fa7a25058300b27b03f6ea3bf27df151b803d83bae1cb21"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_02.json",
+      "bytes": 6080,
+      "sha256": "856228488d90dae3d40d3cd5c9baeb8c4608246f8d24f9e639e7328526d9ffd6"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_03.json",
+      "bytes": 7910,
+      "sha256": "91772104c7724ec668e830bf312f00bce13534a205cffa07f08e7f14bc32867b"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_04.json",
+      "bytes": 9368,
+      "sha256": "6669679c80e137a99201488fb9cd9b6d432251eb92b51c21ebeb2857e9907a92"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_05.json",
+      "bytes": 12500,
+      "sha256": "4e991908d6a7f8a2ce877071896dc8b89916b0682c152bee08814123b0b3bbe7"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_06.json",
+      "bytes": 15126,
+      "sha256": "62e01bdee3714d43ce9e8b0c4953e42397a703357648c7d2e14662e12266d0de"
+    },
+    {
+      "path": "QA_EVIDENCE/D0C063A7-5E35-436D-8A15-96F268B8DF10.png",
+      "bytes": 1003535,
+      "sha256": "f0116a747562a24a77e3b3db8f442342adde4a35a973989a70b8e995d0eb50d9"
+    },
+    {
+      "path": "QA_EVIDENCE/44A003C2-D433-47DF-A9D2-E88DEAB8485F.png",
+      "bytes": 1744945,
+      "sha256": "3c0b77ca28fd1c64f1dcc36b6064716f43aaf1d8bd36c4b9df2c27670e396766"
+    },
+    {
+      "path": "QA_EVIDENCE/26CA896F-B283-4553-8198-EFF74E1234D0.png",
+      "bytes": 3603306,
+      "sha256": "42ce4fcf080daa4bd28b32c435908097cc9a6eb9c3b249785d601be814044098"
+    },
+    {
+      "path": "QA_EVIDENCE/57639D03-DFFD-46B7-8BF0-6F0D4B3F4BD5.png",
+      "bytes": 294010,
+      "sha256": "1db6c52db294964c9ee90192247b1c9b2ab24b8244bfc204884e5117440f01e8"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/184628C0-A789-4255-A6E1-87DF504079D2.png",
+      "bytes": 1877899,
+      "sha256": "fd05847c76daa74b91cc578cdcfa95af9c526288d033b7eb3f767b935a265fdc"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/801C48B8-AB34-4EBB-A272-64EBD555A142.png",
+      "bytes": 1804620,
+      "sha256": "db51206075c24170223f4d3bf286724b883872a267a38bbc733d05ae2794a0f1"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/E257606E-8111-48F2-A0A6-8CC588F1E880.png",
+      "bytes": 512938,
+      "sha256": "4b574cc409dfb064786b8092d00bfc004266bd0d9604c51b6770646465b08357"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/CD9A5CF4-C641-4D28-AFC0-E56CF3E971CE.png",
+      "bytes": 182467,
+      "sha256": "59858f27c4c3e66222fc869d839b2114ca7daad18082834caa2d58fd6049309c"
+    },
+    {
+      "path": "LAYOUT_TEST_SUMMARY_small.json",
+      "bytes": 1006,
+      "sha256": "f3e2a187da256cc785c76c24def20a78f330d00eb683658a6cbd54847c51f4a6"
+    },
+    {
+      "path": "LAYOUT_ENVIRONMENT.txt",
+      "bytes": 150,
+      "sha256": "7029c1e04cf7116c059a7a42012ab90e16976baf7682c87cd0953eac39e8a755"
+    },
+    {
+      "path": "QA_EVIDENCE/layout-small/A1DB82D6-FCF8-4AD1-8812-D6803B46444F.png",
+      "bytes": 1365903,
+      "sha256": "fea6d6a5cedd70e37bcbd239fa3fa4f2d4a02f29cb8c6ca43192d3c62057ff60"
+    },
+    {
+      "path": "QA_EVIDENCE/layout-small/0C59948E-2226-47F6-844C-935446DB8277.png",
+      "bytes": 757323,
+      "sha256": "ab9db4e33d48c68e0bb9337720945988f4d94b22af917095bc893951a1f2f0e1"
+    }
+  ],
+  "layout_small": {
+    "job_id": 118823068652,
+    "artifact_id": 12291387951,
+    "archive_sha256": "3259f687728c12e562fe52339ca64a382754bec80b5be75aa455e7e8c07089e9",
+    "bytes": 26632528,
+    "counts": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    }
+  }
+}

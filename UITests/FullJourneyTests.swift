@@ -50,14 +50,29 @@ final class FullJourneyTests:XCTestCase {
         XCTAssertTrue(app.buttons["quick-L5-1"].waitForExistence(timeout:10))
         app.buttons["quick-L5-1"].tap();perform("備料",app);perform("下鍋",app)
         XCTAssertTrue(app.buttons["quick-L5-2"].waitForExistence(timeout:10));app.buttons["quick-L5-2"].tap();perform("備料",app);perform("下鍋",app)
-        XCTAssertTrue(app.buttons["quick-L5-3"].waitForExistence(timeout:10));app.buttons["quick-L5-3"].tap();perform("備料",app)
+        XCTAssertTrue(app.buttons["quick-L5-3"].waitForExistence(timeout:10))
         app.buttons["quick-L5-2"].tap();perform("裝盤",app)
         app.buttons["蓋上"].tap();XCTAssertTrue(app.buttons["取下"].waitForExistence(timeout:5));captureRealTaps("actual-late-covered-dragon",app)
         XCTAssertFalse(app.buttons["香草芽"].exists,"Covered meals must not offer garnishing")
         app.buttons["取下"].tap();XCTAssertTrue(app.buttons["蓋上"].waitForExistence(timeout:5));app.buttons["蓋上"].tap();perform("出餐",app)
         app.buttons["quick-L5-1"].tap();perform("裝盤",app)
         app.buttons["蓋上"].tap();XCTAssertTrue(app.buttons["取下"].waitForExistence(timeout:5));captureRealTaps("actual-late-cloche-reused-on-deer",app)
-        app.buttons["取下"].tap();app.buttons["香草芽"].tap();perform("出餐",app)
+        app.buttons["取下"].tap()
+        // Real clock and UI automation can leave the earlier stew scorched while
+        // the dragon is covered and served. Covering does not repair that damage.
+        // Follow the displayed recovery action before asserting garnishing.
+        let command=app.buttons["primaryCommand"]
+        XCTAssertTrue(command.waitForExistence(timeout:5))
+        if command.label == "整理 3 秒"{
+            XCTAssertFalse(app.buttons["香草芽"].exists,"Damaged meals must be tidied before garnishing")
+            captureRealTaps("actual-late-damaged-stew-before-tidy",app)
+            perform("整理 3 秒",app)
+            let repaired=app.buttons.matching(NSPredicate(format:"value == %@","已整理・偏好失效")).firstMatch
+            XCTAssertTrue(repaired.waitForExistence(timeout:5),"Tidying must retain the lost preference qualification")
+        }
+        let herb=app.buttons["香草芽"]
+        XCTAssertTrue(herb.waitForExistence(timeout:5),"Uncovered, tidied stew must offer the original herb action")
+        XCTAssertTrue(herb.isHittable);herb.tap();perform("出餐",app)
         XCTAssertTrue(app.staticTexts["已服務 2／7 ・一般"].waitForExistence(timeout:5));captureRealTaps("actual-late-two-served-with-cloche",app)
         app.buttons["pause"].tap();app.buttons["保存並回首頁"].tap();XCTAssertTrue(app.buttons["繼續遊玩"].waitForExistence(timeout:5))
     }
