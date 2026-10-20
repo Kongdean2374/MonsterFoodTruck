@@ -1,0 +1,427 @@
+// !$*UTF8*$!
+{
+	"archiveVersion" = 1;
+	"classes" = {
+	};
+	"objectVersion" = 56;
+	"objects" = {
+		"5D696BADA48A9CE779A3565D" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "MonsterFoodTruck/App/MonsterFoodTruckApp.swift";
+			"sourceTree" = "<group>";
+		};
+		"601FD9005059D18D8E6A506A" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "5D696BADA48A9CE779A3565D";
+		};
+		"4976501FE000B82D445F9AEB" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.application";
+			"includeInIndex" = 0;
+			"path" = "MonsterFoodTruck.app";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"3960FD2338EFA367FC286C12" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ("601FD9005059D18D8E6A506A");
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"64055D1D34375DE9ED4A0179" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "folder";
+			"path" = "MonsterFoodTruck/Resources";
+			"sourceTree" = "<group>";
+		};
+		"173DACCF76503B379247A8F2" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "64055D1D34375DE9ED4A0179";
+		};
+		"950518B2F1DAB3505B7602CF" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ("173DACCF76503B379247A8F2");
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"4CE686BE02B58C4AADC78C3E" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"SWIFT_VERSION" = "5.0";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"CLANG_ENABLE_MODULES" = "YES";
+				"SWIFT_EMIT_LOC_STRINGS" = "NO";
+				"CODE_SIGNING_ALLOWED" = "NO";
+				"CODE_SIGNING_REQUIRED" = "NO";
+				"DEVELOPMENT_TEAM" = "";
+				"MARKETING_VERSION" = "1.0.0";
+				"CURRENT_PROJECT_VERSION" = "1";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"PRODUCT_NAME" = "MonsterFoodTruck";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "cc.chaihome.monsterfoodtruck";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"INFOPLIST_FILE" = "MonsterFoodTruck/Info.plist";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon";
+				"ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME" = "AccentColor";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"SUPPORTS_MACCATALYST" = "NO";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+			};
+			"name" = "Debug";
+		};
+		"9598F1A4ED4B173161757975" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"SWIFT_VERSION" = "5.0";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"CLANG_ENABLE_MODULES" = "YES";
+				"SWIFT_EMIT_LOC_STRINGS" = "NO";
+				"CODE_SIGNING_ALLOWED" = "NO";
+				"CODE_SIGNING_REQUIRED" = "NO";
+				"DEVELOPMENT_TEAM" = "";
+				"MARKETING_VERSION" = "1.0.0";
+				"CURRENT_PROJECT_VERSION" = "1";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"PRODUCT_NAME" = "MonsterFoodTruck";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "cc.chaihome.monsterfoodtruck";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"INFOPLIST_FILE" = "MonsterFoodTruck/Info.plist";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon";
+				"ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME" = "AccentColor";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"SUPPORTS_MACCATALYST" = "NO";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ENABLE_TESTABILITY" = "NO";
+			};
+			"name" = "Release";
+		};
+		"1A67BF3237E4B369F9721C61" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = ("4CE686BE02B58C4AADC78C3E", "9598F1A4ED4B173161757975");
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"5A6192C389140F2A3EC26E60" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "1A67BF3237E4B369F9721C61";
+			"buildPhases" = ("3960FD2338EFA367FC286C12", "950518B2F1DAB3505B7602CF");
+			"buildRules" = ();
+			"dependencies" = ();
+			"name" = "MonsterFoodTruck";
+			"productName" = "MonsterFoodTruck";
+			"productReference" = "4976501FE000B82D445F9AEB";
+			"productType" = "com.apple.product-type.application";
+		};
+		"2E7E1224D16DBD25E10307D8" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Tests/SmokeTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"F64598E6069E14A7E6CCA482" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "2E7E1224D16DBD25E10307D8";
+		};
+		"3D7775C06E83D365C4EF853C" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"includeInIndex" = 0;
+			"path" = "MonsterFoodTruckTests.xctest";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"6CC87D3BF75717B931C279BA" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ("F64598E6069E14A7E6CCA482");
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"A3FCEE4C57973DA7D0AA662D" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ();
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"BDA363AA6EE27B4F85FCF73B" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "244210E48437B6556980A702";
+			"proxyType" = 1;
+			"remoteGlobalIDString" = "5A6192C389140F2A3EC26E60";
+			"remoteInfo" = "MonsterFoodTruck";
+		};
+		"4A107DD777768A536BDD7D78" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "5A6192C389140F2A3EC26E60";
+			"targetProxy" = "BDA363AA6EE27B4F85FCF73B";
+		};
+		"EADD0799E33F38B798916BFB" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"SWIFT_VERSION" = "5.0";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"CLANG_ENABLE_MODULES" = "YES";
+				"SWIFT_EMIT_LOC_STRINGS" = "NO";
+				"CODE_SIGNING_ALLOWED" = "NO";
+				"CODE_SIGNING_REQUIRED" = "NO";
+				"DEVELOPMENT_TEAM" = "";
+				"MARKETING_VERSION" = "1.0.0";
+				"CURRENT_PROJECT_VERSION" = "1";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"PRODUCT_NAME" = "MonsterFoodTruckTests";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "cc.chaihome.monsterfoodtruck.MonsterFoodTruckTests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"TEST_TARGET_NAME" = "MonsterFoodTruck";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/MonsterFoodTruck.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MonsterFoodTruck";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+			};
+			"name" = "Debug";
+		};
+		"DBB760B3E37C0CDD1211730E" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"SWIFT_VERSION" = "5.0";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"CLANG_ENABLE_MODULES" = "YES";
+				"SWIFT_EMIT_LOC_STRINGS" = "NO";
+				"CODE_SIGNING_ALLOWED" = "NO";
+				"CODE_SIGNING_REQUIRED" = "NO";
+				"DEVELOPMENT_TEAM" = "";
+				"MARKETING_VERSION" = "1.0.0";
+				"CURRENT_PROJECT_VERSION" = "1";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"PRODUCT_NAME" = "MonsterFoodTruckTests";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "cc.chaihome.monsterfoodtruck.MonsterFoodTruckTests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"TEST_TARGET_NAME" = "MonsterFoodTruck";
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/MonsterFoodTruck.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MonsterFoodTruck";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ENABLE_TESTABILITY" = "NO";
+			};
+			"name" = "Release";
+		};
+		"7AB088AF38FCDF323A739E72" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = ("EADD0799E33F38B798916BFB", "DBB760B3E37C0CDD1211730E");
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"396A13BF1A64F43B7BED1CF9" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "7AB088AF38FCDF323A739E72";
+			"buildPhases" = ("6CC87D3BF75717B931C279BA", "A3FCEE4C57973DA7D0AA662D");
+			"buildRules" = ();
+			"dependencies" = ("4A107DD777768A536BDD7D78");
+			"name" = "MonsterFoodTruckTests";
+			"productName" = "MonsterFoodTruckTests";
+			"productReference" = "3D7775C06E83D365C4EF853C";
+			"productType" = "com.apple.product-type.bundle.unit-test";
+		};
+		"9AA18C699868488E18EBB07C" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "UITests/FlowTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"E8F29357AC61F6C3FF8C415F" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "9AA18C699868488E18EBB07C";
+		};
+		"F8233BE1F795043CABE2EC9D" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"includeInIndex" = 0;
+			"path" = "MonsterFoodTruckUITests.xctest";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"942D1D50DED04C57BD778553" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ("E8F29357AC61F6C3FF8C415F");
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"8C0290D901098343738A45F5" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ();
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"3D04A3A659FA033E1329C847" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "244210E48437B6556980A702";
+			"proxyType" = 1;
+			"remoteGlobalIDString" = "5A6192C389140F2A3EC26E60";
+			"remoteInfo" = "MonsterFoodTruck";
+		};
+		"63FEFA8923A7ADF9FACC3CFD" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "5A6192C389140F2A3EC26E60";
+			"targetProxy" = "3D04A3A659FA033E1329C847";
+		};
+		"AD6A936BAE9AFDA5479214E4" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"SWIFT_VERSION" = "5.0";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"CLANG_ENABLE_MODULES" = "YES";
+				"SWIFT_EMIT_LOC_STRINGS" = "NO";
+				"CODE_SIGNING_ALLOWED" = "NO";
+				"CODE_SIGNING_REQUIRED" = "NO";
+				"DEVELOPMENT_TEAM" = "";
+				"MARKETING_VERSION" = "1.0.0";
+				"CURRENT_PROJECT_VERSION" = "1";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"PRODUCT_NAME" = "MonsterFoodTruckUITests";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "cc.chaihome.monsterfoodtruck.MonsterFoodTruckUITests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"TEST_TARGET_NAME" = "MonsterFoodTruck";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+			};
+			"name" = "Debug";
+		};
+		"77BD4D48455D872319D76F2A" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"SWIFT_VERSION" = "5.0";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"CLANG_ENABLE_MODULES" = "YES";
+				"SWIFT_EMIT_LOC_STRINGS" = "NO";
+				"CODE_SIGNING_ALLOWED" = "NO";
+				"CODE_SIGNING_REQUIRED" = "NO";
+				"DEVELOPMENT_TEAM" = "";
+				"MARKETING_VERSION" = "1.0.0";
+				"CURRENT_PROJECT_VERSION" = "1";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"PRODUCT_NAME" = "MonsterFoodTruckUITests";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "cc.chaihome.monsterfoodtruck.MonsterFoodTruckUITests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"TEST_TARGET_NAME" = "MonsterFoodTruck";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ENABLE_TESTABILITY" = "NO";
+			};
+			"name" = "Release";
+		};
+		"3B61B922E35CD32E09701F09" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = ("AD6A936BAE9AFDA5479214E4", "77BD4D48455D872319D76F2A");
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"F7FF56B3F5E16CAEF290439F" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "3B61B922E35CD32E09701F09";
+			"buildPhases" = ("942D1D50DED04C57BD778553", "8C0290D901098343738A45F5");
+			"buildRules" = ();
+			"dependencies" = ("63FEFA8923A7ADF9FACC3CFD");
+			"name" = "MonsterFoodTruckUITests";
+			"productName" = "MonsterFoodTruckUITests";
+			"productReference" = "F8233BE1F795043CABE2EC9D";
+			"productType" = "com.apple.product-type.bundle.ui-testing";
+		};
+		"0A3E27B8CA818264D75C8D81" = {
+			"isa" = "PBXGroup";
+			"children" = ("4976501FE000B82D445F9AEB", "3D7775C06E83D365C4EF853C", "F8233BE1F795043CABE2EC9D");
+			"name" = "Products";
+			"sourceTree" = "<group>";
+		};
+		"C8D2DC745BFC63C0D67231CE" = {
+			"isa" = "PBXGroup";
+			"children" = ("5D696BADA48A9CE779A3565D", "64055D1D34375DE9ED4A0179", "2E7E1224D16DBD25E10307D8", "9AA18C699868488E18EBB07C", "0A3E27B8CA818264D75C8D81");
+			"sourceTree" = "<group>";
+		};
+		"73EBF6644258C120893E685D" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"SWIFT_VERSION" = "5.0";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"CLANG_ENABLE_MODULES" = "YES";
+				"SWIFT_EMIT_LOC_STRINGS" = "NO";
+				"CODE_SIGNING_ALLOWED" = "NO";
+				"CODE_SIGNING_REQUIRED" = "NO";
+				"DEVELOPMENT_TEAM" = "";
+				"MARKETING_VERSION" = "1.0.0";
+				"CURRENT_PROJECT_VERSION" = "1";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+			};
+			"name" = "Debug";
+		};
+		"0B0C687DF8B6B8DC790B519C" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"SDKROOT" = "iphoneos";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"SWIFT_VERSION" = "5.0";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"CLANG_ENABLE_MODULES" = "YES";
+				"SWIFT_EMIT_LOC_STRINGS" = "NO";
+				"CODE_SIGNING_ALLOWED" = "NO";
+				"CODE_SIGNING_REQUIRED" = "NO";
+				"DEVELOPMENT_TEAM" = "";
+				"MARKETING_VERSION" = "1.0.0";
+				"CURRENT_PROJECT_VERSION" = "1";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ENABLE_TESTABILITY" = "NO";
+			};
+			"name" = "Release";
+		};
+		"76F8DEC3DFE0BDB465198890" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = ("73EBF6644258C120893E685D", "0B0C687DF8B6B8DC790B519C");
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"244210E48437B6556980A702" = {
+			"isa" = "PBXProject";
+			"attributes" = {
+				"LastUpgradeCheck" = "1640";
+				"BuildIndependentTargetsInParallel" = "YES";
+			};
+			"buildConfigurationList" = "76F8DEC3DFE0BDB465198890";
+			"compatibilityVersion" = "Xcode 14.0";
+			"developmentRegion" = "zh-Hant";
+			"knownRegions" = ("zh-Hant", "en", "Base");
+			"mainGroup" = "C8D2DC745BFC63C0D67231CE";
+			"productRefGroup" = "0A3E27B8CA818264D75C8D81";
+			"projectDirPath" = "";
+			"projectRoot" = "";
+			"targets" = ("5A6192C389140F2A3EC26E60", "396A13BF1A64F43B7BED1CF9", "F7FF56B3F5E16CAEF290439F");
+		};
+	};
+	"rootObject" = "244210E48437B6556980A702";
+}

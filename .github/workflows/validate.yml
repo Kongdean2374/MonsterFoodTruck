@@ -1,0 +1,39 @@
+name: Validate iOS
+on:
+  push:
+    branches: [main]
+    paths: ['MonsterFoodTruck/**', 'MonsterFoodTruck.xcodeproj/**', 'Tests/**', 'UITests/**', 'Scripts/**', '.github/workflows/**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: macos-15
+    timeout-minutes: 30
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Record environment and verify reproducible project
+        run: bash Scripts/ci_environment.sh
+      - name: Unit and simulator UI tests
+        run: bash Scripts/validate.sh
+      - name: Upload actual test evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: validation-${{ github.run_number }}-${{ github.sha }}
+          retention-days: 14
+          path: |
+            build/ENVIRONMENT.txt
+            build/Validation.xcresult
+            build/QA_EVIDENCE
+            build/TEST_SUMMARY.md
+            build/*.log
+          if-no-files-found: error
