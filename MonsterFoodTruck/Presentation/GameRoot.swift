@@ -7,6 +7,7 @@ enum TruckTheme {
     static let cocoa=Color(red:0.231,green:0.169,blue:0.165)
     static let moss=Color(red:0.31,green:0.40,blue:0.24)
     static let teal=Color(red:0.20,green:0.40,blue:0.43)
+    static let plum=Color(red:0.45,green:0.23,blue:0.57)
 }
 struct TruckButtonStyle: ButtonStyle {
     var primary = false
@@ -51,11 +52,13 @@ struct GameRoot:View {
         .preferredColorScheme(model.screen == .home ? .dark:.light)
         .sheet(isPresented:$model.settingsPresented,onDismiss:{model.settingsDidDismiss()}){SettingsScreen()}
         .sheet(item:$model.confirmation){ConfirmationScreen(confirmation:$0)}
-        .alert("餐車提醒",isPresented:Binding(get:{model.message != nil},set:{if !$0{model.message=nil}})) {Button("知道了"){model.message=nil}} message:{Text(model.message ?? "")}
+        .alert("餐車提醒",isPresented:Binding(get:{model.message != nil && !model.settingsPresented},set:{if !$0{model.message=nil}})) {Button("知道了"){model.message=nil}} message:{Text(model.message ?? "")}
         .onReceive(timer){_ in model.tick()}
         .onChange(of:phase){_,value in if value != .active{model.pause()}else if model.screen == .home{model.audio.startMusic()}}
+        .onChange(of:model.message){_,value in if value != nil,model.screen == .game{model.pause()}}
         .onReceive(NotificationCenter.default.publisher(for:AVAudioSession.interruptionNotification)){_ in model.pause()}
-        .onAppear{if systemReduceMotion{model.updateSettings{$0.reduceMotion=true}}}
+        .onAppear{model.setSystemReducedMotion(systemReduceMotion)}
+        .onChange(of:systemReduceMotion){_,value in model.setSystemReducedMotion(value)}
     }
 }
 struct HomeScreen:View {

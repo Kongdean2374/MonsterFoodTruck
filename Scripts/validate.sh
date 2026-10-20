@@ -27,6 +27,18 @@ plutil -p "$SIM_APP/Info.plist"
 cp "$SIM_APP/Info.plist" build/SIMULATOR_APP_INFO.plist
 python3 Scripts/verify_app.py "$SIM_APP" --platform iPhoneSimulator --output build/SIMULATOR_APP_IDENTITY.json
 xcrun swift Scripts/probe_bundle.swift "$PWD/$SIM_APP" | tee build/SIMULATOR_BUNDLE_PROBE.txt
+if [ "${MFT_LAYOUT_ONLY:-0}" = 1 ]; then
+  VALIDATION_STAGE=layout-tests
+  LAYOUT_STATUS=0
+  if bash Scripts/layout_smoke.sh; then LAYOUT_STATUS=0; else LAYOUT_STATUS=$?; fi
+  VALIDATION_STAGE=built-resource-integrity
+  ASSET_STATUS=0
+  if python3 Scripts/verify_app.py "$SIM_APP" --platform iPhoneSimulator --resources MonsterFoodTruck/Resources --output build/SIMULATOR_APP_IDENTITY.json; then ASSET_STATUS=0; else ASSET_STATUS=$?; fi
+  if [ "$LAYOUT_STATUS" != 0 ]; then VALIDATION_STAGE=layout-tests-failed; exit "$LAYOUT_STATUS"; fi
+  if [ "$ASSET_STATUS" != 0 ]; then VALIDATION_STAGE=built-resource-integrity-failed; exit "$ASSET_STATUS"; fi
+  VALIDATION_STAGE=complete
+  exit 0
+fi
 TEST_STATUS=0
 VALIDATION_STAGE=baseline-tests
 if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckTests -only-testing:MonsterFoodTruckUITests/FlowTests -resultBundlePath build/Validation.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/validate.log; then

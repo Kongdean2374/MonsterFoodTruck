@@ -3,7 +3,7 @@ import XCTest
 final class FlowTests: XCTestCase {
     override func setUp(){continueAfterFailure=false}
     override func tearDown(){
-        if testRun?.hasSucceeded == false{
+        if (testRun?.failureCount ?? 0)>0{
             let shot=XCTAttachment(screenshot:XCUIScreen.main.screenshot());shot.name="FAILED-actual-screen";shot.lifetime = .keepAlways;add(shot)
         }
     }
@@ -35,8 +35,11 @@ final class FlowTests: XCTestCase {
         app.buttons["pause"].tap();XCTAssertTrue(app.buttons["保存並回首頁"].waitForExistence(timeout:5));capture("paused",app)
         app.buttons["設定"].tap();XCTAssertTrue(app.navigationBars["餐車設定"].waitForExistence(timeout:5))
         reveal(app.switches["高對比資訊"],app,up:true);app.switches["高對比資訊"].tap()
+        XCTAssertEqual(app.switches["高對比資訊"].value as? String,"1")
         reveal(app.switches["大字介面"],app,up:true);app.switches["大字介面"].tap()
+        XCTAssertEqual(app.switches["大字介面"].value as? String,"1")
         reveal(app.switches["左手單手配置"],app,up:true);app.switches["左手單手配置"].tap()
+        XCTAssertEqual(app.switches["左手單手配置"].value as? String,"1")
         reveal(app.sliders["音樂音量"],app,up:false)
         app.sliders["音樂音量"].adjust(toNormalizedSliderPosition:0);capture("settings-large-contrast-left",app)
         app.buttons["完成"].tap();XCTAssertTrue(app.buttons["繼續營業"].waitForExistence(timeout:5))
@@ -61,9 +64,13 @@ final class FlowTests: XCTestCase {
     func verifySettingsAndReset(_ app:XCUIApplication){
         app.buttons["首頁"].tap();app.buttons["設定"].tap()
         reveal(app.sliders["音效音量"],app,up:false);app.sliders["音效音量"].adjust(toNormalizedSliderPosition:0)
-        app.switches["觸覺回饋"].tap();app.buttons["舒緩"].tap()
+        app.switches["觸覺回饋"].tap();XCTAssertEqual(app.switches["觸覺回饋"].value as? String,"0");app.buttons["舒緩"].tap()
         reveal(app.switches["減少動態效果"],app,up:true);app.switches["減少動態效果"].tap()
-        app.buttons["完成"].tap();app.terminate();app.launchEnvironment.removeValue(forKey:"MFT_REDUCE_MOTION");app.launch()
+        XCTAssertEqual(app.switches["減少動態效果"].value as? String,"0");capture("actual-settings-before-process-restart",app)
+        app.buttons["完成"].tap()
+        let closed=XCTNSPredicateExpectation(predicate:NSPredicate(format:"exists == false"),object:app.navigationBars["餐車設定"])
+        XCTAssertEqual(XCTWaiter.wait(for:[closed],timeout:5),.completed)
+        app.terminate();app.launchEnvironment.removeValue(forKey:"MFT_REDUCE_MOTION");app.launch()
         app.buttons["設定"].tap();XCTAssertTrue(app.staticTexts["音樂音量 0%"].waitForExistence(timeout:5))
         XCTAssertTrue(app.staticTexts["音效音量 0%"].exists);XCTAssertEqual(app.switches["觸覺回饋"].value as? String,"0")
         reveal(app.switches["減少動態效果"],app,up:true);XCTAssertEqual(app.switches["減少動態效果"].value as? String,"0")
@@ -117,7 +124,7 @@ final class FlowTests: XCTestCase {
         let app=XCUIApplication();app.launchEnvironment["MFT_UI_SUITE"]="layout";app.launch()
         XCTAssertTrue(app.buttons["start"].waitForExistence(timeout:10));capture("layout-home-standard",app)
         app.buttons["設定"].tap();XCTAssertTrue(app.navigationBars["餐車設定"].waitForExistence(timeout:5))
-        for label in ["高對比資訊","大字介面","左手單手配置"]{reveal(app.switches[label],app,up:true);app.switches[label].tap()}
+        for label in ["高對比資訊","大字介面","左手單手配置"]{reveal(app.switches[label],app,up:true);app.switches[label].tap();XCTAssertEqual(app.switches[label].value as? String,"1")}
         app.buttons["完成"].tap();capture("layout-home-large-contrast-left",app)
         app.buttons["關卡選擇"].tap();XCTAssertTrue(app.buttons["level-level_01"].waitForExistence(timeout:5));capture("layout-levels-large-contrast",app)
         app.buttons["level-level_01"].tap();XCTAssertTrue(app.buttons["beginLevel"].waitForExistence(timeout:5));capture("layout-intro-large-contrast",app)

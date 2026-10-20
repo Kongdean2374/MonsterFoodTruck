@@ -4,6 +4,11 @@ import XCTest
 /// The app's DEBUG driver submits normal validated commands against foreground time.
 final class FullJourneyTests:XCTestCase {
     override func setUp(){continueAfterFailure=false}
+    override func tearDown(){
+        if (testRun?.failureCount ?? 0)>0{
+            let shot=XCTAttachment(screenshot:XCUIScreen.main.screenshot());shot.name="FAILED-journey-actual-screen";shot.lifetime = .keepAlways;add(shot)
+        }
+    }
     func testSixLevelsAtNormalSpeed(){
         let app=XCUIApplication()
         app.launchEnvironment["MFT_NORMAL_REPLAY"]="1"

@@ -4,14 +4,22 @@ struct SettingsScreen:View {
     @EnvironmentObject var model:AppModel
     @Environment(\.dismiss) private var dismiss
     func setting<T>(_ keyPath:WritableKeyPath<GameSettings,T>)->Binding<T>{Binding(get:{model.document.settings[keyPath:keyPath]},set:{value in model.updateSettings{$0[keyPath:keyPath]=value}})}
+    func switchRow(_ title:String,_ key:WritableKeyPath<GameSettings,Bool>)->some View{
+        let value=setting(key)
+        return Toggle(isOn:value){
+            Text(title).frame(maxWidth:.infinity,minHeight:44,alignment:.leading).contentShape(Rectangle())
+                .onTapGesture{value.wrappedValue.toggle()}.accessibilityHidden(true)
+        }.accessibilityLabel(title)
+    }
     var body:some View{
         NavigationStack{
             Form{
+                if let message=model.message{Section("尚未儲存"){Text(message).foregroundStyle(TruckTheme.cocoa)}}
                 Section("聲音與回饋"){
                     VStack(alignment:.leading){Text("音樂音量 \(Int(model.document.settings.music*100))%");Slider(value:setting(\.music),in:0...1).accessibilityLabel("音樂音量")}
                     VStack(alignment:.leading){Text("音效音量 \(Int(model.document.settings.effects*100))%");Slider(value:setting(\.effects),in:0...1).accessibilityLabel("音效音量")}
                     Button("試聽配樂與完成提示"){model.audio.preview()}.frame(minHeight:44)
-                    Toggle("觸覺回饋",isOn:setting(\.haptics))
+                    switchRow("觸覺回饋",\.haptics)
                 }
                 Section("下一局模式"){
                     Picker("模式",selection:setting(\.nextMode)){ForEach(PlayMode.allCases,id:\.self){mode in Text(mode.rawValue).tag(mode)}}.pickerStyle(.segmented)
@@ -19,10 +27,11 @@ struct SettingsScreen:View {
                     if let session=model.session{Text("目前這局固定為「\(session.mode.rawValue)」；更改僅套用下一局。").font(.caption.bold())}
                 }
                 Section("閱讀與操作"){
-                    Toggle("高對比資訊",isOn:setting(\.highContrast))
-                    Toggle("大字介面",isOn:setting(\.largeText))
-                    Toggle("減少動態效果",isOn:setting(\.reduceMotion))
-                    Toggle("左手單手配置",isOn:setting(\.leftHanded))
+                    switchRow("高對比資訊",\.highContrast)
+                    switchRow("大字介面",\.largeText)
+                    switchRow("減少動態效果",\.reduceMotion)
+                    if model.systemReducedMotion{Text("iPhone 系統已啟用減少動態，餐車也會遵循；此處保留你自己的額外設定。").font(.caption)}
+                    switchRow("左手單手配置",\.leftHanded)
                     Text("左手配置將主要命令放到左側；兩爐、兩備料槽與兩成品位置的規則相同。").font(.caption)
                 }
                 Section("教學與資料"){
@@ -30,8 +39,9 @@ struct SettingsScreen:View {
                     Button("恢復預設設定"){model.closeSettingsFor(.resetSettings)}.frame(minHeight:44)
                     Button("清除遊戲進度",role:.destructive){model.closeSettingsFor(.resetProgress)}.frame(minHeight:44)
                 }
-            }.navigationTitle("餐車設定").toolbar{ToolbarItem(placement:.confirmationAction){Button("完成"){model.persist();model.audio.pause();dismiss()}.frame(minHeight:44)}}
+            }.disabled(model.isClosingSettings).navigationTitle("餐車設定").toolbar{ToolbarItem(placement:.confirmationAction){Button("完成"){model.closeSettings()}.frame(minHeight:44).disabled(model.isClosingSettings)}}
         }.preferredColorScheme(.light)
+            .interactiveDismissDisabled(model.isClosingSettings)
     }
 }
 struct ConfirmationScreen:View {
@@ -92,7 +102,7 @@ struct CompletionScreen:View {
             Spacer()
             Button("返回挑戰三星"){model.screen = .levels}.buttonStyle(TruckButtonStyle(primary:true))
             Button("略過動畫，回首頁"){model.screen = .home}.frame(minHeight:44)
-        }.padding(24).onAppear{withAnimation(model.document.settings.reduceMotion ? nil:.easeInOut(duration:1.2)){appeared=true}}
+        }.padding(24).onAppear{withAnimation(model.reducesMotion ? nil:.easeInOut(duration:1.2)){appeared=true}}
     }
 }
 struct InformationScreen:View {

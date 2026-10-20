@@ -1,0 +1,43 @@
+{
+  "width": 1536,
+  "height": 1024,
+  "rects": {
+    "forest": [
+      16,
+      107,
+      492,
+      410
+    ],
+    "body": [
+      520,
+      102,
+      497,
+      423
+    ],
+    "counter": [
+      1024,
+      332,
+      502,
+      193
+    ],
+    "stove": [
+      22,
+      557,
+      478,
+      373
+    ],
+    "serving": [
+      516,
+      602,
+      504,
+      322
+    ],
+    "prep": [
+      1025,
+      605,
+      500,
+      320
+    ]
+  },
+  "status": "Initial layered kitchen prototype; original PNG preserved; not yet integrated or Dot reviewed"
+}

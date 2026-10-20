@@ -70,6 +70,10 @@ struct KitchenCanvas:View {
                             }.frame(height:(geo.size.height-132)/3).padding(.horizontal,6)
                         }
                     }
+                    if let target=session.nibbleTarget,let plate=session.orders.first(where:{$0.id==target})?.slot,
+                       let actor=session.activeOrders.firstIndex(where:{$0.id==session.nibbleActor}){
+                        WarningConnector(actor:actor,plate:plate).allowsHitTesting(false).accessibilityHidden(true)
+                    }
                 }
             }
         }
@@ -82,6 +86,7 @@ struct KitchenCanvas:View {
 struct StationControl:View {
     @EnvironmentObject var model:AppModel
     var station:Station;var slot:Int;var order:OrderState?
+    var isTarget:Bool{order != nil && model.session?.nibbleTarget==order?.id}
     var body:some View{
         Button{
             guard let order else{return};model.select(order.id)
@@ -95,18 +100,23 @@ struct StationControl:View {
                         if order.isCovered{ClocheView()}
                         if order.needsTidy{Image(systemName:order.everNibbled ? "hand.raised.fill":"exclamationmark.triangle.fill").font(.caption).foregroundStyle(TruckTheme.cocoa).padding(4).background(TruckTheme.cream,in:Circle()).offset(x:16,y:-12)}
                         if let topping=order.topping{Image(systemName:topping == .herb ? "leaf.fill":"star.fill").font(.caption.bold()).foregroundStyle(topping == .herb ? TruckTheme.moss:Color.orange).offset(y:-8)}
+                        if isTarget{Image(systemName:"hand.point.down.fill").font(.system(size:16,weight:.bold)).foregroundStyle(TruckTheme.plum).padding(3).background(TruckTheme.cream,in:Circle()).offset(x:16,y:-14)}
                     }.frame(width:50,height:50)
                     VStack(alignment:.leading,spacing:2){
                         Text(status(order,session:session)).font(.system(size:model.document.settings.largeText ? 14:12,weight:.bold)).lineLimit(2)
                         if let end=order.workEnds{Text("\(max(0,end-session.time),specifier:"%.1f") 秒").font(.caption).monospacedDigit()}
-                        else if order.station == .stove,let cooked=order.cookedAt,!order.everScorched{Text("寬限 \(Int(ceil(max(0,cooked+content.recipe(order.recipe).grace*session.mode.multiplier-session.time))))秒").font(.caption2).bold()}
+                        else if order.station == .stove,let cooked=order.cookedAt,!order.everScorched{
+                            let remaining=cooked+content.recipe(order.recipe).grace*session.mode.multiplier-session.time
+                            Text("\(remaining<=GameRules.scorchNotice ? "快起鍋":"寬限") \(Int(ceil(max(0,remaining))))秒").font(.caption2).bold()
+                        }
                         if order.monster == .emberDragon,let cooked=order.cookedAt{Text("熱度 \(Int(ceil(max(0,cooked+GameRules.heatWindow*session.mode.multiplier-session.time))))秒").font(.caption2).bold()}
+                        if order.isCovered,let remaining=order.warningRemaining{Text("預告暫停 \(Int(ceil(remaining)))秒").font(.caption2).bold()}
                     }
                 }else{Image(systemName:station == .stove ? "flame":station == .prep ? "carrot":"circle.dashed");Text("空位 \(slot+1)").font(.caption)}
             }.frame(maxWidth:.infinity,minHeight:48,maxHeight:.infinity)
                 .padding(.horizontal,3)
                 .background(TruckTheme.cream,in:RoundedRectangle(cornerRadius:13))
-                .overlay(RoundedRectangle(cornerRadius:13).stroke(model.selectedOrder==order?.id && order != nil ? TruckTheme.moss:TruckTheme.cocoa.opacity(0.18),lineWidth:model.selectedOrder==order?.id && order != nil ? 2.5:1))
+                .overlay(RoundedRectangle(cornerRadius:13).stroke(isTarget ? TruckTheme.plum:model.selectedOrder==order?.id && order != nil ? TruckTheme.moss:TruckTheme.cocoa.opacity(0.18),lineWidth:isTarget ? 3:model.selectedOrder==order?.id && order != nil ? 2.5:1))
         }.buttonStyle(.plain).disabled(order==nil).padding(.vertical,3)
             .accessibilityLabel(accessibilityText)
     }
@@ -121,6 +131,24 @@ struct StationControl:View {
         switch o.stage{case .prepping:return "備料中";case .prepared:return "備妥・可下鍋";case .cooking:return "烹調中";case .ready:return "完成・可裝盤";case .topping:return "配料中";case .tidying:return "整理中";case .plated:return o.topping?.rawValue ?? "可出餐";case .none:return "等待備料"}
     }
 }
+struct WarningConnector:View{
+    var actor:Int;var plate:Int
+    var body:some View{
+        GeometryReader{geometry in
+            let width=geometry.size.width
+            let start=CGPoint(x:width*(CGFloat(actor)+0.5)/3+12,y:58)
+            let side:CGFloat=actor==0 ? 7:width-7
+            let destination=CGPoint(x:plate==0 ? width/4+28.5:width*0.75+7.5,y:153)
+            Canvas{context,_ in
+                var path=Path();path.move(to:start);path.addLines([CGPoint(x:side,y:73),CGPoint(x:side,y:142),CGPoint(x:destination.x,y:142),destination])
+                context.stroke(path,with:.color(TruckTheme.cream.opacity(0.9)),style:StrokeStyle(lineWidth:5,lineCap:.round,lineJoin:.round))
+                context.stroke(path,with:.color(TruckTheme.plum),style:StrokeStyle(lineWidth:2.5,lineCap:.round,lineJoin:.round,dash:[5,3]))
+                var arrow=Path();arrow.move(to:CGPoint(x:destination.x-5,y:destination.y-4));arrow.addLine(to:CGPoint(x:destination.x+5,y:destination.y-4));arrow.addLine(to:CGPoint(x:destination.x,y:destination.y+3));arrow.closeSubpath()
+                context.fill(arrow,with:.color(TruckTheme.plum))
+            }
+        }
+    }
+}
 struct ClocheView:View {
     var body:some View{ZStack(alignment:.bottom){Ellipse().fill(TruckTheme.cocoa.opacity(0.18)).frame(height:8);UnevenRoundedRectangle(topLeadingRadius:26,topTrailingRadius:26).fill(LinearGradient(colors:[.white,Color(red:0.74,green:0.75,blue:0.67)],startPoint:.topLeading,endPoint:.bottomTrailing)).overlay(UnevenRoundedRectangle(topLeadingRadius:26,topTrailingRadius:26).stroke(TruckTheme.cocoa,lineWidth:1.5)).frame(height:32);Capsule().fill(TruckTheme.cream).overlay(Capsule().stroke(TruckTheme.cocoa,lineWidth:1.5)).frame(height:5);Circle().fill(TruckTheme.cocoa).frame(width:7,height:7).offset(y:-31)}.frame(height:40)}
 }
@@ -128,6 +156,7 @@ struct CommandPanel:View {
     @EnvironmentObject var model:AppModel
     var body:some View{
         VStack(spacing:6){
+            if let hint=model.commandHint{Text(hint).font(.caption.bold()).foregroundStyle(TruckTheme.cocoa).frame(maxWidth:.infinity,alignment:.leading).accessibilityLabel("操作提醒：\(hint)")}
             if let session=model.session,let content=model.content{
                 HStack(spacing:6){ForEach(session.activeOrders){order in
                     Button{model.select(order.id)}label:{VStack(spacing:2){Text(content.monster(order.monster).name).font(.system(size:11,weight:.medium));Text(content.recipe(order.recipe).name).font(.system(size:model.document.settings.largeText ? 16:14,weight:.bold))}.lineLimit(1).frame(maxWidth:.infinity,minHeight:44).background(model.selectedOrder==order.id ? TruckTheme.moss:TruckTheme.cream,in:RoundedRectangle(cornerRadius:12)).foregroundStyle(model.selectedOrder==order.id ? TruckTheme.cream:TruckTheme.cocoa)}.accessibilityIdentifier("quick-\(order.id)").accessibilityLabel("選取\(content.monster(order.monster).name)的\(content.recipe(order.recipe).name)")
@@ -156,6 +185,13 @@ struct CommandPanel:View {
         }
     }
     func action(_ o:OrderState)->(String,GameCommand?){
-        switch o.stage{case .none:return("備料",.prepare(o.id));case .prepared:return("下鍋",.cook(o.id));case .ready:return("裝盤",.plate(o.id));case .plated:return o.needsTidy ? ("整理 3 秒",.tidy(o.id)):("出餐",.serve(o.id));case .prepping:return("備料中…",nil);case .cooking:return("烹調中…",nil);case .topping:return("配料中…",nil);case .tidying:return("整理中…",nil)}
+        let active=model.session?.activeOrders ?? []
+        switch o.stage{
+        case .none:return active.filter{$0.station == .prep}.count<2 ? ("備料",.prepare(o.id)):("備料槽已滿",nil)
+        case .prepared:return active.filter{$0.station == .stove}.count<2 ? ("下鍋",.cook(o.id)):("爐位已滿",nil)
+        case .ready:return active.filter{$0.station == .plate}.count<2 ? ("裝盤",.plate(o.id)):("成品位已滿",nil)
+        case .plated:return o.needsTidy ? ("整理 3 秒",.tidy(o.id)):("出餐",.serve(o.id))
+        case .prepping:return("備料中…",nil);case .cooking:return("烹調中…",nil);case .topping:return("配料中…",nil);case .tidying:return("整理中…",nil)
+        }
     }
 }

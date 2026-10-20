@@ -31,7 +31,6 @@ final class KitchenScene: SKScene {
     private var state: GameSession?
     private var content: GameContent?
     private var reduced = false
-    private let warning=SKShapeNode()
     private var previewDragonRig:Bool{
         #if DEBUG
         return ProcessInfo.processInfo.environment["MFT_DRAGON_RIG"]=="1"
@@ -47,7 +46,7 @@ final class KitchenScene: SKScene {
         else{layoutCharacters()}
     }
     func display(session:GameSession,content:GameContent,selected:String?,reduceMotion:Bool) {
-        if let old=state,old.levelID != session.levelID || session.time<old.time{
+        if let old=state,old.id != session.id || old.levelID != session.levelID || session.time<old.time{
             removeAllChildren();monsters.removeAll()
         }
         state=session;self.content=content;reduced=reduceMotion
@@ -77,13 +76,6 @@ final class KitchenScene: SKScene {
             }
         }
         layoutCharacters()
-        warning.removeFromParent()
-        if let target=session.nibbleTarget,let order=session.orders.first(where:{$0.id==target}),let slot=order.slot,
-           let actor=session.nibbleActor,let actorNode=monsters[actor] {
-            let path=CGMutablePath();path.move(to:actorNode.position);path.addLine(to:CGPoint(x:size.width*(slot==0 ? 0.28:0.74),y:size.height-162))
-            warning.path=path;warning.strokeColor=UIColor(red:0.45,green:0.23,blue:0.57,alpha:1);warning.lineWidth=3;warning.zPosition=4
-            addChild(warning)
-        }
         isPaused=session.isPaused || reduceMotion
     }
     private func layoutCharacters(){

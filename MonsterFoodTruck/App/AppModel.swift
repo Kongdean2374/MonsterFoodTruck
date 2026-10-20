@@ -11,8 +11,13 @@ final class AppModel: ObservableObject {
     @Published var screen: Screen = .home
     @Published var selectedOrder: String?
     @Published var message: String?
+    @Published private(set) var commandHint:String?
+    private var commandHintUntil:Double=0
     @Published var lesson: String?
     @Published var settingsPresented = false
+    @Published private(set) var isClosingSettings=false
+    @Published private(set) var systemReducedMotion=false
+    var reducesMotion:Bool{systemReducedMotion || document.settings.reduceMotion}
     @Published var startupError: String?
     @Published var confirmation: Confirmation?
     private var confirmationAfterSettings:Confirmation?
@@ -136,7 +141,7 @@ final class AppModel: ObservableObject {
         guard screen == .game, lesson == nil else { return }
         document.session?.isPaused = false
         lastUptime = ProcessInfo.processInfo.systemUptime
-        kitchen.isPaused = document.settings.reduceMotion
+        kitchen.isPaused = reducesMotion
         audio.startMusic(); syncKitchen()
     }
     func dismissLesson(skip: Bool = false) {
@@ -144,7 +149,7 @@ final class AppModel: ObservableObject {
         lesson = nil; document.session?.pendingLesson=nil; resume(); persist()
     }
     func select(_ id: String) {
-        selectedOrder = id; audio.play("select")
+        selectedOrder = id;commandHint=nil; audio.play("select")
         if tutorialPhase == 1 {
             tutorialPhase = 2
             showLesson("點「備料」就會自動準備，不需要連點。兩個備料槽都能使用。")
@@ -162,6 +167,7 @@ final class AppModel: ObservableObject {
         lastUptime = uptime
         session.advance(to:session.time+delta,content:content)
         document.session = session
+        if commandHint != nil,session.time>=commandHintUntil{commandHint=nil}
         consumeEvents()
         syncKitchen()
         if session.finished(content:content) { settleResult(session); return }
@@ -176,7 +182,8 @@ final class AppModel: ObservableObject {
     @discardableResult private func submit(_ command:GameCommand,catchUp:Bool)->Bool{
         if catchUp{tick()}
         guard var session=document.session,!session.isPaused,lesson==nil,let content else { return false }
-        if let error=session.send(command,content:content) { message=error;return false }
+        if let error=session.send(command,content:content) {commandHint=error;commandHintUntil=session.time+4;return false}
+        commandHint=nil
         document.session=session;consumeEvents();syncKitchen();persist()
         if session.finished(content:content) { settleResult(session) }
         return true
@@ -207,7 +214,7 @@ final class AppModel: ObservableObject {
     private func consumeEvents() {
         guard let session=document.session, let content else { return }
         for event in session.events where event.id > lastEvent {
-            lastEvent=event.id;audio.play(event.kind)
+            lastEvent=event.id;audio.play(event.kind=="scorchWarning" ? "scorched":event.kind)
             if (event.kind=="preferred" || event.kind=="served"),let order=session.orders.first(where:{$0.id==event.orderID}) {
                 audio.play(order.monster == .emberDragon ? "dragonReaction":order.monster == .nibbleImp ? "impReaction":"deerReaction")
             }
@@ -238,7 +245,8 @@ final class AppModel: ObservableObject {
         _ = content
     }
     private func showLesson(_ text: String) {lesson=text;document.session?.pendingLesson=text;document.session?.isPaused=true;lastUptime=nil;kitchen.isPaused=true;persist()}
-    private func syncKitchen() {guard let session=document.session,let content else{return};kitchen.display(session:session,content:content,selected:selectedOrder,reduceMotion:document.settings.reduceMotion)}
+    private func syncKitchen() {guard let session=document.session,let content else{return};kitchen.display(session:session,content:content,selected:selectedOrder,reduceMotion:reducesMotion)}
+    func setSystemReducedMotion(_ value:Bool){guard value != systemReducedMotion else{return};systemReducedMotion=value;syncKitchen()}
     private func settleResult(_ session: GameSession) {
         guard screen == .game,!isSettling,let content,let store else{return}
         isSettling=true
@@ -275,7 +283,17 @@ final class AppModel: ObservableObject {
     func homeSaving() {pause();persist{[weak self] success in if success{self?.screen = .home}}}
     func endPlay() {pause();persist{[weak self] success in if success{self?.audio.pause();self?.screen = .ended}}}
     func openSettings() {if screen == .game{pause()};settingsPresented=true}
-    func closeSettingsFor(_ confirmation:Confirmation){confirmationAfterSettings=confirmation;settingsPresented=false}
+    func closeSettings(){
+        guard !isClosingSettings else{return}
+        if recoveryBlocked{audio.pause();settingsPresented=false;return}
+        isClosingSettings=true
+        persist{[weak self] success in
+            guard let self else{return};self.isClosingSettings=false
+            if success{self.message=nil;self.audio.pause();self.settingsPresented=false}
+            else{self.confirmationAfterSettings=nil}
+        }
+    }
+    func closeSettingsFor(_ confirmation:Confirmation){confirmationAfterSettings=confirmation;closeSettings()}
     func settingsDidDismiss(){
         if let pending=confirmationAfterSettings{confirmationAfterSettings=nil;confirmation=pending}
         else if screen == .home{audio.startMusic()}

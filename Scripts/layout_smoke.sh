@@ -9,7 +9,11 @@ if len(matches)!=1:raise SystemExit('Expected the recorded iOS 18.5 runtime for 
 print(matches[0])
 PY
 )
-for SIZE in small large; do
+SIZES=(small large)
+if [ -n "${MFT_LAYOUT_SIZE:-}" ]; then
+  case "$MFT_LAYOUT_SIZE" in small|large) SIZES=("$MFT_LAYOUT_SIZE");; *) echo 'Unknown layout size' >&2; exit 1;; esac
+fi
+for SIZE in "${SIZES[@]}"; do
   if [ "$SIZE" = small ]; then TYPE=com.apple.CoreSimulator.SimDeviceType.iPhone-SE-3rd-generation; else TYPE=com.apple.CoreSimulator.SimDeviceType.iPhone-15-Pro-Max; fi
   DEVICE=$(xcrun simctl create "MonsterFoodTruck-$SIZE" "$TYPE" "$RUNTIME")
   echo "$SIZE $TYPE $DEVICE $RUNTIME" >> build/LAYOUT_ENVIRONMENT.txt

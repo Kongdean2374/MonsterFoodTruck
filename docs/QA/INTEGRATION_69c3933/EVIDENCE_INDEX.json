@@ -1,0 +1,17 @@
+{
+  "source_sha": "69c3933a7833429a32b537ac2ba7e1ff93739f4b",
+  "run_id": 39441785452,
+  "job_id": 118693237157,
+  "artifact_id": 12275303224,
+  "images": {
+    "actual-home.png": "A0A3EEDC-6F6C-487C-A266-DE2A0A471E7A.png",
+    "actual-taps-level-one-result.png": "CF56A967-9972-4D28-89F5-5B1292D4382F.png",
+    "actual-taps-level-two-unlocked.png": "25B1BFFC-812B-46CF-8C9B-8DE9627D21CB.png",
+    "actual-settings-before-restart-switches-unchanged.png": "E298E895-4BE8-4B2D-9037-58626805EAD7.png",
+    "actual-FAILED-haptics-after-restart.png": "2E0631AE-F01B-4AA7-A94F-EC8B7F0C8592.png",
+    "actual-DEBUG-rig-prototype.png": "C122AB94-BA70-4960-905F-896B963CE26B.png",
+    "actual-DEBUG-warning.png": "3CECDAFE-1FAB-47A7-A6FE-204C77573761.png",
+    "actual-DEBUG-large-left-contrast.png": "1635C867-8857-4688-93B3-ADF761ABECB8.png"
+  },
+  "scope": "Overall FAILURE. 15 unit passed; 3 UI passed and 1 failed at haptics after restart. First-level real-tap subflow reached saved result and unlock before later assertion failure. No small/large device tests ran. DEBUG screenshots are explicitly injected and frozen scenarios, not full normal gameplay."
+}

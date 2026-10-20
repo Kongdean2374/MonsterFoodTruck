@@ -7,6 +7,7 @@ enum GameRules {
     static let exposureBeforeWarning: Double = 7
     static let theftCooldown: Double = 8
     static let arrivalNotice: Double = 4
+    static let scorchNotice: Double = 2
 }
 
 enum RecipeID: String, Codable, CaseIterable, Hashable { case starSoup = "star_soup", moonCrisp = "moon_crisp", cloudStew = "cloud_stew" }

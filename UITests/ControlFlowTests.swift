@@ -4,7 +4,7 @@ import XCTest
 final class ControlFlowTests:XCTestCase{
     override func setUp(){continueAfterFailure=false}
     override func tearDown(){
-        if testRun?.hasSucceeded == false{
+        if (testRun?.failureCount ?? 0)>0{
             let shot=XCTAttachment(screenshot:XCUIScreen.main.screenshot());shot.name="FAILED-controls-actual-screen";shot.lifetime = .keepAlways;add(shot)
         }
     }

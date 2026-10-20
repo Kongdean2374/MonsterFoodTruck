@@ -18,14 +18,14 @@ permissions:
   contents: read
 concurrency:
   group: validate-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   validate:
     runs-on: macos-15
     timeout-minutes: 45
     env:
       DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
-      MFT_LAYOUT_QA: ${{ inputs.layout_qa && '1' || '0' }}
+      MFT_LAYOUT_QA: '0'
       MFT_FULL_QA: ${{ inputs.full_qa && '1' || '0' }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -55,6 +55,47 @@ jobs:
             build/VALIDATION_STATUS.json
             build/RESOURCE_FAILURE
             build/TEST_RESULT_SUMMARY.json
+            build/LAYOUT_*.json
+            build/LAYOUT_ENVIRONMENT.txt
+            build/Layout-*.xcresult
+            build/*.log
+          if-no-files-found: error
+  layouts:
+    if: ${{ inputs.layout_qa }}
+    name: layout-${{ matrix.size }}
+    strategy:
+      fail-fast: false
+      matrix:
+        size: [small, large]
+    runs-on: macos-15
+    timeout-minutes: 25
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+      MFT_LAYOUT_ONLY: '1'
+      MFT_LAYOUT_SIZE: ${{ matrix.size }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Record environment and verify reproducible project
+        run: bash Scripts/ci_environment.sh
+      - name: Build this same source and run actual layout UI tests
+        run: bash Scripts/validate.sh
+      - name: Upload actual layout evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: layout-${{ matrix.size }}-${{ github.run_number }}-${{ github.sha }}
+          retention-days: 14
+          path: |
+            build/ENVIRONMENT.txt
+            build/SIMULATOR_APP_INFO.plist
+            build/SIMULATOR_APP_IDENTITY.json
+            build/SIMULATOR_BUNDLE_PROBE.txt
+            build/QA_EVIDENCE
+            build/TEST_SUMMARY.md
+            build/VALIDATION_STATUS.json
+            build/RESOURCE_FAILURE
             build/LAYOUT_*.json
             build/LAYOUT_ENVIRONMENT.txt
             build/Layout-*.xcresult

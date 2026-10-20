@@ -31,9 +31,9 @@ else
   STATUS=$?
 fi
 stop_recording
-xcrun swift Scripts/probe_video.swift build/QA_EVIDENCE/journey/normal-six-level-journey.mov > build/QA_EVIDENCE/journey/VIDEO_METADATA.json
 xcrun xcresulttool export attachments --path build/Journey.xcresult --output-path build/QA_EVIDENCE/journey/screenshots
 xcrun xcresulttool get test-results summary --path build/Journey.xcresult > build/JOURNEY_TEST_SUMMARY.json
+xcrun swift Scripts/probe_video.swift build/QA_EVIDENCE/journey/normal-six-level-journey.mov > build/QA_EVIDENCE/journey/VIDEO_METADATA.json
 APP_DATA=$(xcrun simctl get_app_container "$DEVICE" cc.chaihome.monsterfoodtruck data)
 REPLAY_DIR="$APP_DATA/Library/Application Support/MonsterFoodTruck/UIReplayEvidence/Journey"
 if [ -d "$REPLAY_DIR" ]; then ditto "$REPLAY_DIR" build/QA_EVIDENCE/journey/actual-model-snapshots; fi

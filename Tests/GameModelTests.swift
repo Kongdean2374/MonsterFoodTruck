@@ -84,6 +84,9 @@ final class GameModelTests: XCTestCase {
         var (_,scorch)=try fixture();XCTAssertNil(scorch.send(.prepare("test-1"),content:d))
         scorch.advance(to:3,content:d);XCTAssertNil(scorch.send(.cook("test-1"),content:d))
         scorch.advance(to:20,content:d);XCTAssertEqual(scorch.scorchCount,1)
+        let notice=try XCTUnwrap(scorch.events.first{$0.kind=="scorchWarning"})
+        let burned=try XCTUnwrap(scorch.events.first{$0.kind=="scorched"})
+        XCTAssertEqual(notice.time,17,accuracy:0.0001);XCTAssertGreaterThanOrEqual(burned.time-notice.time,GameRules.scorchNotice)
         XCTAssertNil(scorch.send(.plate("test-1"),content:d));XCTAssertNil(scorch.send(.tidy("test-1"),content:d))
         scorch.advance(to:23,content:d);XCTAssertFalse(scorch.orders[0].needsTidy);XCTAssertTrue(scorch.orders[0].everScorched)
     }
@@ -130,6 +133,42 @@ final class GameModelTests: XCTestCase {
         object["schemaVersion"]=999
         let bad=try JSONDecoder().decode(GameSession.self,from:JSONSerialization.data(withJSONObject:object))
         XCTAssertThrowsError(try bad.validate(content:c))
+        object["schemaVersion"]=1
+        var orders=try XCTUnwrap(object["orders"] as? [[String:Any]])
+        orders[0]["station"]="stove";orders[0]["slot"]=0;object["orders"]=orders
+        let impossibleStation=try JSONDecoder().decode(GameSession.self,from:JSONSerialization.data(withJSONObject:object))
+        XCTAssertThrowsError(try impossibleStation.validate(content:c))
+    }
+    func testAllSixScoringBoundariesThroughLegalCommands() throws{
+        let c=try content()
+        let thresholds=[(3,3),(3,3),(4,4),(5,5),(6,5),(7,7)]
+        for mode in PlayMode.allCases{for (index,level) in c.levels.enumerated(){
+            let (pass,preference)=thresholds[index]
+            XCTAssertEqual(level.passCount,pass);XCTAssertEqual(level.preferenceCount,preference)
+            let reference=try CommandReplayPlanner.run(level:level,mode:mode,content:c)
+            for count in [pass-1,pass] where count<level.orders.count{
+                let accepted=Set(level.orders.prefix(count).map(\.id))
+                var s=GameSession(level:level,mode:mode,content:c);s.isPaused=false
+                for input in reference.inputs where accepted.contains(input.command.orderID){
+                    s.advance(to:input.time,content:c);XCTAssertNil(s.send(input.command,content:c))
+                }
+                s.advance(to:300,content:c);try s.validate(content:c)
+                XCTAssertTrue(s.finished(content:c));XCTAssertEqual(s.served,count)
+                XCTAssertEqual(s.stars(content:c),count<pass ? 0:1,"\(level.id), served \(count)")
+            }
+            let automatic=level.orders.filter{$0.monster == .emberDragon}.count
+            for target in [preference-1,preference]{
+                let topped=Set(level.orders.filter{$0.monster != .emberDragon}.prefix(target-automatic).map(\.id))
+                var s=GameSession(level:level,mode:mode,content:c);s.isPaused=false
+                for input in reference.inputs{
+                    if case let .garnish(id,_)=input.command,!topped.contains(id){continue}
+                    s.advance(to:input.time,content:c);XCTAssertNil(s.send(input.command,content:c))
+                }
+                s.advance(to:reference.time,content:c);try s.validate(content:c)
+                XCTAssertEqual(s.served,level.orders.count);XCTAssertEqual(s.preferences,target)
+                XCTAssertEqual(s.stars(content:c),target==preference ? 3:2,"\(level.id), preferences \(target)")
+            }
+        }}
     }
     func testSixLevelsNormalAndGentleReferenceReplay() throws {
         let c=try content()

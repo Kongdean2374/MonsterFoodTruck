@@ -1,5 +1,14 @@
 # 品質問題紀錄
 
+## MFT-003（設定文字區點按與保存回歸）
+
+- 嚴重度：P2，規格 4／12.2；Source `69c3933a7833429a32b537ac2ba7e1ff93739f4b`，[run 39441785452](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39441785452)，artifact `12275303224`。
+- 原生結果：18 passed／1 failed／0 skipped（15 單元；3 UI 通過、1 UI 失敗）。原教學操作已到達真實第一關結算及第二關解鎖，但同一長案例之後於 FlowTests.swift:68 讀取重開後觸覺開關，預期 0、實際 1，整體 failure。
+- 畫面：重開前即能看到高對比／大字等仍為關閉，原 Toggle 的文字區點按未切換開關；不能將原預期檔名當成旗標已生效。尚未證明是檔案寫入失敗，不作該歸因。
+- 修改中：文字區提供至少 44pt 的操作區，維持原生開關與明確 accessibility label；每次點按立即檢查實際值，再檢查重開保存，不刪除觸覺斷言。完成設定等最新原子寫入完成才關閉，失敗保留畫面及重試；雙壞檔則保護原檔並允許返回／明確清除流程。
+- 同次修正：以 failureCount 判斷失敗附件，避免 passed 案例被過早 hasSucceeded 值命名為 FAILED；原 artifact 及原生統計保留。
+- 證據：[INTEGRATION_69c3933](INTEGRATION_69c3933/)。狀態 IN_PROGRESS，未有 Dot 通過判定。
+
 ## MFT-002（整合教學操作與失敗證據）
 
 - 嚴重度：P1（操作驗證未通過），規格 3／12。受測 SHA `d59f2123188156043a46dd10e7f8bc1d0a97d4f1`；[Validate 39433857551](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39433857551)，job `118665612505`，artifact `12271815746`。
@@ -9,6 +18,7 @@
 - 修改中：教學／暫停時停用並隱藏背景操作；命令 catch-up 如觸發教學先停下；保留原「備料→下鍋→裝盤→出餐→設定→保存→重開」斷言並等待實際轉移。失敗時先匯出附件／摘要再回傳原 xcodebuild 失敗碼，新增操作失敗截圖與 hierarchy。
 - 真實畫面：[INTEGRATION_d59f212](INTEGRATION_d59f212/) 保存首頁、測試情境及大字／左手／高對比原始 PNG 與來源。首頁接縫在此畫面消失；同尺寸角色腳部仍與文字相疊，修正後需重拍。debug 情境與工程重播不代表完整真實點按 UI 通過。
 - 狀態：IN_PROGRESS，等待新候選原失敗及尺寸回歸。
+- `69c3933a7833429a32b537ac2ba7e1ff93739f4b` 的原教學／保存子流程已執行到第一關結算與解鎖第二關，但整個長案例因新增 MFT-003 設定斷言仍 failure。失敗附件匯出已實測成功：26 PNG＋原生 summary；資源逐檔一致。未把該案例或三尺寸標成通過，仍等待完整重測與 Dot 查驗。
 - 中間候選 `1b90898e19032ce55883d9723f15ba1533f045f0` 的 [run 39437388402](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39437388402) 在編譯成功後、啟動測試前被新增資源完整性檢查攔下：Xcode CopyPNGFile 的預設轉換使輸出 PNG 位元組與來源 SHA-256 不同。此 run 沒有執行單元／UI，不宣稱原失敗消失。下一候選關閉原始資源 PNG 的建置重壓縮，保留逐檔校驗；另外增加所有退出階段的狀態摘要，建置前失敗不虛構截圖或測試數。
 - `e4865ea38af8e6c728463e4a7dcefd25bfc45d56` 的 [run 39437916409](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39437916409) 同樣在資源檢查失敗、沒有執行 XCTest。log 確認關閉壓縮後仍執行 `copypng -strip-PNG-text`，因此原檔雜湊仍不同。後續校驗僅允許 tEXt／zTXt／iTXt 文字中繼資料差異，驗證每個 PNG chunk 的 CRC，要求像素、色彩及全部非文字區塊完全一致；產出與來源 SHA-256 及共同 payload 雜湊均記錄。其他資源仍要求逐位元組一致，不以刪除資源檢查取得成功。
 - 上述中間方案 `e76f4a79c910be07a11eb043fe7215806e3d259b` 的 [run 39440235520](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39440235520) 仍被 PNG 區塊差異攔下，未執行 XCTest。Codex 新增的檢查未先配合 Xcode 資源處理，拖住了原 UI 回歸。後續改成明確以 opaque file 複製原始 PNG，關閉 PNG 文字移除，恢復逐位元組嚴格校驗；如仍失敗會連同實際輸出 PNG 保存以便查對，避免只依指令推測。必要 bundle 識別／native probe 仍在安裝前執行，完整資源檢查放到測試附件匯出之後獨立執行，任何失敗保留非零結果，不再阻止取得原教學及尺寸的實測證據。

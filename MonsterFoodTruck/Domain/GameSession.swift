@@ -113,7 +113,11 @@ struct GameSession: Codable {
                 if let t = o.workEnds { next = min(next, max(time, t)) }
                 // Strict expiry gives an input received exactly at deadline priority.
                 next = min(next, max(time, o.deadline + 0.00001))
-                if o.station == .stove, let cooked = o.cookedAt, !o.everScorched { next = min(next, max(time, cooked + content.recipe(o.recipe).grace * mode.multiplier + 0.00001)) }
+                if o.station == .stove, let cooked = o.cookedAt, !o.everScorched {
+                    let deadline=cooked+content.recipe(o.recipe).grace*mode.multiplier
+                    if !events.contains(where:{$0.kind=="scorchWarning" && $0.orderID==o.id}){next=min(next,max(time,deadline-GameRules.scorchNotice))}
+                    next = min(next, max(time, deadline + 0.00001))
+                }
                 if o.monster == .emberDragon, let cooked = o.cookedAt, !o.heatExpiredRecorded { next = min(next, max(time, cooked + GameRules.heatWindow * mode.multiplier + 0.00001)) }
                 if exposed(o), o.exposure < GameRules.exposureBeforeWarning, time >= cooldownUntil { next = min(next, time + GameRules.exposureBeforeWarning - o.exposure) }
             }
@@ -145,6 +149,11 @@ struct GameSession: Codable {
                 case .tidying: orders[i].stage = .plated; orders[i].needsTidy = false; emit("tidyDone", orders[i].id)
                 default: break
                 }
+            }
+            if orders[i].station == .stove,let cooked=orders[i].cookedAt,!orders[i].everScorched,
+               time>=cooked+content.recipe(orders[i].recipe).grace*mode.multiplier-GameRules.scorchNotice,
+               !events.contains(where:{$0.kind=="scorchWarning" && $0.orderID==orders[i].id}){
+                emit("scorchWarning",orders[i].id)
             }
             if orders[i].station == .stove, let cooked = orders[i].cookedAt, !orders[i].everScorched,
                time > cooked + content.recipe(orders[i].recipe).grace * mode.multiplier {
@@ -272,6 +281,8 @@ struct GameSession: Codable {
         if events.contains(where: { $0.kind == "heatExpired" }) { result.append("有焰尾龍餐點失去熱度；熱度從烹調完成開始，可優先出餐。") }
         if result.count < 2 && nibbleCount > 0 { result.append("成品曾被偷嚐；可蓋住目標餐點，或先服務伸手的小鬼。") }
         if result.count < 2 && scorchCount > 0 { result.append("料理曾出現焦邊；留意爐上的完成提示與安全寬限。") }
+        if result.count < 2 && lost > 0{result.append("有 \(lost) 位客人耐心用盡離開；可先留意快到期的訂單，入場前排隊不耗耐心。")}
+        if result.count < 2 && orders.contains(where:{$0.status == .served && !$0.preferred && $0.monster == .mossDeer}){result.append("有苔角鹿餐點未達成偏好；可在乾淨料理上加香草芽，再等配料完成出餐。")}
         return Array(result.prefix(2))
     }
 }

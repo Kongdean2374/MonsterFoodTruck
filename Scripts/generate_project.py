@@ -40,6 +40,7 @@ def configurations(key, settings):
             "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "DEBUG" if mode == "Debug" else "",
             "DEBUG_INFORMATION_FORMAT": "dwarf" if mode == "Debug" else "dwarf-with-dsym",
             "ENABLE_TESTABILITY": "YES" if mode == "Debug" else "NO",
+            "ONLY_ACTIVE_ARCH": "YES" if mode == "Debug" else "NO",
         }
         entries.append(obj(key+mode, isa="XCBuildConfiguration", buildSettings=cfg, name=mode))
     return obj(key+"configs", isa="XCConfigurationList", buildConfigurations=entries, defaultConfigurationIsVisible=0, defaultConfigurationName="Release")
