@@ -7,4 +7,4 @@
 - BUILD_MANIFEST.json、TEST_RESULT_SUMMARY.json、DEVICE_APP_IDENTITY.json、DEVICE_BUNDLE_PROBE.txt、MACHO_PLATFORM.txt、SIGNATURE.txt：從實際 artifact 取出的原始證據。
 - P1-bootstrap-launch.png：從實際 XCTest xcresult 匯出的 App 啟動截圖；未作合成或美術改造。
 
-Codex 已下載 IPA 核對 checksum 並解析 Mach-O；Dot 尚未獨立重測。本候選只有最小工程，尚非完整遊戲、美術驗收或最終可試玩版本。IPA 不提交進 git，請由上述 Actions artifact 取得。真機與簽名安裝尚未測。
+Codex 已下載 IPA 核對 checksum 並解析 Mach-O；使用者已轉交 Dot 對相同 SHA／artifact 的獨立重測，授權 DOT-001 記為 VERIFIED_CLOSED，詳問題紀錄。本候選只有最小工程，尚非完整遊戲、美術驗收或最終可試玩版本。IPA 不提交進 git，請由上述 Actions artifact 取得。真機與簽名安裝尚未測。
