@@ -16,6 +16,17 @@ final class ArtReviewTests:XCTestCase {
         let app=XCUIApplication();app.launchEnvironment["MFT_ART_REVIEW"]=background;app.launchEnvironment["MFT_UI_SUITE"]="art-review";app.launch()
         let play=app.buttons["播放部件動作"]
         XCTAssertTrue(play.waitForExistence(timeout:10));capture("rig-\(background)-before",app)
+        // The external simctl screenshot watcher acknowledges a complete native
+        // baseline image before the first real tap. No App source is changed.
+        let documents=FileManager.default.urls(for:.documentDirectory,in:.userDomainMask).first!
+        try! FileManager.default.createDirectory(at:documents,withIntermediateDirectories:true)
+        let marker=documents.appendingPathComponent("MFT-dense-\(background).json")
+        let ack=documents.appendingPathComponent("MFT-dense-\(background).ack")
+        try? FileManager.default.removeItem(at:ack)
+        try! JSONSerialization.data(withJSONObject:["background":background,"ready_wall_seconds":Date().timeIntervalSince1970]).write(to:marker,options:.atomic)
+        let deadline=Date().addingTimeInterval(12)
+        while !FileManager.default.fileExists(atPath:ack.path) && Date()<deadline{RunLoop.current.run(until:Date().addingTimeInterval(0.05))}
+        XCTAssertTrue(FileManager.default.fileExists(atPath:ack.path),"Native screenshot watcher must capture baseline before motion")
         for cycle in 1...3{
             mark("rig-\(background)-cycle-\(cycle)-before-real-tap")
             play.tap()

@@ -17,7 +17,7 @@ jobs:
     env:
       DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
       MFT_HARNESS_SHA: ${{ github.sha }}
-      MFT_CAPTURE_CASES: ${{ contains(github.event.head_commit.message, '[crisp-only]') && 'crisp' || 'all' }}
+      MFT_CAPTURE_CASES: ${{ contains(github.event.head_commit.message, '[rig-snapshots]') && 'rig-snapshots' || (contains(github.event.head_commit.message, '[crisp-only]') && 'crisp' || 'all') }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:

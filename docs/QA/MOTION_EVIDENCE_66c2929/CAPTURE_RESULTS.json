@@ -1,0 +1,641 @@
+{
+  "actual_app_source_sha": "66c2929dd05c28af1b0c3ec8a79805446c6dc023",
+  "candidate_build": 25,
+  "app_and_ipa_unchanged": true,
+  "resource_hashes_match_candidate_device_ipa": 47,
+  "full_regression_result": "Original source 66c2929 Validate 39497238513: 41 method invocations passed, 0 failed/skipped. No new full regression.",
+  "capture_test_history": [
+    {
+      "harness": "fd05dc6",
+      "run_id": 39509800845,
+      "conclusion": "failure",
+      "executed_capture_tests": 0,
+      "reason": "Missing existing asset-preparation step; bundle gate rejected missing icon metadata."
+    },
+    {
+      "harness": "9a34d46",
+      "run_id": 39510391658,
+      "conclusion": "failure",
+      "passed": 4,
+      "failed": 1,
+      "skipped": 0,
+      "reason": "Crisp launch Busy installing/uninstalling; all five video JSON probes failed. Original files retained."
+    },
+    {
+      "harness": "f8beae1",
+      "run_id": 39512444370,
+      "conclusion": "success",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "Only previously failed crisp case, on fresh runner. Typed JSON probe successful."
+    }
+  ],
+  "successful_distinct_capture_cases": 5,
+  "capture_method_invocations": {
+    "passed": 5,
+    "failed": 1,
+    "skipped": 0
+  },
+  "movies": [
+    {
+      "phase": "dark",
+      "original_movie": "dark.mov",
+      "bytes": 13973968,
+      "sha256": "0068c3ba33b8ab3b45088dffd8f751384eb7363567a8b50a8dff21f349295160",
+      "artifact_id": 12305138449,
+      "run_id": 39510391658,
+      "capture_harness_sha": "9a34d468b074799329dee99f80bb4ae44fe21231",
+      "native_test_counts": {
+        "passedTests": 1,
+        "failedTests": 0,
+        "skippedTests": 0
+      },
+      "scope": "Existing DEBUG ArtReview page: actual shared SpriteKit rigs, first row only, three manual button cycles. Not normal orders or actual player serving all three species."
+    },
+    {
+      "phase": "light",
+      "original_movie": "light.mov",
+      "bytes": 15435251,
+      "sha256": "e7d9c108e332e11b80b0cccf493e24de4521f31a130e2f714d19d41ee48dedb2",
+      "artifact_id": 12305138449,
+      "run_id": 39510391658,
+      "capture_harness_sha": "9a34d468b074799329dee99f80bb4ae44fe21231",
+      "native_test_counts": {
+        "passedTests": 1,
+        "failedTests": 0,
+        "skippedTests": 0
+      },
+      "scope": "Existing DEBUG ArtReview page: actual shared SpriteKit rigs, first row only, three manual button cycles. Not normal orders or actual player serving all three species."
+    },
+    {
+      "phase": "soup",
+      "original_movie": "soup.mov",
+      "bytes": 36282414,
+      "sha256": "d50b7e184fb2c831152dcbfd8c09e67ca0745b92fb37d3245d0461f2cb85271c",
+      "artifact_id": 12305138449,
+      "run_id": 39510391658,
+      "capture_harness_sha": "9a34d468b074799329dee99f80bb4ae44fe21231",
+      "native_test_counts": {
+        "passedTests": 1,
+        "failedTests": 0,
+        "skippedTests": 0
+      },
+      "scope": "Unmodified earned save restored, normal UI buttons and clock, first customer only; not complete level success or fresh-user unlock.",
+      "actual_session": {
+        "order_id": "L1-1",
+        "recipe": "star_soup",
+        "status": "served",
+        "commands": [
+          {
+            "time": 2.5277180833332977,
+            "command": {
+              "prepare": {
+                "_0": "L1-1"
+              }
+            }
+          },
+          {
+            "time": 6.026858791666655,
+            "command": {
+              "cook": {
+                "_0": "L1-1"
+              }
+            }
+          },
+          {
+            "time": 16.57680045833331,
+            "command": {
+              "plate": {
+                "_0": "L1-1"
+              }
+            }
+          },
+          {
+            "time": 18.59364791666667,
+            "command": {
+              "cover": {
+                "_0": "L1-1"
+              }
+            }
+          },
+          {
+            "time": 20.261233500000003,
+            "command": {
+              "uncover": {
+                "_0": "L1-1"
+              }
+            }
+          },
+          {
+            "time": 21.926894791666655,
+            "command": {
+              "garnish": {
+                "_1": "香草芽",
+                "_0": "L1-1"
+              }
+            }
+          },
+          {
+            "time": 24.510420166666677,
+            "command": {
+              "serve": {
+                "_0": "L1-1"
+              }
+            }
+          }
+        ],
+        "events": [
+          {
+            "kind": "arrival",
+            "id": 0,
+            "time": 0,
+            "orderID": "L1-1",
+            "detail": ""
+          },
+          {
+            "kind": "prepStart",
+            "id": 1,
+            "time": 2.5277180833332977,
+            "orderID": "L1-1",
+            "detail": ""
+          },
+          {
+            "kind": "prepDone",
+            "id": 2,
+            "time": 5.527718083333298,
+            "orderID": "L1-1",
+            "detail": ""
+          },
+          {
+            "kind": "cookStart",
+            "id": 3,
+            "time": 6.026858791666655,
+            "orderID": "L1-1",
+            "detail": ""
+          },
+          {
+            "kind": "cookDone",
+            "id": 4,
+            "time": 16.026858791666655,
+            "orderID": "L1-1",
+            "detail": ""
+          },
+          {
+            "kind": "plated",
+            "id": 5,
+            "time": 16.57680045833331,
+            "orderID": "L1-1",
+            "detail": ""
+          },
+          {
+            "kind": "covered",
+            "id": 7,
+            "time": 18.59364791666667,
+            "orderID": "L1-1",
+            "detail": ""
+          },
+          {
+            "kind": "uncovered",
+            "id": 8,
+            "time": 20.261233500000003,
+            "orderID": "L1-1",
+            "detail": ""
+          },
+          {
+            "kind": "toppingStart",
+            "id": 9,
+            "time": 21.926894791666655,
+            "orderID": "L1-1",
+            "detail": "香草芽"
+          },
+          {
+            "kind": "toppingDone",
+            "id": 10,
+            "time": 23.926894791666655,
+            "orderID": "L1-1",
+            "detail": ""
+          },
+          {
+            "kind": "preferred",
+            "id": 11,
+            "time": 24.510420166666677,
+            "orderID": "L1-1",
+            "detail": ""
+          }
+        ],
+        "other_orders": [
+          {
+            "id": "L1-2",
+            "status": "waiting"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "stew",
+      "original_movie": "stew.mov",
+      "bytes": 67674009,
+      "sha256": "7c44e3b49efe8440df5c36d999bece95d2850291de038202b620b09eeee5deee",
+      "artifact_id": 12305138449,
+      "run_id": 39510391658,
+      "capture_harness_sha": "9a34d468b074799329dee99f80bb4ae44fe21231",
+      "native_test_counts": {
+        "passedTests": 1,
+        "failedTests": 0,
+        "skippedTests": 0
+      },
+      "scope": "Unmodified earned save restored, normal UI buttons and clock, first customer only; not complete level success or fresh-user unlock.",
+      "actual_session": {
+        "order_id": "L5-1",
+        "recipe": "cloud_stew",
+        "status": "served",
+        "commands": [
+          {
+            "command": {
+              "prepare": {
+                "_0": "L5-1"
+              }
+            },
+            "time": 2.6745966666666163
+          },
+          {
+            "command": {
+              "cook": {
+                "_0": "L5-1"
+              }
+            },
+            "time": 8.591945833333284
+          },
+          {
+            "command": {
+              "plate": {
+                "_0": "L5-1"
+              }
+            },
+            "time": 34.54185774999996
+          },
+          {
+            "command": {
+              "tidy": {
+                "_0": "L5-1"
+              }
+            },
+            "time": 42.3742921249999
+          },
+          {
+            "command": {
+              "cover": {
+                "_0": "L5-1"
+              }
+            },
+            "time": 47.27511466666658
+          },
+          {
+            "command": {
+              "uncover": {
+                "_0": "L5-1"
+              }
+            },
+            "time": 49.29388570833328
+          },
+          {
+            "command": {
+              "garnish": {
+                "_0": "L5-1",
+                "_1": "香草芽"
+              }
+            },
+            "time": 51.25858887499999
+          },
+          {
+            "command": {
+              "serve": {
+                "_0": "L5-1"
+              }
+            },
+            "time": 55.1537454999999
+          }
+        ],
+        "events": [
+          {
+            "kind": "arrival",
+            "id": 0,
+            "time": 0,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "prepStart",
+            "id": 1,
+            "time": 2.6745966666666163,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "prepDone",
+            "id": 3,
+            "time": 7.674596666666616,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "cookStart",
+            "id": 5,
+            "time": 8.591945833333284,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "cookDone",
+            "id": 7,
+            "time": 24.591945833333284,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "scorchWarning",
+            "id": 8,
+            "time": 29.591945833333284,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "scorched",
+            "id": 9,
+            "time": 31.591955833333284,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "plated",
+            "id": 10,
+            "time": 34.54185774999996,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "nibbleWarning",
+            "id": 11,
+            "time": 37.54185774999996,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "nibbled",
+            "id": 12,
+            "time": 40.54185774999996,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "tidyStart",
+            "id": 13,
+            "time": 42.3742921249999,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "tidyDone",
+            "id": 14,
+            "time": 45.3742921249999,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "covered",
+            "id": 15,
+            "time": 47.27511466666658,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "uncovered",
+            "id": 18,
+            "time": 49.29388570833328,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "toppingStart",
+            "id": 19,
+            "time": 51.25858887499999,
+            "orderID": "L5-1",
+            "detail": "香草芽"
+          },
+          {
+            "kind": "toppingDone",
+            "id": 21,
+            "time": 53.25858887499999,
+            "orderID": "L5-1",
+            "detail": ""
+          },
+          {
+            "kind": "served",
+            "id": 22,
+            "time": 55.1537454999999,
+            "orderID": "L5-1",
+            "detail": ""
+          }
+        ],
+        "other_orders": [
+          {
+            "id": "L5-2",
+            "status": "left"
+          },
+          {
+            "id": "L5-3",
+            "status": "left"
+          },
+          {
+            "id": "L5-4",
+            "status": "waiting"
+          },
+          {
+            "id": "L5-5",
+            "status": "waiting"
+          }
+        ]
+      }
+    },
+    {
+      "phase": "crisp",
+      "original_movie": "crisp.mov",
+      "bytes": 29241387,
+      "sha256": "b686411e05a7eaabfb42ab13e558759328c636c518997d28f8105cbd67f45e92",
+      "artifact_id": 12307030020,
+      "run_id": 39512444370,
+      "capture_harness_sha": "f8beae134e58094082500827726bc2ea538fd1a3",
+      "native_test_counts": {
+        "passedTests": 1,
+        "failedTests": 0,
+        "skippedTests": 0
+      },
+      "scope": "Unmodified earned save restored, normal UI buttons and clock, first customer only; not complete level success or fresh-user unlock.",
+      "actual_session": {
+        "order_id": "L4-1",
+        "recipe": "moon_crisp",
+        "status": "served",
+        "commands": [
+          {
+            "command": {
+              "prepare": {
+                "_0": "L4-1"
+              }
+            },
+            "time": 3.0298436250000123
+          },
+          {
+            "command": {
+              "cook": {
+                "_0": "L4-1"
+              }
+            },
+            "time": 7.667078000000004
+          },
+          {
+            "command": {
+              "plate": {
+                "_0": "L4-1"
+              }
+            },
+            "time": 16.21303237500001
+          },
+          {
+            "command": {
+              "cover": {
+                "_0": "L4-1"
+              }
+            },
+            "time": 18.030706750000036
+          },
+          {
+            "command": {
+              "uncover": {
+                "_0": "L4-1"
+              }
+            },
+            "time": 19.564065125000013
+          },
+          {
+            "command": {
+              "garnish": {
+                "_1": "香草芽",
+                "_0": "L4-1"
+              }
+            },
+            "time": 21.129905208333355
+          },
+          {
+            "command": {
+              "serve": {
+                "_0": "L4-1"
+              }
+            },
+            "time": 23.829912208333383
+          }
+        ],
+        "events": [
+          {
+            "id": 0,
+            "time": 0,
+            "orderID": "L4-1",
+            "kind": "arrival",
+            "detail": ""
+          },
+          {
+            "id": 1,
+            "time": 3.0298436250000123,
+            "orderID": "L4-1",
+            "kind": "prepStart",
+            "detail": ""
+          },
+          {
+            "id": 3,
+            "time": 7.029843625000012,
+            "orderID": "L4-1",
+            "kind": "prepDone",
+            "detail": ""
+          },
+          {
+            "id": 4,
+            "time": 7.667078000000004,
+            "orderID": "L4-1",
+            "kind": "cookStart",
+            "detail": ""
+          },
+          {
+            "id": 7,
+            "time": 15.667078000000004,
+            "orderID": "L4-1",
+            "kind": "cookDone",
+            "detail": ""
+          },
+          {
+            "id": 8,
+            "time": 16.21303237500001,
+            "orderID": "L4-1",
+            "kind": "plated",
+            "detail": ""
+          },
+          {
+            "id": 9,
+            "time": 18.030706750000036,
+            "orderID": "L4-1",
+            "kind": "covered",
+            "detail": ""
+          },
+          {
+            "id": 10,
+            "time": 19.564065125000013,
+            "orderID": "L4-1",
+            "kind": "uncovered",
+            "detail": ""
+          },
+          {
+            "time": 21.129905208333355,
+            "kind": "toppingStart",
+            "id": 11,
+            "detail": "香草芽",
+            "orderID": "L4-1"
+          },
+          {
+            "time": 23.129905208333355,
+            "kind": "toppingDone",
+            "id": 12,
+            "detail": "",
+            "orderID": "L4-1"
+          },
+          {
+            "time": 23.829912208333383,
+            "kind": "preferred",
+            "id": 13,
+            "detail": "",
+            "orderID": "L4-1"
+          }
+        ],
+        "other_orders": [
+          {
+            "id": "L4-2",
+            "status": "waiting"
+          },
+          {
+            "id": "L4-3",
+            "status": "waiting"
+          }
+        ]
+      }
+    }
+  ],
+  "art_scores": [
+    3,
+    3,
+    null,
+    3,
+    2,
+    3
+  ],
+  "art_total": null,
+  "full_game_accepted": false,
+  "native_contiguous_export": "Pending separate read-only Apple decode job; no new App test or packaging."
+}

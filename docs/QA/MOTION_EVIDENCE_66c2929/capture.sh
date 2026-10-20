@@ -29,7 +29,7 @@ seed=qa/'docs/QA/INTEGRATION_66c2929/QA_EVIDENCE/journey/actual-late-session'
 receipt=json.loads((seed/'PROVENANCE.json').read_text())
 assert receipt['source_sha']==candidate
 assert hashlib.sha256((seed/'save-v1.json').read_bytes()).hexdigest()==receipt['sha256']
-report=dict(candidate_source_sha=candidate,candidate_build=25,harness_sha=os.environ['MFT_HARNESS_SHA'],capture_cases=os.environ.get('MFT_CAPTURE_CASES','all'),workflow_run_id=os.environ['GITHUB_RUN_ID'],method='Only a separate UI-test harness is overlaid on the fixed candidate checkout. App source, project, resources and game clocks unchanged. Explicit capture_cases records all five bounded cases or only the missing crisp case; no six-level replay, new IPA or full-game acceptance.',harness_file='UITests/ArtReviewTests.swift',harness_sha256=hashlib.sha256(Path('UITests/ArtReviewTests.swift').read_bytes()).hexdigest(),original_harness_git_blob=subprocess.check_output(['git','rev-parse',candidate+':UITests/ArtReviewTests.swift'],text=True).strip(),seed_save=receipt,seed_method='Unmodified actual save earned in source 66c2929, copied to the isolated simulator before each recipe. Unlocks are restored progress, not a fresh-user unlock walkthrough or injected order/score state.',audio='Native simctl picture only; hearing and haptics unverified.')
+report=dict(candidate_source_sha=candidate,candidate_build=25,harness_sha=os.environ['MFT_HARNESS_SHA'],capture_cases=os.environ.get('MFT_CAPTURE_CASES','all'),workflow_run_id=os.environ['GITHUB_RUN_ID'],method='Only a separate UI-test harness is overlaid on the fixed candidate checkout. App source, project, resources and game clocks unchanged. Explicit capture_cases records all five bounded cases, only the missing crisp case, or two rig-only direct-screen cases; no six-level replay, new IPA or full-game acceptance.',harness_file='UITests/ArtReviewTests.swift',harness_sha256=hashlib.sha256(Path('UITests/ArtReviewTests.swift').read_bytes()).hexdigest(),original_harness_git_blob=subprocess.check_output(['git','rev-parse',candidate+':UITests/ArtReviewTests.swift'],text=True).strip(),seed_save=receipt,seed_method='Unmodified actual save earned in source 66c2929, copied to the isolated simulator before each recipe. Unlocks are restored progress, not a fresh-user unlock walkthrough or injected order/score state.',audio='Native simctl picture only; hearing and haptics unverified.')
 (out/'SOURCE_PROVENANCE.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 PY
 xcrun simctl list devices available --json > "$MFT_REVIEW/DEVICES.json"
@@ -69,6 +69,7 @@ MFT_ANY_FAILED=0
 case "${MFT_CAPTURE_CASES:-all}" in
   all) MFT_SPECS="dark:testDarkContinuousMotion light:testLightContinuousMotion soup:testSoupTransitions stew:testStewRecoveryTransitions crisp:testCrispTransitions";;
   crisp) MFT_SPECS="crisp:testCrispTransitions";;
+  rig-snapshots) MFT_SPECS="dark:testDarkContinuousMotion light:testLightContinuousMotion";;
   *) echo "Unrecognized explicit capture scope" >&2;exit 1;;
 esac
 for MFT_SPEC in $MFT_SPECS; do
@@ -85,24 +86,35 @@ for MFT_SPEC in $MFT_SPECS; do
   xcrun simctl launch "$MFT_DEVICE" cc.chaihome.monsterfoodtruck > "$MFT_PHASE_OUT/pre-record-launch.txt"
   xcrun simctl io "$MFT_DEVICE" screenshot "$MFT_PHASE_OUT/recording-ready.png"
   MFT_FORCED_STOP=0
-  python3 Scripts/start_recording.py "$MFT_DEVICE" "$MFT_PHASE_OUT/$MFT_PHASE.mov" > "$MFT_PHASE_OUT/recording.log" 2>&1 &
-  MFT_VIDEO_PID=$!
+  if [ "${MFT_CAPTURE_CASES:-all}" != rig-snapshots ]; then
+    python3 Scripts/start_recording.py "$MFT_DEVICE" "$MFT_PHASE_OUT/$MFT_PHASE.mov" > "$MFT_PHASE_OUT/recording.log" 2>&1 &
+    MFT_VIDEO_PID=$!
+  fi
+  MFT_SCREEN_PID=
+  if [ "$MFT_PHASE" = dark ] || [ "$MFT_PHASE" = light ]; then
+    MFT_RUNNER_ID=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$MFT_OUTPUT/DerivedData/Build/Products/Debug-iphonesimulator/MonsterFoodTruckUITests-Runner.app/Info.plist")
+    python3 "$MFT_HARNESS/capture_native_screens.py" "$MFT_DEVICE" "$MFT_RUNNER_ID" "$MFT_PHASE" "$MFT_PHASE_OUT/direct-screens" > "$MFT_PHASE_OUT/DIRECT_SCREENS.log" 2>&1 &
+    MFT_SCREEN_PID=$!
+  fi
   sleep 1
   MFT_TEST_STATUS=0
   if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$MFT_DEVICE" -parallel-testing-enabled NO -only-testing:"MonsterFoodTruckUITests/ArtReviewTests/$MFT_METHOD" -resultBundlePath "$MFT_OUTPUT/$MFT_PHASE.xcresult" -derivedDataPath "$MFT_OUTPUT/DerivedData" CODE_SIGNING_ALLOWED=NO CURRENT_PROJECT_VERSION=25 | tee "$MFT_PHASE_OUT/test.log"; then MFT_TEST_STATUS=0; else MFT_TEST_STATUS=$?; fi
   MFT_EXPORT_STATUS=0
+  if [ -n "$MFT_SCREEN_PID" ]; then if ! wait "$MFT_SCREEN_PID"; then MFT_EXPORT_STATUS=1; fi; fi
   if ! xcrun xcresulttool export attachments --path "$MFT_OUTPUT/$MFT_PHASE.xcresult" --output-path "$MFT_PHASE_OUT/screenshots"; then MFT_EXPORT_STATUS=1; fi
   if ! xcrun xcresulttool get test-results summary --path "$MFT_OUTPUT/$MFT_PHASE.xcresult" > "$MFT_PHASE_OUT/TEST_SUMMARY.json"; then MFT_EXPORT_STATUS=1; fi
   stop_recording
   MFT_PROBE_STATUS=0
-  if ! xcrun swift "$MFT_HARNESS/probe_continuous_video.swift" "$MFT_PHASE_OUT/$MFT_PHASE.mov" "$MFT_PHASE_OUT/FRAME_PTS" > "$MFT_PHASE_OUT/VIDEO_PROBE.log" 2>&1; then MFT_PROBE_STATUS=1; fi
+  if [ "${MFT_CAPTURE_CASES:-all}" != rig-snapshots ]; then
+    if ! xcrun swift "$MFT_HARNESS/probe_continuous_video.swift" "$MFT_PHASE_OUT/$MFT_PHASE.mov" "$MFT_PHASE_OUT/FRAME_PTS" > "$MFT_PHASE_OUT/VIDEO_PROBE.log" 2>&1; then MFT_PROBE_STATUS=1; fi
+  fi
   if [ "$MFT_PHASE" != dark ] && [ "$MFT_PHASE" != light ]; then
     MFT_APP_DATA=$(xcrun simctl get_app_container "$MFT_DEVICE" cc.chaihome.monsterfoodtruck data)
     MFT_SAVE="$MFT_APP_DATA/Library/Application Support/MonsterFoodTruck/UIReplayEvidence"
     cp "$MFT_SAVE/save-v1.json" "$MFT_PHASE_OUT/actual-save-v1.json"
   fi
   python3 - "$MFT_PHASE_OUT" "$MFT_TEST_STATUS" "$MFT_EXPORT_STATUS" "$MFT_PROBE_STATUS" "$MFT_FORCED_STOP" <<'PY'
-import hashlib,json,sys
+import hashlib,json,sys,os
 from pathlib import Path
 out=Path(sys.argv[1]);statuses=list(map(int,sys.argv[2:]));files=[]
 for file in sorted(out.rglob('*')):
@@ -111,7 +123,7 @@ for file in sorted(out.rglob('*')):
   with file.open('rb') as stream:
    for chunk in iter(lambda:stream.read(1024*1024),b''):h.update(chunk)
   files.append(dict(path=str(file.relative_to(out)),bytes=file.stat().st_size,sha256=h.hexdigest()))
-(out/'CAPTURE_STATUS.json').write_text(json.dumps(dict(phase=out.name,test_exit=statuses[0],export_exit=statuses[1],video_probe_exit=statuses[2],recording_forced_termination=bool(statuses[3]),files=files,scope='Original native short capture. Passed assertions check capture operations only, not final art scores or all-level human play.'),ensure_ascii=False,indent=2)+'\n')
+(out/'CAPTURE_STATUS.json').write_text(json.dumps(dict(phase=out.name,capture_cases=os.environ.get('MFT_CAPTURE_CASES','all'),test_exit=statuses[0],export_exit=statuses[1],video_probe_exit=None if os.environ.get('MFT_CAPTURE_CASES')=='rig-snapshots' else statuses[2],recording_forced_termination=bool(statuses[3]),files=files,scope='Original native short capture. Direct snapshot scope does not request MOV or video probe. Passed assertions check capture operations only, not final art scores or all-level human play.'),ensure_ascii=False,indent=2)+'\n')
 PY
   if [ "$MFT_TEST_STATUS" != 0 ] || [ "$MFT_EXPORT_STATUS" != 0 ] || [ "$MFT_PROBE_STATUS" != 0 ] || [ "$MFT_FORCED_STOP" != 0 ]; then MFT_ANY_FAILED=1; fi
 done
@@ -123,6 +135,7 @@ import sys
 r=Path(sys.argv[1]);rows=[]
 expected=[('soup','L1-1','star_soup'),('stew','L5-1','cloud_stew'),('crisp','L4-1','moon_crisp')]
 if os.environ.get('MFT_CAPTURE_CASES')=='crisp':expected=[expected[-1]]
+if os.environ.get('MFT_CAPTURE_CASES')=='rig-snapshots':expected=[]
 for phase,order,recipe in expected:
  f=r/phase/'actual-save-v1.json'
  if not f.is_file():continue

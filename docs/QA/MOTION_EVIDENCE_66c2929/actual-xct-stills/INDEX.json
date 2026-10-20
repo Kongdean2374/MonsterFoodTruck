@@ -1,0 +1,70 @@
+[
+  {
+    "phase": "soup",
+    "filename": "8F015493-DFB4-471C-93F9-DDE5D98518B7.png",
+    "bytes": 802455,
+    "sha256": "30a311657936a6ba04197436583a651bc9e1d0439ebe77d6343b603a92e2be4e",
+    "native_attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "22A3039C-6A45-47F4-82D4-80C58CA94379",
+      "deviceName": "iPhone SE (3rd generation)",
+      "exportedFileName": "8F015493-DFB4-471C-93F9-DDE5D98518B7.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "L1-1-one-real-customer-served_0_23DD022C-F528-499B-82E5-50A82DFC16C8.png",
+      "timestamp": 1792536861.459
+    },
+    "artifact_id": 12305138449,
+    "scope": "Original XCTest PNG copied byte-for-byte; still only, not a continuous motion phase verdict."
+  },
+  {
+    "phase": "stew",
+    "filename": "453ED163-00E3-42CD-B64C-9C41E3F636F1.png",
+    "bytes": 823908,
+    "sha256": "8bab09137a211b34298c16a36f98828fab41de25649788846e4c1a777087c29c",
+    "native_attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "22A3039C-6A45-47F4-82D4-80C58CA94379",
+      "deviceName": "iPhone SE (3rd generation)",
+      "exportedFileName": "453ED163-00E3-42CD-B64C-9C41E3F636F1.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "L5-1-one-real-customer-served_0_808A036A-C412-4FF1-A4D0-BFCC17547423.png",
+      "timestamp": 1792536974.484
+    },
+    "artifact_id": 12305138449,
+    "scope": "Original XCTest PNG copied byte-for-byte; still only, not a continuous motion phase verdict."
+  },
+  {
+    "phase": "crisp",
+    "filename": "3E68C1EA-97FB-499A-BECA-31981E339B28.png",
+    "bytes": 825437,
+    "sha256": "4047a4520f7130eb4a6070f266e720a5ca74c999a88d152b95b40895ebe20d67",
+    "native_attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "22A3039C-6A45-47F4-82D4-80C58CA94379",
+      "deviceName": "iPhone SE (3rd generation)",
+      "exportedFileName": "3E68C1EA-97FB-499A-BECA-31981E339B28.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "L4-1-one-real-customer-served_0_FF638169-A60E-4004-B9B4-69E29D3BF2F1.png",
+      "timestamp": 1792537670.025
+    },
+    "artifact_id": 12307030020,
+    "scope": "Original XCTest PNG copied byte-for-byte; still only, not a continuous motion phase verdict."
+  },
+  {
+    "phase": "dark",
+    "filename": "A221516C-D9D7-4234-B89D-A8555C8268A2.png",
+    "bytes": 494974,
+    "sha256": "86f570fa7402bad5e8360d4b3a4a70ef80013b73ca5421195d5570c393cac09a",
+    "native_attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "22A3039C-6A45-47F4-82D4-80C58CA94379",
+      "deviceName": "iPhone SE (3rd generation)",
+      "exportedFileName": "A221516C-D9D7-4234-B89D-A8555C8268A2.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "rig-dark-after-three-cycles_0_199E376F-540C-41D3-A5E5-0C7030F6DF90.png",
+      "timestamp": 1792536708.938
+    },
+    "artifact_id": 12305138449,
+    "scope": "Original XCTest PNG copied byte-for-byte; still only, not a continuous motion phase verdict."
+  }
+]
