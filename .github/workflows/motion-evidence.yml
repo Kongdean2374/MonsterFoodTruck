@@ -1,0 +1,58 @@
+name: Short visual evidence for candidate 66c2929
+run-name: Capture fixed 66c2929 motion and recipe transitions (not full-game regression)
+on:
+  push:
+    branches: [integration/full-game]
+    paths: ['docs/QA/MOTION_EVIDENCE_66c2929/**', '.github/workflows/motion-evidence.yml']
+permissions:
+  contents: read
+concurrency:
+  group: motion-evidence-66c2929
+  cancel-in-progress: false
+jobs:
+  capture:
+    if: ${{ startsWith(github.event.head_commit.message, '[motion-evidence-66c2929]') }}
+    runs-on: macos-15
+    timeout-minutes: 45
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+      MFT_HARNESS_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          path: qa
+          persist-credentials: false
+      - name: Verify explicit request and unchanged candidate product trees
+        working-directory: qa
+        env:
+          MFT_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          MFT_REQUIRE_CAPTURE: '1'
+        run: |
+          git fetch --no-tags --depth=1 origin 66c2929dd05c28af1b0c3ec8a79805446c6dc023
+          python3 docs/QA/MOTION_EVIDENCE_66c2929/route.py
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 66c2929dd05c28af1b0c3ec8a79805446c6dc023
+          path: source
+          persist-credentials: false
+      - name: Build fixed candidate and capture only five bounded evidence cases
+        timeout-minutes: 35
+        run: bash qa/docs/QA/MOTION_EVIDENCE_66c2929/capture.sh "$PWD/source" "$PWD/qa"
+      - name: Upload original short movies and actual frame timestamps even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: motion-66c2929-harness-${{ github.sha }}
+          path: qa/build/motion-evidence/review
+          retention-days: 14
+          if-no-files-found: error
+      - name: Preserve original capture test diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: motion-diagnostics-66c2929-${{ github.sha }}
+          path: |
+            qa/build/motion-evidence/build.log
+            qa/build/motion-evidence/*.xcresult
+          retention-days: 14
+          if-no-files-found: error
