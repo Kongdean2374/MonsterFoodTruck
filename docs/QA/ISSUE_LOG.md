@@ -19,3 +19,5 @@
 - 深入診斷：原工程將來源 Resources 作為藍色 folder reference，輸出 `.app/Resources/`。此保留目錄可能使 CFBundle 採舊式包結構查找 plist。改為標準逐檔 PBXResourcesBuildPhase、輸出扁平 iOS bundle，並加入 Foundation Bundle 識別 probe 及 native 新舊布局重現；必須等 CI 證明假設與實際安裝，不從靜態 plist 直接判定通過。
 - Dot 重測：尚未取得；Codex 不代簽關閉。
 - 歷史：OPEN（使用者轉交 Dot 問題）→ IN_PROGRESS。
+- 包結構修復 `143e9fb2ba3db6a2ab4b7bcfcac52995fdb3ebac` 的 [Validate run 39423441754](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39423441754)／[IPA run 39423444228](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39423444228)：native 布局重現通過，真實 App 的 Foundation bundle identifier 正確；`testBundleIdentity` 與 `testLaunch` 都 passed，`TEST EXECUTE SUCCEEDED`，UI 測試成功保存 `P1-launch` 附件。安裝阻擋已在此候選消失，但兩筆整體 run 均為 failure：測試後多做的 `simctl screenshot` 回報 ScreenshotError code 2，導致 IPA archive 仍未執行。因此不把整體標成功。
+- 後續修正：移除在 XCTest 結束後向無可用 framebuffer 擷取的額外截圖命令，改為從該次真實 xcresult 匯出 UI 測試附件與測試統計，強制確認非空 PNG。所有測試仍完整執行，不略過失敗項；待新 SHA 整體驗證及裝置封裝結果。

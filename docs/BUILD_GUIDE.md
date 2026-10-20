@@ -21,3 +21,7 @@ bash Scripts/package_ipa.sh
 失敗時先讀環境紀錄及失敗步驟日誌；缺指定 Xcode／模擬器須記錄並驗證更新，不能靜默選 latest。沒有成功裝置 archive 時不提供 IPA，不以模擬器 `.app` 替代。
 
 DOT-001 回歸：先 `build-for-testing`，直接讀取真正產出 `.app/Info.plist`，由 `Scripts/verify_app.py` 強制驗證必要識別欄位、展開後的值、平台、iPhone 直式設定、執行檔與離線資源，再 `test-without-building`。每次 artifacts 保存 `SIMULATOR_APP_INFO.plist`／`SIMULATOR_APP_IDENTITY.json`；裝置交付保存對應 `DEVICE_APP_*`。檢查器的 fixture 測試只驗證拒絕錯誤資料的行為，不代替真正模擬器安裝或裝置封裝。
+
+資源使用標準逐檔 PBXResourcesBuildPhase，避免在 `.app` 根目錄建立保留的 `Resources`／`Contents` 目錄而觸發錯誤包結構辨識。另以 Foundation Bundle API 檢查真正 App 的識別與執行檔；native 新舊布局 regression 保存於 `BUNDLE_LAYOUT_REGRESSION.txt`。
+
+截圖直接由 UI 測試在 App 運行期間擷取，附在 xcresult，再用 `xcresulttool export attachments` 匯出至 `QA_EVIDENCE`；不在 XCTest 結束後向可能沒有 framebuffer 的模擬器索取截圖。沒有非空實際 PNG 時驗證仍失敗。

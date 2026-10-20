@@ -45,5 +45,6 @@ jobs:
             build/SIMULATOR_BUNDLE_PROBE.txt
             build/BUNDLE_LAYOUT_REGRESSION.txt
             build/Validation.xcresult
+            build/TEST_RESULT_SUMMARY.json
             build/*.log
           if-no-files-found: error

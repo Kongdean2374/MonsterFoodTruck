@@ -39,5 +39,6 @@ jobs:
             build/Validation.xcresult
             build/QA_EVIDENCE
             build/TEST_SUMMARY.md
+            build/TEST_RESULT_SUMMARY.json
             build/*.log
           if-no-files-found: error

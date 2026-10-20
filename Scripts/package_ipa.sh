@@ -22,7 +22,7 @@ VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' "$APP/In
 BUILD=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' "$APP/Info.plist")
 IPA="MonsterFoodTruck-unsigned-$VERSION-$BUILD.ipa"
 (cd build/package && zip -qry "../delivery/$IPA" Payload)
-cp build/ENVIRONMENT.txt build/TEST_SUMMARY.md build/delivery/
+cp build/ENVIRONMENT.txt build/TEST_SUMMARY.md build/TEST_RESULT_SUMMARY.json build/delivery/
 cp PLAYTEST_GUIDE.md build/delivery/
 python3 - "$APP" "$IPA" <<'PY'
 import datetime,hashlib,json,os,plistlib,subprocess,sys
