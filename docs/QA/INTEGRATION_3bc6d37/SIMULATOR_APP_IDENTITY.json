@@ -1,0 +1,59 @@
+{
+  "CFBundleIdentifier": "cc.chaihome.monsterfoodtruck",
+  "CFBundleExecutable": "MonsterFoodTruck",
+  "CFBundleName": "MonsterFoodTruck",
+  "CFBundlePackageType": "APPL",
+  "CFBundleInfoDictionaryVersion": "6.0",
+  "CFBundleShortVersionString": "1.0.0",
+  "CFBundleVersion": "16",
+  "MinimumOSVersion": "17.0",
+  "CFBundleSupportedPlatforms": [
+    "iPhoneSimulator"
+  ],
+  "UIDeviceFamily": [
+    1
+  ],
+  "app": "MonsterFoodTruck.app",
+  "offline_resource_sha256": {
+    "characters-and-dishes.png": "7c9c14c597e7cd6eda1d3ae1e7aeef93bd0a7df7d18834707712c5ac8184f1f5",
+    "dragon-layer-rig.json": "fb71349cd38e1701e4408714240d29a1e7ec1a24b16a5dda8ef67c251f56ab1c",
+    "dragon-layer-rig.png": "fb4b576ff92a8c8e11b30c017409ed790d90477c09ebe1781f5e75d7f8871107",
+    "forest-food-truck.png": "cb1e11306f62f6fae847be58b8f8d6d93dbe14cc3874749a1a6484b1e9cc0e70",
+    "kitchen-layers.json": "e9c5f8789ea72ec112ca1158366bd476a565ae9a62d19834d6dd7f681f8b2a85",
+    "kitchen-layers.png": "90b7607ac092e8d99c01d4b39657c69e40bff6c324cd0f321010b7aafcab11e4",
+    "arrival.wav": "2c4531432889f007e44bf6d05633826054056b18042748bd8af717052c2e41fb",
+    "audio-analysis.json": "e76b7f1e51f316ad48ece311f8d26a4451b59c7b661b147576571a513b5217eb",
+    "cookDone.wav": "77eb7f3659aa60ab27b02752aa1e08edeca5ff1e43106ab6d775eff4e01ed892",
+    "cookStart.wav": "6148c470a2021699abda078226bf2f1081c2970c01f055a6c0949082e2366020",
+    "covered.wav": "73051466ed24fadd394cbc7ba5e291f0b3eadf532a3eaf93763e6bd75873cd5c",
+    "deerReaction.wav": "fbdaa0973faed599d9f9ee1eb2f4db1a2e74588bbb5db6900d237c7ece96bbf1",
+    "dragonReaction.wav": "f8ab86e84cb59bd39edbaa1ef7e6031640c4d681a8453580012ce27b0a1c5bc4",
+    "forest_evening.wav": "054c19e455a7fb65fb07ac51f7eb5911c184b67ab5dc2174df274cec66fd5d81",
+    "impReaction.wav": "3fa998b19520e0f06d1ef71670afed568baa4275a86a18529fd8f3c749bdd06a",
+    "left.wav": "0517602de11ff7e425773948bc0b871f4a6a037aebe566d90c42915cd6d09ba4",
+    "lose.wav": "26fc1418689bdd7375285f011645445305d3c5a88f8bffd6ae0bd255b7772e30",
+    "nibbleWarning.wav": "0703e7108002fcbe932234a67e12004be95a8e6eea214ca0b8c5d75a7c13377b",
+    "nibbled.wav": "96a0535ecb25a9debbe22d047458059a989fcd6d50cd8797489dfbe39c8a10f8",
+    "plated.wav": "5040383dec4f3715cf2be8c22ebf4fe664de00f269d96ce393ae8a3c7bc02e15",
+    "preferred.wav": "1ec8220d4c26e99389ceb5863d4a49c0a952d796f6697ee7b267e48b5e39d816",
+    "prepDone.wav": "999f09b2d2228366ea3d67b28fed21913995b178be458ee97a98e7336e739855",
+    "prepStart.wav": "a101ed9405bee94f000ff87c0c5b301c83ae0356eba90b88b7c7360826420839",
+    "scorched.wav": "483e7893230cb65c744f143fbc9b63f26374acb192d006b4fc2732fca9e9fb10",
+    "select.wav": "2efe293fb4da1355ff0cfdc25581a59971d21092538040517b94c514dcdf5143",
+    "served.wav": "312eadd6bd6ced8c7acb596b322b83d272afc5777b2e4d301b7bb394ee594ff6",
+    "tidyDone.wav": "2c4531432889f007e44bf6d05633826054056b18042748bd8af717052c2e41fb",
+    "tidyStart.wav": "a87872b68f7a4fecaacb3cba818e935b3222d4508e104cfb5b38f2f6d4207b16",
+    "toppingDone.wav": "e80147a69efd7af41dfcb7213f301b75bea8c9f8a76038a686503c4457897e26",
+    "toppingStart.wav": "75bb71e77b0d17d3165ed5ad46751385af454c0f99cfc7d2bf2ef98a2ed0b0fa",
+    "uncovered.wav": "cc2135bb81ef23e17f575dce7acd914fcdbc0157d9804680114ad3ccd15dda64",
+    "win.wav": "425141df906a259e4a6f784ffed4525096d9f9823358dd79cbb35a0dbac5a1e0",
+    "Content.json": "1e13db4d1f1c3b258478cd3d1201dfee20f1d1d29ff9f6cb689d8cc205e685c8",
+    "ContentVersion.json": "6ffc33a352cef001582086ed7358cfa0e4503387695dd44f7611ea64e0f12373",
+    "PrivacyInfo.xcprivacy": "ee0fed999db7f6b37ed28752c709262b39bb1280d535718e892e9a81736a69a9"
+  },
+  "content_counts": {
+    "recipes": 3,
+    "monsters": 3,
+    "levels": 6
+  }
+}

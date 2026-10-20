@@ -35,7 +35,7 @@ final class GameAudio {
         lastPlayed[name]=now
         let playing=sounds.values.flatMap({$0}).filter(\.isPlaying)
         if playing.count>=6 {
-            guard name=="nibbleWarning" || name=="cookDone" else{return}
+            guard name=="nibbleWarning" || name=="cookDone" || name=="scorched" else{return}
             playing.first?.stop()
         }
         let voice=voices.first{!$0.isPlaying} ?? voices[0]

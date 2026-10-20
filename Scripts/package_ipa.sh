@@ -2,6 +2,16 @@
 set -euo pipefail
 mkdir -p build/delivery
 test -z "$(git status --porcelain --untracked-files=no)"
+test "${MFT_FULL_QA:-0}" = 1
+test "${MFT_LAYOUT_QA:-0}" = 1
+python3 - <<'PY'
+import json
+from pathlib import Path
+for name in ['TEST_RESULT_SUMMARY.json','JOURNEY_TEST_SUMMARY.json','LAYOUT_TEST_SUMMARY_small.json','LAYOUT_TEST_SUMMARY_large.json']:
+ result=json.loads((Path('build')/name).read_text())
+ assert result['passedTests']>0 and result['failedTests']==0 and result['skippedTests']==0,f'Incomplete required validation scope: {name}'
+assert list(Path('build/QA_EVIDENCE').rglob('*.png')),'No actual App screenshots to accompany the device candidate'
+PY
 xcodebuild archive -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Release -destination 'generic/platform=iOS' -archivePath build/MonsterFoodTruck.xcarchive -derivedDataPath build/DeviceData CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= DEVELOPMENT_TEAM= CURRENT_PROJECT_VERSION="${GITHUB_RUN_NUMBER:-1}" | tee build/archive.log
 APP=build/MonsterFoodTruck.xcarchive/Products/Applications/MonsterFoodTruck.app
 test -f "$APP/MonsterFoodTruck"

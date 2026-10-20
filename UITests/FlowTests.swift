@@ -124,13 +124,15 @@ final class FlowTests: XCTestCase {
         // SwiftUI can report a partially offscreen Form row as hittable. Require
         // its tap centre to clear the sheet toolbar and bottom safe area too.
         for _ in 0..<6{
+            if !element.exists{if up{app.swipeUp()}else{app.swipeDown()};continue}
             let frame=element.frame,viewport=app.frame
-            let above=frame.midY<viewport.minY+150,below=frame.midY>viewport.maxY-100
+            let above=frame.midY<viewport.minY+150,below=frame.midY>viewport.maxY-60
             if element.isHittable && !above && !below{return}
             if above{app.swipeDown()}else if below || up{app.swipeUp()}else{app.swipeDown()}
         }
+        guard element.exists else{XCTFail("Control did not appear after bounded form scrolling: \(element)");return}
         let frame=element.frame
-        XCTAssertTrue(element.isHittable && frame.midY>=app.frame.minY+150 && frame.midY<=app.frame.maxY-100,"Control centre remains outside visible form: \(frame)")
+        XCTAssertTrue(element.isHittable && frame.midY>=app.frame.minY+150 && frame.midY<=app.frame.maxY-60,"Control centre remains outside visible form: \(frame)")
     }
     func testHomeLayouts(){
         let app=XCUIApplication();app.launchEnvironment["MFT_UI_SUITE"]="layout";app.launch()

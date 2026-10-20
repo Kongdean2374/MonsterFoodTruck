@@ -1,0 +1,53 @@
+{
+  "devicesAndConfigurations" : [
+    {
+      "device" : {
+        "architecture" : "arm64",
+        "deviceId" : "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+        "deviceName" : "iPhone 16 Pro",
+        "modelName" : "iPhone 16 Pro",
+        "osBuildNumber" : "22F77",
+        "osVersion" : "18.5",
+        "platform" : "iOS Simulator"
+      },
+      "expectedFailures" : 0,
+      "failedTests" : 1,
+      "passedTests" : 22,
+      "skippedTests" : 0,
+      "testPlanConfiguration" : {
+        "configurationId" : "1",
+        "configurationName" : "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription" : "MonsterFoodTruck · Built with macOS 15.7.9",
+  "expectedFailures" : 0,
+  "failedTests" : 1,
+  "finishTime" : 1792511512.723,
+  "passedTests" : 22,
+  "result" : "Failed",
+  "skippedTests" : 0,
+  "startTime" : 1792510815.979,
+  "statistics" : [
+
+  ],
+  "testFailures" : [
+    {
+      "failureText" : "Failed to get matching snapshot: No matches found for Descendants matching type Slider from input {(\n    Application, pid: 20168, label: '魔物餐車'\n)}",
+      "targetName" : "MonsterFoodTruckUITests",
+      "testIdentifier" : 23,
+      "testIdentifierString" : "FlowTests/testNavigationTutorialPauseAndPersistence()",
+      "testIdentifierURL" : "test://com.apple.xcode/MonsterFoodTruck/MonsterFoodTruckUITests/FlowTests/testNavigationTutorialPauseAndPersistence",
+      "testName" : "testNavigationTutorialPauseAndPersistence()"
+    }
+  ],
+  "title" : "Test - MonsterFoodTruck",
+  "topInsights" : [
+    {
+      "category" : "Longest Test Runs",
+      "impact" : "44% of duration",
+      "text" : "1 longest test run with outlier durations exceeding 2.06s (three standard deviations)"
+    }
+  ],
+  "totalTestCount" : 23
+}
