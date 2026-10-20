@@ -16,6 +16,8 @@ test -z "$(git status --porcelain --untracked-files=no)"
   xcrun swift --version
   xcrun simctl list runtimes
 } > "$MFT_REVIEW/ENVIRONMENT.txt"
+bash Scripts/prepare_assets.sh
+cp build/icon-normalization.txt "$MFT_REVIEW/icon-normalization.txt"
 python3 Scripts/generate_project.py
 git diff --exit-code -- MonsterFoodTruck.xcodeproj
 cp "$MFT_HARNESS/ArtReviewTests.swift" UITests/ArtReviewTests.swift
@@ -41,8 +43,8 @@ PY
 )
 xcodebuild build-for-testing -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$MFT_DEVICE" -derivedDataPath "$MFT_OUTPUT/DerivedData" CODE_SIGNING_ALLOWED=NO CURRENT_PROJECT_VERSION=25 | tee "$MFT_OUTPUT/build.log"
 MFT_APP="$MFT_OUTPUT/DerivedData/Build/Products/Debug-iphonesimulator/MonsterFoodTruck.app"
-python3 Scripts/verify_app.py "$MFT_APP" --platform iPhoneSimulator --resources MonsterFoodTruck/Resources --output "$MFT_REVIEW/SIMULATOR_APP_IDENTITY.json"
 cp "$MFT_APP/Info.plist" "$MFT_REVIEW/SIMULATOR_APP_INFO.plist"
+python3 Scripts/verify_app.py "$MFT_APP" --platform iPhoneSimulator --resources MonsterFoodTruck/Resources --output "$MFT_REVIEW/SIMULATOR_APP_IDENTITY.json"
 MFT_DEVICE_STATE=$(xcrun simctl list devices --json | python3 -c 'import json,sys; print(next(d["state"] for a in json.load(sys.stdin)["devices"].values() for d in a if d["udid"]==sys.argv[1]))' "$MFT_DEVICE")
 if [ "$MFT_DEVICE_STATE" != Booted ]; then xcrun simctl boot "$MFT_DEVICE"; fi
 xcrun simctl bootstatus "$MFT_DEVICE" -b
