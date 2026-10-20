@@ -1,0 +1,72 @@
+{
+  "file": "light.mov",
+  "sha256": "e7d9c108e332e11b80b0cccf493e24de4521f31a130e2f714d19d41ee48dedb2",
+  "bytes": 15435251,
+  "duration_seconds": 36.428333,
+  "width": 750,
+  "height": 1334,
+  "audio_tracks": 0,
+  "decoded_frame_count": 1067,
+  "duplicate_pts_count": 27,
+  "raw_pts_reversals": [
+    {
+      "decoded_frame_zero_based": 77,
+      "previous_actual_seconds": 17.021667,
+      "actual_seconds": 17.02
+    },
+    {
+      "decoded_frame_zero_based": 81,
+      "previous_actual_seconds": 17.028333,
+      "actual_seconds": 17.025
+    },
+    {
+      "decoded_frame_zero_based": 85,
+      "previous_actual_seconds": 17.035,
+      "actual_seconds": 17.033333
+    },
+    {
+      "decoded_frame_zero_based": 88,
+      "previous_actual_seconds": 17.04,
+      "actual_seconds": 17.036667
+    },
+    {
+      "decoded_frame_zero_based": 90,
+      "previous_actual_seconds": 17.043333,
+      "actual_seconds": 17.04
+    },
+    {
+      "decoded_frame_zero_based": 94,
+      "previous_actual_seconds": 17.05,
+      "actual_seconds": 17.046667
+    },
+    {
+      "decoded_frame_zero_based": 98,
+      "previous_actual_seconds": 17.056667,
+      "actual_seconds": 17.053333
+    },
+    {
+      "decoded_frame_zero_based": 102,
+      "previous_actual_seconds": 17.063333,
+      "actual_seconds": 17.06
+    },
+    {
+      "decoded_frame_zero_based": 106,
+      "previous_actual_seconds": 17.07,
+      "actual_seconds": 17.066667
+    },
+    {
+      "decoded_frame_zero_based": 110,
+      "previous_actual_seconds": 17.076667,
+      "actual_seconds": 17.073333
+    }
+  ],
+  "first_actual_seconds": 0.0,
+  "last_actual_seconds": 36.426667,
+  "max_actual_frame_gap_seconds": 7.458333,
+  "median_actual_frame_gap_seconds": 0.016666000000000736,
+  "full_decode_exit": 0,
+  "full_decode_errors": "",
+  "decoder": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "method": "Read every decoded original MOV presentation timestamp with ffprobe frame pts_time and independently decode the complete video with ffmpeg into a discarded null sink. Only the discarded sink uses setpts=N to avoid muxer DTS rounding warnings; original MOV bytes and indexed raw PTS are untouched. Non-monotonic raw timestamps are recorded rather than sorted away. No requested seek time, nominal FPS, generated frames, PNG editing or source changes.",
+  "scope": "Derived local read-only verification of the actual downloaded native recording. Original native probe/export failure remains recorded. Whole-movie gaps include static setup and shutdown; this is recorded-frame coverage, not gameplay or physical display FPS, joint approval or audible playback."
+}

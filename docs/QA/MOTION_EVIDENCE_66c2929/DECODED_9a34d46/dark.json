@@ -1,0 +1,21 @@
+{
+  "file": "dark.mov",
+  "sha256": "0068c3ba33b8ab3b45088dffd8f751384eb7363567a8b50a8dff21f349295160",
+  "bytes": 13973968,
+  "duration_seconds": 75.223333,
+  "width": 750,
+  "height": 1334,
+  "audio_tracks": 0,
+  "decoded_frame_count": 977,
+  "duplicate_pts_count": 21,
+  "raw_pts_reversals": [],
+  "first_actual_seconds": 0.0,
+  "last_actual_seconds": 73.873333,
+  "max_actual_frame_gap_seconds": 19.631667,
+  "median_actual_frame_gap_seconds": 0.016666000000000736,
+  "full_decode_exit": 0,
+  "full_decode_errors": "",
+  "decoder": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "method": "Read every decoded original MOV presentation timestamp with ffprobe frame pts_time and independently decode the complete video with ffmpeg into a discarded null sink. Only the discarded sink uses setpts=N to avoid muxer DTS rounding warnings; original MOV bytes and indexed raw PTS are untouched. Non-monotonic raw timestamps are recorded rather than sorted away. No requested seek time, nominal FPS, generated frames, PNG editing or source changes.",
+  "scope": "Derived local read-only verification of the actual downloaded native recording. Original native probe/export failure remains recorded. Whole-movie gaps include static setup and shutdown; this is recorded-frame coverage, not gameplay or physical display FPS, joint approval or audible playback."
+}

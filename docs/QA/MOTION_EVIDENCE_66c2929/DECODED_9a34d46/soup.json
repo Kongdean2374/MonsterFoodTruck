@@ -1,0 +1,47 @@
+{
+  "file": "soup.mov",
+  "sha256": "d50b7e184fb2c831152dcbfd8c09e67ca0745b92fb37d3245d0461f2cb85271c",
+  "bytes": 36282414,
+  "duration_seconds": 59.868333,
+  "width": 750,
+  "height": 1334,
+  "audio_tracks": 0,
+  "decoded_frame_count": 2210,
+  "duplicate_pts_count": 69,
+  "raw_pts_reversals": [
+    {
+      "decoded_frame_zero_based": 1394,
+      "previous_actual_seconds": 42.161667,
+      "actual_seconds": 42.16
+    },
+    {
+      "decoded_frame_zero_based": 1541,
+      "previous_actual_seconds": 43.995,
+      "actual_seconds": 43.993333
+    },
+    {
+      "decoded_frame_zero_based": 1565,
+      "previous_actual_seconds": 44.313333,
+      "actual_seconds": 44.311667
+    },
+    {
+      "decoded_frame_zero_based": 1710,
+      "previous_actual_seconds": 46.478333,
+      "actual_seconds": 46.476667
+    },
+    {
+      "decoded_frame_zero_based": 1713,
+      "previous_actual_seconds": 46.483333,
+      "actual_seconds": 46.481667
+    }
+  ],
+  "first_actual_seconds": 0.0,
+  "last_actual_seconds": 59.853333,
+  "max_actual_frame_gap_seconds": 7.31,
+  "median_actual_frame_gap_seconds": 0.01166600000000173,
+  "full_decode_exit": 0,
+  "full_decode_errors": "",
+  "decoder": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "method": "Read every decoded original MOV presentation timestamp with ffprobe frame pts_time and independently decode the complete video with ffmpeg into a discarded null sink. Only the discarded sink uses setpts=N to avoid muxer DTS rounding warnings; original MOV bytes and indexed raw PTS are untouched. Non-monotonic raw timestamps are recorded rather than sorted away. No requested seek time, nominal FPS, generated frames, PNG editing or source changes.",
+  "scope": "Derived local read-only verification of the actual downloaded native recording. Original native probe/export failure remains recorded. Whole-movie gaps include static setup and shutdown; this is recorded-frame coverage, not gameplay or physical display FPS, joint approval or audible playback."
+}

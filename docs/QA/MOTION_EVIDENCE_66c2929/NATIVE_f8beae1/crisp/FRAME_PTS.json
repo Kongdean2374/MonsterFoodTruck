@@ -1,0 +1,13 @@
+{
+  "audio_tracks" : 0,
+  "decoded_frame_count" : 2177,
+  "duration_seconds" : 63.65,
+  "file" : "crisp.mov",
+  "first_actual_seconds" : 0,
+  "height" : 1334,
+  "last_actual_seconds" : 60.01833333333333,
+  "max_actual_frame_gap_seconds" : 7.595000000000001,
+  "p95_actual_frame_gap_seconds" : 0.03499999999999659,
+  "scope" : "Continuous native simulator recording; all decoded presentation timestamps retained. This measures recorded frame coverage, not physical display FPS, artistic acceptance or audio playback. No requested times or generated replacement frames.",
+  "width" : 750
+}

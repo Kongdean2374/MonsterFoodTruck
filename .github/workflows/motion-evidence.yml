@@ -1,5 +1,5 @@
 name: Short visual evidence for candidate 66c2929
-run-name: Capture fixed 66c2929 motion and recipe transitions (not full-game regression)
+run-name: ${{ contains(github.event.head_commit.message, '[decode-only]') && 'Decode existing 66c2929 movies (no App build or tests)' || 'Capture fixed 66c2929 motion and recipe transitions (not full-game regression)' }}
 on:
   push:
     branches: [integration/full-game]
@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   capture:
-    if: ${{ startsWith(github.event.head_commit.message, '[motion-evidence-66c2929]') }}
+    if: ${{ startsWith(github.event.head_commit.message, '[motion-evidence-66c2929]') && !contains(github.event.head_commit.message, '[decode-only]') }}
     runs-on: macos-15
     timeout-minutes: 45
     env:
@@ -55,5 +55,37 @@ jobs:
           path: |
             qa/build/motion-evidence/build.log
             qa/build/motion-evidence/*.xcresult
+          retention-days: 14
+          if-no-files-found: error
+  decode-existing:
+    if: ${{ startsWith(github.event.head_commit.message, '[motion-evidence-66c2929]') && contains(github.event.head_commit.message, '[decode-only]') }}
+    runs-on: macos-15
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: read
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Verify unchanged candidate product trees
+        env:
+          MFT_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          MFT_REQUIRE_CAPTURE: '1'
+        run: |
+          git fetch --no-tags --depth=1 origin 66c2929dd05c28af1b0c3ec8a79805446c6dc023
+          python3 docs/QA/MOTION_EVIDENCE_66c2929/route.py
+      - name: Decode existing original movies with native Apple frameworks only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 docs/QA/MOTION_EVIDENCE_66c2929/decode_existing.py
+      - name: Preserve actual native frame exports even on failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-motion-decode-${{ github.sha }}
+          path: build/native-motion-decode/review
           retention-days: 14
           if-no-files-found: error
