@@ -29,7 +29,7 @@ final class KitchenScene: SKScene {
     private var reduced = false
     private let warning=SKShapeNode()
     override init(size:CGSize) {super.init(size:size);scaleMode = .resizeFill;backgroundColor = .clear;isUserInteractionEnabled=false}
-    convenience init(){self.init(size:CGSize(width:390,height:330))}
+    override convenience init(){self.init(size:CGSize(width:390,height:330))}
     required init?(coder:NSCoder){super.init(coder:coder)}
     override func didChangeSize(_ oldSize:CGSize){layoutCharacters()}
     func display(session:GameSession,content:GameContent,selected:String?,reduceMotion:Bool) {
