@@ -18,6 +18,12 @@ final class AppModel: ObservableObject {
     @Published var isSaving = false
     @Published private(set) var debugScenarioLabel:String?
     private var debugFrozen=false
+    #if DEBUG
+    private var normalReplay=false
+    private var replayInputs:[ReplayInput]=[]
+    private var replayCursor=0
+    private var lastReplayCommand:Double = -1
+    #endif
     @Published private(set) var resultSession: GameSession?
     let kitchen = KitchenScene()
     let audio = GameAudio()
@@ -40,7 +46,12 @@ final class AppModel: ObservableObject {
     func load() {
         do {
             let content = try GameContent.load()
-            let store = SaveStore(directory:try SaveStore.applicationDirectory(),content:content)
+            var directory=try SaveStore.applicationDirectory()
+            #if DEBUG
+            let environment=ProcessInfo.processInfo.environment
+            if environment["MFT_NORMAL_REPLAY"]=="1"{directory.appendPathComponent("UIReplayEvidence",isDirectory:true)}
+            #endif
+            let store = SaveStore(directory:directory,content:content)
             let loaded = store.load()
             self.content = content; self.store = store; document = loaded.document
             message = loaded.notice
@@ -48,9 +59,15 @@ final class AppModel: ObservableObject {
             startupError = nil
             audio.configure(document.settings)
             #if DEBUG
-            let environment=ProcessInfo.processInfo.environment
+            if environment["MFT_NORMAL_REPLAY"]=="1"{
+                if environment["MFT_REPLAY_RESET"]=="1"{let revision=document.revision;document=SaveDocument();document.revision=revision}
+                normalReplay=true
+                debugScenarioLabel="一般模式・正常命令重播（非手動試玩）"
+            }
+            if environment["MFT_REDUCE_MOTION"]=="1"{document.settings.reduceMotion=true}
             if let scenario=environment["MFT_UI_SCENARIO"], ["busy","warning","covered","tidy","scorched"].contains(scenario) {
                 document.settings=GameSettings()
+                document.settings.reduceMotion=true
                 document.session=try DebugScenarios.make(scenario,content:content)
                 debugScenarioLabel="測試情境：\(scenario)・不列正式成績"
                 debugFrozen=true;screen = .game;selectedOrder="L6-2"
@@ -90,7 +107,14 @@ final class AppModel: ObservableObject {
         selectedOrder = document.session?.activeOrders.first?.id
         resultSession = nil; lastEvent = -1; lastSnapshotTime = 0; lastUptime = nil; tutorialPhase = 0
         screen = .game; persist()
+        #if DEBUG
+        if normalReplay {
+            do{replayInputs=try CommandReplayPlanner.run(level:content.levels[index],mode:document.settings.nextMode,content:content).inputs;replayCursor=0;lastReplayCommand = -1}
+            catch{normalReplay=false;message="參考操作序列無法建立：\(error.localizedDescription)"}
+        }
+        #endif
         if levelID == "level_01" && (!document.tutorialDone || document.session?.isPractice == true) { tutorialPhase = 1; showLesson("歡迎開張！先點選苔角鹿的訂單，料理會一直綁定這位客人。") }
+        else{resume()}
     }
     func continueSession() {
         guard document.session != nil else { return }
@@ -126,6 +150,9 @@ final class AppModel: ObservableObject {
     }
     func tick() {
         guard !debugFrozen else{return}
+        #if DEBUG
+        if normalReplay && screen == .game && lesson != nil{dismissLesson();return}
+        #endif
         guard screen == .game, var session = document.session, !session.isPaused, lesson == nil, let content else { return }
         let uptime = ProcessInfo.processInfo.systemUptime
         let delta = lastUptime.map { max(0,uptime-$0) } ?? 0
@@ -136,14 +163,44 @@ final class AppModel: ObservableObject {
         syncKitchen()
         if session.finished(content:content) { settleResult(session); return }
         if session.time-lastSnapshotTime >= 2 { lastSnapshotTime=session.time;persist() }
+        #if DEBUG
+        drainReplay()
+        #endif
     }
     func command(_ command: GameCommand) {
-        tick()
-        guard var session=document.session, let content else { return }
-        if let error=session.send(command,content:content) { message=error;return }
+        _=submit(command,catchUp:true)
+    }
+    @discardableResult private func submit(_ command:GameCommand,catchUp:Bool)->Bool{
+        if catchUp{tick()}
+        guard var session=document.session,!session.isPaused,lesson==nil,let content else { return false }
+        if let error=session.send(command,content:content) { message=error;return false }
         document.session=session;consumeEvents();syncKitchen();persist()
         if session.finished(content:content) { settleResult(session) }
+        return true
     }
+    #if DEBUG
+    private func drainReplay(){
+        guard normalReplay,screen == .game,let session=document.session,!session.isPaused,
+              replayCursor<replayInputs.count,session.time-lastReplayCommand>=0.5999 else{return}
+        let input=replayInputs[replayCursor]
+        guard session.time>=input.time,let order=session.activeOrders.first(where:{$0.id==input.command.orderID}) else{return}
+        let legal:Bool
+        switch input.command{
+        case .prepare:legal=order.stage == .none && session.activeOrders.filter{$0.station == .prep}.count<2
+        case .cook:legal=order.stage == .prepared && session.activeOrders.filter{$0.station == .stove}.count<2
+        case .plate:legal=order.stage == .ready && session.activeOrders.filter{$0.station == .plate}.count<2
+        case .garnish,.serve:legal=order.stage == .plated && !order.needsTidy && !order.isCovered
+        case .tidy:legal=order.stage == .plated && order.needsTidy && !order.isCovered
+        case .cover:legal=order.stage == .plated && !order.isCovered
+        case .uncover:legal=order.isCovered
+        case .cancelGarnish:legal=order.stage == .topping
+        }
+        guard legal else{return}
+        select(order.id)
+        guard lesson==nil else{return}
+        if submit(input.command,catchUp:false){lastReplayCommand=session.time;replayCursor+=1}
+    }
+    #endif
     private func consumeEvents() {
         guard let session=document.session, let content else { return }
         for event in session.events where event.id > lastEvent {
@@ -196,7 +253,17 @@ final class AppModel: ObservableObject {
             guard let self else{return}
             self.isSettling=false;self.isSaving=false
             switch result {
-            case .success:self.document=settled;self.screen = .result;self.audio.play(session.stars(content:content)>0 ? "win":"lose")
+            case .success:
+                #if DEBUG
+                if self.normalReplay {
+                    do{
+                        let directory=try SaveStore.applicationDirectory().appendingPathComponent("UIReplayEvidence/Journey",isDirectory:true)
+                        try FileManager.default.createDirectory(at:directory,withIntermediateDirectories:true)
+                        try JSONEncoder().encode(session).write(to:directory.appendingPathComponent("actual-\(session.levelID).json"),options:.atomic)
+                    }catch{self.message="工程重播證據寫入失敗：\(error.localizedDescription)"}
+                }
+                #endif
+                self.document=settled;self.screen = .result;self.audio.play(session.stars(content:content)>0 ? "win":"lose")
             case let .failure(error):self.message="結算尚未儲存：\(error.localizedDescription)。請在暫停畫面重試。"
             }
         }

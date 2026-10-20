@@ -6,7 +6,7 @@ xcodebuild archive -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck 
 APP=build/MonsterFoodTruck.xcarchive/Products/Applications/MonsterFoodTruck.app
 test -f "$APP/MonsterFoodTruck"
 cp "$APP/Info.plist" build/delivery/DEVICE_APP_INFO.plist
-python3 Scripts/verify_app.py "$APP" --platform iPhoneOS --output build/delivery/DEVICE_APP_IDENTITY.json
+python3 Scripts/verify_app.py "$APP" --platform iPhoneOS --resources MonsterFoodTruck/Resources --output build/delivery/DEVICE_APP_IDENTITY.json
 xcrun swift Scripts/probe_bundle.swift "$PWD/$APP" | tee build/delivery/DEVICE_BUNDLE_PROBE.txt
 xcrun vtool -show-build "$APP/MonsterFoodTruck" | tee build/delivery/MACHO_PLATFORM.txt
 grep -Eq 'platform[[:space:]]+IOS$' build/delivery/MACHO_PLATFORM.txt
@@ -23,6 +23,7 @@ BUILD=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' "$APP/Info.plist")
 IPA="MonsterFoodTruck-unsigned-$VERSION-$BUILD.ipa"
 (cd build/package && zip -qry "../delivery/$IPA" Payload)
 cp build/ENVIRONMENT.txt build/TEST_SUMMARY.md build/TEST_RESULT_SUMMARY.json build/delivery/
+if [ "${MFT_FULL_QA:-0}" = 1 ]; then cp build/JOURNEY_TEST_SUMMARY.json build/delivery/; fi
 if [ "${MFT_LAYOUT_QA:-0}" = 1 ]; then cp build/LAYOUT_TEST_SUMMARY_*.json build/LAYOUT_ENVIRONMENT.txt build/delivery/; fi
 cp PLAYTEST_GUIDE.md build/delivery/
 python3 - "$APP" "$IPA" <<'PY'

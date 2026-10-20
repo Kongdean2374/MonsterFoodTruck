@@ -31,7 +31,10 @@ final class KitchenScene: SKScene {
     override init(size:CGSize) {super.init(size:size);scaleMode = .resizeFill;backgroundColor = .clear;isUserInteractionEnabled=false}
     override convenience init(){self.init(size:CGSize(width:390,height:330))}
     required init?(coder:NSCoder){super.init(coder:coder)}
-    override func didChangeSize(_ oldSize:CGSize){layoutCharacters()}
+    override func didChangeSize(_ oldSize:CGSize){
+        if let state,let content{display(session:state,content:content,selected:nil,reduceMotion:reduced)}
+        else{layoutCharacters()}
+    }
     func display(session:GameSession,content:GameContent,selected:String?,reduceMotion:Bool) {
         state=session;self.content=content;reduced=reduceMotion
         let live=Set(session.activeOrders.map(\.id))
@@ -66,8 +69,8 @@ final class KitchenScene: SKScene {
         guard let state else{return}
         for (i,order) in state.activeOrders.enumerated(){
             guard let node=monsters[order.id] else{continue}
-            node.position=CGPoint(x:size.width*(CGFloat(i)+0.5)/3,y:size.height-84)
-            let width=min(86,size.width/3-16);node.size=CGSize(width:width,height:width*540/512)
+            node.position=CGPoint(x:size.width*(CGFloat(i)+0.5)/3,y:size.height-70)
+            let width=min(72,size.width/3-16);node.size=CGSize(width:width,height:width*540/512)
         }
     }
 }

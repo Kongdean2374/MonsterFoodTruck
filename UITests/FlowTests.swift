@@ -17,7 +17,7 @@ final class FlowTests: XCTestCase {
         add(attachment)
     }
     func testNavigationTutorialPauseAndPersistence(){
-        let app=XCUIApplication();app.launch()
+        let app=XCUIApplication();app.launchEnvironment["MFT_REDUCE_MOTION"]="1";app.launch()
         XCTAssertTrue(app.buttons["start"].waitForExistence(timeout:10));capture("home",app)
         app.buttons["關卡選擇"].tap();XCTAssertTrue(app.buttons["level-level_01"].waitForExistence(timeout:5));capture("levels-locked",app)
         app.buttons["level-level_01"].tap();XCTAssertTrue(app.buttons["beginLevel"].waitForExistence(timeout:5));capture("level-intro",app)
@@ -41,12 +41,16 @@ final class FlowTests: XCTestCase {
     }
     func perform(_ label:String,_ app:XCUIApplication){
         let deadline=Date().addingTimeInterval(30)
+        var attempted=false
         while Date()<deadline{
-            if app.buttons["知道了，繼續"].exists{app.buttons["知道了，繼續"].tap()}
+            if app.buttons["知道了，繼續"].exists{app.buttons["知道了，繼續"].tap();continue}
             let button=app.buttons["primaryCommand"]
-            if button.exists && button.isEnabled && button.label==label{button.tap();return}
+            if attempted && button.exists && button.label != label{return}
+            if button.exists && button.isEnabled && button.isHittable && button.label==label{button.tap();attempted=true}
             RunLoop.current.run(until:Date().addingTimeInterval(0.2))
         }
+        capture("FAILED-action-\(label)",app)
+        let tree=XCTAttachment(string:app.debugDescription);tree.name="FAILED-action-hierarchy";tree.lifetime = .keepAlways;add(tree)
         XCTFail("Expected legal UI action did not become available: \(label)")
     }
     func reveal(_ element:XCUIElement,_ app:XCUIApplication,up:Bool){
@@ -55,10 +59,11 @@ final class FlowTests: XCTestCase {
     }
     func testDebugScenarioScreenshots(){
         for (name,large) in [("busy",false),("warning",false),("covered",false),("tidy",false),("scorched",false),("busy",true)]{
-            let app=XCUIApplication();app.launchEnvironment["MFT_UI_SCENARIO"]=name;app.launch()
+            let app=XCUIApplication();app.launchEnvironment["MFT_UI_SCENARIO"]=name
             if large{
-                app.terminate();app.launchEnvironment["MFT_LARGE_TEXT"]="1";app.launchEnvironment["MFT_HIGH_CONTRAST"]="1";app.launchEnvironment["MFT_LEFT_HAND"]="1";app.launch()
+                app.launchEnvironment["MFT_LARGE_TEXT"]="1";app.launchEnvironment["MFT_HIGH_CONTRAST"]="1";app.launchEnvironment["MFT_LEFT_HAND"]="1"
             }
+            app.launch()
             XCTAssertTrue(app.staticTexts["測試情境：\(name)・不列正式成績"].waitForExistence(timeout:10))
             capture("DEBUG-\(name)\(large ? "-large-contrast-left":"-standard-right")",app);app.terminate()
         }

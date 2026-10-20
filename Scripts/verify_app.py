@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Fail before install/package if the built .app has invalid identity or layout."""
 import argparse
+import hashlib
 import json
 import plistlib
 from pathlib import Path
 
-def inspect(app, platform):
+def inspect(app, platform, resources=None):
     app = Path(app)
     info = plistlib.loads((app / 'Info.plist').read_bytes())
     required = ['CFBundleIdentifier', 'CFBundleExecutable', 'CFBundleName',
@@ -38,15 +39,34 @@ def inspect(app, platform):
     for suffix in ('*.mobileprovision', '*.p12', '*.key'):
         if any(app.rglob(suffix)):
             raise ValueError('Unexpected signing material in app')
-    return {key: info[key] for key in required} | {'UIDeviceFamily': info['UIDeviceFamily'], 'app': app.name}
+    report={key: info[key] for key in required} | {'UIDeviceFamily': info['UIDeviceFamily'], 'app': app.name}
+    if resources is not None:
+        sources=[p for p in Path(resources).rglob('*') if p.is_file()]
+        if len({p.name for p in sources})!=len(sources):raise ValueError('Duplicate flat resource names')
+        hashes={}
+        for source in sorted(sources):
+            target=app/source.name
+            if not target.is_file():raise ValueError(f'Built app is missing offline resource: {source.name}')
+            digest=hashlib.sha256(target.read_bytes()).hexdigest()
+            if digest!=hashlib.sha256(source.read_bytes()).hexdigest():raise ValueError(f'Built offline resource differs from source: {source.name}')
+            hashes[source.name]=digest
+        content=json.loads((app/'Content.json').read_text())
+        if [len(content[k]) for k in ('recipes','monsters','levels')]!=[3,3,6]:raise ValueError('Built app has incomplete game content')
+        if len(list(app.glob('*.wav')))!=25:raise ValueError('Built app has incomplete offline audio')
+        if not (app/'Assets.car').is_file():raise ValueError('Compiled app icon catalog is missing')
+        if info.get('CFBundleIcons',{}).get('CFBundlePrimaryIcon',{}).get('CFBundleIconName')!='AppIcon':raise ValueError('Built app icon metadata is missing')
+        report['offline_resource_sha256']=hashes
+        report['content_counts']={key:len(content[key]) for key in ('recipes','monsters','levels')}
+    return report
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('app')
     parser.add_argument('--platform', required=True, choices=['iPhoneOS', 'iPhoneSimulator'])
     parser.add_argument('--output', required=True)
+    parser.add_argument('--resources', required=True, help='Verify every original offline resource against the built flat bundle')
     args = parser.parse_args()
-    report = inspect(args.app, args.platform)
+    report = inspect(args.app, args.platform, args.resources)
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')

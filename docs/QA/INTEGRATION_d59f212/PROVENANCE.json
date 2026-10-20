@@ -1,0 +1,19 @@
+{
+  "source_sha": "d59f2123188156043a46dd10e7f8bc1d0a97d4f1",
+  "workflow_run_id": 39433857551,
+  "job_id": 118665612505,
+  "artifact_id": 12271815746,
+  "extraction": "Unmodified PNG payloads from actual xcresult Data entries; zstandard decompression on Linux. Original artifact has xcresult/logs but no native exported attachment folder or summary. Next candidate fixes this.",
+  "images": {
+    "actual-home.png": "data.0~VDIoK-DDVAYLa7H-EqZj3dkrYbnaFeGsNRHLEQeIiyvWQOsAuYJN29puXqsYZQ8GEN3UtNkKyzy0knNFCxCI-A==.png",
+    "actual-DEBUG-busy.png": "data.0~kOs_N3HrWY3qmfHUKeerTtqfiqSoPyqNJ2skM4T2hHyctVdcDdS-mp9KJYYauZeYjeGGNA3GE6NRsfIEqFEQog==.png",
+    "actual-DEBUG-busy-large-left-contrast.png": "data.0~kjqe3zzL4dhUaiJs2pJWN_bDoHBjK_aLlSnefUiVmiYTqb7Y6SIMZhTOQH-eTJvbbkB6-0HHAMvn1VRo-P0wlg==.png"
+  },
+  "observed_from_actual_log": {
+    "unit_passed": 14,
+    "ui_passed": 2,
+    "ui_failed": 1,
+    "total_skipped": 0,
+    "overall": "failure"
+  }
+}

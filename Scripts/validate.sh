@@ -16,18 +16,31 @@ xcodebuild build-for-testing -project MonsterFoodTruck.xcodeproj -scheme Monster
 SIM_APP=build/DerivedData/Build/Products/Debug-iphonesimulator/MonsterFoodTruck.app
 plutil -p "$SIM_APP/Info.plist"
 cp "$SIM_APP/Info.plist" build/SIMULATOR_APP_INFO.plist
-python3 Scripts/verify_app.py "$SIM_APP" --platform iPhoneSimulator --output build/SIMULATOR_APP_IDENTITY.json
+python3 Scripts/verify_app.py "$SIM_APP" --platform iPhoneSimulator --resources MonsterFoodTruck/Resources --output build/SIMULATOR_APP_IDENTITY.json
 xcrun swift Scripts/probe_bundle.swift "$PWD/$SIM_APP" | tee build/SIMULATOR_BUNDLE_PROBE.txt
-xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -parallel-testing-enabled NO -resultBundlePath build/Validation.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/validate.log
+TEST_STATUS=0
+if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckTests -only-testing:MonsterFoodTruckUITests/FlowTests -resultBundlePath build/Validation.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/validate.log; then
+  TEST_STATUS=0
+else
+  TEST_STATUS=$?
+fi
 xcrun xcresulttool export attachments --path build/Validation.xcresult --output-path build/QA_EVIDENCE
 xcrun xcresulttool get test-results summary --path build/Validation.xcresult > build/TEST_RESULT_SUMMARY.json
-python3 - <<'PY'
+python3 - "$TEST_STATUS" <<'PY'
 from pathlib import Path
+import json,sys
 screenshots=list(Path('build/QA_EVIDENCE').rglob('*.png'))
-if not screenshots or not all(p.stat().st_size>0 for p in screenshots):
+summary=json.loads(Path('build/TEST_RESULT_SUMMARY.json').read_text())
+status=int(sys.argv[1])
+Path('build/TEST_SUMMARY.md').write_text(f'xcodebuild test exit status: {status}. Actual counts: {summary.get("passedTests")} passed, {summary.get("failedTests")} failed, {summary.get("skippedTests")} skipped. See TEST_RESULT_SUMMARY.json and Validation.xcresult for cases and failures. QA_EVIDENCE contains actual XCTest screenshots and model replays, exported even when tests fail. Simulator validation is not device or full-game acceptance.\n')
+if status==0 and (not screenshots or not all(p.stat().st_size>0 for p in screenshots)):
     raise SystemExit('Required actual XCTest screenshot attachments were not exported')
-Path('build/TEST_SUMMARY.md').write_text('xcodebuild build-for-testing and test-without-building completed successfully. See TEST_RESULT_SUMMARY.json and Validation.xcresult for executed, failed and skipped test counts. QA_EVIDENCE contains actual screenshots captured inside the running app by XCTest, exported from that result bundle. This is simulator validation, not device or full-game acceptance.\n')
 PY
+if [ "$TEST_STATUS" != 0 ]; then exit "$TEST_STATUS"; fi
+if [ "${MFT_FULL_QA:-0}" = 1 ]; then
+  bash Scripts/full_journey.sh "$SIM_ID"
+  printf '\nExtended six-level normal-speed command replay ran separately; see JOURNEY_TEST_SUMMARY.json, Journey.xcresult and the actual simulator recording. Engineering replay is not human playtesting.\n' >> build/TEST_SUMMARY.md
+fi
 if [ "${MFT_LAYOUT_QA:-0}" = 1 ]; then
   bash Scripts/layout_smoke.sh
   printf '\nAdditional small/large simulator UI layout tests ran; see LAYOUT_TEST_SUMMARY_*.json and QA_EVIDENCE/layout-*.\n' >> build/TEST_SUMMARY.md

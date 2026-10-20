@@ -26,6 +26,17 @@ struct SaveDocument: Codable {
     var tutorialDone = false
     var seenLessons: [String] = []
     var session: GameSession?
+    var sessionReadIssue: String?
+    enum CodingKeys:String,CodingKey {case version,revision,settings,records,tutorialDone,seenLessons,session}
+    init(){}
+    init(from decoder:Decoder) throws{
+        let c=try decoder.container(keyedBy:CodingKeys.self)
+        version=try c.decode(Int.self,forKey:.version);revision=try c.decode(UInt64.self,forKey:.revision)
+        settings=try c.decode(GameSettings.self,forKey:.settings);records=try c.decode([String:LevelRecord].self,forKey:.records)
+        tutorialDone=try c.decode(Bool.self,forKey:.tutorialDone);seenLessons=try c.decode([String].self,forKey:.seenLessons)
+        do{session=try c.decodeIfPresent(GameSession.self,forKey:.session)}
+        catch{session=nil;sessionReadIssue=error.localizedDescription}
+    }
     var totalStars: Int { records.values.reduce(0) { $0 + $1.best } }
     func unlocked(_ index: Int, content: GameContent) -> Bool {
         index == 0 || (index > 0 && index < content.levels.count && (records[content.levels[index-1].id]?.best ?? 0) > 0)
@@ -34,7 +45,10 @@ struct SaveDocument: Codable {
         guard version == 1, settings.music.isFinite, settings.effects.isFinite,
               (0...1).contains(settings.music), (0...1).contains(settings.effects),
               records.allSatisfy({ key, record in content.levels.contains { $0.id == key } && (0...3).contains(record.normal) && (0...3).contains(record.gentle) }) else { throw GameError.invalid("永久進度或設定格式不正確。") }
-        if includeSession { try session?.validate(content: content) }
+        if includeSession {
+            if sessionReadIssue != nil{throw GameError.invalid("進行中快照無法解碼。")}
+            try session?.validate(content: content)
+        }
     }
 }
 struct SaveLoadResult {
@@ -66,8 +80,24 @@ final class SaveStore {
                     var document = try JSONDecoder().decode(SaveDocument.self, from:Data(contentsOf:url))
                     try document.validate(content:content,includeSession:false)
                     var sessionNotice: String?
-                    do { try document.session?.validate(content:content) }
-                    catch { document.session = nil; sessionNotice = "永久進度已保留，但進行中的局與資料不相容，需重新開局。" }
+                    do {
+                        if document.sessionReadIssue != nil{throw GameError.invalid("進行中快照無法解碼。")}
+                        try document.session?.validate(content:content)
+                    }catch{
+                        document.session=nil
+                        sessionNotice="永久進度已保留，但進行中的局無法恢復或與資料不相容，需重新開局。"
+                        if index==0 && FileManager.default.fileExists(atPath:backup.path){
+                            do{
+                                let previous=try JSONDecoder().decode(SaveDocument.self,from:Data(contentsOf:backup))
+                                try previous.validate(content:content)
+                                if let snapshot=previous.session{
+                                    document.session=snapshot
+                                    sessionNotice="永久進度與設定已保留，進行中的局已從最後有效備份恢復。"
+                                }
+                            }catch{ /* Keep readable permanent progress when no valid session backup exists. */ }
+                        }
+                        document.sessionReadIssue=nil
+                    }
                     document.session?.isPaused = true
                     newestRevision = document.revision
                     return SaveLoadResult(document:document,notice:sessionNotice ?? (index == 1 ? "主要存檔無法讀取，已從最後有效備份恢復。" : nil))

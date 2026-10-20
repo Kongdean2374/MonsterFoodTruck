@@ -8,11 +8,16 @@ struct PlayScreen:View {
             VStack(spacing:6){
                 if let label=model.debugScenarioLabel{Text(label).font(.caption2.bold()).foregroundStyle(TruckTheme.teal)}
                 if let session=model.session,let content=model.content{
-                    HStack{VStack(alignment:.leading,spacing:2){Text(session.level(content).name).font(.headline);Text("已服務 \(session.served)／\(session.level(content).orders.count) ・\(session.mode.rawValue)").font(.caption)};Spacer();Button{model.pause()}label:{Label("暫停",systemImage:"pause.fill").frame(minWidth:72,minHeight:44)}.accessibilityIdentifier("pause")}
+                    HStack{VStack(alignment:.leading,spacing:2){Text(session.level(content).name).font(.headline);Text("已服務 \(session.served)／\(session.level(content).orders.count) ・\(session.mode.rawValue)").font(.caption)
+                        if session.waitingForSlot{Label("下一位客人在等候入場",systemImage:"figure.stand.line.dotted.figure.stand").font(.caption2.bold())}
+                        else if let next=session.nextAdmissionAt,next-session.time<=GameRules.arrivalNotice{Text("下一位 \(Int(ceil(max(0,next-session.time)))) 秒後入場").font(.caption2.bold())}
+                    };Spacer();Button{model.pause()}label:{Label("暫停",systemImage:"pause.fill").frame(minWidth:72,minHeight:44)}.accessibilityIdentifier("pause")}
                     KitchenCanvas().frame(minHeight:324,maxHeight:.infinity)
                     CommandPanel()
                 }
             }.padding(.horizontal,12).padding(.vertical,6)
+                .disabled(model.session?.isPaused == true)
+                .accessibilityHidden(model.session?.isPaused == true)
             if model.session?.isPaused == true && model.lesson == nil {
                 Color.black.opacity(0.28).ignoresSafeArea()
                 VStack(spacing:12){
@@ -50,7 +55,7 @@ struct KitchenCanvas:View {
                                     Button{model.select(order.id)}label:{
                                         VStack(spacing:2){Spacer(minLength:80);Text(content.recipe(order.recipe).name).font(.caption.bold()).lineLimit(1)
                                             HStack(spacing:2){Image(systemName:order.monster == .emberDragon ? "thermometer.sun.fill":order.monster == .mossDeer ? "leaf.fill":"star.fill");Text(content.monster(order.monster).preference).lineLimit(1)}.font(.system(size:model.document.settings.largeText ? 13:11,weight:.semibold))
-                                            HStack(spacing:3){Image(systemName:"hourglass");ProgressView(value:max(0,order.deadline-session.time),total:content.monster(order.monster).patience*session.mode.multiplier).tint(TruckTheme.teal);Text("\(Int(ceil(max(0,order.deadline-session.time))))").monospacedDigit()}.font(.caption2)
+                                            HStack(spacing:3){Image(systemName:order.deadline-session.time<=10 ? "exclamationmark.triangle.fill":"hourglass");ProgressView(value:max(0,order.deadline-session.time),total:content.monster(order.monster).patience*session.mode.multiplier).tint(TruckTheme.teal);Text("\(Int(ceil(max(0,order.deadline-session.time))))").monospacedDigit()}.font(.caption2)
                                         }.frame(maxWidth:.infinity).padding(.horizontal,4).padding(.bottom,5)
                                             .background(RoundedRectangle(cornerRadius:16).stroke(model.selectedOrder==order.id ? TruckTheme.moss:.clear,lineWidth:3))
                                     }.buttonStyle(.plain).accessibilityIdentifier("customer-\(order.id)").accessibilityLabel("\(content.monster(order.monster).name)，\(content.recipe(order.recipe).name)，偏好\(content.monster(order.monster).preference)，耐心剩\(Int(max(0,order.deadline-session.time)))秒")
@@ -94,7 +99,8 @@ struct StationControl:View {
                     VStack(alignment:.leading,spacing:2){
                         Text(status(order,session:session)).font(.system(size:model.document.settings.largeText ? 14:12,weight:.bold)).lineLimit(2)
                         if let end=order.workEnds{Text("\(max(0,end-session.time),specifier:"%.1f") 秒").font(.caption).monospacedDigit()}
-                        else if order.monster == .emberDragon,let cooked=order.cookedAt{Text("熱度 \(Int(ceil(max(0,cooked+GameRules.heatWindow*session.mode.multiplier-session.time))))秒").font(.caption2).bold()}
+                        else if order.station == .stove,let cooked=order.cookedAt,!order.everScorched{Text("寬限 \(Int(ceil(max(0,cooked+content.recipe(order.recipe).grace*session.mode.multiplier-session.time))))秒").font(.caption2).bold()}
+                        if order.monster == .emberDragon,let cooked=order.cookedAt{Text("熱度 \(Int(ceil(max(0,cooked+GameRules.heatWindow*session.mode.multiplier-session.time))))秒").font(.caption2).bold()}
                     }
                 }else{Image(systemName:station == .stove ? "flame":station == .prep ? "carrot":"circle.dashed");Text("空位 \(slot+1)").font(.caption)}
             }.frame(maxWidth:.infinity,minHeight:48,maxHeight:.infinity)
@@ -111,7 +117,7 @@ struct StationControl:View {
     func status(_ o:OrderState,session:GameSession)->String{
         if session.nibbleTarget==o.id{return "爪子目標 \(Int(ceil(o.warningRemaining ?? 0)))秒"}
         if o.isCovered{return "餐蓋保護"}
-        if o.needsTidy && o.stage != .tidying{return o.everNibbled ? "被偷嚐・待整理":"焦邊・待整理"}
+        if o.needsTidy && o.stage != .tidying{return o.station == .stove ? "焦邊・先裝盤":o.everNibbled ? "被偷嚐・待整理":"焦邊・待整理"}
         switch o.stage{case .prepping:return "備料中";case .prepared:return "備妥・可下鍋";case .cooking:return "烹調中";case .ready:return "完成・可裝盤";case .topping:return "配料中";case .tidying:return "整理中";case .plated:return o.topping?.rawValue ?? "可出餐";case .none:return "等待備料"}
     }
 }
@@ -124,7 +130,7 @@ struct CommandPanel:View {
         VStack(spacing:6){
             if let session=model.session,let content=model.content{
                 HStack(spacing:6){ForEach(session.activeOrders){order in
-                    Button{model.select(order.id)}label:{Text(content.recipe(order.recipe).name).font(.system(size:model.document.settings.largeText ? 16:14,weight:.bold)).frame(maxWidth:.infinity,minHeight:44).background(model.selectedOrder==order.id ? TruckTheme.moss:TruckTheme.cream,in:RoundedRectangle(cornerRadius:12)).foregroundStyle(model.selectedOrder==order.id ? TruckTheme.cream:TruckTheme.cocoa)}.accessibilityIdentifier("quick-\(order.id)").accessibilityLabel("選取\(content.monster(order.monster).name)的\(content.recipe(order.recipe).name)")
+                    Button{model.select(order.id)}label:{VStack(spacing:2){Text(content.monster(order.monster).name).font(.system(size:11,weight:.medium));Text(content.recipe(order.recipe).name).font(.system(size:model.document.settings.largeText ? 16:14,weight:.bold))}.lineLimit(1).frame(maxWidth:.infinity,minHeight:44).background(model.selectedOrder==order.id ? TruckTheme.moss:TruckTheme.cream,in:RoundedRectangle(cornerRadius:12)).foregroundStyle(model.selectedOrder==order.id ? TruckTheme.cream:TruckTheme.cocoa)}.accessibilityIdentifier("quick-\(order.id)").accessibilityLabel("選取\(content.monster(order.monster).name)的\(content.recipe(order.recipe).name)")
                 }}
             }
             if let order=model.selected {
