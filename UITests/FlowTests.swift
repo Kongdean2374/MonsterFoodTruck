@@ -77,6 +77,7 @@ final class FlowTests: XCTestCase {
         app.terminate();app.launchEnvironment.removeValue(forKey:"MFT_REDUCE_MOTION");app.launch()
         app.buttons["設定"].tap();XCTAssertTrue(app.staticTexts["音樂音量 0%"].waitForExistence(timeout:5))
         XCTAssertTrue(app.staticTexts["音效音量 0%"].exists);XCTAssertEqual(app.switches["觸覺回饋"].value as? String,"0")
+        reveal(app.buttons["舒緩"],app,up:true);XCTAssertTrue(app.buttons["舒緩"].isSelected,"Next-game mode must persist after process restart")
         reveal(app.switches["減少動態效果"],app,up:true);XCTAssertEqual(app.switches["減少動態效果"].value as? String,"0")
         for label in ["高對比資訊","大字介面","左手單手配置"]{
             reveal(app.switches[label],app,up:true);XCTAssertEqual(app.switches[label].value as? String,"1","Setting must persist after process restart: \(label)")

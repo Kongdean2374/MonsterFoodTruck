@@ -162,7 +162,10 @@ final class GameModelTests: XCTestCase {
         for mode in PlayMode.allCases{for (index,level) in c.levels.enumerated(){
             let (pass,preference)=thresholds[index]
             XCTAssertEqual(level.passCount,pass);XCTAssertEqual(level.preferenceCount,preference)
-            let reference=try CommandReplayPlanner.run(level:level,mode:mode,content:c)
+            // Boundary construction needs a proven all-preference trace. The
+            // dynamic player deliberately omits optional toppings to free plates.
+            let reference=try CommandReplayPlanner.observe(level:level,mode:mode,content:c,policy:.shortFirst).session
+            XCTAssertEqual(reference.preferences,level.orders.count,"Scoring boundary fixture must first achieve every preference")
             for count in [pass-1,pass] where count<level.orders.count{
                 let accepted=Set(level.orders.prefix(count).map(\.id))
                 var s=GameSession(level:level,mode:mode,content:c);s.isPaused=false

@@ -3,6 +3,21 @@ import SpriteKit
 @testable import MonsterFoodTruck
 
 final class SceneLifecycleTests:XCTestCase{
+    @MainActor func testReducedMotionRemovesFinishedDeparturesWithoutFreezingGhosts() throws{
+        var content=try GameContent.load()
+        content.levels[0].orders=[PlannedOrder(id:"motion-order",scheduledAt:0,monster:.mossDeer,recipe:.starSoup)]
+        var session=GameSession(level:content.levels[0],mode:.normal,content:content);session.isPaused=false
+        let scene=KitchenScene(size:CGSize(width:375,height:324))
+        scene.display(session:session,content:content,selected:nil,reduceMotion:false)
+        XCTAssertNil(session.send(.prepare("motion-order"),content:content));session.advance(to:3,content:content)
+        XCTAssertNil(session.send(.cook("motion-order"),content:content));session.advance(to:13,content:content)
+        XCTAssertNil(session.send(.plate("motion-order"),content:content));XCTAssertNil(session.send(.serve("motion-order"),content:content))
+        scene.display(session:session,content:content,selected:nil,reduceMotion:false)
+        XCTAssertTrue(scene.children.contains{$0.name=="departing"},"Departure should remain briefly for the receive animation")
+        scene.display(session:session,content:content,selected:nil,reduceMotion:true)
+        XCTAssertTrue(scene.children.isEmpty,"Enabling reduce motion must clear pending departure actions before pausing the scene")
+        XCTAssertEqual(session.served,1);try session.validate(content:content)
+    }
     @MainActor func testSettingsWriteFailureStaysOpenAndCanRetryAfterIORecovery() async throws{
         let directory=FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try Data("file blocking save directory".utf8).write(to:directory)

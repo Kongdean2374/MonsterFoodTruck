@@ -1,55 +1,42 @@
 # 工作狀態
 
-- 目標倉庫：https://github.com/Kongdean2374/MonsterFoodTruck
-- 開發分支：`integration/full-game`（同一工作樹、單一寫入者）；最終目標分支 `main`。`main` 的 b12837c 核心回歸已成功並經 Dot 獨立查核。
-- 階段：P1 工程建置已打通；DOT-001 經 Dot 獨立重測 VERIFIED_CLOSED。核心模型與介面／資產整合中，完整成品尚未完成。
-- 最近交付審核 source SHA：`f8707b553758ba86605d0b70b6f97be35b516b8e`（DOT-001 工程修復，非完整遊戲候選）。
-- 活動任務識別：未另建外部任務。
-- 產品檔案寫入者：目前 Codex 對話，單一寫入者。
-- Dot 狀態：使用者已轉交 DOT-001 對 f8707b5 的獨立重測與 VERIFIED_CLOSED 判定；範圍僅該啟動工程，不代表完整遊戲或美術通過。
+2026-10-20。完整遊戲仍在製作與回歸，沒有最終驗收或完整遊戲 IPA。
 
-## 已完成檢查
+## 恢復入口與單一寫入者
 
-- GitHub CLI 與連接器均確認擁有者為 `Kongdean2374`、倉庫可見性 `public`、預設分支 `main`、未封存且未停用。
-- 兩種工具均回報 `pull: true`、`push: true`。
-- 遠端初始為空倉庫，沒有既有分支或產品檔案可被覆蓋；已成功 clone。
-- 將使用者提供的完整規格原文保存為 `docs/PROJECT_SPEC.md`，建立本規則摘要及狀態紀錄。
-- 實際首次 push 成功：`d957fdfd0ce4fd87e5495b791c4e92055068162a`；`main` 的 GitHub API 回覆與 `git ls-remote` 均指向該提交。
-- 經 GitHub Contents API 讀回 `docs/PROJECT_SPEC.md`，逐位元組比對本地原始附件，完全一致；工作樹乾淨。
+- 倉庫 `Kongdean2374/MonsterFoodTruck`，公開，預設分支 main。單一工作樹 `/workspace/MonsterFoodTruck`、整合分支 `integration/full-game`，目前 Codex 對話為唯一產品寫入者。不 reset／force push／覆蓋未知工作。
+- 先讀 `git status`、本檔及 [問題紀錄](QA/ISSUE_LOG.md)；完整規格 [PROJECT_SPEC](PROJECT_SPEC.md)。歷史失敗及 Dot 的獨立判定保存在問題紀錄與各 QA 目錄，不以新成功改寫。
+- 目前正在驗證候選 `7c79fe0e0111f9d44212fc8e36866ab9a80a9a29`；[Validate 39462050918](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39462050918) 正在執行，主 job 118763757859。full_qa／layout_qa 均開啟；主流程失敗仍會跑兩尺寸。沒有取消／重開重複 job。
+- main 仍為 `b12837c80dfc9f44ae6035c8bf7334f0fff66fdb` 的核心候選。最終需將完整候選整合到 main，再產出同 SHA 的真實測試與未簽名裝置包。
 
-## 工具與未驗證項
+## 已有獨立判定（範圍不可擴張）
 
-- Git／GitHub CLI／GitHub 連接器可用。
-- 圖片生成／檢視可用；三角色／三料理、餐車森林與圖示原創母版已保存並整合。已檢視實際首頁及同尺寸遊玩／大字情境；完整分層動畫、三尺寸與 Dot 視覺門檻尚未通過。
-- 本地 Linux 沒有 Xcode、iOS SDK 或 iOS 模擬器；已實際使用 macos-15／Xcode 16.4／iOS 18.5 SDK 與 iPhone 16 Pro Simulator 完成最小工程的單元／UI 測試及無簽名裝置 archive。
-- 已原創合成 25 份本地 PCM 配樂／事件音，完成無削波靜態分析並整合播放器；實際聽覺與觸覺尚未驗收。
-- 已建立最小 SwiftUI／SpriteKit 工程、決定性工程產生器、單元與啟動 UI 測試、兩條 Actions；DOT-001 對應的 Validate run `39424665706` 與 IPA run `39424665179` 同 SHA 均 SUCCESS，2 passed、0 failed、0 skipped。已下載實際 IPA 比對校驗碼與裝置 Mach-O，已檢視真實截圖；詳 `docs/QA/ISSUE_LOG.md`。
-- 核心模型、六關資料、存檔／音訊、SwiftUI 全部路由與原創母版已在整合分支編譯。3b7dce8 的 14 單元＋1 啟動 UI 通過；d59f212 擴充操作後發現教學回歸失敗。不能把啟動成功套用為完整流程通過。
-- 尚無完整遊戲、正式美術音訊、效能、真機或 Dot 驗收結果。
+- DOT-001：Dot 親自下載 f8707b553758ba86605d0b70b6f97be35b516b8e 的 artifact 12265820706，確認 Validate 39424665706／IPA 39424665179 成功、2 passed／0 failed／0 skipped、真實 P1-launch、SHA256SUMS／iPhoneOS／iOS 17／arm64／Mach-O platform=2／無 LC_CODE_SIGNATURE。VERIFIED_CLOSED 僅啟動工程的安裝與封裝，該小 IPA 不是完整遊戲。
+- MFT-001：b12837c 的 Validate 39430419215／job 118653712104，14 單元＋1 啟動 UI 通過，Dot 獨立確認存檔回呼逾時消失。僅核心／存檔等待問題 VERIFIED_CLOSED。
+- 7.3：Dot 查看原 blob、三角色三菜／餐車母版與 0171012 兩張 SE3 實圖，經使用者轉交有條件通過沿用同一母版風格及小尺寸辨識，可繼續表情／部件／狀態／動畫，不需額外使用者逐階段同意。不是 7.7 六項評分、動態接合或全遊戲通過。
+- Dot 對 69c3933 確認實際第一關 3 成功／2 偏好／2 星、第二關解鎖，且所列畫面未見明確裁切；該整體仍 18 passed／1 觸覺斷言 failed／0 skipped。首次教學角色空白另列 MFT-004。
+- Dot 對 3bc6d37 的尺寸查核：large 成功；small debugScenario 通過、HomeLayouts 於 FlowTests.swift:127 缺高對比 snapshot（job 118730361469）。146 已等原 run 完成再記錄結果，沒有另重跑同 SHA。
 
-## 阻礙與下一步
+## 最新已完成原生結果
 
-- 先前自動建庫因 integration 缺少建立倉庫權限失敗；目前使用者已提供可存取的倉庫，已實際驗證既有倉庫可 clone、push 及讀回。建庫阻礙已解除。
-- 下一個實際動作：提交 MFT-002 修正，重跑原教學／暫停／保存測試並成功或失敗都匯出 PNG／summary；驗證 375×667pt、402×874pt、430×932pt 的一般及大字配置。另建立六關真實時間命令重播與模擬器錄影作獨立工程證據，不代替真實點按流程或真人試玩。b12837c 的 Dot 核心查核範圍保持不變。
-- 查詢 Actions 管理設定 API 回傳 403，這不等於 workflow 無法執行；以實際推送及工作流程結果確認，不修改帳號安全設定。
-- 問題 ID：DOT-001 VERIFIED_CLOSED；完整產品、美術、流程及最終候選仍須查驗，未達最終交付條件。
-- 整合首輪：b84b983 的 run 39432021237 在編譯失敗，`KitchenScene` 的 convenience init 缺少 override。資產前置檢查已通過，但沒有啟動 App；修正後重新執行，不沿用核心候選的成功替它背書。
-- 修復整合：`3b7dce8ab0871d09e6b794c5b0da8d9055faaa74` 的 run `39432461903` SUCCESS，14 單元＋1 啟動 UI 測試，15 passed／0 failed／0 skipped。已下載並檢視首頁真實截圖、保存十二份模型重播；見 `docs/QA/INTEGRATION_3b7dce8`。完整操作與三尺寸尚待新增 UI 回歸驗證。
-- 擴充整合：`d59f2123188156043a46dd10e7f8bc1d0a97d4f1` 的 run `39433857551` failure，14 單元通過、3 UI 中 2 通過／1 失敗（裝盤），後續尺寸未執行。Dot 親自下載 artifact `12271815746` 核對；已記錄 MFT-002 與原始畫面，不略過或刪除原失敗斷言。
-- 後續三筆中間資源檢查 run `39437388402`／`39437916409`／`39440235520` 都在 XCTest 前因 Xcode 處理 PNG 與新增雜湊檢查不合而失敗，沒有宣稱任何新 UI 通過。改為原始 PNG 複製並讓資源完整性檢查與原教學實測各自留下證據；任何失敗仍使整體失敗。
-- 本次待驗證擴充：原真實點按流程延伸至第一關結算／第二關解鎖、設定持續性、還原設定保留星數、清除進度雙確認及各取消；另有正常時鐘六關重播、背景／失敗／重試與取消路徑的延伸測試及真實錄影工具，尚未實測通過。
-- 一張基於原母版的龍角色分層試稿已保存，僅 DEBUG 試裝；不擴稱三角色正式動畫或 Dot 美術通過。仍需完整料理狀態／餐車圖層／三角色動畫及實際聽覺查驗。
-- `69c3933` 的 run `39441785452` 完成：15 單元通過，4 UI 中 3 通過／1 在新增觸覺保存斷言失敗，18 passed／1 failed／0 skipped。原裝盤／保存阻擋未重現，真實點按已到第一關二星結算及第二關解鎖，但整個案例仍 failure。26 PNG＋原生 summary 已實際下載；見 `docs/QA/INTEGRATION_69c3933` 與 MFT-003，未代稱 Dot 通過。
-- 下一候選修設定文字觸控與關閉寫入等待；三尺寸獨立 job 同 SHA 執行。額外提交三種排程／保守間隔／選單延遲的 Domain 診斷及六關評分門檻測試；這些尚待實際執行，不作平衡或好玩判定。六關參考快速解目前沒有偷嚐預告／餐蓋，該設計查驗仍開放。
-- Dot 最新獨立查核 69c3933 artifact：19 項、18 通過／1 觸覺失敗／0 略過；確認真實第一關 3 成功／2 偏好／2 星與第二關解鎖，所列畫面未見明確裁切；指出 tutorial-first 的角色空白需穩定畫面，不判定持續動畫故障或完整驗收。已列 MFT-004，代碼發現教學前缺少場景同步；新增節點回歸與 0／1／3 秒原生截圖待實測。
-- `0171012506fd63161b0d3911de0de6f294ff8f43` 的 run 39446499495 已自行結束，沒有取消／重開：small 2 UI 通過，large 1 通過／1 左手開關失敗；主 job 未取得 hosted runner 被 GitHub 取消，沒有單元或主 UI 結果。原生摘要、六張直接複製 PNG 與來源保存 [INTEGRATION_0171012](QA/INTEGRATION_0171012/)。下一候選讓主驗證先取得 runner，隨後兩尺寸仍在主驗證失敗時執行，避免同時三個 macOS job 的容量問題。
-- MFT-004 修復候選 `3bc6d37b2804a7ed61c5d51b9cdd937da3713413`：run 39450296133 執行中，未取消。包含節點回歸、首次教學 0／1／3 秒截圖、小尺寸可視中心捲動、餐車分層單一 DEBUG 初稿及練習結算不解鎖的延伸測試，尚待實際結果。
-- 後續未測改動：二十次真實點按進出場景的節點／音效實例／task_info 記憶體／SpriteKit update cadence 診斷，明確不冒充真機 FPS 或 touch-to-photon；修練習意圖殘留與重開標記（MFT-005）、設定轉說明同樣等待寫入且保留失敗重試，新增真實 I/O 失敗的模型回歸。完整產物尚未完成。
-- 母版小尺寸與單龍試稿查驗資料已備妥：[ART_MOTHER_REVIEW_REQUEST](QA/ART_MOTHER_REVIEW_REQUEST.md)。遵守規格 7.3／13，未將未過獨立視覺門檻的試稿大批擴作正式變體；其他不受阻工作繼續，未宣稱已向 Dot 投遞或收到其判定。
-- Dot 後續獨立查看索引及 0171012 的兩張 SE3 實圖，經使用者轉交：7.3 有條件通過沿用同一母版風格的製作判定，可繼續其他表情／部件／狀態／動畫。只涵蓋風格與小尺寸辨識，不是動態接合、7.7 或完整遊戲通過。原母版、舊試稿與回退檔保留。另有原龍 Alpha 殘點局部缺陷 MFT-007，正在處理。
-- 3bc6d37 主驗證實際 23 項、22 passed／1 failed／0 skipped；19 單元通過（含首次教學節點與 72 筆策略診斷），3 UI 通過／1 讀取移出可及性樹的滑桿失敗。已檢視教學 0／1／3 秒原生 PNG，三檔相同且角色／耐心 65 穩定；MFT-004 READY_FOR_RETEST。觸覺保存未執行，MFT-003 保持未關閉；六關延伸未執行。尺寸 job 最後結果 small 1 通過／1 同類查詢失敗，large 2 通過；整體 failure，原始畫面／摘要見 INTEGRATION_3bc6d37。
+- `146a7caffbbc8b88489eb4be112dbfd04a7e4031`／Validate 39455229683，整體 failure。主 job 25 項、24 passed／1 failed／0 skipped（21 單元全過、UI 3 過／1 失敗）；small 1 過／1 失敗；large 2 過。觸覺即時與程序重開後 0、音量與減少動態保存通過，後續「還原設定」確認窗未關閉 MFT-008 失敗；SE 的大幅捲動反覆跨越高對比目標。原始 PNG／summary／來源見 [INTEGRATION_146a7ca](QA/INTEGRATION_146a7ca/)。六關延伸、影片、效能未執行。
+- `3bc6d37`／Validate 39450296133 主 job 23 項、22 passed／1 failed／0 skipped（19 單元全過），失敗為先讀取移出 Form 可及性樹的音樂 slider frame。首次教學節點回歸通過，0／1／3 秒實際 PNG 相同、角色與耐心 65 穩定；MFT-004 READY_FOR_RETEST，未代稱 Dot 關閉。見 [INTEGRATION_3bc6d37](QA/INTEGRATION_3bc6d37/)。
+- 較早整合與原失敗都在 [問題紀錄](QA/ISSUE_LOG.md)，包括 d59f212 的裝盤失敗與三次測試前 PNG 處理檢查失敗；均未略過或冒稱執行成功。
 
+## 目前候選與待驗證修正
 
-- 最新已完成候選 `146a7caffbbc8b88489eb4be112dbfd04a7e4031`／Validate 39455229683：主 job 25 項、24 passed／1 failed／0 skipped（21 單元全通過）；small 1 通過／1 失敗，large 2 通過。觸覺及音量等程序重開保存已實際通過，仍因還原確認窗未關閉 MFT-008 失敗；SE 捲動跨越高對比目標，不能稱已修好。原始 PNG／summary／來源在 QA/INTEGRATION_146a7ca。沒有取消或重開相同 job，六關延伸／影片／效能尚未執行。
-- 現有未測整合：短距離可視捲動與確認窗明確關閉；保留所有舊設定與重開斷言，新增高對比／大字／左手重開後值。7.3 通過後擴作同母版的鹿／小鬼八部件、三菜九狀態與六工位道具，加入三尺寸原生深／淺底五表情與動作證據。龍 MFT-007 仍開放；圖片工具兩次未解低 Alpha 殘點，未採 Python 圖片編修，原稿保留。
-- Content v2 依實際策略診斷調整後四關到達與暴露起始值；規格／資料／測試同步，至少三秒預告不變。Linux 官方 Swift 6.1.2 編譯純 Domain 並先重現舊原生 72 筆，再保存配對保護對照；不是 iOS build、UI、真人或 Dot 平衡通過。詳細 QA/BALANCE_V2。下一候選實際原生／正常時鐘六關／後關真實餐蓋點按／場景二十次進出與錄影待跑。
+- 7c79fe0：先 exists 再 frame，改短距離捲動、以實際導覽列判可視中心；保留舊設定／觸覺／重開斷言，新增高對比／大字／左手重開仍為 1。確認窗明確 dismiss、完整按鈕命中區、固定淺色。原教學／暫停／保存／第一關／設定／清除仍完整執行。
+- 同母版擴作：鹿／小鬼各八部件與五表情、三菜各九狀態、六工位道具，三角色及餐車分層接入一般遊玩；PNG 與圖片工具輸出逐位元組相同，JSON 只作執行期裁切及 anchor。ArtReviewTests 在三尺寸提供真實深淺底／五表情／動作 PNG。尚待實物查驗。
+- MFT-007：龍的紅黃低 Alpha 殘點與毛邊仍開放。兩次圖片工具處理未消除同類缺陷，未推選／覆蓋原稿，**未使用 Python 圖片編修**。使用者明確限制先沿用圖片工具；無法解決時保留缺陷繼續其他工作，不重問一般授權。
+- Content v2：原生舊版 72 筆策略診斷全三星、0 預告／餐蓋，已調整後四關到達與暴露起始 7→3 秒，預告仍普通 3／舒緩 5 秒、耐心與菜時間不變。Linux 官方 Swift 6.1.2 編譯同一 App Domain，先重現舊原生 72 筆，再比較保護收益與代價；見 [BALANCE_V2](QA/BALANCE_V2/)。不是 iOS UI、真人或 Dot 平衡通過。
+- 待新候選原生驗證：料理完成亮點、脆餅滋滋與少量出餐粒子；減少動態清理待離場節點，避免暫停動畫留下鬼影，新增原生節點回歸。同步 ContentVersion 的實際資料／資產集識別與包檢查。
+- 待新候選原生驗證 MFT-009：新動態參考解有意省略選配料，原評分邊界案例卻假設每單偏好全達成。Linux 13 個原方法與全部斷言，12 方法過／1 失敗（4 斷言）；改以同 validator 的全偏好短菜軌跡建立門檻案例，新增全偏好前提斷言，13 方法重測全過。原失敗／重測均保存；原生結果獨立等待，沒有刪除失敗斷言或放寬星數門檻。
+
+## 下一步與能力邊界
+
+- 等既有 7c79fe0，下載原生摘要／實圖，修實際失敗；整合上述待測改動後用新 SHA 重測，不重開不變的舊候選。
+- 完整延伸測試：正常前景時鐘六關命令重播及真實錄影；關卡解鎖由實際六次結算取得，再關閉命令 driver，真實點按第五關餐蓋／取下／直接出餐／歸還重用；練習隔離保存、背景五秒不消耗耐心、故意無操作失敗、重試／取消／放棄。工程重播不是人工遊玩。
+- 二十次真實進出場景記錄節點、音效實例、task_info 取樣記憶體、SpriteKit update cadence 及 handler→next-update。它們不是實體 FPS、touch-to-photon 或連續 profiler 峰值。
+- Linux 無 Xcode／iOS Simulator。真實原生使用 GitHub macos-15 Apple Silicon、Xcode 16.4／Swift 6.1.2／iOS 18.5 runtime。iOS 17 是部署下限，沒有宣稱實際 iOS 17 runtime 或 iPhone 17 Pro 真機通過。
+- 25 個原創離線 WAV 及播放器已整合、靜態無削波；聽覺、真實觸覺、真機效能與飛航模式實測仍待。原始母版／舊稿保留；7.7 與完整遊戲 Dot 驗收未取得。
+- 最終只交付同一完整 source SHA、成功原生 scopes、可追溯實際 PNG／影片、無簽名 iPhoneOS IPA、必要識別欄位／Mach-O／逐檔校驗／SHA256SUMS。不得以 bootstrap IPA、固定情境或純 Domain 結果代替。

@@ -21,3 +21,6 @@ MFT_DIAGNOSTIC_PROTECT=0 /tmp/BalanceDiagnostics MonsterFoodTruck/Resources/Cont
 ```
 
 輸入環境變數只控制診斷命令頻率與保護策略，不會改正式遊戲時鐘。來源雜湊見 SOURCE_HASHES.json，實際候選 SHA 為包含本資料的提交。下一步需同 SHA 原生模型、正常時間六關錄影、真實後關餐蓋點按與真人覆核。
+
+
+評分邊界回歸另外暴露 MFT-009：新動態排程刻意略過選配料，原評分案例不能再假設其每單偏好全達成。保留原 13 個 GameModel 方法與全部斷言的 Linux XCTest adapter 只更改 Bundle 資料載入並略去 Linux 無法匯出的附件，先得到 12 方法通過／1 失敗（4 個邊界斷言），再改以短菜優先全偏好軌跡建立門檻案例，新增該軌跡全偏好前提斷言，13 方法重測全通過。原動態策略診斷與六關雙模式三星回歸保留；沒有把 2 星改判三星或放寬門檻。原生 CI 仍獨立執行全部 XCTest／附件匯出。LINUX_DOMAIN_FAILURE.txt／LINUX_DOMAIN_RETEST.txt 保留實際失敗與重測輸出，明確不是 iOS 測試統計。

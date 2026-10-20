@@ -1,0 +1,39 @@
+Test Suite 'All tests' started at 2026-10-20 17:01:57.303
+Test Suite 'balance.xctest' started at 2026-10-20 17:01:57.309
+Test Suite 'GameModelTests' started at 2026-10-20 17:01:57.309
+Test Case 'GameModelTests.testAllRecipesAndToppings' started at 2026-10-20 17:01:57.309
+Test Case 'GameModelTests.testAllRecipesAndToppings' passed (0.006 seconds)
+Test Case 'GameModelTests.testDuplicateInputAndResourceCapacity' started at 2026-10-20 17:01:57.315
+Test Case 'GameModelTests.testDuplicateInputAndResourceCapacity' passed (0.002 seconds)
+Test Case 'GameModelTests.testPausedClockAndSnapshotRoundTrip' started at 2026-10-20 17:01:57.317
+Test Case 'GameModelTests.testPausedClockAndSnapshotRoundTrip' passed (0.003 seconds)
+Test Case 'GameModelTests.testCoverPausesWarningWithoutResetAndTidyNeverRestoresPreference' started at 2026-10-20 17:01:57.320
+Test Case 'GameModelTests.testCoverPausesWarningWithoutResetAndTidyNeverRestoresPreference' passed (0.001 seconds)
+Test Case 'GameModelTests.testDeadlineEqualityHeatAndScorch' started at 2026-10-20 17:01:57.322
+Test Case 'GameModelTests.testDeadlineEqualityHeatAndScorch' passed (0.002 seconds)
+Test Case 'GameModelTests.testLongFramesMatchSmallSteps' started at 2026-10-20 17:01:57.323
+Test Case 'GameModelTests.testLongFramesMatchSmallSteps' passed (0.007 seconds)
+Test Case 'GameModelTests.testNoImpNoTheftAndCancelledToppingHasNoCredit' started at 2026-10-20 17:01:57.331
+Test Case 'GameModelTests.testNoImpNoTheftAndCancelledToppingHasNoCredit' passed (0.001 seconds)
+Test Case 'GameModelTests.testQueuePatienceStartsAtActualAdmissionWithFreshNoticeAfterFull' started at 2026-10-20 17:01:57.331
+Test Case 'GameModelTests.testQueuePatienceStartsAtActualAdmissionWithFreshNoticeAfterFull' passed (0.001 seconds)
+Test Case 'GameModelTests.testImpNeverTargetsItsOwnPlate' started at 2026-10-20 17:01:57.333
+Test Case 'GameModelTests.testImpNeverTargetsItsOwnPlate' passed (0.002 seconds)
+Test Case 'GameModelTests.testCoveredServiceReturnsClocheAndServingActorCancelsWarning' started at 2026-10-20 17:01:57.334
+Test Case 'GameModelTests.testCoveredServiceReturnsClocheAndServingActorCancelsWarning' passed (0.002 seconds)
+Test Case 'GameModelTests.testCorruptSnapshotRejectsInvalidStationAndVersion' started at 2026-10-20 17:01:57.337
+Test Case 'GameModelTests.testCorruptSnapshotRejectsInvalidStationAndVersion' passed (0.002 seconds)
+Test Case 'GameModelTests.testAllSixScoringBoundariesThroughLegalCommands' started at 2026-10-20 17:01:57.339
+build/balance/GameModelLinux.swift:185: error: GameModelTests.testAllSixScoringBoundariesThroughLegalCommands : XCTAssertEqual failed: ("6") is not equal to ("7") - 
+build/balance/GameModelLinux.swift:186: error: GameModelTests.testAllSixScoringBoundariesThroughLegalCommands : XCTAssertEqual failed: ("2") is not equal to ("3") - level_06, preferences 7
+build/balance/GameModelLinux.swift:185: error: GameModelTests.testAllSixScoringBoundariesThroughLegalCommands : XCTAssertEqual failed: ("6") is not equal to ("7") - 
+build/balance/GameModelLinux.swift:186: error: GameModelTests.testAllSixScoringBoundariesThroughLegalCommands : XCTAssertEqual failed: ("2") is not equal to ("3") - level_06, preferences 7
+Test Case 'GameModelTests.testAllSixScoringBoundariesThroughLegalCommands' failed (0.182 seconds)
+Test Case 'GameModelTests.testSixLevelsNormalAndGentleReferenceReplay' started at 2026-10-20 17:01:57.521
+Test Case 'GameModelTests.testSixLevelsNormalAndGentleReferenceReplay' passed (0.397 seconds)
+Test Suite 'GameModelTests' failed at 2026-10-20 17:01:57.918
+	 Executed 13 tests, with 4 failures (0 unexpected) in 0.608 (0.608) seconds
+Test Suite 'balance.xctest' failed at 2026-10-20 17:01:57.918
+	 Executed 13 tests, with 4 failures (0 unexpected) in 0.608 (0.608) seconds
+Test Suite 'All tests' failed at 2026-10-20 17:01:57.918
+	 Executed 13 tests, with 4 failures (0 unexpected) in 0.608 (0.608) seconds

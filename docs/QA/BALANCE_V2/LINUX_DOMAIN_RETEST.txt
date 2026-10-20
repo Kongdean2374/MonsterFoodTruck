@@ -1,0 +1,35 @@
+Test Suite 'All tests' started at 2026-10-20 17:02:42.799
+Test Suite 'balance.xctest' started at 2026-10-20 17:02:42.801
+Test Suite 'GameModelTests' started at 2026-10-20 17:02:42.801
+Test Case 'GameModelTests.testAllRecipesAndToppings' started at 2026-10-20 17:02:42.801
+Test Case 'GameModelTests.testAllRecipesAndToppings' passed (0.005 seconds)
+Test Case 'GameModelTests.testDuplicateInputAndResourceCapacity' started at 2026-10-20 17:02:42.806
+Test Case 'GameModelTests.testDuplicateInputAndResourceCapacity' passed (0.001 seconds)
+Test Case 'GameModelTests.testPausedClockAndSnapshotRoundTrip' started at 2026-10-20 17:02:42.807
+Test Case 'GameModelTests.testPausedClockAndSnapshotRoundTrip' passed (0.005 seconds)
+Test Case 'GameModelTests.testCoverPausesWarningWithoutResetAndTidyNeverRestoresPreference' started at 2026-10-20 17:02:42.811
+Test Case 'GameModelTests.testCoverPausesWarningWithoutResetAndTidyNeverRestoresPreference' passed (0.002 seconds)
+Test Case 'GameModelTests.testDeadlineEqualityHeatAndScorch' started at 2026-10-20 17:02:42.813
+Test Case 'GameModelTests.testDeadlineEqualityHeatAndScorch' passed (0.002 seconds)
+Test Case 'GameModelTests.testLongFramesMatchSmallSteps' started at 2026-10-20 17:02:42.815
+Test Case 'GameModelTests.testLongFramesMatchSmallSteps' passed (0.008 seconds)
+Test Case 'GameModelTests.testNoImpNoTheftAndCancelledToppingHasNoCredit' started at 2026-10-20 17:02:42.824
+Test Case 'GameModelTests.testNoImpNoTheftAndCancelledToppingHasNoCredit' passed (0.001 seconds)
+Test Case 'GameModelTests.testQueuePatienceStartsAtActualAdmissionWithFreshNoticeAfterFull' started at 2026-10-20 17:02:42.824
+Test Case 'GameModelTests.testQueuePatienceStartsAtActualAdmissionWithFreshNoticeAfterFull' passed (0.001 seconds)
+Test Case 'GameModelTests.testImpNeverTargetsItsOwnPlate' started at 2026-10-20 17:02:42.825
+Test Case 'GameModelTests.testImpNeverTargetsItsOwnPlate' passed (0.001 seconds)
+Test Case 'GameModelTests.testCoveredServiceReturnsClocheAndServingActorCancelsWarning' started at 2026-10-20 17:02:42.826
+Test Case 'GameModelTests.testCoveredServiceReturnsClocheAndServingActorCancelsWarning' passed (0.002 seconds)
+Test Case 'GameModelTests.testCorruptSnapshotRejectsInvalidStationAndVersion' started at 2026-10-20 17:02:42.827
+Test Case 'GameModelTests.testCorruptSnapshotRejectsInvalidStationAndVersion' passed (0.002 seconds)
+Test Case 'GameModelTests.testAllSixScoringBoundariesThroughLegalCommands' started at 2026-10-20 17:02:42.829
+Test Case 'GameModelTests.testAllSixScoringBoundariesThroughLegalCommands' passed (0.173 seconds)
+Test Case 'GameModelTests.testSixLevelsNormalAndGentleReferenceReplay' started at 2026-10-20 17:02:43.003
+Test Case 'GameModelTests.testSixLevelsNormalAndGentleReferenceReplay' passed (0.388 seconds)
+Test Suite 'GameModelTests' passed at 2026-10-20 17:02:43.390
+	 Executed 13 tests, with 0 failures (0 unexpected) in 0.589 (0.589) seconds
+Test Suite 'balance.xctest' passed at 2026-10-20 17:02:43.390
+	 Executed 13 tests, with 0 failures (0 unexpected) in 0.589 (0.589) seconds
+Test Suite 'All tests' passed at 2026-10-20 17:02:43.390
+	 Executed 13 tests, with 0 failures (0 unexpected) in 0.589 (0.589) seconds

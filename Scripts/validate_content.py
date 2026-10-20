@@ -10,6 +10,8 @@ ROOT=Path(__file__).resolve().parents[1]
 RES=ROOT/'MonsterFoodTruck/Resources'
 c=json.loads((RES/'Content.json').read_text())
 assert c['version']==2
+metadata=json.loads((RES/'ContentVersion.json').read_text())
+assert metadata['schemaVersion']==1 and metadata['contentVersion']==c['version'] and metadata['levelCount']==len(c['levels'])
 assert len(c['recipes'])==3 and len(c['monsters'])==3 and len(c['levels'])==6
 recipe_ids={r['id'] for r in c['recipes']};monster_ids={m['id'] for m in c['monsters']}
 assert len(recipe_ids)==3 and len(monster_ids)==3

@@ -111,6 +111,9 @@ struct StationControl:View {
                         else if KitchenArt.enabled{KitchenPiece(name:KitchenArt.workSurface(station)).frame(width:64,height:48)}
                         if let food=FoodArt.image(order.recipe,FoodArt.state(order)){Image(uiImage:food).resizable().scaledToFit().frame(width:46,height:44).offset(y:station == .stove ? -6:0)}
                         FoodSteam(order:order,time:session.time,heatWindow:GameRules.heatWindow*session.mode.multiplier,reduced:model.reducesMotion)
+                        if !model.reducesMotion,let event=session.events.last(where:{$0.orderID==order.id && ["prepDone","cookDone","toppingDone","tidyDone"].contains($0.kind)}),session.time-event.time<0.55{
+                            FoodCompletionGlints(age:session.time-event.time)
+                        }
                         if order.isCovered{ClocheView()}
                         if order.needsTidy{Image(systemName:order.everNibbled ? "hand.raised.fill":"exclamationmark.triangle.fill").font(.caption).foregroundStyle(TruckTheme.cocoa).padding(4).background(TruckTheme.cream,in:Circle()).offset(x:16,y:-12)}
                         if let topping=order.topping{AtlasPiece(atlas:"kitchen-props",part:topping == .herb ? "herb":"star").frame(width:14,height:13).offset(x:-4,y:-8)}
@@ -186,10 +189,28 @@ struct FoodSteam:View{
         if order.stage == .cooking,!reduced{
             ForEach(0..<3,id:\.self){index in
                 let bubble=(time*0.7+Double(index)*0.31).truncatingRemainder(dividingBy:1)
-                Circle().stroke(TruckTheme.cream.opacity(0.7*(1-bubble)),lineWidth:0.8)
-                    .frame(width:CGFloat(2+bubble*3),height:CGFloat(2+bubble*3))
-                    .offset(x:CGFloat(index*8-8),y:CGFloat(-11-bubble*5)).accessibilityHidden(true)
+                if order.recipe == .moonCrisp{
+                    Path{path in path.move(to:CGPoint(x:0,y:5));path.addQuadCurve(to:CGPoint(x:3,y:0),control:CGPoint(x:5,y:4))}
+                        .stroke(TruckTheme.cream.opacity(0.7*(1-bubble)),lineWidth:0.9).frame(width:5,height:6)
+                        .offset(x:CGFloat(index*10-10),y:CGFloat(-8-bubble*5)).accessibilityHidden(true)
+                }else{
+                    Circle().stroke(TruckTheme.cream.opacity(0.7*(1-bubble)),lineWidth:0.8)
+                        .frame(width:CGFloat(2+bubble*3),height:CGFloat(2+bubble*3))
+                        .offset(x:CGFloat(index*8-8),y:CGFloat(-11-bubble*5)).accessibilityHidden(true)
+                }
             }
+        }
+    }
+}
+struct FoodCompletionGlints:View{
+    var age:Double
+    var body:some View{
+        let progress=max(0,min(1,age/0.55))
+        ForEach(0..<4,id:\.self){index in
+            let side:Double=index.isMultiple(of:2) ? -1:1
+            Path{path in path.move(to:CGPoint(x:0,y:3));path.addLine(to:CGPoint(x:6,y:3));path.move(to:CGPoint(x:3,y:0));path.addLine(to:CGPoint(x:3,y:6))}
+                .stroke(TruckTheme.moss.opacity(1-progress),lineWidth:1).frame(width:6,height:6)
+                .offset(x:CGFloat(side*(15+progress*7)),y:CGFloat((index<2 ? -12:8)-progress*6)).accessibilityHidden(true)
         }
     }
 }

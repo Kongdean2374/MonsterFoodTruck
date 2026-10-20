@@ -53,11 +53,15 @@ def inspect(app, platform, resources=None):
             hashes[source.name]=digest
         content=json.loads((app/'Content.json').read_text())
         if [len(content[k]) for k in ('recipes','monsters','levels')]!=[3,3,6]:raise ValueError('Built app has incomplete game content')
+        metadata=json.loads((app/'ContentVersion.json').read_text())
+        if metadata.get('contentVersion')!=content['version'] or metadata.get('levelCount')!=len(content['levels']):raise ValueError('Built content metadata disagrees with game data')
         if len(list(app.glob('*.wav')))!=25:raise ValueError('Built app has incomplete offline audio')
         if not (app/'Assets.car').is_file():raise ValueError('Compiled app icon catalog is missing')
         if info.get('CFBundleIcons',{}).get('CFBundlePrimaryIcon',{}).get('CFBundleIconName')!='AppIcon':raise ValueError('Built app icon metadata is missing')
         report['offline_resource_sha256']=hashes
         report['content_counts']={key:len(content[key]) for key in ('recipes','monsters','levels')}
+        report['content_version']=content['version']
+        report['asset_set']=metadata['assetSet']
     return report
 
 if __name__ == '__main__':

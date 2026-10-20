@@ -50,10 +50,15 @@ final class KitchenScene: SKScene {
             removeAllChildren();monsters.removeAll()
         }
         state=session;self.content=content;reduced=reduceMotion
+        if reduceMotion{for node in children where node.name=="departing" || node.name=="delivery-speck"{node.removeFromParent()}}
         let live=Set(session.activeOrders.map(\.id))
         for key in Array(monsters.keys) where !live.contains(key) {
             if let rig=monsters[key] as? CharacterAnimation,let order=session.orders.first(where:{$0.id==key}){
-                if order.status == .served{rig.receive(dish:FoodArt.image(order.recipe,"finished"),reduced:reduceMotion)}
+                if order.status == .served{
+                    rig.receive(dish:FoodArt.image(order.recipe,"finished"),reduced:reduceMotion)
+                    if !reduceMotion,let node=monsters[key]{deliverySpecks(at:node.position,preferred:order.preferred)}
+                }
+                monsters[key]?.name="departing"
                 rig.depart(disappointed:order.status == .left,reduced:reduceMotion)
             }else{monsters[key]?.removeFromParent()}
             monsters[key]=nil
@@ -81,6 +86,15 @@ final class KitchenScene: SKScene {
         if session.isPaused || reduceMotion{PerformanceDiagnostics.shared.endActiveInterval()}
         #endif
         isPaused=session.isPaused || reduceMotion
+    }
+    private func deliverySpecks(at origin:CGPoint,preferred:Bool){
+        // Tiny one-shot foreground marks, paused by this scene with the game.
+        for index in 0..<5{
+            let dot=SKShapeNode(circleOfRadius:index.isMultiple(of:2) ? 1.6:1)
+            dot.fillColor=preferred ? UIColor(red:0.84,green:0.65,blue:0.29,alpha:1):UIColor(red:0.40,green:0.48,blue:0.32,alpha:1)
+            dot.name="delivery-speck";dot.strokeColor = .clear;dot.zPosition=5;dot.position=CGPoint(x:origin.x,y:origin.y+42);addChild(dot)
+            dot.run(.sequence([.group([.moveBy(x:CGFloat(index-2)*7,y:CGFloat(14-abs(index-2)*3),duration:0.45),.fadeOut(withDuration:0.45)]),.removeFromParent()]))
+        }
     }
     private func layoutCharacters(){
         guard let state else{return}
