@@ -1,0 +1,17 @@
+Test Suite 'All tests' started at 2026-10-20 17:57:15.001
+Test Suite 'balance.xctest' started at 2026-10-20 17:57:15.002
+Test Suite 'SaveStoreTests' started at 2026-10-20 17:57:15.002
+Test Case 'SaveStoreTests.testIncompatibleContentSessionKeepsSettingsAndPermanentProgressWritable' started at 2026-10-20 17:57:15.002
+Test Case 'SaveStoreTests.testIncompatibleContentSessionKeepsSettingsAndPermanentProgressWritable' passed (0.006 seconds)
+Test Case 'SaveStoreTests.testCorruptSessionPreservesProgressAndFallsBackIndependently' started at 2026-10-20 17:57:15.009
+Test Case 'SaveStoreTests.testCorruptSessionPreservesProgressAndFallsBackIndependently' passed (0.003 seconds)
+Test Case 'SaveStoreTests.testOrderedWritesBackupAndSettlementTransaction' started at 2026-10-20 17:57:15.012
+Test Case 'SaveStoreTests.testOrderedWritesBackupAndSettlementTransaction' passed (0.004 seconds)
+Test Case 'SaveStoreTests.testSettingsResetKeepsStarsAndRecordsNeverFall' started at 2026-10-20 17:57:15.015
+Test Case 'SaveStoreTests.testSettingsResetKeepsStarsAndRecordsNeverFall' passed (0.002 seconds)
+Test Suite 'SaveStoreTests' passed at 2026-10-20 17:57:15.018
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.016 (0.016) seconds
+Test Suite 'balance.xctest' passed at 2026-10-20 17:57:15.018
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.016 (0.016) seconds
+Test Suite 'All tests' passed at 2026-10-20 17:57:15.018
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.016 (0.016) seconds

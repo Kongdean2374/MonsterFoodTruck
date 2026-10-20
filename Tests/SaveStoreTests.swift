@@ -5,6 +5,23 @@ final class SaveStoreTests: XCTestCase {
     func save(_ document:SaveDocument,_ store:SaveStore) async throws{
         try await withCheckedThrowingContinuation{(continuation:CheckedContinuation<Void,Error>) in store.write(document){continuation.resume(with:$0)}}
     }
+    func testIncompatibleContentSessionKeepsSettingsAndPermanentProgressWritable() async throws{
+        let content=try GameContent.load(),directory=FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at:directory,withIntermediateDirectories:true)
+        defer{do{try FileManager.default.removeItem(at:directory)}catch{XCTFail("Fixture cleanup failed: \(error)")}}
+        var document=SaveDocument();document.revision=10;document.settings.music=0;document.settings.haptics=false;document.settings.leftHanded=true;document.settings.nextMode = .gentle
+        document.records[content.levels[0].id]=LevelRecord(normal:3,gentle:2);document.session=GameSession(level:content.levels[0],mode:.normal,content:content)
+        var object=try XCTUnwrap(JSONSerialization.jsonObject(with:JSONEncoder().encode(document)) as? [String:Any])
+        var oldSession=try XCTUnwrap(object["session"] as? [String:Any]);oldSession["contentVersion"]=content.version-1;object["session"]=oldSession
+        try JSONSerialization.data(withJSONObject:object).write(to:directory.appendingPathComponent("save-v1.json"))
+        let store=SaveStore(directory:directory,content:content),loaded=store.load()
+        XCTAssertNil(loaded.document.session);XCTAssertEqual(loaded.document.totalStars,3);XCTAssertEqual(loaded.document.settings,document.settings)
+        XCTAssertTrue(loaded.notice?.contains("資料不相容") == true);XCTAssertFalse(loaded.preserveUnreadableFiles)
+        var next=loaded.document;next.revision+=1;next.settings.music=0.2;try await save(next,store)
+        let persisted=store.load().document
+        XCTAssertEqual(persisted.totalStars,3);XCTAssertNil(persisted.session);XCTAssertEqual(persisted.settings.music,0.2)
+        XCTAssertFalse(persisted.settings.haptics);XCTAssertTrue(persisted.settings.leftHanded);XCTAssertEqual(persisted.settings.nextMode,.gentle)
+    }
     func testCorruptSessionPreservesProgressAndFallsBackIndependently() async throws{
         let content=try GameContent.load()
         let dir=FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)

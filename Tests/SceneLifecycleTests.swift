@@ -3,6 +3,21 @@ import SpriteKit
 @testable import MonsterFoodTruck
 
 final class SceneLifecycleTests:XCTestCase{
+    @MainActor func testSettingsToConfirmationPreservesOnePresentationAndCancelKeepsData() async throws{
+        let directory=FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer{do{try FileManager.default.removeItem(at:directory)}catch{XCTFail("Fixture cleanup failed: \(error)")}}
+        let model=AppModel(saveDirectory:directory)
+        model.document.records["level_01"]=LevelRecord(normal:2,gentle:0)
+        model.openSettings();model.updateSettings{$0.music=0.2;$0.haptics=false};model.closeSettingsFor(.resetProgress)
+        let written=await withCheckedContinuation{continuation in model.persist{continuation.resume(returning:$0)}}
+        XCTAssertTrue(written);XCTAssertFalse(model.settingsPresented)
+        guard case .resetProgress?=model.confirmation else{return XCTFail("Confirmation must replace settings before the presentation closes")}
+        XCTAssertTrue(model.settingsPresented || model.confirmation != nil)
+        model.dismissPresentation();model.settingsDidDismiss()
+        XCTAssertNil(model.confirmation);XCTAssertFalse(model.settingsPresented)
+        let saved=SaveStore(directory:directory,content:try XCTUnwrap(model.content)).load().document
+        XCTAssertEqual(saved.totalStars,2);XCTAssertEqual(saved.settings.music,0.2);XCTAssertFalse(saved.settings.haptics)
+    }
     @MainActor func testReducedMotionRemovesFinishedDeparturesWithoutFreezingGhosts() throws{
         var content=try GameContent.load()
         content.levels[0].orders=[PlannedOrder(id:"motion-order",scheduledAt:0,monster:.mossDeer,recipe:.starSoup)]

@@ -1,0 +1,9 @@
+{
+  "MonsterFoodTruck/Domain/GameSession.swift": "64c308f6e2ede79557c0621aaca63d616e1cb352087fbd3263c4fbf977a4ce15",
+  "MonsterFoodTruck/Domain/CommandReplayPlanner.swift": "c7704aa8fee001e873dfd9814426384f8f2a2880fedacce2aa251abeef6be2a7",
+  "MonsterFoodTruck/Data/GameContent.swift": "22ee06afb133b87ca0f1dd75c258fd4eb5047e2b879e3cfebbaba78662300fd0",
+  "MonsterFoodTruck/Services/SaveStore.swift": "39162af145ed6d9218485fbcc0cc9c32f2aa979e783235cc480d0bd3a2e83c9f",
+  "Tests/GameModelTests.swift": "834607ed6e8638da3269b30ec2420e84f38e47ceedf4f360f0a4be13e99eb857",
+  "Tests/SaveStoreTests.swift": "b3931e203abc0dad291f927922c96b9b9ca13f51c4bade54500a7f4e510df4aa",
+  "MonsterFoodTruck/Resources/Content.json": "f899ad0bdebe5e7790bf713713cafa003180972569f6bb338e48358debda48e2"
+}

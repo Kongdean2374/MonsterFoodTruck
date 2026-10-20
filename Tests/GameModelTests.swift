@@ -46,6 +46,36 @@ final class GameModelTests: XCTestCase {
         XCTAssertTrue(s.activeOrders.isEmpty);XCTAssertEqual(s.lost,3)
         XCTAssertTrue(s.orders.allSatisfy{$0.station == nil && !$0.isCovered})
     }
+    func testFullStovesAndPlatesRejectWithoutMovingFoodOrDuplicatingInputs() throws{
+        var c=try content()
+        c.levels[0].orders=(0..<3).map{PlannedOrder(id:"capacity-\($0)",scheduledAt:Double($0*4),monster:.mossDeer,recipe:.starSoup)}
+        var s=GameSession(level:c.levels[0],mode:.normal,content:c);s.isPaused=false
+        XCTAssertNil(s.send(.prepare("capacity-0"),content:c));s.advance(to:3,content:c);XCTAssertNil(s.send(.cook("capacity-0"),content:c))
+        s.advance(to:4,content:c);XCTAssertNil(s.send(.prepare("capacity-1"),content:c));s.advance(to:7,content:c);XCTAssertNil(s.send(.cook("capacity-1"),content:c))
+        s.advance(to:8,content:c);XCTAssertNil(s.send(.prepare("capacity-2"),content:c));s.advance(to:11,content:c)
+        let beforeRejectedCook=s.inputs.count
+        XCTAssertNotNil(s.send(.cook("capacity-2"),content:c));XCTAssertEqual(s.inputs.count,beforeRejectedCook)
+        XCTAssertEqual(s.orders[2].stage,.prepared);XCTAssertEqual(s.orders[2].station,.prep);XCTAssertEqual(s.activeOrders.filter{$0.station == .stove}.count,2)
+        s.advance(to:13,content:c);XCTAssertNil(s.send(.plate("capacity-0"),content:c));XCTAssertNil(s.send(.cook("capacity-2"),content:c))
+        s.advance(to:17,content:c);XCTAssertNil(s.send(.plate("capacity-1"),content:c));s.advance(to:23,content:c)
+        let beforeRejectedPlate=s.inputs.count
+        XCTAssertNotNil(s.send(.plate("capacity-2"),content:c));XCTAssertEqual(s.inputs.count,beforeRejectedPlate)
+        XCTAssertEqual(s.orders[2].stage,.ready);XCTAssertEqual(s.orders[2].station,.stove);XCTAssertEqual(s.activeOrders.filter{$0.station == .plate}.count,2)
+        XCTAssertNil(s.send(.cover("capacity-0"),content:c));XCTAssertNotNil(s.send(.cover("capacity-1"),content:c))
+        XCTAssertNil(s.send(.serve("capacity-0"),content:c));XCTAssertNil(s.send(.plate("capacity-2"),content:c));XCTAssertNil(s.send(.cover("capacity-2"),content:c))
+        XCTAssertEqual(s.activeOrders.filter(\.isCovered).count,1);try s.validate(content:c)
+    }
+    func testCustomerExpiryCancelsTidyAndReleasesResourcesOnlyOnce() throws{
+        var (c,s)=try fixture(withImp:true);plate(&s,content:c)
+        s.advance(to:19,content:c);XCTAssertEqual(s.nibbleCount,1);XCTAssertTrue(s.orders[0].needsTidy)
+        s.advance(to:64,content:c);XCTAssertNil(s.send(.tidy("test-1"),content:c));XCTAssertEqual(s.orders[0].stage,.tidying)
+        s.advance(to:66,content:c)
+        XCTAssertEqual(s.orders[0].status,.left);XCTAssertNil(s.orders[0].station);XCTAssertNil(s.orders[0].slot);XCTAssertNil(s.orders[0].workEnds)
+        XCTAssertFalse(s.orders[0].isCovered);XCTAssertNil(s.nibbleTarget);XCTAssertNil(s.nibbleActor)
+        XCTAssertNotNil(s.send(.tidy("test-1"),content:c));let lost=s.lost
+        s.advance(to:100,content:c);XCTAssertEqual(s.lost,lost);XCTAssertEqual(s.events.filter{$0.kind=="left" && $0.orderID=="test-1"}.count,1)
+        XCTAssertEqual(s.nibbleCount,1);try s.validate(content:c)
+    }
     func testPausedClockAndSnapshotRoundTrip() throws {
         var (c,s)=try fixture(withImp:true);plate(&s,content:c)
         s.advance(to:17,content:c);XCTAssertEqual(s.nibbleTarget,"test-1")

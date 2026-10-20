@@ -1,0 +1,59 @@
+[
+  {
+    "testIdentifier": "ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence()",
+    "testIdentifierURL": "test://com.apple.xcode/MonsterFoodTruck/MonsterFoodTruckUITests/ArtReviewTests/testDarkAndLightActualSizePartsAndMotionEvidence",
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+        "deviceName": "iPhone 16 Pro",
+        "exportedFileName": "5F8E846A-4A5C-42FE-995C-76B00B90828D.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "ART-dark-five-poses-game-size_0_331EBFD2-5DDA-43B1-B654-3AA0FA542F33.png",
+        "timestamp": 1792517620.966
+      }
+    ]
+  },
+  {
+    "testIdentifier": "FlowTests/testNavigationTutorialPauseAndPersistence()",
+    "testIdentifierURL": "test://com.apple.xcode/MonsterFoodTruck/MonsterFoodTruckUITests/FlowTests/testNavigationTutorialPauseAndPersistence",
+    "attachments": [
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+        "deviceName": "iPhone 16 Pro",
+        "exportedFileName": "4231521C-978C-4A98-8C5E-FE1F217BC8D9.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "FAILED-actual-screen_0_CE2E4BC8-F30E-460E-991E-AB99F26E9770.png",
+        "timestamp": 1792517917.22
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+        "deviceName": "iPhone 16 Pro",
+        "exportedFileName": "9659000E-8BAB-46C4-8B3F-8C790DDDA614.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "actual-settings-after-process-restart_0_4801CE84-ADB7-4F37-A530-D70EC52894AE.png",
+        "timestamp": 1792517889.576
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+        "deviceName": "iPhone 16 Pro",
+        "exportedFileName": "82576EC6-4FCB-40F4-9B0F-008EEB0FB9F2.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "normal-play-after-service_0_3CFDC703-153A-4E52-A7A1-750166961000.png",
+        "timestamp": 1792517793.906
+      },
+      {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+        "deviceName": "iPhone 16 Pro",
+        "exportedFileName": "3B145E19-CD31-4C7D-82ED-7E881AD40BE7.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "tutorial-first-stable-3s_0_E5015576-82F6-46A4-8432-2E549B61BF14.png",
+        "timestamp": 1792517776.148
+      }
+    ]
+  }
+]

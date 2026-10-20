@@ -1,0 +1,18 @@
+{
+  "source_sha": "b53ff6020f9f5227c6a636f66859d393277a41ca",
+  "run_id": 39466494713,
+  "job_id": 118784334535,
+  "artifact_id": 12286378128,
+  "archive_sha256": "3dc86a73b279df9b2e94f11bc9fafcb6ba41a9e210fa6042c026d7604a6d3197",
+  "selected_attachments": [
+    {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "3CE13D5A-C0C9-4705-A3B5-3435F549B22F",
+      "deviceName": "MonsterFoodTruck-small",
+      "exportedFileName": "25EF3C21-D213-4FFE-AA8F-6686F0B5A864.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "layout-home-large-contrast-left_0_DE23547C-1B80-42F8-A030-3386B4B2BE15.png",
+      "timestamp": 1792519011.466
+    }
+  ]
+}

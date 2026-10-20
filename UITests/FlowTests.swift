@@ -162,7 +162,12 @@ final class FlowTests: XCTestCase {
         app.buttons["首頁"].tap()
         app.buttons["設定"].tap();XCTAssertTrue(app.navigationBars["餐車設定"].waitForExistence(timeout:5))
         for label in ["高對比資訊","大字介面","左手單手配置"]{reveal(app.switches[label],app,up:true);app.switches[label].tap();XCTAssertEqual(app.switches[label].value as? String,"1")}
-        app.buttons["完成"].tap();capture("layout-home-large-contrast-left",app)
+        app.buttons["完成"].tap()
+        let closed=XCTNSPredicateExpectation(predicate:NSPredicate(format:"exists == false"),object:app.navigationBars["餐車設定"])
+        XCTAssertEqual(XCTWaiter.wait(for:[closed],timeout:5),.completed,"Settings must finish saving and dismiss before the home screenshot")
+        let homeReady=XCTNSPredicateExpectation(predicate:NSPredicate(format:"hittable == true"),object:app.buttons["關卡選擇"])
+        XCTAssertEqual(XCTWaiter.wait(for:[homeReady],timeout:5),.completed)
+        capture("layout-home-large-contrast-left",app)
         app.buttons["關卡選擇"].tap();XCTAssertTrue(app.buttons["level-level_01"].waitForExistence(timeout:5));capture("layout-levels-large-contrast",app)
         app.buttons["level-level_01"].tap();XCTAssertTrue(app.buttons["beginLevel"].waitForExistence(timeout:5));capture("layout-intro-large-contrast",app)
         app.buttons["返回選關"].tap();app.buttons["首頁"].tap();app.buttons["設定"].tap()

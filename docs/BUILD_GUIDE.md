@@ -31,4 +31,8 @@ DOT-001 回歸：先 `build-for-testing`，直接讀取真正產出 `.app/Info.p
 
 `validate.yml` 手動 `full_qa=true` 執行正常時鐘六關工程重播、實際點按取消／重試／背景路徑及延伸診斷；`layout_qa=true` 隨後執行 SE3 與 15 Pro Max 兩個獨立尺寸 job。主 job 失敗後尺寸仍會執行，三者各有自己的原生統計及 artifact。先執行主 job 是因 0171012 的主 job 曾未取得 hosted macOS runner 而被 GitHub 取消；不能把該取消當測試成功。
 
+指定整合分支的程式／工程／測試／腳本／workflow push 自動開啟相同的 full 與 layout scopes；純文件提交不觸發。手動觸發仍保留。CLI 憑證失效時可由已連接的 GitHub 倉庫工具提交修正並取得同 SHA 的 CI，不重跑原失敗候選，也不需要更改 main。
+
+大型 xcresult／影片另保留診斷 artifact；Validate 另有 `review-<run>-<SHA>` 小型 artifact，裝置包的 `unsigned-ipa-*` 只包含 delivery，圖片／摘要另放 `review-ipa-*`。小型檔保留原測試失敗數，不代表通過。若舊 artifact 超過下載工具大小上限，可手動提供 `evidence_artifact_id`：僅 Ubuntu 讀取既有 artifact、檢查原 archive digest 與 source SHA、原樣複製 PNG／JSON／TXT／摘要並附 EXPORT_PROVENANCE，沒有重建、重跑或產 IPA，且使用獨立 concurrency group，不影響既有 Mac CI。
+
 `MFT_PERFORMANCE=1` 僅在明確 DEBUG 診斷中取樣；PerformanceTests 以真實點按進入 20 次場景，保留節點、已分配音效實例、task_info 取樣記憶體及 SpriteKit 更新間隔。更新間隔不是實體螢幕 FPS，handler 到下次 scene update 不是 touch-to-photon，取樣最大值也不是連續 profiler 峰值。腳本匯出原始值與摘要，不依未測目標偽造 60fps／100ms 達標。

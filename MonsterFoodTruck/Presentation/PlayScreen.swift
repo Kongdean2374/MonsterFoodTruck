@@ -76,12 +76,14 @@ struct KitchenCanvas:View {
                             }
                         }.frame(height:132).background(alignment:.bottom){if KitchenArt.enabled{TruckTheme.cream.frame(height:52)}}
                         ForEach([Station.plate,.stove,.prep],id:\.self){station in
-                            HStack(spacing:6){Text(station == .plate ? "成品":station == .stove ? "爐台":"備料").font(.caption.bold()).frame(width:30)
+                            HStack(spacing:6){Text(station == .plate ? "成品":station == .stove ? "爐台":"備料").font(.caption.bold()).foregroundStyle(TruckTheme.cocoa).frame(width:34).padding(.vertical,6)
+                                    .background(TruckTheme.cream,in:RoundedRectangle(cornerRadius:6))
+                                    .overlay(RoundedRectangle(cornerRadius:6).stroke(TruckTheme.cocoa.opacity(0.15),lineWidth:0.7))
                                 ForEach(0..<2,id:\.self){slot in
                                     StationControl(station:station,slot:slot,order:session.activeOrders.first{$0.station==station && $0.slot==slot})
                                 }
                             }.frame(height:(geo.size.height-132)/3).padding(.horizontal,6)
-                                .background{if KitchenArt.enabled{KitchenPiece(name:"counterTop").padding(.leading,32).padding(.horizontal,3)}}
+                                .background{if KitchenArt.enabled{KitchenPiece(name:"counterTop").padding(.leading,36).padding(.horizontal,3)}}
                         }
                     }
                     if let target=session.nibbleTarget,let plate=session.orders.first(where:{$0.id==target})?.slot,

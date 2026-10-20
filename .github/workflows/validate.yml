@@ -2,7 +2,7 @@ name: Validate iOS
 run-name: ${{ inputs.evidence_artifact_id && format('Export artifact {0} (no build or tests)', inputs.evidence_artifact_id) || format('Validate {0}', github.sha) }}
 on:
   push:
-    branches: [main]
+    branches: [main, integration/full-game]
     paths: ['MonsterFoodTruck/**', 'MonsterFoodTruck.xcodeproj/**', 'Tests/**', 'UITests/**', 'Scripts/**', '.github/workflows/**']
   pull_request:
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
     env:
       DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
       MFT_LAYOUT_QA: '0'
-      MFT_FULL_QA: ${{ inputs.full_qa && '1' || '0' }}
+      MFT_FULL_QA: ${{ (inputs.full_qa || (github.event_name == 'push' && github.ref == 'refs/heads/integration/full-game')) && '1' || '0' }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -85,7 +85,7 @@ jobs:
           if-no-files-found: error
   layouts:
     needs: validate
-    if: ${{ always() && inputs.layout_qa && !inputs.evidence_artifact_id }}
+    if: ${{ always() && (inputs.layout_qa || (github.event_name == 'push' && github.ref == 'refs/heads/integration/full-game')) && !inputs.evidence_artifact_id }}
     name: layout-${{ matrix.size }}
     strategy:
       fail-fast: false

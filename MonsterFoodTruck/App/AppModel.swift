@@ -302,16 +302,26 @@ final class AppModel: ObservableObject {
     func openSettings() {if screen == .game{pause()};settingsPresented=true}
     func closeSettings(){
         guard !isClosingSettings else{return}
-        if recoveryBlocked{audio.pause();settingsPresented=false;return}
+        if recoveryBlocked{finishClosingSettings();return}
         isClosingSettings=true
         persist{[weak self] success in
             guard let self else{return};self.isClosingSettings=false
-            if success{self.message=nil;self.audio.pause();self.settingsPresented=false}
+            if success{
+                self.message=nil;self.finishClosingSettings()
+            }
             else{self.confirmationAfterSettings=nil;self.screenAfterSettings=nil}
         }
     }
-    func closeSettingsFor(_ confirmation:Confirmation){confirmationAfterSettings=confirmation;closeSettings()}
-    func closeSettingsToHelp(){screenAfterSettings = .help;closeSettings()}
+    private func finishClosingSettings(){
+        audio.pause()
+        // Replace settings inside the same presentation. This also applies to
+        // the explicit reset offered when both save files are unreadable.
+        if let pending=confirmationAfterSettings{confirmationAfterSettings=nil;confirmation=pending}
+        settingsPresented=false
+    }
+    func closeSettingsFor(_ confirmation:Confirmation){guard !isClosingSettings else{return};confirmationAfterSettings=confirmation;closeSettings()}
+    func closeSettingsToHelp(){guard !isClosingSettings else{return};screenAfterSettings = .help;closeSettings()}
+    func dismissPresentation(){settingsPresented=false;confirmation=nil}
     func settingsDidDismiss(){
         if let pending=confirmationAfterSettings{confirmationAfterSettings=nil;confirmation=pending}
         else if let pending=screenAfterSettings{screenAfterSettings=nil;screen=pending}

@@ -55,8 +55,10 @@ struct GameRoot:View {
         .background(TruckTheme.cream)
         .environment(\.dynamicTypeSize,model.document.settings.largeText ? .xLarge:.large)
         .preferredColorScheme(model.screen == .home ? .dark:.light)
-        .sheet(isPresented:$model.settingsPresented,onDismiss:{model.settingsDidDismiss()}){SettingsScreen()}
-        .sheet(item:$model.confirmation){ConfirmationScreen(confirmation:$0)}
+        .sheet(isPresented:Binding(get:{model.settingsPresented || model.confirmation != nil},set:{presented in if !presented{model.dismissPresentation()}}),onDismiss:{model.settingsDidDismiss()}){
+            if model.settingsPresented{SettingsScreen()}
+            else if let confirmation=model.confirmation{ConfirmationScreen(confirmation:confirmation)}
+        }
         .alert("餐車提醒",isPresented:Binding(get:{model.message != nil && !model.settingsPresented},set:{if !$0{model.message=nil}})) {Button("知道了"){model.message=nil}} message:{Text(model.message ?? "")}
         .onReceive(timer){_ in model.tick()}
         .onChange(of:phase){_,value in if value != .active{model.pause()}else if model.screen == .home{model.audio.startMusic()}}
