@@ -6,8 +6,10 @@ final class SceneLifecycleTests:XCTestCase{
     @MainActor func testSettingsToConfirmationPreservesOnePresentationAndCancelKeepsData() async throws{
         let directory=FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         defer{do{try FileManager.default.removeItem(at:directory)}catch{XCTFail("Fixture cleanup failed: \(error)")}}
+        let content=try GameContent.load(),store=SaveStore(directory:directory,content:content)
+        var seed=SaveDocument();seed.revision=1;seed.records["level_01"]=LevelRecord(normal:2,gentle:0)
+        try await withCheckedThrowingContinuation{(continuation:CheckedContinuation<Void,Error>) in store.write(seed){continuation.resume(with:$0)}}
         let model=AppModel(saveDirectory:directory)
-        model.document.records["level_01"]=LevelRecord(normal:2,gentle:0)
         model.openSettings();model.updateSettings{$0.music=0.2;$0.haptics=false};model.closeSettingsFor(.resetProgress)
         let written=await withCheckedContinuation{continuation in model.persist{continuation.resume(returning:$0)}}
         XCTAssertTrue(written);XCTAssertFalse(model.settingsPresented)

@@ -6,7 +6,7 @@
 
 - 倉庫 `Kongdean2374/MonsterFoodTruck`，公開，預設分支 main。單一工作樹 `/workspace/MonsterFoodTruck`、整合分支 `integration/full-game`，目前 Codex 對話為唯一產品寫入者。不 reset／force push／覆蓋未知工作。
 - 先讀 `git status`、本檔及 [問題紀錄](QA/ISSUE_LOG.md)；完整規格 [PROJECT_SPEC](PROJECT_SPEC.md)。歷史失敗及 Dot 的獨立判定保存在問題紀錄與各 QA 目錄，不以新成功改寫。
-- 最新原生候選 `b53ff6020f9f5227c6a636f66859d393277a41ca`／[Validate 39466494713](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39466494713)：主 job 118779164125 已 failure（27 項，26 passed／1 failed／0 skipped）；small 118784334535／large 118784334216 各 3 passed／0 failed／0 skipped，均已結束。保留既有 job，不重開同 SHA。倉庫 HEAD 53223fb 僅加入證據分檔／只讀匯出能力，尚未重測產品。
+- 最新原生候選 `b53ff6020f9f5227c6a636f66859d393277a41ca`／[Validate 39466494713](https://github.com/Kongdean2374/MonsterFoodTruck/actions/runs/39466494713)：主 job 118779164125 已 failure（27 項，26 passed／1 failed／0 skipped）；small 118784334535／large 118784334216 各 3 passed／0 failed／0 skipped，均已結束。保留既有 job，不重開同 SHA。目前 HEAD 9882a0c；新候選 Validate 39471446711 主 job 118796263167 在測試建置失敗，尚未執行 XCTest，兩尺寸仍待原 job 結束。
 - main 仍為 `b12837c80dfc9f44ae6035c8bf7334f0fff66fdb` 的核心候選。完整候選可在指定整合分支手動產出同 SHA 的完整驗證與未簽名裝置包；仍須全部原生 scopes 通過，不為產包先改 main。
 
 ## 已有獨立判定（範圍不可擴張）
@@ -26,6 +26,8 @@
 - 146a7ca／Validate 39455229683 主 24 過／1 失敗（21 單元過）、small 1 過／1 失敗、large 2 過；此前失敗、PNG 處理阻擋、保存逾時與首次教學角色空白全部保存在問題紀錄，不以新結果覆蓋。
 
 ## 下一候選待原生驗證
+
+- 9882a0c 新增 SceneLifecycle 案例直接寫入 private(set) document，原生編譯拒絕；未執行任何 XCTest／沒有新 App 圖，不能將 Linux 通過數套用。修正 fixture 先經 SaveStore 真實原子寫入再載入 AppModel，保留產品封裝與原斷言；見 QA/INTEGRATION_9882a0c。
 
 - MFT-008：設定與確認改用單一 sheet 容器，保存成功後替換內容，避免兩張 sheet 關閉／重開交錯。保留取消、雙確認、程序重開及值保留全部原斷言，新增呈現狀態／取消不清資料模型回歸。Swift 語法可解析；UIKit 根因與修復效果尚待原生，沒有先稱已修好。
 - MFT-012：成品／爐台／備料置於固定奶油淺底小標籤，保留木紋與工位材質，增加 4pt 寬度相應對齊；新三尺寸實圖尚待。

@@ -1,5 +1,10 @@
 # 品質問題紀錄
 
+## MFT-014（新增呈現狀態回歸案例無法編譯）
+
+- P1，規格 12.2。9882a0c／Validate 39471446711／主 job 118796263167，新增 SceneLifecycleTests.swift:10 直接修改 private(set) document，test build exit 65。沒有執行 XCTest，counts 未回報、沒有本候選 App PNG；不是 0 failed 的成功驗證。
+- 修 fixture 先經 SaveStore 真實寫入永久紀錄，再載入 AppModel；不改產品 setter 可見性，保留原斷言。原錯誤／狀態在 INTEGRATION_9882a0c。狀態 IN_PROGRESS，待新 SHA 原生重測。
+
 ## MFT-013（首頁截圖在設定保存中過早擷取）
 
 - P2，規格 12.3。Codex 實看 7c79fe0 small 的 0ACAF0A3：原附件名 layout-home-large-contrast-left，但畫面仍在設定 sheet 且完成鈕因保存而停用。原生 small 3 項方法確實通過，不改寫其結果，也不將該檔名當首頁證明。b53ff60 的 small 25EF3C21 已是完整首頁；large 850C0A2E 則仍在 sheet 關閉途中，修正等待條件同時涵蓋三尺寸。

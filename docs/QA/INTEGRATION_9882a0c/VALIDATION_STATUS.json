@@ -1,0 +1,11 @@
+{
+  "source_sha": "9882a0c3793ba1faccf240afb0b4deb9562acce9",
+  "exit_status": 65,
+  "last_stage": "build",
+  "baseline_tests": "not executed; no XCTest result summary available",
+  "scoped_results": {},
+  "actual_png_count": 0,
+  "passed": null,
+  "failed": null,
+  "skipped": null
+}
