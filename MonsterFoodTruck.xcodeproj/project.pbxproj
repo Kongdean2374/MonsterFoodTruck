@@ -15,6 +15,36 @@
 			"isa" = "PBXBuildFile";
 			"fileRef" = "5D696BADA48A9CE779A3565D";
 		};
+		"5C6DB81F7D9E950B29DE755D" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "MonsterFoodTruck/Data/GameContent.swift";
+			"sourceTree" = "<group>";
+		};
+		"AEBD8869137B09AC1C9E2A86" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "5C6DB81F7D9E950B29DE755D";
+		};
+		"CBE6E69F19FA5F46D690B6CC" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "MonsterFoodTruck/Domain/GameSession.swift";
+			"sourceTree" = "<group>";
+		};
+		"CC8301F8E77E838B50D57031" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "CBE6E69F19FA5F46D690B6CC";
+		};
+		"CB8AC78F6A2A356CC476EA01" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "MonsterFoodTruck/Services/SaveStore.swift";
+			"sourceTree" = "<group>";
+		};
+		"08D62D0E971A1E73EBAE51FB" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "CB8AC78F6A2A356CC476EA01";
+		};
 		"4976501FE000B82D445F9AEB" = {
 			"isa" = "PBXFileReference";
 			"explicitFileType" = "wrapper.application";
@@ -25,8 +55,18 @@
 		"3960FD2338EFA367FC286C12" = {
 			"isa" = "PBXSourcesBuildPhase";
 			"buildActionMask" = 2147483647;
-			"files" = ("601FD9005059D18D8E6A506A");
+			"files" = ("601FD9005059D18D8E6A506A", "AEBD8869137B09AC1C9E2A86", "CC8301F8E77E838B50D57031", "08D62D0E971A1E73EBAE51FB");
 			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"B2CA83EE592A08316CFAF5EE" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.json";
+			"path" = "MonsterFoodTruck/Resources/Content.json";
+			"sourceTree" = "<group>";
+		};
+		"6FCCFE3E8153312359F277D5" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "B2CA83EE592A08316CFAF5EE";
 		};
 		"4062DB5E2BB4F144C25BA348" = {
 			"isa" = "PBXFileReference";
@@ -41,7 +81,7 @@
 		"950518B2F1DAB3505B7602CF" = {
 			"isa" = "PBXResourcesBuildPhase";
 			"buildActionMask" = 2147483647;
-			"files" = ("8E37781DCA1384BDFC844095");
+			"files" = ("6FCCFE3E8153312359F277D5", "8E37781DCA1384BDFC844095");
 			"runOnlyForDeploymentPostprocessing" = 0;
 		};
 		"4CE686BE02B58C4AADC78C3E" = {
@@ -121,6 +161,26 @@
 			"productReference" = "4976501FE000B82D445F9AEB";
 			"productType" = "com.apple.product-type.application";
 		};
+		"42DF6D567F25FD1817BE3CB3" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Tests/GameModelTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"5B7C769300DB40130F45F707" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "42DF6D567F25FD1817BE3CB3";
+		};
+		"435685955179C59EEB1EBDF9" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Tests/SaveStoreTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"83C1ABC587421DFF69DB450C" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "435685955179C59EEB1EBDF9";
+		};
 		"2E7E1224D16DBD25E10307D8" = {
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "sourcecode.swift";
@@ -141,7 +201,7 @@
 		"6CC87D3BF75717B931C279BA" = {
 			"isa" = "PBXSourcesBuildPhase";
 			"buildActionMask" = 2147483647;
-			"files" = ("F64598E6069E14A7E6CCA482");
+			"files" = ("5B7C769300DB40130F45F707", "83C1ABC587421DFF69DB450C", "F64598E6069E14A7E6CCA482");
 			"runOnlyForDeploymentPostprocessing" = 0;
 		};
 		"A3FCEE4C57973DA7D0AA662D" = {
@@ -353,7 +413,7 @@
 		};
 		"C8D2DC745BFC63C0D67231CE" = {
 			"isa" = "PBXGroup";
-			"children" = ("5D696BADA48A9CE779A3565D", "4062DB5E2BB4F144C25BA348", "2E7E1224D16DBD25E10307D8", "9AA18C699868488E18EBB07C", "0A3E27B8CA818264D75C8D81");
+			"children" = ("5D696BADA48A9CE779A3565D", "5C6DB81F7D9E950B29DE755D", "CBE6E69F19FA5F46D690B6CC", "CB8AC78F6A2A356CC476EA01", "B2CA83EE592A08316CFAF5EE", "4062DB5E2BB4F144C25BA348", "42DF6D567F25FD1817BE3CB3", "435685955179C59EEB1EBDF9", "2E7E1224D16DBD25E10307D8", "9AA18C699868488E18EBB07C", "0A3E27B8CA818264D75C8D81");
 			"sourceTree" = "<group>";
 		};
 		"73EBF6644258C120893E685D" = {

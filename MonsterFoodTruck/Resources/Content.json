@@ -1,0 +1,300 @@
+{
+  "version": 1,
+  "recipes": [
+    {
+      "id": "star_soup",
+      "name": "星火濃湯",
+      "prep": 3,
+      "cook": 10,
+      "grace": 6,
+      "atlasColumn": 0
+    },
+    {
+      "id": "moon_crisp",
+      "name": "月角脆餅",
+      "prep": 4,
+      "cook": 8,
+      "grace": 5,
+      "atlasColumn": 1
+    },
+    {
+      "id": "cloud_stew",
+      "name": "雲菇燉菜",
+      "prep": 5,
+      "cook": 16,
+      "grace": 7,
+      "atlasColumn": 2
+    }
+  ],
+  "monsters": [
+    {
+      "id": "ember_dragon",
+      "name": "焰尾龍",
+      "patience": 44,
+      "preference": "趁熱上桌",
+      "atlasColumn": 0
+    },
+    {
+      "id": "nibble_imp",
+      "name": "饞嘴小鬼",
+      "patience": 48,
+      "preference": "星脆片",
+      "atlasColumn": 1
+    },
+    {
+      "id": "moss_deer",
+      "name": "苔角鹿",
+      "patience": 65,
+      "preference": "香草芽",
+      "atlasColumn": 2
+    }
+  ],
+  "levels": [
+    {
+      "id": "level_01",
+      "name": "森林開張",
+      "focus": "選訂單、備料、下鍋、裝盤，再加香草出餐。",
+      "orders": [
+        {
+          "id": "L1-1",
+          "scheduledAt": 0,
+          "monster": "moss_deer",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L1-2",
+          "scheduledAt": 18,
+          "monster": "moss_deer",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L1-3",
+          "scheduledAt": 36,
+          "monster": "moss_deer",
+          "recipe": "star_soup"
+        }
+      ]
+    },
+    {
+      "id": "level_02",
+      "name": "趁熱上桌",
+      "focus": "熱度從料理完成起算，焰尾龍喜歡九秒內上桌。",
+      "orders": [
+        {
+          "id": "L2-1",
+          "scheduledAt": 0,
+          "monster": "moss_deer",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L2-2",
+          "scheduledAt": 8,
+          "monster": "ember_dragon",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L2-3",
+          "scheduledAt": 24,
+          "monster": "moss_deer",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L2-4",
+          "scheduledAt": 36,
+          "monster": "ember_dragon",
+          "recipe": "star_soup"
+        }
+      ]
+    },
+    {
+      "id": "level_03",
+      "name": "雙爐晚餐",
+      "focus": "長燉菜先安排，善用兩個相同的爐位。",
+      "orders": [
+        {
+          "id": "L3-1",
+          "scheduledAt": 0,
+          "monster": "moss_deer",
+          "recipe": "cloud_stew"
+        },
+        {
+          "id": "L3-2",
+          "scheduledAt": 6,
+          "monster": "ember_dragon",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L3-3",
+          "scheduledAt": 18,
+          "monster": "moss_deer",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L3-4",
+          "scheduledAt": 30,
+          "monster": "ember_dragon",
+          "recipe": "cloud_stew"
+        },
+        {
+          "id": "L3-5",
+          "scheduledAt": 46,
+          "monster": "moss_deer",
+          "recipe": "cloud_stew"
+        }
+      ]
+    },
+    {
+      "id": "level_04",
+      "name": "香脆新菜",
+      "focus": "脆餅起鍋寬限較短，留意成品台的空間。",
+      "orders": [
+        {
+          "id": "L4-1",
+          "scheduledAt": 0,
+          "monster": "moss_deer",
+          "recipe": "moon_crisp"
+        },
+        {
+          "id": "L4-2",
+          "scheduledAt": 6,
+          "monster": "ember_dragon",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L4-3",
+          "scheduledAt": 15,
+          "monster": "moss_deer",
+          "recipe": "cloud_stew"
+        },
+        {
+          "id": "L4-4",
+          "scheduledAt": 27,
+          "monster": "ember_dragon",
+          "recipe": "moon_crisp"
+        },
+        {
+          "id": "L4-5",
+          "scheduledAt": 40,
+          "monster": "moss_deer",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L4-6",
+          "scheduledAt": 52,
+          "monster": "ember_dragon",
+          "recipe": "cloud_stew"
+        }
+      ]
+    },
+    {
+      "id": "level_05",
+      "name": "小鬼來偷嚐",
+      "focus": "小鬼愛星脆片；餐蓋可保護別人的成品。",
+      "orders": [
+        {
+          "id": "L5-1",
+          "scheduledAt": 0,
+          "monster": "moss_deer",
+          "recipe": "cloud_stew"
+        },
+        {
+          "id": "L5-2",
+          "scheduledAt": 7,
+          "monster": "ember_dragon",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L5-3",
+          "scheduledAt": 14,
+          "monster": "nibble_imp",
+          "recipe": "moon_crisp"
+        },
+        {
+          "id": "L5-4",
+          "scheduledAt": 28,
+          "monster": "moss_deer",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L5-5",
+          "scheduledAt": 40,
+          "monster": "nibble_imp",
+          "recipe": "cloud_stew"
+        },
+        {
+          "id": "L5-6",
+          "scheduledAt": 54,
+          "monster": "ember_dragon",
+          "recipe": "moon_crisp"
+        },
+        {
+          "id": "L5-7",
+          "scheduledAt": 68,
+          "monster": "moss_deer",
+          "recipe": "cloud_stew"
+        }
+      ]
+    },
+    {
+      "id": "level_06",
+      "name": "森林晚餐尖峰",
+      "focus": "同時留意熱度、耐心與空位，找出自己的節奏。",
+      "orders": [
+        {
+          "id": "L6-1",
+          "scheduledAt": 0,
+          "monster": "moss_deer",
+          "recipe": "cloud_stew"
+        },
+        {
+          "id": "L6-2",
+          "scheduledAt": 6,
+          "monster": "ember_dragon",
+          "recipe": "moon_crisp"
+        },
+        {
+          "id": "L6-3",
+          "scheduledAt": 12,
+          "monster": "nibble_imp",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L6-4",
+          "scheduledAt": 24,
+          "monster": "ember_dragon",
+          "recipe": "cloud_stew"
+        },
+        {
+          "id": "L6-5",
+          "scheduledAt": 32,
+          "monster": "moss_deer",
+          "recipe": "moon_crisp"
+        },
+        {
+          "id": "L6-6",
+          "scheduledAt": 42,
+          "monster": "nibble_imp",
+          "recipe": "cloud_stew"
+        },
+        {
+          "id": "L6-7",
+          "scheduledAt": 54,
+          "monster": "ember_dragon",
+          "recipe": "star_soup"
+        },
+        {
+          "id": "L6-8",
+          "scheduledAt": 66,
+          "monster": "nibble_imp",
+          "recipe": "moon_crisp"
+        },
+        {
+          "id": "L6-9",
+          "scheduledAt": 78,
+          "monster": "moss_deer",
+          "recipe": "cloud_stew"
+        }
+      ]
+    }
+  ]
+}
