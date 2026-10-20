@@ -50,6 +50,8 @@ jobs:
             build/Journey.xcresult
             build/JOURNEY_TEST_SUMMARY.json
             build/TEST_RESULT_SUMMARY.json
+            build/TEST_SUMMARY.md
+            build/VALIDATION_STATUS.json
             build/LAYOUT_*.json
             build/LAYOUT_ENVIRONMENT.txt
             build/Layout-*.xcresult

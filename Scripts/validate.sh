@@ -1,5 +1,13 @@
 #!/bin/bash
 set -euo pipefail
+VALIDATION_STAGE=build
+finish_validation(){
+  STATUS=$?
+  trap - EXIT
+  python3 Scripts/validation_status.py "$STATUS" "$VALIDATION_STAGE"
+  exit "$STATUS"
+}
+trap finish_validation EXIT
 python3 Scripts/generate_project.py
 mkdir -p build/QA_EVIDENCE
 xcrun simctl list devices available --json > build/devices.json
@@ -14,11 +22,13 @@ PY
 echo "$SIM_ID" > build/simulator-id.txt
 xcodebuild build-for-testing -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/compile.log
 SIM_APP=build/DerivedData/Build/Products/Debug-iphonesimulator/MonsterFoodTruck.app
+VALIDATION_STAGE=built-resource-integrity
 plutil -p "$SIM_APP/Info.plist"
 cp "$SIM_APP/Info.plist" build/SIMULATOR_APP_INFO.plist
 python3 Scripts/verify_app.py "$SIM_APP" --platform iPhoneSimulator --resources MonsterFoodTruck/Resources --output build/SIMULATOR_APP_IDENTITY.json
 xcrun swift Scripts/probe_bundle.swift "$PWD/$SIM_APP" | tee build/SIMULATOR_BUNDLE_PROBE.txt
 TEST_STATUS=0
+VALIDATION_STAGE=baseline-tests
 if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckTests -only-testing:MonsterFoodTruckUITests/FlowTests -resultBundlePath build/Validation.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO | tee build/validate.log; then
   TEST_STATUS=0
 else
@@ -38,10 +48,13 @@ if status==0 and (not screenshots or not all(p.stat().st_size>0 for p in screens
 PY
 if [ "$TEST_STATUS" != 0 ]; then exit "$TEST_STATUS"; fi
 if [ "${MFT_FULL_QA:-0}" = 1 ]; then
+  VALIDATION_STAGE=normal-six-level-journey
   bash Scripts/full_journey.sh "$SIM_ID"
   printf '\nExtended six-level normal-speed command replay ran separately; see JOURNEY_TEST_SUMMARY.json, Journey.xcresult and the actual simulator recording. Engineering replay is not human playtesting.\n' >> build/TEST_SUMMARY.md
 fi
 if [ "${MFT_LAYOUT_QA:-0}" = 1 ]; then
+  VALIDATION_STAGE=small-and-large-layouts
   bash Scripts/layout_smoke.sh
   printf '\nAdditional small/large simulator UI layout tests ran; see LAYOUT_TEST_SUMMARY_*.json and QA_EVIDENCE/layout-*.\n' >> build/TEST_SUMMARY.md
 fi
+VALIDATION_STAGE=complete

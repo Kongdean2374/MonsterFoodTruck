@@ -68,7 +68,7 @@ for name,folder,kind in [("MonsterFoodTruck","MonsterFoodTruck","application"),(
     settings={"PRODUCT_NAME":name,"PRODUCT_BUNDLE_IDENTIFIER":"cc.chaihome.monsterfoodtruck"+("" if kind=="application" else "."+name),"GENERATE_INFOPLIST_FILE":"YES"}
     dependencies=[]
     if kind=="application":
-        settings |= {"INFOPLIST_FILE":"MonsterFoodTruck/Info.plist","GENERATE_INFOPLIST_FILE":"NO","ASSETCATALOG_COMPILER_APPICON_NAME":"AppIcon","ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME":"AccentColor","SUPPORTED_PLATFORMS":"iphoneos iphonesimulator","SUPPORTS_MACCATALYST":"NO"}
+        settings |= {"INFOPLIST_FILE":"MonsterFoodTruck/Info.plist","GENERATE_INFOPLIST_FILE":"NO","ASSETCATALOG_COMPILER_APPICON_NAME":"AppIcon","ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME":"AccentColor","SUPPORTED_PLATFORMS":"iphoneos iphonesimulator","SUPPORTS_MACCATALYST":"NO","COMPRESS_PNG_FILES":"NO"}
     else:
         settings |= {"TEST_TARGET_NAME":"MonsterFoodTruck"}
         if kind=="bundle.unit-test":

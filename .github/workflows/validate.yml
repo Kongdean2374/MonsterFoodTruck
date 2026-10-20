@@ -52,6 +52,7 @@ jobs:
             build/JOURNEY_TEST_SUMMARY.json
             build/QA_EVIDENCE
             build/TEST_SUMMARY.md
+            build/VALIDATION_STATUS.json
             build/TEST_RESULT_SUMMARY.json
             build/LAYOUT_*.json
             build/LAYOUT_ENVIRONMENT.txt
