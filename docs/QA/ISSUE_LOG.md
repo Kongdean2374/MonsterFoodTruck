@@ -1,5 +1,13 @@
 # 品質問題紀錄
 
+## 最新同 SHA 候選：66c2929（原生／封裝成功，待獨立驗收）
+
+- Source `66c2929dd05c28af1b0c3ec8a79805446c6dc023`／Validate 39497238513，原 attempt 1 整體 success；基礎 31／0／0、延伸 4／0／0、small／large 各 3／0／0，package-device 118909103267 success。沒有取消或重開舊 job；41 是含尺寸重複方法的執行次數，未略過 XCTest。
+- MFT-015 修復回歸：原第五關 driver 關閉後，實際等偷嚐完成再整理／原香草／出餐，原餐蓋開合、直接服務、歸還重用、失效偏好、兩次服務及保存斷言全部保留且通過。真正 App save 記偷嚐 42.4306→整理 44.2299～47.2299→香草 49.3509～51.3509→服務 52.4308 秒；不改時鐘／耐心／玩法或注入狀態。狀態 READY_FOR_RETEST，原 d090／28e／2bb 失敗保留。
+- MFT-013 三尺寸 HomeLayouts 的設定保存階段、關閉後首頁與程序重開值均通過。MFT-016 二十次完整 SpriteKit 後代入場／暫停／update 取樣最大值皆 5，直接子節點皆 1、audio players 49。MFT-017 二十次 Performance 完整方法本次及 d090 均通過，沒有推定原啟動失敗唯一根因。以上 READY_FOR_RETEST，非 Dot 關閉。
+- 完整裝置 artifact 12302352776 已下載，20 份交付檔校驗全符，實際 IPA 26,053,576 bytes，SHA-256 `314ef428c7cad8ef754233940c91949c20dac0bfaa1aaed856bd15ce74094d4e`；plist／iPhoneOS／iOS 17／arm64／platform=2／無 LC_CODE_SIGNATURE 直接查驗正確。見 [同 SHA 原圖、session、原生摘要與實際 IPA 查驗](INTEGRATION_66c2929/)。
+- MFT-007 仍 OPEN；7.7／連續動態接合、音訊監聽與真機項 UNVERIFIED，沒有將本成功拼成完整遊戲 Dot 通過。以下各節保留前輪歷史，不改寫原失敗。
+
 ## 最新原生回歸：d09011f（未通過完整候選）
 
 - Validate 39489728099／主 job 118859372658：基礎 31／0／0，延伸 3／1／0；原 review artifact 12297477079 已下載核對 digest。見 [原生摘要、失敗圖與實際存檔](INTEGRATION_d09011f/)。沒有略過失敗方法；兩尺寸各 3／0／0，封裝依門檻 skipped，無完整 IPA。

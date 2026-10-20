@@ -1,0 +1,361 @@
+{
+  "source_sha": "66c2929dd05c28af1b0c3ec8a79805446c6dc023",
+  "run_id": 39497238513,
+  "job_id": 118885341280,
+  "job_conclusion": "success",
+  "review_artifact": {
+    "id": 12300107138,
+    "bytes": 146868167,
+    "sha256": "a27e1b5c45d25b9cd200ab124f577f72253d2a1f81d686b937bf1e6a002905a9"
+  },
+  "full_artifact": {
+    "id": 12300750859,
+    "bytes": 1554659595,
+    "sha256": "51319c4482c7ec9f09b24a4608d7c95bf1add05bf1d7edba28cc88d523417ab1",
+    "downloaded": false,
+    "reason": "Exceeds connector 512 MiB download limit; original preserved in Actions."
+  },
+  "method": "Downloaded original review ZIP and verified GitHub archive digest; selected original evidence copied byte-for-byte. Source SHA is the actual tested app; any subsequent documentation commit does not change it.",
+  "files": [
+    {
+      "path": "TEST_RESULT_SUMMARY.json",
+      "bytes": 1179,
+      "sha256": "1ab5fb1062b98eddd6f48a0f3aaf1676fd02b6b8ac4e036998a8706f104af52e"
+    },
+    {
+      "path": "JOURNEY_TEST_SUMMARY.json",
+      "bytes": 984,
+      "sha256": "4a6e2220051d9ee2f69e7b977a3dd4cfdc1eb8bfa4857af670d75c3716f4b4f3"
+    },
+    {
+      "path": "VALIDATION_STATUS.json",
+      "bytes": 508,
+      "sha256": "d5bfc73f1b8ecd4bd1e76f080b6954d50cd2d99b4bc67651c643ed48f8cb28f0"
+    },
+    {
+      "path": "ENVIRONMENT.txt",
+      "bytes": 2157,
+      "sha256": "48d1fdfc204d8ca79b422900b6333797f9d2031077036f702f14293e45dba181"
+    },
+    {
+      "path": "TEST_SUMMARY.md",
+      "bytes": 1036,
+      "sha256": "2d0a56b31decf9f91f1b97745d1ff2ba8b88334b2453bd80bff4627c4de7c124"
+    },
+    {
+      "path": "SIMULATOR_APP_IDENTITY.json",
+      "bytes": 4899,
+      "sha256": "5ba31c70c394baac7d26b7cd5c8fb6e5c4d60b6307670ed946e280bf9d0eca85"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/PERFORMANCE.json",
+      "bytes": 222481,
+      "sha256": "deaed5f14dc7b578e35412950ade824f14f2dc1cffe8411c9de5339184dbb072"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/PERFORMANCE_SUMMARY.json",
+      "bytes": 14278,
+      "sha256": "f7b636a6fa37bcc0c33fe0e6b815f28c156aa6f2b32adf46117eac72522b2093"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/VIDEO_METADATA.json",
+      "bytes": 7750,
+      "sha256": "2a1ad232d79388b9e941669925d164b8effd7874c297d5b0e84d76e407344c42"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/RECORDING_METHOD.json",
+      "bytes": 872,
+      "sha256": "cdf21ce951b7ca4498faa7b89b8b92536446429a770171bbf60e6862c338ff2c"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-late-session/save-v1.json",
+      "bytes": 6202,
+      "sha256": "de8f91c77cca617b6a1479c11edf7edbee34285adea0020a3d1b3a6c67d3eb65"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-late-session/save-v1.backup.json",
+      "bytes": 6202,
+      "sha256": "897bc14c3f0a21fc6215c6e88956aa6797c16f0e984832e08122f3a9c79e9e18"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-late-session/PROVENANCE.json",
+      "bytes": 395,
+      "sha256": "0f965c57c0e02825272958f5d563b4bf2ba5e11b32a362cfa32ee3f4d84a91e1"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/B05D922F-B3F9-4BCC-B425-75A022A93CDC.png",
+      "bytes": 2040713,
+      "sha256": "04dae18a5442f7f6a01c050835c8d6ccdd3de97a552d15b06e7156f4243299ad"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/BED933EC-DF49-4A9F-90F6-B1CA4CD23E5C.png",
+      "bytes": 1966617,
+      "sha256": "3f07335a995deee178a8a24a4cdbd81d21e6b8af21d6285e6310110510f2502f"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/C9828DC3-22C8-4A2D-AAE9-321959B66B01.png",
+      "bytes": 182957,
+      "sha256": "d32bafffcb74eca9edbbcadd10388c0b3b16b2703ca83eb3f637fe4729d395ee"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/screenshots/98DF55D3-BFB8-44D3-B0F8-5B2F3BA289DA.png",
+      "bytes": 511976,
+      "sha256": "d7a3062626fa0442a4fc6969feae264a24a6d3c8effc2756f4cf180388ed841e"
+    },
+    {
+      "path": "QA_EVIDENCE/C4F9A7C7-7D30-4E1D-8527-0804794EDF80.png",
+      "bytes": 3590645,
+      "sha256": "3d49bfa973baca55585fd34de1f4793039e32dd08a5981b3ccc6821855bbbce0"
+    },
+    {
+      "path": "QA_EVIDENCE/B5CC83FD-8833-4924-BF92-6F0740B00C74.png",
+      "bytes": 1102273,
+      "sha256": "481454274c98bc0ffac67faa3756c571bcbf49110ef40ddd4b3e4e591d2273ae"
+    },
+    {
+      "path": "QA_EVIDENCE/B91B49C3-977E-439A-AFB7-D7CF4AA071AE.png",
+      "bytes": 214713,
+      "sha256": "ebaa854d7ce4cce752c3bbd5b9796ac901069b24a5e3de2132a4639bb3e12b51"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_01.json",
+      "bytes": 5122,
+      "sha256": "293c7626189f8f12416a83c3407ca83eb84ca9db84526a514a54a2caff3d5e77"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_02.json",
+      "bytes": 6091,
+      "sha256": "e0621cb50a2f89e8fc4b383d779dbd4b4138311dd9883525d8185051093c77ac"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_03.json",
+      "bytes": 7905,
+      "sha256": "f1942af96e0090a0418c83c8780f73ca8d09c1b9c3156a8627b54f54f794c3b6"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_04.json",
+      "bytes": 9383,
+      "sha256": "358285dc7af0de328efeb5fc55ec782b19d1225edc3a006a29e9253bebc23389"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_05.json",
+      "bytes": 12482,
+      "sha256": "1bf91bcfde0c73aceb82285ec8cfb23dc22c21fa8e325e3a3b1d939334dfe79a"
+    },
+    {
+      "path": "QA_EVIDENCE/journey/actual-model-snapshots/actual-level_06.json",
+      "bytes": 15286,
+      "sha256": "20494bcf613da6ee42962a47707627612b1c2faeb5a4b31affe2c7afe9cfcef9"
+    },
+    {
+      "path": "LAYOUT_TEST_SUMMARY_small.json",
+      "bytes": 1006,
+      "sha256": "595e2da25f416565cc33bfbdf3335892ecfb285f37525be7af45dc02ab033ea9"
+    },
+    {
+      "path": "QA_EVIDENCE/layout-small/6E458B60-E94A-495C-AD87-9B90BC137D11.png",
+      "bytes": 1366199,
+      "sha256": "294eefc42e8377d2953183331c2d5156e2467160245bb4c9e739915f890a0ae4"
+    },
+    {
+      "path": "QA_EVIDENCE/layout-small/86470BD0-0D5B-4A59-918B-0D3C84327A3D.png",
+      "bytes": 757381,
+      "sha256": "48adce884437328532775c1f801a361ebd4bb302c8ae0dce448be8488db637c1"
+    },
+    {
+      "path": "QA_EVIDENCE/layout-small/8CFADC06-7E3B-49B1-9770-D36DD15F3D8D.png",
+      "bytes": 495159,
+      "sha256": "150f2c47dea2e828b5addac829d3ae9c4cf46d64a5e4e3916d0124d0b7c718b5"
+    },
+    {
+      "path": "LAYOUT_TEST_SUMMARY_large.json",
+      "bytes": 997,
+      "sha256": "cecf96d9bd7aa495d49933c1bcc9b1752cf19ec56b2586dd513aebc2499528b9"
+    },
+    {
+      "path": "QA_EVIDENCE/layout-large/DDBE33C6-BA91-4120-BDE2-5C61A4D140BE.png",
+      "bytes": 4063396,
+      "sha256": "a1844aac2c5973b0c7dace0127170018cd0ceca38c83fe5a4f5727946f3f0e52"
+    },
+    {
+      "path": "QA_EVIDENCE/layout-large/DE51FA7C-C569-4B66-B0AF-40C0887080E5.png",
+      "bytes": 1932960,
+      "sha256": "12f9ccbf9fb618ea5e17f609ddbfa9dbb6ae5e2a36a20d3fb301bfe3458083ef"
+    },
+    {
+      "path": "device/BUILD_MANIFEST.json",
+      "bytes": 704,
+      "sha256": "f894e853581bfa45dfb7b306115ba45c30e465d5f87c4fed44f07c6cee3d6372"
+    },
+    {
+      "path": "device/DEVICE_APP_IDENTITY.json",
+      "bytes": 4892,
+      "sha256": "d32359b54d5a4799d9a5ad1ac5a3d01cf586c3d60209189da02a25ea2e9dc385"
+    },
+    {
+      "path": "device/DEVICE_APP_INFO.plist",
+      "bytes": 1292,
+      "sha256": "e1b05e483f66cc9fbde0f499e37b96b0df5ec9312d656f936adecef41407808c"
+    },
+    {
+      "path": "device/DEVICE_BUILD_ENVIRONMENT.txt",
+      "bytes": 2157,
+      "sha256": "48d1fdfc204d8ca79b422900b6333797f9d2031077036f702f14293e45dba181"
+    },
+    {
+      "path": "device/DEVICE_BUNDLE_PROBE.txt",
+      "bytes": 212,
+      "sha256": "b245a668c8479a8c482a332ca526a24938af686c4fa75458b15e827c0e554aea"
+    },
+    {
+      "path": "device/ENVIRONMENT.txt",
+      "bytes": 2157,
+      "sha256": "48d1fdfc204d8ca79b422900b6333797f9d2031077036f702f14293e45dba181"
+    },
+    {
+      "path": "device/JOURNEY_TEST_SUMMARY.json",
+      "bytes": 984,
+      "sha256": "4a6e2220051d9ee2f69e7b977a3dd4cfdc1eb8bfa4857af670d75c3716f4b4f3"
+    },
+    {
+      "path": "device/LAYOUT_ENVIRONMENT.txt",
+      "bytes": 320,
+      "sha256": "b48016b814c13b771158da5f9e3b96360b602e660912e8ea4b06e8d02f1edc02"
+    },
+    {
+      "path": "device/LAYOUT_TEST_SUMMARY_large.json",
+      "bytes": 997,
+      "sha256": "cecf96d9bd7aa495d49933c1bcc9b1752cf19ec56b2586dd513aebc2499528b9"
+    },
+    {
+      "path": "device/LAYOUT_TEST_SUMMARY_small.json",
+      "bytes": 1006,
+      "sha256": "595e2da25f416565cc33bfbdf3335892ecfb285f37525be7af45dc02ab033ea9"
+    },
+    {
+      "path": "device/MACHO_ARCHITECTURES.txt",
+      "bytes": 6,
+      "sha256": "c1669e1d8edca98769c37d494b76442a1d6e5ffffd7b4da1fb63aef8ebaf6f01"
+    },
+    {
+      "path": "device/MACHO_LOAD_COMMANDS.txt",
+      "bytes": 18066,
+      "sha256": "9772187d4657a831ca9ae9857589d54c59f1d5d024139e44202d8f6845b2b238"
+    },
+    {
+      "path": "device/MACHO_PLATFORM.txt",
+      "bytes": 236,
+      "sha256": "d55b971bcf673279ccf324d2e48dc461f08880b17ede8183219a1950a825fa52"
+    },
+    {
+      "path": "device/PLAYTEST_GUIDE.md",
+      "bytes": 3382,
+      "sha256": "7678823cd718944fe8fa7e53b0b8a290d714c0445cfa7a6e3f7ada43a83da4fa"
+    },
+    {
+      "path": "device/QA_EVIDENCE_INDEX.json",
+      "bytes": 73536,
+      "sha256": "20b26682da38d649af9fbf5b0622887d013c5222db75c79308b58d0531a3510e"
+    },
+    {
+      "path": "device/SHA256SUMS.txt",
+      "bytes": 1794,
+      "sha256": "3e75257646c652c8b90b5015c2249cabd9db01ad86f6d4936c46536f0278cba3"
+    },
+    {
+      "path": "device/SIGNATURE.txt",
+      "bytes": 110,
+      "sha256": "ea6942689b7527485f03c1a39240129b190c7986c7d504d4de2d244a34f70872"
+    },
+    {
+      "path": "device/TEST_RESULT_SUMMARY.json",
+      "bytes": 1179,
+      "sha256": "1ab5fb1062b98eddd6f48a0f3aaf1676fd02b6b8ac4e036998a8706f104af52e"
+    },
+    {
+      "path": "device/TEST_SUMMARY.md",
+      "bytes": 1130,
+      "sha256": "475b1ebe61f66c20872aa3534e2525ac832e8228d90fa6bab60b379276efc8f4"
+    },
+    {
+      "path": "device/VALIDATION_ASSEMBLY.json",
+      "bytes": 86430,
+      "sha256": "83fb0f3a46b93c140b79165fa3708bfb9312331a469fa2a2bf1f8ce5455f1fb0"
+    }
+  ],
+  "dot_verdict": "Not independently accepted as a full game. Prior DOT-001/core/7.3 rulings retain their original limited scopes.",
+  "layout_small": {
+    "artifact_id": 12302380889,
+    "job_id": 118900546087,
+    "archive_bytes": 27417156,
+    "archive_sha256": "4283e345a5f8b6e64d6ededabc73cd30550ef706a9ac02a2277df7f6a93eefa8",
+    "conclusion": "success",
+    "counts": {
+      "passedTests": 3,
+      "failedTests": 0,
+      "skippedTests": 0
+    }
+  },
+  "layout_large": {
+    "artifact_id": 12301693883,
+    "job_id": 118900546280,
+    "archive_bytes": 68322590,
+    "archive_sha256": "592ed18fd6b04da3bd77e9024a4152656f6eb2ddf9cbd4ec19bab57b455569e1",
+    "conclusion": "success",
+    "counts": {
+      "passedTests": 3,
+      "failedTests": 0,
+      "skippedTests": 0
+    }
+  },
+  "workflow": {
+    "status": "completed",
+    "conclusion": "success",
+    "run_attempt": 1,
+    "package_job_id": 118909103267,
+    "package_conclusion": "success",
+    "updated_at": "2026-10-20T21:58:18Z"
+  },
+  "device_artifact": {
+    "id": 12302352776,
+    "bytes": 26119376,
+    "sha256": "51e7f4ef0950edfafd53fce1a09e185573a942129949b6218e27f9b49d64747b",
+    "ipa": "MonsterFoodTruck-unsigned-1.0.0-25.ipa",
+    "ipa_bytes": 26053576,
+    "ipa_sha256": "314ef428c7cad8ef754233940c91949c20dac0bfaa1aaed856bd15ce74094d4e",
+    "downloaded": true,
+    "delivery_checksums_verified": 20
+  },
+  "derived_files": [
+    {
+      "path": "DEVICE_CANDIDATE_INSPECTION.json",
+      "sha256": "2e36b626eff2b4193071e81dec27bd049e048f50a8e337874a6e14a1499d480f",
+      "method": "Local read-only verification of actual downloaded candidate; original artifacts unchanged."
+    },
+    {
+      "path": "inspect_device_candidate.py",
+      "sha256": "56a7850a3f4abd0dfec0525a44ed090181383b1b84b9b993d1aa428d370c23a3",
+      "method": "Local read-only verification of actual downloaded candidate; original artifacts unchanged."
+    },
+    {
+      "path": "EVIDENCE_INSPECTION.json",
+      "sha256": "e6e074eded332601049d7b273516976b8a957afa62b27286e0be7f9d7223eba8",
+      "method": "Matched original downloaded review/small/large files byte count and SHA-256 against same-SHA device evidence index. Original MOV remains in the heavy artifact and was verified by the macOS assembly job, not downloaded or watched here."
+    },
+    {
+      "path": "SCREENSHOT_INDEX.json",
+      "sha256": "e57d7576f7d519145bf7caebc377ae1bd885e440d794cefa3962e97923fbb758",
+      "method": "Editorial evidence index; original native files remain unchanged and separately hashed."
+    },
+    {
+      "path": "README.md",
+      "sha256": "ac58fa156989b99d3539839599e8bec9fde562e0c0c7bea898fe77fb8be74a04",
+      "method": "Editorial evidence index; original native files remain unchanged and separately hashed."
+    },
+    {
+      "path": "ART_REVIEW.md",
+      "sha256": "c749811b19cd77bf45aaa2cb88a10b6c653509ce376269b18eee33de611f1beb",
+      "method": "Editorial evidence index; original native files remain unchanged and separately hashed."
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+build/MonsterFoodTruck.xcarchive/Products/Applications/MonsterFoodTruck.app: code object is not signed at all

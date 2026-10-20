@@ -1,0 +1,2 @@
+Foundation.Bundle path: /Users/runner/work/MonsterFoodTruck/MonsterFoodTruck/build/MonsterFoodTruck.xcarchive/Products/Applications/MonsterFoodTruck.app
+Foundation.Bundle identifier: cc.chaihome.monsterfoodtruck

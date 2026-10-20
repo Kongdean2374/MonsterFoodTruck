@@ -1,0 +1,5 @@
+layout-small
+small com.apple.CoreSimulator.SimDeviceType.iPhone-SE-3rd-generation D6669EE1-B7B8-46E0-9307-E3A64F8CE8C6 com.apple.CoreSimulator.SimRuntime.iOS-18-5
+
+layout-large
+large com.apple.CoreSimulator.SimDeviceType.iPhone-15-Pro-Max A67D210F-8525-4E3E-A0E3-4E6BA0709DFF com.apple.CoreSimulator.SimRuntime.iOS-18-5

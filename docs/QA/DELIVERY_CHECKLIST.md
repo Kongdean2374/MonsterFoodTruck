@@ -1,23 +1,21 @@
 # 完整候選交付查驗表
 
-本表以最終完整 source SHA 為單位。尚無完整候選通過，不能將不同提交或不同範圍的成功拼成一次驗收。
+實際 App source `66c2929dd05c28af1b0c3ec8a79805446c6dc023`／build 25。Validate 39497238513 及同 SHA 裝置封裝 success，41 次原生方法執行／0 failed／0 skipped；詳細原物與能力邊界見 [INTEGRATION_66c2929](INTEGRATION_66c2929/)。尚未最終驗收，MFT-007 及獨立藝術／真機項不能被綠燈取代。
 
-最新 d09011f／Validate 39489728099：基礎 31／0／0，延伸 3／1／0；小大各 3／0／0，整體未通過／無 IPA。失敗及真正後段 UI session 見 INTEGRATION_d09011f；原二十次進場通過，完整 SpriteKit 後代入場／暫停／update 取樣最大值固定 5，直接子節點固定 1，不能擴張成所有場景／真機效能通過。
-
-| 查驗內容 | 必須可追溯的證據 | 目前狀態 |
+| 查驗內容 | 實際證據 | 狀態與邊界 |
 |---|---|---|
-| 生成工程／安裝／識別 | Source SHA、ENVIRONMENT、實際 plist、Foundation probe | P1 已獨立關閉；完整候選仍須重測 |
-| 三菜／三角色／六關與所有核心規則 | 原生 GameModel／SaveStore／SceneLifecycle／Strategy xcresult、JSON | 28e474d 26 單元過，含確認清除後保留設定的擴充 |
-| 真實首次教學至第一關、存檔恢復與設定 | 原 Flow 全部斷言，原生摘要、PNG | 28e474d 原完整基礎 Flow 通過，未代稱 Dot 驗收 |
-| 六關與結算／最終畫面／解鎖重開保存 | 正常時鐘六次實際 session、UI 摘要、錄影 | 2bb 工程正常時鐘六次 session／結算走過，同一方法後續點按仍失敗 |
-| 餐蓋正常開合／服務／回收重用 | 無 driver 的真實後關點按與原生截圖 | 2bb 龍餐蓋與歸還走過，燉菜未整理即配料失敗，原案例未通過 |
-| 練習不獎勵、背景、失敗／同關重試、各確認取消 | FullJourney／ControlFlow 原生結果及圖 | 2bb 練習／ControlFlow 原生方法通過；全延伸仍有一失敗 |
-| 三尺寸、大字／高對比／左右手及關鍵狀態 | 同 SHA 三 scopes、各 PNG／摘要 | 28e474d 主基礎及小大各 3 項過；整體仍有延伸失敗 |
-| 三角色五表情／部件動作、三菜狀態、餐車 | 深淺底實際大小 PNG、遊玩及動態影片、來源清單 | 母版方向通過；正式擴作待實圖，MFT-007 開放 |
-| 配樂／提示可辨、音量與觸覺 | 25 WAV、實際監聽／真機紀錄 | 靜態及程式整合；監聽／觸覺未驗收 |
-| 二十次場景重進與效能 | 原始 PERFORMANCE、取樣方式、summary | 2bb 二十次原生方法通過；有實際取樣，不宣稱物理 60fps／100ms |
-| 無網路依賴／飛航模式 | 本地資源包及源碼、實際離線裝置流程 | 本地資源完整性有檢查；飛航真機未測 |
-| 同 SHA 未簽名 iPhoneOS 裝置 IPA | BUILD_MANIFEST、DEVICE_APP_IDENTITY、Mach-O platform=2、無簽名、SHA256SUMS | 只有 P1 小包；完整 Validate 成功後銜接同 SHA archive 尚待實跑 |
-| Dot 獨立完整驗收 | 7.7 六項每項≥3、總分≥20／24；實際證據及明確判定 | 尚未取得，Codex 不代簽 |
+| 工程／安裝／識別 | 三 scopes native identity／probe、實際 IPA plist／Mach-O | 本 SHA 通過；舊 DOT-001 仍只限原獨立啟動工程結論 |
+| 三菜／三角色／六關與核心／存檔 | 26 原生單元、原 xcresult／JSON | 本 SHA 通過；先前 Linux 15 Domain／4 Save 另保留，不混算原生 |
+| 完整首次教學、真實第一關、保存及全部設定 | 原完整 Flow／程序重開值／取消確認 | 本 SHA 通過，第一關真實 3／2／2 星 |
+| 六關／結算／解鎖重開／完成畫面 | 六份正常時鐘 session、原方法 passed、MOV | 工程 driver，非六關全程真實 UI 或真人試玩 |
+| 後關餐蓋／修整／香草／兩位出餐 | driver 關閉後實際點按、真正 UI save、PNG | 本 SHA 原方法通過；MFT-015 READY_FOR_RETEST |
+| 練習隔離、背景、失敗／重試／確認取消 | FullJourney／ControlFlow 原生方法 | 本 SHA 通過 |
+| 三尺寸／大字／高對比／左右手 | 主基礎及小大各 3 原方法／PNG | 本 SHA 通過有限操作斷言；不是所有視覺狀態評分 |
+| 二十次進場／完整子樹／音訊池 | 原 PERFORMANCE v2／summary | 根層 1／完整 SpriteKit 後代 5、players 49 固定；不是全場景或真機 profiler |
+| 正式美術／透明／動作 | 同母版擴作、深淺底五表情／動作取樣、正常 App | MFT-007 OPEN；7.7／連續動態接合 UNVERIFIED |
+| 配樂／警告／音量／觸覺 | 25 原 WAV／PCM、實際設定回歸 | 聽感／真實觸覺未驗；影片音軌 0 |
+| 本地資源／離線 | 實際 device App 全資源 byte hash | 本地資源檢查通過；實機飛航全流程未測 |
+| 未簽名 iPhoneOS IPA／校驗 | artifact 12302352776、BUILD_MANIFEST、直接下載查驗 | 本 SHA 通過：20 檔校驗、arm64／最低 17／platform=2／無 LC_CODE_SIGNATURE |
+| Dot 完整獨立驗收 | 7.7 六項與正確 source／artifact 明確判定 | 尚未取得，Codex 不代簽 |
 
-原生影片目前由 simctl 取得畫面，沒有遊戲音訊；聽覺不能從該影片推論。無簽名 IPA 需使用者自行簽名安裝，本輪不操作 Apple 帳號或發布。
+最終完整完成定義仍未達成；已知必做藝術缺陷與獨立判定保留。候選實物可供具體重測，沒有把 P1 小包或不同 SHA 的成功拼成驗收。未操作 Apple 帳號／簽署／TestFlight／App Store；裝置簽名安裝與真機體驗由實際後續結果判定。

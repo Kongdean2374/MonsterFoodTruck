@@ -1,0 +1,15 @@
+{
+  "source_sha": "66c2929dd05c28af1b0c3ec8a79805446c6dc023",
+  "workflow_run_id": 39497238513,
+  "device_index": "device/QA_EVIDENCE_INDEX.json",
+  "verified_local_files": 376,
+  "verified_local_pngs": 154,
+  "not_locally_downloaded": [
+    {
+      "path": "QA_EVIDENCE/journey/normal-six-level-journey.mov",
+      "bytes": 1345897930,
+      "sha256": "7612a829294299563b6e83df5ccecad90e0ed03e84ef7defa79d5e0ed91ad94f"
+    }
+  ],
+  "method": "Matched original downloaded review/small/large files byte count and SHA-256 against same-SHA device evidence index. Original MOV remains in the heavy artifact and was verified by the macOS assembly job, not downloaded or watched here."
+}
