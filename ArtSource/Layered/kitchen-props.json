@@ -1,0 +1,45 @@
+{
+  "width": 1024,
+  "height": 1536,
+  "rects": {
+    "stoveOff": [
+      14,
+      118,
+      488,
+      392
+    ],
+    "stoveOn": [
+      508,
+      118,
+      490,
+      391
+    ],
+    "herb": [
+      98,
+      597,
+      359,
+      338
+    ],
+    "star": [
+      567,
+      655,
+      368,
+      285
+    ],
+    "cloche": [
+      31,
+      1056,
+      481,
+      380
+    ],
+    "clocheOpen": [
+      565,
+      1007,
+      433,
+      388
+    ]
+  },
+  "source_sha256": "5f89a3212540064ab308ccfc61cc102565f5779aa513199b04dec3a085a763e5",
+  "method": "Read-only alpha connected-component analysis for runtime texture coordinates. Original PNG pixels unmodified.",
+  "status": "Mother style approved; actual edge/motion review pending"
+}

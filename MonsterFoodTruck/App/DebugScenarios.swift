@@ -18,7 +18,7 @@ enum DebugScenarios {
         }else{
             s.advance(to:18,content:content);try send(.plate("L6-2"));try send(.cook("L6-3"))
             s.advance(to:21,content:content);try send(.plate("L6-1"));try send(.garnish("L6-1",.herb))
-            s.advance(to:name=="busy" ? 22:25,content:content)
+            s.advance(to:name=="busy" ? 22:name=="warning" || name=="covered" ? 21:25,content:content)
             if name=="covered" {try send(.cover("L6-2"))}
             if name=="tidy" {s.advance(to:28,content:content);try send(.tidy("L6-2"));s.advance(to:29,content:content)}
         }

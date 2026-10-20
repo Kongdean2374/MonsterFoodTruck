@@ -1,0 +1,10 @@
+{
+  "method": "Linux Swift 6.1.2, exact App Domain sources; candidate source SHA is the commit containing these files. Not native iOS UI or playtest validation.",
+  "files": {
+    "MonsterFoodTruck/Data/GameContent.swift": "22ee06afb133b87ca0f1dd75c258fd4eb5047e2b879e3cfebbaba78662300fd0",
+    "MonsterFoodTruck/Domain/GameSession.swift": "64c308f6e2ede79557c0621aaca63d616e1cb352087fbd3263c4fbf977a4ce15",
+    "MonsterFoodTruck/Domain/CommandReplayPlanner.swift": "c7704aa8fee001e873dfd9814426384f8f2a2880fedacce2aa251abeef6be2a7",
+    "Scripts/balance_diagnostics.swift": "971fea0553f700670f458a709539f256c5b831082924a29c80b859e9f5c53589",
+    "MonsterFoodTruck/Resources/Content.json": "f899ad0bdebe5e7790bf713713cafa003180972569f6bb338e48358debda48e2"
+  }
+}

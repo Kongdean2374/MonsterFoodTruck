@@ -78,6 +78,9 @@ final class FlowTests: XCTestCase {
         app.buttons["設定"].tap();XCTAssertTrue(app.staticTexts["音樂音量 0%"].waitForExistence(timeout:5))
         XCTAssertTrue(app.staticTexts["音效音量 0%"].exists);XCTAssertEqual(app.switches["觸覺回饋"].value as? String,"0")
         reveal(app.switches["減少動態效果"],app,up:true);XCTAssertEqual(app.switches["減少動態效果"].value as? String,"0")
+        for label in ["高對比資訊","大字介面","左手單手配置"]{
+            reveal(app.switches[label],app,up:true);XCTAssertEqual(app.switches[label].value as? String,"1","Setting must persist after process restart: \(label)")
+        }
         capture("actual-settings-after-process-restart",app)
         reveal(app.buttons["恢復預設設定"],app,up:true);app.buttons["恢復預設設定"].tap()
         XCTAssertTrue(app.buttons["還原設定"].waitForExistence(timeout:5));app.buttons["取消"].tap()
@@ -102,7 +105,11 @@ final class FlowTests: XCTestCase {
         app.buttons["返回首頁"].tap();XCTAssertTrue(app.buttons["start"].waitForExistence(timeout:5))
     }
     func assertSecondLevel(_ app:XCUIApplication,unlocked:Bool){
-        XCTAssertTrue(app.buttons["關卡選擇"].waitForExistence(timeout:5));app.buttons["關卡選擇"].tap()
+        let levels=app.buttons["關卡選擇"]
+        XCTAssertTrue(levels.waitForExistence(timeout:5))
+        let ready=XCTNSPredicateExpectation(predicate:NSPredicate(format:"hittable == true"),object:levels)
+        XCTAssertEqual(XCTWaiter.wait(for:[ready],timeout:5),.completed,"Confirmation must actually dismiss before home becomes usable")
+        levels.tap()
         XCTAssertTrue(app.buttons["level-level_02"].waitForExistence(timeout:5));XCTAssertEqual(app.buttons["level-level_02"].isEnabled,unlocked)
     }
     func perform(_ label:String,_ app:XCUIApplication){
@@ -123,16 +130,26 @@ final class FlowTests: XCTestCase {
     func reveal(_ element:XCUIElement,_ app:XCUIApplication,up:Bool){
         // SwiftUI can report a partially offscreen Form row as hittable. Require
         // its tap centre to clear the sheet toolbar and bottom safe area too.
-        for _ in 0..<6{
-            if !element.exists{if up{app.swipeUp()}else{app.swipeDown()};continue}
-            let frame=element.frame,viewport=app.frame
-            let above=frame.midY<viewport.minY+150,below=frame.midY>viewport.maxY-60
-            if element.isHittable && !above && !below{return}
-            if above{app.swipeDown()}else if below || up{app.swipeUp()}else{app.swipeDown()}
+        var observations:[String]=[]
+        func scroll(_ upward:Bool){
+            // Short drags avoid repeatedly jumping past the same SE row.
+            let start=app.coordinate(withNormalizedOffset:CGVector(dx:0.5,dy:upward ? 0.65:0.4))
+            let end=app.coordinate(withNormalizedOffset:CGVector(dx:0.5,dy:upward ? 0.43:0.62))
+            start.press(forDuration:0.1,thenDragTo:end)
         }
+        let top=app.navigationBars["餐車設定"].frame.maxY+24
+        for step in 0..<12{
+            if !element.exists{observations.append("\(step): absent; initial direction up=\(up)");scroll(up);continue}
+            let frame=element.frame,viewport=app.frame
+            observations.append("\(step): \(frame); hittable=\(element.isHittable)")
+            let above=frame.midY<top,below=frame.midY>viewport.maxY-50
+            if element.isHittable && !above && !below{return}
+            scroll(above ? false:below ? true:up)
+        }
+        let note=XCTAttachment(string:observations.joined(separator:"\n"));note.name="FAILED-form-scroll-positions";note.lifetime = .keepAlways;add(note)
         guard element.exists else{XCTFail("Control did not appear after bounded form scrolling: \(element)");return}
         let frame=element.frame
-        XCTAssertTrue(element.isHittable && frame.midY>=app.frame.minY+150 && frame.midY<=app.frame.maxY-60,"Control centre remains outside visible form: \(frame)")
+        XCTAssertTrue(element.isHittable && frame.midY>=top && frame.midY<=app.frame.maxY-50,"Control centre remains outside visible form: \(frame)")
     }
     func testHomeLayouts(){
         let app=XCUIApplication();app.launchEnvironment["MFT_UI_SUITE"]="layout";app.launch()

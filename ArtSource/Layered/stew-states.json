@@ -1,0 +1,63 @@
+{
+  "width": 1254,
+  "height": 1254,
+  "rects": {
+    "raw": [
+      43,
+      56,
+      351,
+      376
+    ],
+    "prepared": [
+      471,
+      149,
+      340,
+      278
+    ],
+    "cooking": [
+      850,
+      129,
+      378,
+      291
+    ],
+    "finished": [
+      34,
+      496,
+      381,
+      294
+    ],
+    "scorched": [
+      439,
+      496,
+      382,
+      294
+    ],
+    "nibbled": [
+      851,
+      494,
+      381,
+      297
+    ],
+    "repairedScorch": [
+      37,
+      872,
+      379,
+      296
+    ],
+    "repairedNibble": [
+      449,
+      871,
+      382,
+      296
+    ],
+    "steam": [
+      947,
+      851,
+      247,
+      359
+    ]
+  },
+  "source_sha256": "ebe01786df0610af372f8cb2fb7d7d66f301b569a64bd97674d00ec76cd20645",
+  "method": "Read-only alpha connected-component analysis for runtime texture coordinates. Original PNG pixels unmodified.",
+  "status": "Mother style approved; actual edge/motion review pending"
+}

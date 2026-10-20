@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "recipes": [
     {
       "id": "star_soup",
@@ -119,25 +119,25 @@
         },
         {
           "id": "L3-2",
-          "scheduledAt": 6,
+          "scheduledAt": 4,
           "monster": "ember_dragon",
           "recipe": "star_soup"
         },
         {
           "id": "L3-3",
-          "scheduledAt": 18,
+          "scheduledAt": 8,
           "monster": "moss_deer",
           "recipe": "star_soup"
         },
         {
           "id": "L3-4",
-          "scheduledAt": 30,
+          "scheduledAt": 14,
           "monster": "ember_dragon",
           "recipe": "cloud_stew"
         },
         {
           "id": "L3-5",
-          "scheduledAt": 46,
+          "scheduledAt": 22,
           "monster": "moss_deer",
           "recipe": "cloud_stew"
         }
@@ -156,31 +156,31 @@
         },
         {
           "id": "L4-2",
-          "scheduledAt": 6,
+          "scheduledAt": 4,
           "monster": "ember_dragon",
           "recipe": "star_soup"
         },
         {
           "id": "L4-3",
-          "scheduledAt": 15,
+          "scheduledAt": 8,
           "monster": "moss_deer",
           "recipe": "cloud_stew"
         },
         {
           "id": "L4-4",
-          "scheduledAt": 27,
+          "scheduledAt": 14,
           "monster": "ember_dragon",
           "recipe": "moon_crisp"
         },
         {
           "id": "L4-5",
-          "scheduledAt": 40,
+          "scheduledAt": 20,
           "monster": "moss_deer",
           "recipe": "star_soup"
         },
         {
           "id": "L4-6",
-          "scheduledAt": 52,
+          "scheduledAt": 26,
           "monster": "ember_dragon",
           "recipe": "cloud_stew"
         }
@@ -199,37 +199,37 @@
         },
         {
           "id": "L5-2",
-          "scheduledAt": 7,
+          "scheduledAt": 4,
           "monster": "ember_dragon",
           "recipe": "star_soup"
         },
         {
           "id": "L5-3",
-          "scheduledAt": 14,
+          "scheduledAt": 8,
           "monster": "nibble_imp",
           "recipe": "moon_crisp"
         },
         {
           "id": "L5-4",
-          "scheduledAt": 28,
+          "scheduledAt": 14,
           "monster": "moss_deer",
           "recipe": "star_soup"
         },
         {
           "id": "L5-5",
-          "scheduledAt": 40,
+          "scheduledAt": 20,
           "monster": "nibble_imp",
           "recipe": "cloud_stew"
         },
         {
           "id": "L5-6",
-          "scheduledAt": 54,
+          "scheduledAt": 28,
           "monster": "ember_dragon",
           "recipe": "moon_crisp"
         },
         {
           "id": "L5-7",
-          "scheduledAt": 68,
+          "scheduledAt": 36,
           "monster": "moss_deer",
           "recipe": "cloud_stew"
         }
@@ -248,49 +248,49 @@
         },
         {
           "id": "L6-2",
-          "scheduledAt": 6,
+          "scheduledAt": 4,
           "monster": "ember_dragon",
           "recipe": "moon_crisp"
         },
         {
           "id": "L6-3",
-          "scheduledAt": 12,
+          "scheduledAt": 8,
           "monster": "nibble_imp",
           "recipe": "star_soup"
         },
         {
           "id": "L6-4",
-          "scheduledAt": 24,
+          "scheduledAt": 12,
           "monster": "ember_dragon",
           "recipe": "cloud_stew"
         },
         {
           "id": "L6-5",
-          "scheduledAt": 32,
+          "scheduledAt": 18,
           "monster": "moss_deer",
           "recipe": "moon_crisp"
         },
         {
           "id": "L6-6",
-          "scheduledAt": 42,
+          "scheduledAt": 24,
           "monster": "nibble_imp",
           "recipe": "cloud_stew"
         },
         {
           "id": "L6-7",
-          "scheduledAt": 54,
+          "scheduledAt": 30,
           "monster": "ember_dragon",
           "recipe": "star_soup"
         },
         {
           "id": "L6-8",
-          "scheduledAt": 66,
+          "scheduledAt": 36,
           "monster": "nibble_imp",
           "recipe": "moon_crisp"
         },
         {
           "id": "L6-9",
-          "scheduledAt": 78,
+          "scheduledAt": 42,
           "monster": "moss_deer",
           "recipe": "cloud_stew"
         }

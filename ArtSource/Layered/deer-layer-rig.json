@@ -1,0 +1,79 @@
+{
+  "width": 1024,
+  "height": 1536,
+  "rects": {
+    "body": [
+      88,
+      39,
+      392,
+      354
+    ],
+    "waiting": [
+      551,
+      40,
+      439,
+      368
+    ],
+    "expecting": [
+      68,
+      420,
+      435,
+      367
+    ],
+    "worried": [
+      550,
+      421,
+      440,
+      370
+    ],
+    "satisfied": [
+      67,
+      803,
+      437,
+      370
+    ],
+    "disappointed": [
+      549,
+      803,
+      442,
+      375
+    ],
+    "arm": [
+      160,
+      1196,
+      227,
+      303
+    ],
+    "tail": [
+      654,
+      1248,
+      242,
+      216
+    ]
+  },
+  "source_sha256": "2fa9d192f6cbe8233c32333c87fff35d8c663007d53c80807109c873ad8f5a5d",
+  "method": "Read-only connected-component alpha analysis for runtime subtexture coordinates. No pixel processing; original generated PNG bytes preserved.",
+  "status": "Approved mother style extension; actual integration/edge/motion review pending",
+  "anchors": {
+    "waiting": [
+      0.5048,
+      0
+    ],
+    "expecting": [
+      0.507,
+      0
+    ],
+    "worried": [
+      0.5021,
+      0
+    ],
+    "satisfied": [
+      0.507,
+      0
+    ],
+    "disappointed": [
+      0.5026,
+      0
+    ]
+  }
+}

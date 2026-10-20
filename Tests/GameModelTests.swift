@@ -48,7 +48,7 @@ final class GameModelTests: XCTestCase {
     }
     func testPausedClockAndSnapshotRoundTrip() throws {
         var (c,s)=try fixture(withImp:true);plate(&s,content:c)
-        s.advance(to:20,content:c);XCTAssertEqual(s.nibbleTarget,"test-1")
+        s.advance(to:17,content:c);XCTAssertEqual(s.nibbleTarget,"test-1")
         s.isPaused=true;let before=s.time;s.advance(to:10000,content:c);XCTAssertEqual(s.time,before)
         let data=try JSONEncoder().encode(s)
         let restored=try JSONDecoder().decode(GameSession.self,from:data)
@@ -58,18 +58,18 @@ final class GameModelTests: XCTestCase {
     }
     func testCoverPausesWarningWithoutResetAndTidyNeverRestoresPreference() throws {
         var (c,s)=try fixture(withImp:true);plate(&s,content:c)
-        s.advance(to:21,content:c)
+        s.advance(to:17,content:c)
         let remaining=s.orders[0].warningRemaining
         XCTAssertNil(s.send(.cover("test-1"),content:c))
-        s.advance(to:26,content:c)
+        s.advance(to:22,content:c)
         XCTAssertEqual(s.orders[0].warningRemaining,remaining)
         XCTAssertNotNil(s.send(.garnish("test-1",.herb),content:c))
         XCTAssertNil(s.send(.uncover("test-1"),content:c))
-        s.advance(to:29,content:c);XCTAssertEqual(s.nibbleCount,1)
+        s.advance(to:25,content:c);XCTAssertEqual(s.nibbleCount,1)
         XCTAssertNotNil(s.send(.serve("test-1"),content:c))
         XCTAssertNil(s.send(.tidy("test-1"),content:c))
-        s.advance(to:32,content:c)
-        XCTAssertNil(s.send(.garnish("test-1",.herb),content:c));s.advance(to:34,content:c)
+        s.advance(to:28,content:c)
+        XCTAssertNil(s.send(.garnish("test-1",.herb),content:c));s.advance(to:30,content:c)
         XCTAssertNil(s.send(.serve("test-1"),content:c))
         XCTAssertEqual(s.served,1);XCTAssertEqual(s.preferences,0)
     }
@@ -139,9 +139,9 @@ final class GameModelTests: XCTestCase {
         a.advance(to:8,content:c);XCTAssertNil(a.send(.cook("test-2"),content:c))
         a.advance(to:13,content:c);XCTAssertNil(a.send(.plate("test-1"),content:c))
         a.advance(to:16,content:c);XCTAssertNil(a.send(.plate("test-2"),content:c))
-        a.advance(to:20,content:c);XCTAssertEqual(a.nibbleTarget,"test-1")
+        a.advance(to:17,content:c);XCTAssertEqual(a.nibbleTarget,"test-1")
         XCTAssertNil(a.send(.serve("test-2"),content:c));XCTAssertNil(a.nibbleActor);XCTAssertNil(a.nibbleTarget)
-        a.advance(to:25,content:c);XCTAssertEqual(a.nibbleCount,0);try a.validate(content:c)
+        a.advance(to:22,content:c);XCTAssertEqual(a.nibbleCount,0);try a.validate(content:c)
     }
     func testCorruptSnapshotRejectsInvalidStationAndVersion() throws {
         let (c,s)=try fixture()

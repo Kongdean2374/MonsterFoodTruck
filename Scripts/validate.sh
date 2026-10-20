@@ -41,7 +41,7 @@ if [ "${MFT_LAYOUT_ONLY:-0}" = 1 ]; then
 fi
 TEST_STATUS=0
 VALIDATION_STAGE=baseline-tests
-if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckTests -only-testing:MonsterFoodTruckUITests/FlowTests -resultBundlePath build/Validation.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO CURRENT_PROJECT_VERSION="${GITHUB_RUN_NUMBER:-1}" | tee build/validate.log; then
+if xcodebuild test-without-building -project MonsterFoodTruck.xcodeproj -scheme MonsterFoodTruck -configuration Debug -destination "platform=iOS Simulator,id=$SIM_ID" -parallel-testing-enabled NO -only-testing:MonsterFoodTruckTests -only-testing:MonsterFoodTruckUITests/FlowTests -only-testing:MonsterFoodTruckUITests/ArtReviewTests -resultBundlePath build/Validation.xcresult -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=NO CURRENT_PROJECT_VERSION="${GITHUB_RUN_NUMBER:-1}" | tee build/validate.log; then
   TEST_STATUS=0
 else
   TEST_STATUS=$?

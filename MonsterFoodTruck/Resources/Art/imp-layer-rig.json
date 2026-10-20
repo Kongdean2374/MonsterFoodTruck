@@ -1,0 +1,79 @@
+{
+  "width": 1024,
+  "height": 1536,
+  "rects": {
+    "waiting": [
+      522,
+      69,
+      452,
+      289
+    ],
+    "body": [
+      111,
+      115,
+      341,
+      253
+    ],
+    "worried": [
+      521,
+      432,
+      458,
+      304
+    ],
+    "expecting": [
+      32,
+      433,
+      448,
+      303
+    ],
+    "satisfied": [
+      32,
+      807,
+      452,
+      304
+    ],
+    "disappointed": [
+      531,
+      807,
+      461,
+      307
+    ],
+    "tail": [
+      595,
+      1188,
+      334,
+      259
+    ],
+    "arm": [
+      160,
+      1206,
+      229,
+      218
+    ]
+  },
+  "source_sha256": "5359de676d980750add1808265cb22294df4f6b73981732fd3d927981c82e5c4",
+  "method": "Read-only alpha analysis for runtime texture bounds; original image bytes preserved. Image-tool spacing edit removes cross-cell crop contamination.",
+  "status": "Approved mother style; actual-size/motion/edge review pending",
+  "anchors": {
+    "waiting": [
+      0.5342,
+      0
+    ],
+    "expecting": [
+      0.5304,
+      0
+    ],
+    "worried": [
+      0.5192,
+      0
+    ],
+    "satisfied": [
+      0.4828,
+      0
+    ],
+    "disappointed": [
+      0.509,
+      0
+    ]
+  }
+}

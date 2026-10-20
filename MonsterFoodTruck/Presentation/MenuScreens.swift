@@ -1,4 +1,5 @@
 import SwiftUI
+import SpriteKit
 
 struct SettingsScreen:View {
     @EnvironmentObject var model:AppModel
@@ -45,6 +46,7 @@ struct SettingsScreen:View {
 }
 struct ConfirmationScreen:View {
     @EnvironmentObject var model:AppModel
+    @Environment(\.dismiss) private var dismiss
     var confirmation:AppModel.Confirmation
     @State private var secondConfirmation=false
     var body:some View{
@@ -52,13 +54,13 @@ struct ConfirmationScreen:View {
             Image(systemName:"questionmark.circle").font(.system(size:40)).foregroundStyle(TruckTheme.moss)
             Text(title).font(.title2.bold()).multilineTextAlignment(.center)
             Text(detail).multilineTextAlignment(.center)
-            if case .replace = confirmation{Button("返回繼續目前這局"){model.confirmation=nil;model.continueSession()}.buttonStyle(TruckButtonStyle(primary:true))}
+            if case .replace = confirmation{Button("返回繼續目前這局"){dismiss();model.confirmation=nil;model.continueSession()}.buttonStyle(TruckButtonStyle(primary:true))}
             Button(actionTitle){
                 if case .resetProgress=confirmation,!secondConfirmation{secondConfirmation=true}
-                else{model.confirmed(confirmation)}
+                else{dismiss();model.confirmed(confirmation)}
             }.buttonStyle(TruckButtonStyle(primary:true))
-            Button("取消"){model.confirmation=nil}.frame(minHeight:44)
-        }.padding(28).foregroundStyle(TruckTheme.cocoa).presentationDetents([.medium,.large]).presentationDragIndicator(.visible)
+            Button("取消"){dismiss();model.confirmation=nil}.frame(minHeight:44)
+        }.padding(28).foregroundStyle(TruckTheme.cocoa).presentationDetents([.medium,.large]).presentationDragIndicator(.visible).preferredColorScheme(.light)
     }
     var title:String{switch confirmation{case .replace:return "要開始新的一局嗎？";case .restart:return "重新開始本關？";case .abandon:return "放棄目前這局？";case .resetSettings:return "恢復預設設定？";case .resetProgress:return secondConfirmation ? "再次確認：清除所有進度？":"清除遊戲進度？"}}
     var detail:String{switch confirmation{case .replace,.restart,.abandon:return "目前這局的工序與訂單會清除，已獲得的星數及解鎖會保留。";case .resetSettings:return "只還原音量、模式與介面設定，不清除星數及解鎖。";case .resetProgress:return "將清除六關星數、解鎖、教學紀錄與進行中的局。音量與介面設定會保留；取消不會刪除任何資料。"}}
@@ -93,18 +95,22 @@ struct ResultScreen:View {
 }
 struct CompletionScreen:View {
     @EnvironmentObject var model:AppModel
-    @State private var appeared=false
+    @State private var scene=CompletionScene(size:CGSize(width:351,height:180))
     var body:some View{
         VStack(spacing:24){
             Spacer()
-            HStack{ForEach(0..<3,id:\.self){index in if let image=ArtAtlas.character(index){Image(uiImage:image).resizable().scaledToFit().rotationEffect(.degrees(appeared ? (index==1 ? -4:4):0))}}}.frame(height:180)
+            GeometryReader{geo in
+                SpriteView(scene:scene,options:[.allowsTransparency]).accessibilityHidden(true)
+                    .onAppear{scene.greet(width:geo.size.width,reduced:model.reducesMotion)}
+                    .onChange(of:geo.size.width){_,width in scene.greet(width:width,reduced:model.reducesMotion)}
+            }.frame(height:180)
             Text("謝謝款待，森林朋友們！").font(.title.bold()).multilineTextAlignment(.center)
             Text("六關已完成，可返回挑戰三星。").font(.headline)
             Text("最高星數合計 \(model.document.totalStars)／18").font(.title2.bold()).foregroundStyle(TruckTheme.moss)
             Spacer()
             Button("返回挑戰三星"){model.screen = .levels}.buttonStyle(TruckButtonStyle(primary:true))
             Button("略過動畫，回首頁"){model.screen = .home}.frame(minHeight:44)
-        }.padding(24).onAppear{withAnimation(model.reducesMotion ? nil:.easeInOut(duration:1.2)){appeared=true}}
+        }.padding(24)
     }
 }
 struct InformationScreen:View {

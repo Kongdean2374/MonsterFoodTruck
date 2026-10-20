@@ -17,6 +17,7 @@ struct TruckButtonStyle: ButtonStyle {
             .foregroundStyle(primary ? TruckTheme.cream:TruckTheme.cocoa)
             .background(primary ? TruckTheme.moss:TruckTheme.cream,in:RoundedRectangle(cornerRadius:16))
             .overlay(RoundedRectangle(cornerRadius:16).stroke(TruckTheme.cocoa.opacity(0.15),lineWidth:1))
+            .contentShape(Rectangle())
             .opacity(configuration.isPressed ? 0.72:1)
     }
 }
@@ -35,6 +36,9 @@ struct GameRoot:View {
                 case .levels:LevelScreen()
                 case let .introduction(id):IntroductionScreen(levelID:id)
                 case .practiceIntroduction:IntroductionScreen(levelID:"level_01",isPractice:true)
+                #if DEBUG
+                case let .artReview(dark):ArtReviewScreen(dark:dark)
+                #endif
                 case .game:PlayScreen()
                 case .result:ResultScreen()
                 case .complete:CompletionScreen()

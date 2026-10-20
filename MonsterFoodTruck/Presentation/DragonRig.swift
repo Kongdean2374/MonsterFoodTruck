@@ -1,9 +1,9 @@
 import SpriteKit
 import UIKit
 
-/// One-character art prototype. DEBUG preview only until actual-size visual review.
-final class DragonRig:SKNode {
-    enum Pose:String {case waiting,expecting,worried,satisfied,disappointed}
+/// Mother-style layered dragon. Original PNG retained; MFT-007 edge review open.
+final class DragonRig:SKNode,CharacterAnimation {
+    typealias Pose=CharacterPose
     private struct Atlas:Decodable{var rects:[String:[Int]]}
     private static let textures:[String:SKTexture]={
         guard let imageURL=Bundle.main.url(forResource:"dragon-layer-rig",withExtension:"png"),
@@ -50,6 +50,7 @@ final class DragonRig:SKNode {
         }
     }
     private func setPose(_ next:Pose){guard pose != next else{return};pose=next;head.texture=Self.textures[next.rawValue]}
+    func preview(_ next:CharacterPose){setPose(next)}
     func receive(dish:UIImage?,reduced:Bool){
         setPose(.satisfied)
         guard !reduced else{return}

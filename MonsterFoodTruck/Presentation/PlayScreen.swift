@@ -78,7 +78,7 @@ struct KitchenCanvas:View {
                                     StationControl(station:station,slot:slot,order:session.activeOrders.first{$0.station==station && $0.slot==slot})
                                 }
                             }.frame(height:(geo.size.height-132)/3).padding(.horizontal,6)
-                                .background{if KitchenArt.enabled{KitchenPiece(name:"counter").padding(.leading,32).padding(.horizontal,3)}}
+                                .background{if KitchenArt.enabled{KitchenPiece(name:"counterTop").padding(.leading,32).padding(.horizontal,3)}}
                         }
                     }
                     if let target=session.nibbleTarget,let plate=session.orders.first(where:{$0.id==target})?.slot,
@@ -107,13 +107,18 @@ struct StationControl:View {
             HStack(spacing:3){
                 if let order,let content=model.content,let session=model.session{
                     ZStack{
-                        if KitchenArt.enabled{KitchenPiece(name:KitchenArt.workSurface(station)).frame(width:62,height:48).saturation(station == .stove && order.stage != .cooking ? 0.25:1)}
-                        DishImage(column:content.recipe(order.recipe).atlasColumn)
+                        if station == .stove{AtlasPiece(atlas:"kitchen-props",part:"stoveOn").frame(width:64,height:50)}
+                        else if KitchenArt.enabled{KitchenPiece(name:KitchenArt.workSurface(station)).frame(width:64,height:48)}
+                        if let food=FoodArt.image(order.recipe,FoodArt.state(order)){Image(uiImage:food).resizable().scaledToFit().frame(width:46,height:44).offset(y:station == .stove ? -6:0)}
+                        FoodSteam(order:order,time:session.time,heatWindow:GameRules.heatWindow*session.mode.multiplier,reduced:model.reducesMotion)
                         if order.isCovered{ClocheView()}
                         if order.needsTidy{Image(systemName:order.everNibbled ? "hand.raised.fill":"exclamationmark.triangle.fill").font(.caption).foregroundStyle(TruckTheme.cocoa).padding(4).background(TruckTheme.cream,in:Circle()).offset(x:16,y:-12)}
-                        if let topping=order.topping{Image(systemName:topping == .herb ? "leaf.fill":"star.fill").font(.caption.bold()).foregroundStyle(topping == .herb ? TruckTheme.moss:Color.orange).offset(y:-8)}
+                        if let topping=order.topping{AtlasPiece(atlas:"kitchen-props",part:topping == .herb ? "herb":"star").frame(width:14,height:13).offset(x:-4,y:-8)}
+                        if !order.isCovered,!model.reducesMotion,let event=session.events.last(where:{$0.kind=="uncovered" && $0.orderID==order.id}),session.time-event.time<0.35{
+                            AtlasPiece(atlas:"kitchen-props",part:"clocheOpen").frame(width:56,height:45).offset(y:CGFloat(-(session.time-event.time)*30)).opacity(1-(session.time-event.time)/0.35)
+                        }
                         if isTarget{Image(systemName:"hand.point.down.fill").font(.system(size:16,weight:.bold)).foregroundStyle(TruckTheme.plum).padding(3).background(TruckTheme.cream,in:Circle()).offset(x:16,y:-14)}
-                    }.frame(width:50,height:50)
+                    }.frame(width:66,height:54)
                     VStack(alignment:.leading,spacing:2){
                         Text(status(order,session:session)).font(.system(size:model.document.settings.largeText ? 14:12,weight:.bold)).lineLimit(2)
                         if let end=order.workEnds{Text("\(max(0,end-session.time),specifier:"%.1f") 秒").font(.caption).monospacedDigit()}
@@ -123,15 +128,17 @@ struct StationControl:View {
                         }
                         if order.monster == .emberDragon,let cooked=order.cookedAt{Text("熱度 \(Int(ceil(max(0,cooked+GameRules.heatWindow*session.mode.multiplier-session.time))))秒").font(.caption2).bold()}
                         if order.isCovered,let remaining=order.warningRemaining{Text("預告暫停 \(Int(ceil(remaining)))秒").font(.caption2).bold()}
+                        if !order.needsTidy && (order.everScorched || order.everNibbled){Text("已整理・偏好失效").font(.caption2)}
                     }
                 }else{
-                    if KitchenArt.enabled{KitchenPiece(name:KitchenArt.workSurface(station)).frame(width:58,height:46).saturation(station == .stove ? 0.1:1)}
+                    if station == .stove{AtlasPiece(atlas:"kitchen-props",part:"stoveOff").frame(width:58,height:46)}
+                    else if KitchenArt.enabled{KitchenPiece(name:KitchenArt.workSurface(station)).frame(width:58,height:46)}
                     else{Image(systemName:station == .stove ? "flame":station == .prep ? "carrot":"circle.dashed")}
                     Text("空位 \(slot+1)").font(.caption)
                 }
             }.frame(maxWidth:.infinity,minHeight:48,maxHeight:.infinity)
                 .padding(.horizontal,3)
-                .background(TruckTheme.cream,in:RoundedRectangle(cornerRadius:13))
+                .background(TruckTheme.cream.opacity(order == nil ? 0.85:0.98),in:RoundedRectangle(cornerRadius:13))
                 .overlay(RoundedRectangle(cornerRadius:13).stroke(isTarget ? TruckTheme.plum:model.selectedOrder==order?.id && order != nil ? TruckTheme.moss:TruckTheme.cocoa.opacity(0.18),lineWidth:isTarget ? 3:model.selectedOrder==order?.id && order != nil ? 2.5:1))
         }.buttonStyle(.plain).disabled(order==nil).padding(.vertical,3)
             .accessibilityLabel(accessibilityText)
@@ -165,8 +172,26 @@ struct WarningConnector:View{
         }
     }
 }
-struct ClocheView:View {
-    var body:some View{ZStack(alignment:.bottom){Ellipse().fill(TruckTheme.cocoa.opacity(0.18)).frame(height:8);UnevenRoundedRectangle(topLeadingRadius:26,topTrailingRadius:26).fill(LinearGradient(colors:[.white,Color(red:0.74,green:0.75,blue:0.67)],startPoint:.topLeading,endPoint:.bottomTrailing)).overlay(UnevenRoundedRectangle(topLeadingRadius:26,topTrailingRadius:26).stroke(TruckTheme.cocoa,lineWidth:1.5)).frame(height:32);Capsule().fill(TruckTheme.cream).overlay(Capsule().stroke(TruckTheme.cocoa,lineWidth:1.5)).frame(height:5);Circle().fill(TruckTheme.cocoa).frame(width:7,height:7).offset(y:-31)}.frame(height:40)}
+struct AtlasPiece:View{var atlas:String;var part:String;var body:some View{Group{if let image=SpriteAtlas.image(atlas,part){Image(uiImage:image).resizable().scaledToFit()}}.accessibilityHidden(true)}}
+struct ClocheView:View{var body:some View{AtlasPiece(atlas:"kitchen-props",part:"cloche").frame(width:60,height:48)}}
+struct FoodSteam:View{
+    var order:OrderState;var time:Double;var heatWindow:Double;var reduced:Bool
+    var body:some View{
+        let heat=order.stage == .cooking ? 0.65:order.cookedAt.map{max(0,1-(time-$0)/heatWindow)} ?? 0
+        let phase=(time*0.5).truncatingRemainder(dividingBy:1)
+        if !order.isCovered,heat>0,!order.needsTidy{
+            AtlasPiece(atlas:FoodArt.atlas(order.recipe),part:"steam").frame(width:17,height:24)
+                .opacity(heat*(reduced ? 0.45:0.35+0.2*(1-phase))).offset(y:reduced ? -21:CGFloat(-18-phase*7))
+        }
+        if order.stage == .cooking,!reduced{
+            ForEach(0..<3,id:\.self){index in
+                let bubble=(time*0.7+Double(index)*0.31).truncatingRemainder(dividingBy:1)
+                Circle().stroke(TruckTheme.cream.opacity(0.7*(1-bubble)),lineWidth:0.8)
+                    .frame(width:CGFloat(2+bubble*3),height:CGFloat(2+bubble*3))
+                    .offset(x:CGFloat(index*8-8),y:CGFloat(-11-bubble*5)).accessibilityHidden(true)
+            }
+        }
+    }
 }
 struct CommandPanel:View {
     @EnvironmentObject var model:AppModel
@@ -193,7 +218,9 @@ struct CommandPanel:View {
     }
     func primary(_ order:OrderState)->some View{
         let action=action(order)
-        return Button(action.0){if let command=action.1{model.command(command)}}.buttonStyle(TruckButtonStyle(primary:true)).disabled(action.1==nil).opacity(action.1==nil ? 0.65:1).accessibilityIdentifier("primaryCommand")
+        return Button{if let command=action.1{model.command(command)}}label:{
+            HStack{if order.stage == .none,let raw=FoodArt.image(order.recipe,"raw"){Image(uiImage:raw).resizable().scaledToFit().frame(width:36,height:36).accessibilityHidden(true)};Text(action.0)}
+        }.buttonStyle(TruckButtonStyle(primary:true)).disabled(action.1==nil).opacity(action.1==nil ? 0.65:1).accessibilityIdentifier("primaryCommand").accessibilityLabel(action.0)
     }
     @ViewBuilder func cover(_ order:OrderState)->some View{
         if order.station == .plate {

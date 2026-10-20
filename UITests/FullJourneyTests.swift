@@ -38,9 +38,46 @@ final class FullJourneyTests:XCTestCase {
         XCTAssertTrue(app.buttons["level-level_06"].waitForExistence(timeout:5))
         XCTAssertTrue(app.buttons["level-level_06"].isEnabled,"Real saved unlock must survive process restart")
         capture("normal-restarted-unlocks",app)
+        verifyRealLateLevelClocheTaps(app)
+    }
+    private func verifyRealLateLevelClocheTaps(_ app:XCUIApplication){
+        app.terminate();app.launchEnvironment.removeValue(forKey:"MFT_NORMAL_REPLAY");app.launchEnvironment["MFT_USE_REPLAY_SAVE"]="1";app.launch()
+        XCTAssertTrue(app.buttons["關卡選擇"].waitForExistence(timeout:10));app.buttons["關卡選擇"].tap()
+        let level=app.buttons["level-level_05"]
+        for _ in 0..<4{if level.isHittable{break};app.swipeUp()}
+        XCTAssertTrue(level.isHittable);level.tap();app.buttons["beginLevel"].tap()
+        XCTAssertTrue(app.buttons["quick-L5-1"].waitForExistence(timeout:10))
+        app.buttons["quick-L5-1"].tap();perform("備料",app);perform("下鍋",app)
+        XCTAssertTrue(app.buttons["quick-L5-2"].waitForExistence(timeout:10));app.buttons["quick-L5-2"].tap();perform("備料",app);perform("下鍋",app)
+        XCTAssertTrue(app.buttons["quick-L5-3"].waitForExistence(timeout:10));app.buttons["quick-L5-3"].tap();perform("備料",app)
+        app.buttons["quick-L5-2"].tap();perform("裝盤",app)
+        app.buttons["蓋上"].tap();XCTAssertTrue(app.buttons["取下"].waitForExistence(timeout:5));captureRealTaps("actual-late-covered-dragon",app)
+        XCTAssertFalse(app.buttons["香草芽"].exists,"Covered meals must not offer garnishing")
+        app.buttons["取下"].tap();XCTAssertTrue(app.buttons["蓋上"].waitForExistence(timeout:5));app.buttons["蓋上"].tap();perform("出餐",app)
+        app.buttons["quick-L5-1"].tap();perform("裝盤",app)
+        app.buttons["蓋上"].tap();XCTAssertTrue(app.buttons["取下"].waitForExistence(timeout:5));captureRealTaps("actual-late-cloche-reused-on-deer",app)
+        app.buttons["取下"].tap();app.buttons["香草芽"].tap();perform("出餐",app)
+        XCTAssertTrue(app.staticTexts["已服務 2／7 ・一般"].waitForExistence(timeout:5));captureRealTaps("actual-late-two-served-with-cloche",app)
+        app.buttons["pause"].tap();app.buttons["保存並回首頁"].tap();XCTAssertTrue(app.buttons["繼續遊玩"].waitForExistence(timeout:5))
+    }
+    private func perform(_ label:String,_ app:XCUIApplication){
+        let deadline=Date().addingTimeInterval(35);var tapped=false
+        while Date()<deadline{
+            if app.buttons["知道了，繼續"].exists{app.buttons["知道了，繼續"].tap();continue}
+            let button=app.buttons["primaryCommand"]
+            if tapped && (!button.exists || button.label != label){return}
+            if button.exists && button.isEnabled && button.isHittable && button.label==label{button.tap();tapped=true}
+            RunLoop.current.run(until:Date().addingTimeInterval(0.2))
+        }
+        XCTFail("Real late-level tap action failed: \(label)")
+    }
+    private func captureRealTaps(_ name:String,_ app:XCUIApplication){
+        let shot=XCTAttachment(screenshot:app.screenshot());shot.name=name;shot.lifetime = .keepAlways;add(shot)
+        let note=XCTAttachment(string:"Actual taps at normal game time, no command driver/state injection. Unlocks restored from the six runtime sessions completed earlier in this same test. This bounded cloche check is not a full human playtest.")
+        note.name=name+"-method";note.lifetime = .keepAlways;add(note)
     }
     func testPracticeReplayDoesNotUnlockFormalProgress(){
-        let app=XCUIApplication();app.launchEnvironment["MFT_NORMAL_REPLAY"]="1";app.launchEnvironment["MFT_REPLAY_RESET"]="1";app.launch()
+        let app=XCUIApplication();app.launchEnvironment["MFT_NORMAL_REPLAY"]="1";app.launchEnvironment["MFT_REPLAY_RESET"]="1";app.launchEnvironment["MFT_PRACTICE_STORAGE"]="1";app.launch()
         XCTAssertTrue(app.buttons["遊戲說明"].waitForExistence(timeout:10));app.buttons["遊戲說明"].tap()
         let practice=app.buttons["重看第一關教學"]
         for _ in 0..<5{if practice.isHittable && practice.frame.midY<app.frame.maxY-100{break};app.swipeUp()}

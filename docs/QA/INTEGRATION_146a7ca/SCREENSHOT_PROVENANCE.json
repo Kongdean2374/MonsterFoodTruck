@@ -1,0 +1,47 @@
+[
+  {
+    "file": "E654E3A1-1E0F-482C-9708-42128307CF92.png",
+    "sha256": "a39d753fff2f1fb9d3cb1b293e96ab66881cd39ebd39a86e97f3b8068d85a1d7",
+    "artifact": 12280577079,
+    "test": "FlowTests/testNavigationTutorialPauseAndPersistence()",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+      "deviceName": "iPhone 16 Pro",
+      "exportedFileName": "E654E3A1-1E0F-482C-9708-42128307CF92.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "actual-settings-after-process-restart_0_FE258988-710D-448C-94FC-088020DB5191.png",
+      "timestamp": 1792513052.45
+    }
+  },
+  {
+    "file": "623D2BD5-DA7C-4BBF-B826-D417B7BD427F.png",
+    "sha256": "e1ebbcd4b25931f9c12e340f8687e6c2c2b7d55e3755ace1d91e6d0ec8de41b5",
+    "artifact": 12280577079,
+    "test": "FlowTests/testNavigationTutorialPauseAndPersistence()",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+      "deviceName": "iPhone 16 Pro",
+      "exportedFileName": "623D2BD5-DA7C-4BBF-B826-D417B7BD427F.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "FAILED-actual-screen_0_D48921F4-D6BA-479A-BD29-CD0425BBF5E2.png",
+      "timestamp": 1792513063.941
+    }
+  },
+  {
+    "file": "73D9EFA0-AD7B-49CB-A644-E5DF45E0943C.png",
+    "sha256": "39145676ac4f2789befe150b57668a398420d525a090ea8a7ec02e6302388702",
+    "artifact": 12281068198,
+    "test": "FlowTests/testHomeLayouts()",
+    "attachment": {
+      "configurationName": "Test Scheme Action",
+      "deviceId": "93512E9C-FC00-428B-BEFB-760A2C148EAE",
+      "deviceName": "MonsterFoodTruck-small",
+      "exportedFileName": "73D9EFA0-AD7B-49CB-A644-E5DF45E0943C.png",
+      "isAssociatedWithFailure": false,
+      "suggestedHumanReadableName": "FAILED-actual-screen_0_C6BAF173-20D7-4FB9-B0F6-A3F0E5433429.png",
+      "timestamp": 1792513654.264
+    }
+  }
+]

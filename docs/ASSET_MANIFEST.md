@@ -46,3 +46,16 @@
 餐車分層初稿：`ArtSource/Prototypes/kitchen-layers.png`、相應 JSON 及 `Resources/Art` 原檔副本；參考同一森林餐車與料理母版生成，1536×1024 RGBA，六部件，執行時裁切。只在 DEBUG 明確開啟試裝，爐具固定火焰尚須改為狀態分層，不作正式資產或 Dot 通過聲明。
 
 啟動畫面：同一原創圖示母版透過 macOS sips 正規化成 LaunchMark 的 100／200／300px 圖集，保留來源，不新增圖像創作或外部素材。須由實際編譯的 Assets.car 讀取測試確認。
+
+## 母版沿用後的擴作（待實際 App 覆核）
+
+使用者轉交 Dot 的 7.3 有條件風格／SE3 縮小辨識判定已記入 ART_MOTHER_REVIEW_REQUEST；不是 7.7 六項評分、動態接合或完整遊戲通過。六張新 PNG 的原始來源、工具輸出 ID、公開保存依據與未改像素說明見 [Layered 來源](../ArtSource/Layered/README.md)。每張 PNG 與 JSON 均有 ArtSource 原始檔及 Resources 相同副本，CI 比對 source_sha256／尺寸／bounds，實際包另作逐檔完整性檢查。
+
+| 新增資產 | 正式整合用途 | 狀態 |
+|---|---|---|
+| imp-layer-rig | 頭／軀幹／手／尾、五表情、伸爪／偷嚐／接餐 | 同母版工具擴作，真實深淺底與接合待測 |
+| deer-layer-rig | 頭／軀幹／近前腿／尾、五表情、嗅聞／接餐 | 同上；保留分層來源 |
+| soup-states／crisp-states／stew-states | 三菜各九種部件／狀態，缺陷及整理後仍保留份量變化 | 同上；不是整理恢復偏好 |
+| kitchen-props | 熄火／點火、兩配料、開合餐蓋 | 同上；配料疊於料理，動作隨模型時間 |
+
+龍既有原稿仍有 MFT-007 局部 Alpha 殘點；未將圖片工具再生成結果當成清理完成，未使用 Python 圖片編修。原母版與舊稿不覆蓋。實際聽覺、觸覺及最終美術評分仍待驗證。

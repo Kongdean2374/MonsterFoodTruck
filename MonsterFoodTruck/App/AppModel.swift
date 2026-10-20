@@ -2,7 +2,12 @@ import SwiftUI
 import Combine
 import UIKit
 
-enum Screen: Equatable { case home, levels, introduction(String), practiceIntroduction, game, result, complete, help, about, ended }
+enum Screen: Equatable {
+    case home, levels, introduction(String), practiceIntroduction, game, result, complete, help, about, ended
+    #if DEBUG
+    case artReview(Bool)
+    #endif
+}
 
 @MainActor
 final class AppModel: ObservableObject {
@@ -59,8 +64,9 @@ final class AppModel: ObservableObject {
             if let saveDirectoryOverride{directory=saveDirectoryOverride}else{directory=try SaveStore.applicationDirectory()}
             #if DEBUG
             let environment=ProcessInfo.processInfo.environment
-            if environment["MFT_NORMAL_REPLAY"]=="1"{directory.appendPathComponent("UIReplayEvidence",isDirectory:true)}
-            if let suite=environment["MFT_UI_SUITE"],["navigation","layout","controls","performance"].contains(suite){directory.appendPathComponent("UIEvidence-"+suite,isDirectory:true)}
+            if environment["MFT_PRACTICE_STORAGE"]=="1"{directory.appendPathComponent("UIPracticeEvidence",isDirectory:true)}
+            else if environment["MFT_NORMAL_REPLAY"]=="1" || environment["MFT_USE_REPLAY_SAVE"]=="1"{directory.appendPathComponent("UIReplayEvidence",isDirectory:true)}
+            if let suite=environment["MFT_UI_SUITE"],["navigation","layout","controls","performance","art-review"].contains(suite){directory.appendPathComponent("UIEvidence-"+suite,isDirectory:true)}
             #endif
             let store = SaveStore(directory:directory,content:content)
             let loaded = store.load()
@@ -76,6 +82,7 @@ final class AppModel: ObservableObject {
                 debugScenarioLabel="一般模式・正常命令重播（非手動試玩）"
             }
             if environment["MFT_REDUCE_MOTION"]=="1"{document.settings.reduceMotion=true}
+            if let background=environment["MFT_ART_REVIEW"]{screen = .artReview(background=="dark")}
             if let scenario=environment["MFT_UI_SCENARIO"], ["busy","warning","covered","tidy","scorched"].contains(scenario) {
                 document.settings=GameSettings()
                 document.settings.reduceMotion=true
@@ -276,7 +283,7 @@ final class AppModel: ObservableObject {
             switch result {
             case .success:
                 #if DEBUG
-                if self.normalReplay {
+                if self.normalReplay && !session.isPractice {
                     do{
                         let directory=try SaveStore.applicationDirectory().appendingPathComponent("UIReplayEvidence/Journey",isDirectory:true)
                         try FileManager.default.createDirectory(at:directory,withIntermediateDirectories:true)

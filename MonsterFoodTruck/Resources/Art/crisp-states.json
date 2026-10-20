@@ -1,0 +1,63 @@
+{
+  "width": 1254,
+  "height": 1254,
+  "rects": {
+    "raw": [
+      38,
+      75,
+      386,
+      368
+    ],
+    "prepared": [
+      438,
+      154,
+      386,
+      292
+    ],
+    "cooking": [
+      847,
+      104,
+      380,
+      339
+    ],
+    "finished": [
+      24,
+      484,
+      399,
+      327
+    ],
+    "scorched": [
+      432,
+      489,
+      395,
+      321
+    ],
+    "nibbled": [
+      838,
+      489,
+      396,
+      321
+    ],
+    "repairedScorch": [
+      28,
+      872,
+      397,
+      305
+    ],
+    "repairedNibble": [
+      435,
+      878,
+      398,
+      299
+    ],
+    "steam": [
+      938,
+      832,
+      207,
+      344
+    ]
+  },
+  "source_sha256": "cff53b5f54502d5222128ed257b8fba8d98bad081facf1a6b539306f4d3a20af",
+  "method": "Read-only connected-component alpha analysis for runtime subtexture coordinates. No pixel processing; original generated PNG bytes preserved.",
+  "status": "Approved mother style extension; actual integration/edge/motion review pending"
+}

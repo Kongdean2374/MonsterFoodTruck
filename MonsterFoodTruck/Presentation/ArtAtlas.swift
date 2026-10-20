@@ -12,8 +12,10 @@ enum ArtAtlas {
         guard let original=UIImage(contentsOfFile:url.path) else{return nil}
         return original.preparingForDisplay() ?? original
     }
-    static func preload() throws {
+    @MainActor static func preload() throws {
         guard master != nil,background != nil,characters.count==3,dishes.count==3 else{throw GameError.invalid("餐車或料理素材無法讀取，請重新載入。")}
+        try SpriteAtlas.preload()
+        for monster in MonsterID.allCases{guard CharacterArt.make(monster) != nil else{throw GameError.invalid("角色部件無法建立：\(monster.rawValue)")}}
     }
     private static func tile(column:Int,food:Bool)->UIImage? {
         guard let cg=master?.cgImage else{return nil}
@@ -31,13 +33,6 @@ final class KitchenScene: SKScene {
     private var state: GameSession?
     private var content: GameContent?
     private var reduced = false
-    private var previewDragonRig:Bool{
-        #if DEBUG
-        return ProcessInfo.processInfo.environment["MFT_DRAGON_RIG"]=="1"
-        #else
-        return false
-        #endif
-    }
     override init(size:CGSize) {super.init(size:size);scaleMode = .resizeFill;backgroundColor = .clear;isUserInteractionEnabled=false}
     override convenience init(){self.init(size:CGSize(width:390,height:330))}
     required init?(coder:NSCoder){super.init(coder:coder)}
@@ -49,28 +44,31 @@ final class KitchenScene: SKScene {
         else{layoutCharacters()}
     }
     func display(session:GameSession,content:GameContent,selected:String?,reduceMotion:Bool) {
+        let oldEvent=state?.events.last?.id ?? -1,previousActor=state?.nibbleActor
+        let stolen=session.events.contains{$0.id>oldEvent && $0.kind=="nibbled"}
         if let old=state,old.id != session.id || old.levelID != session.levelID || session.time<old.time{
             removeAllChildren();monsters.removeAll()
         }
         state=session;self.content=content;reduced=reduceMotion
         let live=Set(session.activeOrders.map(\.id))
         for key in Array(monsters.keys) where !live.contains(key) {
-            if let rig=monsters[key] as? DragonRig,let order=session.orders.first(where:{$0.id==key}){
-                if order.status == .served{rig.receive(dish:ArtAtlas.dish(content.recipe(order.recipe).atlasColumn),reduced:reduceMotion)}
+            if let rig=monsters[key] as? CharacterAnimation,let order=session.orders.first(where:{$0.id==key}){
+                if order.status == .served{rig.receive(dish:FoodArt.image(order.recipe,"finished"),reduced:reduceMotion)}
                 rig.depart(disappointed:order.status == .left,reduced:reduceMotion)
             }else{monsters[key]?.removeFromParent()}
             monsters[key]=nil
         }
         for order in session.activeOrders {
-            if monsters[order.id] == nil,let image=ArtAtlas.character(content.monster(order.monster).atlasColumn) {
-                let node:SKNode
-                if previewDragonRig,order.monster == .emberDragon,let rig=DragonRig.make(){node=rig}
-                else{let sprite=SKSpriteNode(texture:SKTexture(image:image));sprite.anchorPoint=CGPoint(x:0.5,y:0.1);node=sprite}
+            if monsters[order.id] == nil,let node=CharacterArt.make(order.monster) {
                 node.name=order.id;node.zPosition=2;addChild(node);monsters[order.id]=node
             }
             if let node=monsters[order.id] {
                 node.alpha=1
-                if let rig=node as? DragonRig{rig.display(order:order,time:session.time,reduceMotion:reduceMotion)}
+                if let rig=node as? CharacterAnimation{
+                    rig.display(order:order,time:session.time,reduceMotion:reduceMotion)
+                    rig.warning(session.nibbleActor==order.id,reduced:reduceMotion)
+                    if stolen && previousActor==order.id{rig.stolenBite(reduced:reduceMotion)}
+                }
                 else if reduceMotion {node.removeAllActions();node.zRotation=0}
                 else if node.action(forKey:"idle")==nil {
                     let breath=SKAction.sequence([.rotate(toAngle:0.025,duration:1.1),.rotate(toAngle:-0.025,duration:1.1)])
@@ -94,7 +92,7 @@ final class KitchenScene: SKScene {
                 sprite.size=CGSize(width:width,height:width*540/512)
             }else{
                 node.position=CGPoint(x:size.width*(CGFloat(i)+0.5)/3-4,y:size.height-78)
-                node.setScale(min(76/110,width/94))
+                node.setScale(CharacterArt.scale(order.monster,width:width))
             }
         }
     }

@@ -1,14 +1,8 @@
 import SwiftUI
 
-/// Initial truck-interior art sample. Enabled only in explicit DEBUG visual review.
+/// Original truck-interior parts, shared by gameplay and explicit visual review.
 enum KitchenArt {
-    static var enabled:Bool{
-        #if DEBUG
-        return ProcessInfo.processInfo.environment["MFT_KITCHEN_LAYERS"]=="1"
-        #else
-        return false
-        #endif
-    }
+    static let enabled=true
     private struct Atlas:Decodable{var rects:[String:[Int]]}
     private static let parts:[String:UIImage]={
         guard let imageURL=Bundle.main.url(forResource:"kitchen-layers",withExtension:"png"),
@@ -25,7 +19,7 @@ enum KitchenArt {
         return result
     }()
     static func image(_ name:String)->UIImage?{parts[name]}
-    static func preload() throws{guard parts.count==6 else{throw GameError.invalid("餐車分層試稿無法讀取。")}}
+    static func preload() throws{guard parts.count==7 else{throw GameError.invalid("餐車分層素材無法讀取。")}}
     static func workSurface(_ station:Station)->String{station == .stove ? "stove":station == .prep ? "prep":"serving"}
 }
 

@@ -4,7 +4,7 @@ enum GameRules {
     static let toppingTime: Double = 2
     static let tidyTime: Double = 3
     static let heatWindow: Double = 9
-    static let exposureBeforeWarning: Double = 7
+    static let exposureBeforeWarning: Double = 3
     static let theftCooldown: Double = 8
     static let arrivalNotice: Double = 4
     static let scorchNotice: Double = 2
@@ -46,7 +46,7 @@ struct GameContent: Codable {
     func recipe(_ id: RecipeID) -> Recipe { recipes.first { $0.id == id } ?? Recipe(id: id, name: "資料錯誤", prep: 3, cook: 10, grace: 6, atlasColumn: 0) }
     func monster(_ id: MonsterID) -> Monster { monsters.first { $0.id == id } ?? Monster(id: id, name: "資料錯誤", patience: 44, preference: "", atlasColumn: 0) }
     func validate() throws {
-        guard version == 1, recipes.count == 3, monsters.count == 3, levels.count == 6,
+        guard version == 2, recipes.count == 3, monsters.count == 3, levels.count == 6,
               Set(recipes.map(\.id)).count == 3, Set(monsters.map(\.id)).count == 3,
               Set(levels.map(\.id)).count == 6 else { throw GameError.invalid("遊戲資料版本或數量不正確。") }
         for r in recipes where !r.prep.isFinite || !r.cook.isFinite || !r.grace.isFinite || r.prep <= 0 || r.cook <= 0 || r.grace <= 0 { throw GameError.invalid("食譜時間不正確：\(r.id.rawValue)") }

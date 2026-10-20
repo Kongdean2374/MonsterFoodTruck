@@ -44,8 +44,9 @@ final class SceneLifecycleTests:XCTestCase{
         XCTAssertNil(model.startupError)
         model.begin("level_01")
         XCTAssertNotNil(model.lesson);XCTAssertTrue(model.session?.isPaused == true);XCTAssertTrue(model.kitchen.isPaused)
-        let sprite=try XCTUnwrap(model.kitchen.childNode(withName:"L1-1") as? SKSpriteNode)
-        XCTAssertNotNil(sprite.texture);XCTAssertEqual(sprite.alpha,1,accuracy:0.0001)
+        let sprite=try XCTUnwrap(model.kitchen.childNode(withName:"L1-1"))
+        let textured=([sprite]+sprite.children).compactMap{$0 as? SKSpriteNode}.filter{$0.texture != nil}
+        XCTAssertFalse(textured.isEmpty);XCTAssertEqual(sprite.alpha,1,accuracy:0.0001)
         model.kitchen.size=CGSize(width:375,height:324)
         XCTAssertEqual(model.kitchen.children.filter{$0.name=="L1-1"}.count,1)
         XCTAssertEqual(sprite.alpha,1,accuracy:0.0001);model.tick();XCTAssertEqual(model.session?.time,0)

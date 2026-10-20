@@ -37,7 +37,13 @@
       605,
       500,
       320
+    ],
+    "counterTop": [
+      1028,
+      336,
+      492,
+      130
     ]
   },
-  "status": "Initial layered kitchen prototype; original PNG preserved; DEBUG integration awaiting actual screenshots and Dot review"
+  "status": "Mother style approved; layered integration and actual-size review in progress"
 }

@@ -1,0 +1,11 @@
+{
+  "method": "Linux Swift 6.1.2 exact Domain CLI reproduces all 72 native iOS model observations within 0.0001, including input interval and selection delay. Not UI or device validation.",
+  "native_source_sha": "3bc6d37b2804a7ed61c5d51b9cdd937da3713413",
+  "native_artifact": 12279107638,
+  "source_files": {
+    "MonsterFoodTruck/Data/GameContent.swift": "1326a85c4a73b09791ebbff43061949937e795826c585e501b311f2beede6a11",
+    "MonsterFoodTruck/Domain/GameSession.swift": "64c308f6e2ede79557c0621aaca63d616e1cb352087fbd3263c4fbf977a4ce15",
+    "MonsterFoodTruck/Domain/CommandReplayPlanner.swift": "651f62846d6efb99d8c025662ba8aeff9b6c5e04bcd0ad45d455b3ffa981cd37"
+  },
+  "observations": 72
+}

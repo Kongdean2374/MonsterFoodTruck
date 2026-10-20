@@ -1,0 +1,53 @@
+{
+  "devicesAndConfigurations" : [
+    {
+      "device" : {
+        "architecture" : "arm64",
+        "deviceId" : "DC4CD8B3-4457-4153-9087-A0D7A2F9BFD9",
+        "deviceName" : "iPhone 16 Pro",
+        "modelName" : "iPhone 16 Pro",
+        "osBuildNumber" : "22F77",
+        "osVersion" : "18.5",
+        "platform" : "iOS Simulator"
+      },
+      "expectedFailures" : 0,
+      "failedTests" : 1,
+      "passedTests" : 24,
+      "skippedTests" : 0,
+      "testPlanConfiguration" : {
+        "configurationId" : "1",
+        "configurationName" : "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription" : "MonsterFoodTruck · Built with macOS 15.7.9",
+  "expectedFailures" : 0,
+  "failedTests" : 1,
+  "finishTime" : 1792513096.083,
+  "passedTests" : 24,
+  "result" : "Failed",
+  "skippedTests" : 0,
+  "startTime" : 1792512751.515,
+  "statistics" : [
+
+  ],
+  "testFailures" : [
+    {
+      "failureText" : "Failed to failed to scroll to visible (by AX action) Button, {{39.5, 655.5}, {157.0, 49.0}}, label: '關卡選擇', error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 13993, elementOrHash.elementID: 105553169800864.14. (Underlying Error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 13993, elementOrHash.elementID: 105553169800864.14)",
+      "targetName" : "MonsterFoodTruckUITests",
+      "testIdentifier" : 25,
+      "testIdentifierString" : "FlowTests/testNavigationTutorialPauseAndPersistence()",
+      "testIdentifierURL" : "test://com.apple.xcode/MonsterFoodTruck/MonsterFoodTruckUITests/FlowTests/testNavigationTutorialPauseAndPersistence",
+      "testName" : "testNavigationTutorialPauseAndPersistence()"
+    }
+  ],
+  "title" : "Test - MonsterFoodTruck",
+  "topInsights" : [
+    {
+      "category" : "Longest Test Runs",
+      "impact" : "60% of duration",
+      "text" : "1 longest test run with outlier durations exceeding 12.11s (three standard deviations)"
+    }
+  ],
+  "totalTestCount" : 25
+}

@@ -13,7 +13,7 @@ enum CommandReplayPlanner {
     static func run(level:Level,mode:PlayMode,content:GameContent) throws -> GameSession {
         try observe(level:level,mode:mode,content:content).session
     }
-    static func observe(level:Level,mode:PlayMode,content:GameContent,policy:Policy = .dynamic,interval:Double = 0.6,selectionDelay:Double = 0) throws -> Observation {
+    static func observe(level:Level,mode:PlayMode,content:GameContent,policy:Policy = .dynamic,interval:Double = 0.6,selectionDelay:Double = 0,protectPlates:Bool=true) throws -> Observation {
         guard interval>=0.6,selectionDelay>=0 else{throw GameError.invalid("Diagnostic input speed is invalid")}
         var s=GameSession(level:level,mode:mode,content:content);s.isPaused=false
         var selected:String?,selections=0,idle:Double=0,currentIdle:Double=0,longestIdle:Double=0
@@ -21,6 +21,14 @@ enum CommandReplayPlanner {
             if s.finished(content:content){return Observation(session:s,idleSeconds:idle,longestIdleSpan:longestIdle,selectionCount:selections)}
             let visible=s.activeOrders.sorted { a,b in
                 func priority(_ o:OrderState)->Double {
+                    if policy == .dynamic{
+                        if o.isCovered{return 500}
+                        if s.nibbleTarget==o.id,(o.warningRemaining ?? 10)<=2+interval+selectionDelay{return -160}
+                        if o.stage == .plated && o.monster == .emberDragon{return -150}
+                        if o.stage == .ready,let cooked=o.cookedAt{
+                            return cooked+content.recipe(o.recipe).grace*mode.multiplier-s.time<=3 ? -140:-60
+                        }
+                    }
                     if o.stage == .plated { return o.monster == .emberDragon ? -100 : -50 }
                     if o.stage == .ready { return -30 }
                     let work=content.recipe(o.recipe).cook
@@ -38,6 +46,17 @@ enum CommandReplayPlanner {
                 case .ready: if s.activeOrders.filter({$0.station == .plate}).count<2 {command = .plate(o.id)}
                 case .plated:
                     if o.needsTidy {command = .tidy(o.id)}
+                    else if o.isCovered{
+                        if s.activeOrders.contains(where:{$0.monster == .nibbleImp && $0.id != o.id}) && o.deadline-s.time>8{continue}
+                        command = .uncover(o.id)
+                    }
+                    else if policy == .dynamic,protectPlates,s.nibbleTarget==o.id,
+                            !s.activeOrders.contains(where:\.isCovered),
+                            s.activeOrders.contains(where:{$0.id != o.id && $0.stage != .none && $0.stage != .plated}){
+                        command = .cover(o.id)
+                    }
+                    else if policy == .dynamic,s.activeOrders.filter({$0.station == .plate}).count==2,
+                            s.activeOrders.contains(where:{$0.stage == .ready}){command = .serve(o.id)}
                     else if o.monster == .mossDeer && o.topping != .herb {command = .garnish(o.id,.herb)}
                     else if o.monster == .nibbleImp && o.topping != .star {command = .garnish(o.id,.star)}
                     else {command = .serve(o.id)}
