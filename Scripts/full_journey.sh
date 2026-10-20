@@ -6,6 +6,13 @@ STATE=$(xcrun simctl list devices --json | python3 -c 'import json,sys; d=sys.ar
 if [ "$STATE" != Booted ]; then xcrun simctl boot "$DEVICE"; fi
 xcrun simctl bootstatus "$DEVICE" -b
 open -a Simulator --args -CurrentDeviceUDID "$DEVICE"
+xcrun simctl launch "$DEVICE" cc.chaihome.monsterfoodtruck > build/video-app-launch.txt
+FRAME_READY=0
+for ATTEMPT in {1..15}; do
+  if xcrun simctl io "$DEVICE" screenshot build/QA_EVIDENCE/journey/recording-start.png > build/video-framebuffer.log 2>&1; then FRAME_READY=1; break; fi
+  sleep 1
+done
+if [ "$FRAME_READY" != 1 ]; then echo 'No actual simulator framebuffer available for video' >&2; exit 1; fi
 VIDEO_PID=
 stop_recording(){
   if [ -n "$VIDEO_PID" ]; then
@@ -24,6 +31,7 @@ else
   STATUS=$?
 fi
 stop_recording
+xcrun swift Scripts/probe_video.swift build/QA_EVIDENCE/journey/normal-six-level-journey.mov > build/QA_EVIDENCE/journey/VIDEO_METADATA.json
 xcrun xcresulttool export attachments --path build/Journey.xcresult --output-path build/QA_EVIDENCE/journey/screenshots
 xcrun xcresulttool get test-results summary --path build/Journey.xcresult > build/JOURNEY_TEST_SUMMARY.json
 APP_DATA=$(xcrun simctl get_app_container "$DEVICE" cc.chaihome.monsterfoodtruck data)
@@ -37,5 +45,9 @@ report=dict(source_sha=subprocess.check_output(['git','rev-parse','HEAD'],text=T
 Path('build/QA_EVIDENCE/journey/RECORDING_METHOD.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 if int(sys.argv[2])==0 and report['recorded_bytes']<1024:raise SystemExit('Normal-speed journey recording is missing or empty')
 if int(sys.argv[2])==0 and len(list(Path('build/QA_EVIDENCE/journey/actual-model-snapshots').glob('actual-level_*.json')))!=6:raise SystemExit('Six actual runtime session histories were not exported')
+if int(sys.argv[2])==0:
+ actual=sum(json.loads(p.read_text())['time'] for p in Path('build/QA_EVIDENCE/journey/actual-model-snapshots').glob('actual-level_*.json'))
+ metadata=json.loads(Path('build/QA_EVIDENCE/journey/VIDEO_METADATA.json').read_text())
+ if metadata['duration_seconds']<actual:raise SystemExit('Recording shorter than six actual runtime model histories')
 PY
 exit "$STATUS"

@@ -33,7 +33,7 @@ final class FlowTests: XCTestCase {
         for action in ["備料","下鍋","裝盤","出餐"]{perform(action,app)}
         capture("normal-play-after-service",app)
         app.buttons["pause"].tap();XCTAssertTrue(app.buttons["保存並回首頁"].waitForExistence(timeout:5));capture("paused",app)
-        app.buttons["設定"].tap();XCTAssertTrue(app.switches["高對比資訊"].waitForExistence(timeout:5))
+        app.buttons["設定"].tap();XCTAssertTrue(app.navigationBars["餐車設定"].waitForExistence(timeout:5))
         reveal(app.switches["高對比資訊"],app,up:true);app.switches["高對比資訊"].tap()
         reveal(app.switches["大字介面"],app,up:true);app.switches["大字介面"].tap()
         reveal(app.switches["左手單手配置"],app,up:true);app.switches["左手單手配置"].tap()
@@ -116,7 +116,7 @@ final class FlowTests: XCTestCase {
     func testHomeLayouts(){
         let app=XCUIApplication();app.launchEnvironment["MFT_UI_SUITE"]="layout";app.launch()
         XCTAssertTrue(app.buttons["start"].waitForExistence(timeout:10));capture("layout-home-standard",app)
-        app.buttons["設定"].tap();XCTAssertTrue(app.switches["大字介面"].waitForExistence(timeout:5))
+        app.buttons["設定"].tap();XCTAssertTrue(app.navigationBars["餐車設定"].waitForExistence(timeout:5))
         for label in ["高對比資訊","大字介面","左手單手配置"]{reveal(app.switches[label],app,up:true);app.switches[label].tap()}
         app.buttons["完成"].tap();capture("layout-home-large-contrast-left",app)
         app.buttons["關卡選擇"].tap();XCTAssertTrue(app.buttons["level-level_01"].waitForExistence(timeout:5));capture("layout-levels-large-contrast",app)
